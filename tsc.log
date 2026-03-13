@@ -1,0 +1,13 @@
+actions/student-dashboard.ts(67,9): error TS2783: 'title' is specified more than once, so this usage will be overwritten.
+actions/student-dashboard.ts(68,9): error TS2783: 'slug' is specified more than once, so this usage will be overwritten.
+app/actions/google-classroom.ts(351,35): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+app/actions/google-classroom.ts(352,31): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+app/dashboard/mentor/classroom/page.tsx(117,38): error TS2322: Type '{ children: Element; googleCourseId: any; courseName: any; }' is not assignable to type 'IntrinsicAttributes & SetMeetLinkDialogProps'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & SetMeetLinkDialogProps'.
+app/dashboard/mentor/live-sessions/page.tsx(51,45): error TS2339: Property 'htmlLink' does not exist on type 'Schema$Event | { error: string; }'.
+  Property 'htmlLink' does not exist on type '{ error: string; }'.
+app/dashboard/mentor/live-sessions/page.tsx(53,76): error TS2339: Property 'htmlLink' does not exist on type 'Schema$Event | { error: string; }'.
+  Property 'htmlLink' does not exist on type '{ error: string; }'.
+app/dashboard/mentor/page.tsx(5,33): error TS2307: Cannot find module '@/components/dashboard/dashboard-header' or its corresponding type declarations.

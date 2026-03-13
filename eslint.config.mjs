@@ -12,7 +12,18 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Ignore scripts folder (they're allowed to use console)
+    "scripts/**",
   ]),
+  // Custom rules for code quality
+  {
+    rules: {
+      // Warn on explicit any usage to encourage proper typing
+      "@typescript-eslint/no-explicit-any": "warn",
+      // Warn on console statements (use lib/logger.ts instead)
+      "no-console": ["warn", { allow: ["error"] }],
+    },
+  },
 ]);
 
 export default eslintConfig;
