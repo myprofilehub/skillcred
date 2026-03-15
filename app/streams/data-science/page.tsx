@@ -40,17 +40,17 @@ export default async function DataScienceStreamPage() {
             {/* HERO SECTION */}
             <section className="relative pt-32 pb-20 overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-green-500/10 rounded-full blur-[128px] opacity-30 animate-pulse" />
-                    <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[128px] opacity-30 animate-pulse" />
+                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-rose-500/10 rounded-full blur-[128px] opacity-30 animate-pulse" />
+                    <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-[128px] opacity-30 animate-pulse" />
                 </div>
 
                 <div className="container relative z-10 mx-auto px-4 text-center">
-                    <Badge variant="outline" className="mb-6 border-green-500/30 text-green-400 bg-green-500/10 px-4 py-1 text-sm uppercase tracking-wider">
+                    <Badge variant="outline" className="mb-6 border-rose-500/30 text-rose-400 bg-rose-500/10 px-4 py-1 text-sm uppercase tracking-wider">
                         Data Science & Analytics Track
                     </Badge>
                     <h1 className="text-4xl md:text-6xl font-bold font-heading mb-6 tracking-tight">
                         Build Real Business Insights <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-orange-500">
                             Using Data, Dashboards & SQL
                         </span>
                     </h1>
@@ -60,21 +60,21 @@ export default async function DataScienceStreamPage() {
 
                     <div className="flex flex-wrap justify-center gap-4 mb-12">
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-green-400" /> Live mentor support
+                            <CheckCircle2 className="w-4 h-4 text-rose-400" /> Live mentor support
                         </div>
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-green-400" /> 5 real-world projects
+                            <CheckCircle2 className="w-4 h-4 text-rose-400" /> 5 real-world projects
                         </div>
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-green-400" /> Verified portfolio
+                            <CheckCircle2 className="w-4 h-4 text-rose-400" /> Verified portfolio
                         </div>
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-green-400" /> Assessment-based certification
+                            <CheckCircle2 className="w-4 h-4 text-rose-400" /> Assessment-based certification
                         </div>
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button size="lg" className="text-lg px-8 h-14 bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-500/20" asChild>
+                        <Button size="lg" className="text-lg px-8 h-14 bg-rose-600 hover:bg-rose-700 text-white shadow-lg shadow-rose-500/20" asChild>
                             <Link href="/enroll">
                                 Start This Track <ArrowRight className="ml-2 w-5 h-5" />
                             </Link>
@@ -94,7 +94,7 @@ export default async function DataScienceStreamPage() {
                     <div className="grid md:grid-cols-2 gap-12">
                         {/* Why This Track */}
                         <div>
-                            <h2 className="text-3xl font-bold font-heading mb-6 border-l-4 border-green-500 pl-4">
+                            <h2 className="text-3xl font-bold font-heading mb-6 border-l-4 border-rose-500 pl-4">
                                 Why This Track?
                             </h2>
                             <p className="text-muted-foreground mb-8">
@@ -104,13 +104,13 @@ export default async function DataScienceStreamPage() {
                             <div className="grid grid-cols-2 gap-4">
                                 <Card className="bg-background/50 border-white/5">
                                     <CardContent className="p-4 flex items-center gap-3">
-                                        <div className="p-2 rounded-lg bg-blue-500/20 text-blue-400"><BarChart className="w-5 h-5" /></div>
+                                        <div className="p-2 rounded-lg bg-orange-500/20 text-orange-400"><BarChart className="w-5 h-5" /></div>
                                         <span className="font-medium">Sales Data</span>
                                     </CardContent>
                                 </Card>
                                 <Card className="bg-background/50 border-white/5">
                                     <CardContent className="p-4 flex items-center gap-3">
-                                        <div className="p-2 rounded-lg bg-green-500/20 text-green-400"><Users className="w-5 h-5" /></div>
+                                        <div className="p-2 rounded-lg bg-rose-500/20 text-rose-400"><Users className="w-5 h-5" /></div>
                                         <span className="font-medium">Customer Data</span>
                                     </CardContent>
                                 </Card>
@@ -141,12 +141,12 @@ export default async function DataScienceStreamPage() {
                                     "Career switchers"
                                 ].map((item, i) => (
                                     <li key={i} className="flex items-center gap-3">
-                                        <CheckCircle2 className="w-5 h-5 text-green-400 shrink-0" />
+                                        <CheckCircle2 className="w-5 h-5 text-rose-400 shrink-0" />
                                         <span>{item}</span>
                                     </li>
                                 ))}
                             </ul>
-                            <div className="mt-8 p-4 rounded-lg bg-green-500/10 border border-green-500/20 text-sm text-green-300">
+                            <div className="mt-8 p-4 rounded-lg bg-rose-500/10 border border-rose-500/20 text-sm text-rose-300">
                                 <span className="font-semibold">Note:</span> No prior coding required. Python basics are covered inside the track.
                             </div>
                         </div>
@@ -164,11 +164,11 @@ export default async function DataScienceStreamPage() {
 
                     <div className="flex flex-wrap justify-center gap-8 mb-20">
                         {[
-                            { name: "Python", sub: "Pandas, NumPy", color: "text-blue-400" },
+                            { name: "Python", sub: "Pandas, NumPy", color: "text-orange-400" },
                             { name: "SQL", sub: "MySQL / PostgreSQL", color: "text-orange-400" },
                             { name: "Power BI", sub: "Dashboarding", color: "text-yellow-400" },
                             { name: "Tableau", sub: "Visualization", color: "text-indigo-400" },
-                            { name: "Excel", sub: "Advanced", color: "text-green-400" },
+                            { name: "Excel", sub: "Advanced", color: "text-rose-400" },
                             { name: "Jupyter", sub: "Notebooks", color: "text-orange-600" }
                         ].map((tool) => (
                             <div key={tool.name} className="text-center p-6 rounded-xl bg-secondary/30 w-40 hover:bg-secondary/50 transition-colors">
@@ -211,14 +211,14 @@ export default async function DataScienceStreamPage() {
 
                     <div className="space-y-8 relative">
                         {/* Vertical Line */}
-                        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-green-500/50 to-blue-500/50 hidden md:block" />
+                        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-rose-500/50 to-orange-500/50 hidden md:block" />
 
                         {[
                             {
                                 title: "Retail Sales Data Analysis",
                                 tools: "Excel, Python",
                                 desc: "Analyze sales trends and generate reports.",
-                                color: "border-green-500",
+                                color: "border-rose-500",
                                 type: "Project 1",
                                 icon: LineChart
                             },
@@ -301,7 +301,7 @@ export default async function DataScienceStreamPage() {
                                         "Issue formal recommendation letters"
                                     ].map((item, i) => (
                                         <li key={i} className="flex items-center gap-3">
-                                            <CheckCircle2 className="w-5 h-5 text-green-400 shrink-0" />
+                                            <CheckCircle2 className="w-5 h-5 text-rose-400 shrink-0" />
                                             <span>{item}</span>
                                         </li>
                                     ))}
@@ -488,14 +488,14 @@ export default async function DataScienceStreamPage() {
 
                             <div className="space-y-6">
                                 <div className="flex gap-4">
-                                    <div className="p-3 rounded-lg bg-green-500/20 text-green-400 h-fit"><GraduationCap className="w-6 h-6" /></div>
+                                    <div className="p-3 rounded-lg bg-rose-500/20 text-rose-400 h-fit"><GraduationCap className="w-6 h-6" /></div>
                                     <div>
                                         <h4 className="font-bold">Verified Certificate</h4>
                                         <p className="text-sm text-gray-400">Official proof of your skills.</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="p-3 rounded-lg bg-blue-500/20 text-blue-400 h-fit"><Briefcase className="w-6 h-6" /></div>
+                                    <div className="p-3 rounded-lg bg-orange-500/20 text-orange-400 h-fit"><Briefcase className="w-6 h-6" /></div>
                                     <div>
                                         <h4 className="font-bold">HR-Ready Portfolio</h4>
                                         <p className="text-sm text-gray-400">Includes verified project links, mentor ratings, and assessment scores.</p>
@@ -514,12 +514,12 @@ export default async function DataScienceStreamPage() {
                         </div>
 
                         <div className="relative">
-                            <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl opacity-20 blur-2xl" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-rose-500 to-orange-500 rounded-2xl opacity-20 blur-2xl" />
                             <Card className="relative bg-black/80 border-white/10">
                                 <CardHeader>
                                     <CardTitle className="flex justify-between items-center">
                                         <span>HR Corner (Preview)</span>
-                                        <Badge className="bg-green-600">Recruiter View</Badge>
+                                        <Badge className="bg-rose-600">Recruiter View</Badge>
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent>
@@ -562,7 +562,7 @@ export default async function DataScienceStreamPage() {
                         ))}
                     </div>
 
-                    <div className="text-center bg-gradient-to-r from-green-900/50 to-blue-900/50 p-12 rounded-3xl border border-white/10 relative overflow-hidden">
+                    <div className="text-center bg-gradient-to-r from-rose-900/50 to-orange-900/50 p-12 rounded-3xl border border-white/10 relative overflow-hidden">
                         <div className="relative z-10">
                             <h2 className="text-4xl font-bold mb-4">Start Your Data Science Journey</h2>
                             <p className="text-xl text-gray-300 mb-8">Build skills. Build projects. Build proof.</p>

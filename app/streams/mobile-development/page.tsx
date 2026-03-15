@@ -72,99 +72,25 @@ export default async function MobileDevelopmentPage() {
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
                             <CheckCircle2 className="w-4 h-4 text-yellow-400" /> Project-based assessment
                         </div>
-                        import {LandingNavbar} from "@/components/landing/navbar";
-                        import {Footer} from "@/components/layout/footer";
-                        import {Button} from "@/components/ui/button";
-                        import {Badge} from "@/components/ui/badge";
-                        import {Card, CardContent, CardHeader, CardTitle, CardDescription} from "@/components/ui/card";
-                        import {
-                            CheckCircle2,
-                            Download,
-                            ArrowRight,
-                            Bot,
-                            Database,
-                            Globe,
-                            Server,
-                            Layout,
-                            Lock,
-                            Briefcase,
-                            GraduationCap,
-                            MessageSquare,
-                            FileCheck,
-                            Layers,
-                            Workflow,
-                            AlertTriangle,
-                            ClipboardCheck,
-                            Award,
-                            Terminal,
-                            Settings,
-                            Clock,
-                            FileSpreadsheet,
-                            Mail
-                        } from "lucide-react";
-                        import Link from "next/link";
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
+                            <CheckCircle2 className="w-4 h-4 text-yellow-400" /> HR-visible profile
+                        </div>
+                    </div>
 
-                        import {auth} from "@/auth";
-
-                        export default async function MobileDevelopmentPage() {
-    const session = await auth();
-                        return (
-                        <main className="min-h-screen bg-background text-foreground">
-                            <LandingNavbar />
-
-                            {/* HERO SECTION */}
-                            <section className="relative pt-32 pb-20 overflow-hidden">
-                                <div className="absolute inset-0 z-0">
-                                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-yellow-500/10 rounded-full blur-[128px] opacity-30 animate-pulse" />
-                                    <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[128px] opacity-30 animate-pulse" />
-                                </div>
-
-                                <div className="container relative z-10 mx-auto px-4 text-center">
-                                    <Badge variant="outline" className="mb-6 border-yellow-500/30 text-yellow-400 bg-yellow-500/10 px-4 py-1 text-sm uppercase tracking-wider">
-                                        MOBILE DEVELOPMENT TRACK
-                                    </Badge>
-                                    <h1 className="text-4xl md:text-6xl font-bold font-heading mb-6 tracking-tight">
-                                        Design Systems That Eliminate<br />
-                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-indigo-500">
-                                            Manual Work & Scale Productivity
-                                        </span>
-                                    </h1>
-                                    <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
-                                        Learn how to automate business processes, IT operations, and data workflows using industry tools and mentor-guided real-world projects.
-                                    </p>
-
-                                    <div className="flex flex-wrap justify-center gap-4 mb-12">
-                                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-400" /> Live mentor support
-                                        </div>
-                                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-400" /> 5 real-world projects
-                                        </div>
-                                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-400" /> Verified portfolio
-                                        </div>
-                                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-400" /> Project-based assessment
-                                        </div>
-                                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-400" /> HR-visible profile
-                                        </div>
-                                    </div>
-
-                                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                        <Button size="lg" className="text-lg px-8 h-14 bg-yellow-600 hover:bg-yellow-700 text-black shadow-lg shadow-yellow-500/20 font-semibold" asChild>
-                                            <Link href="/enroll">
-                                                Start This Track <ArrowRight className="ml-2 w-5 h-5" />
-                                            </Link>
-                                        </Button>
-                                        <Button size="lg" variant="outline" className="text-lg px-8 h-14 border-white/10 bg-white/5 hover:bg-white/10" asChild>
-                                            <a href="/brochures/SkillCred_Mobile_Brochure.pdf" download>
-                                                Download Syllabus <Download className="ml-2 w-5 h-5" />
-                                            </a>
-                                        </Button>
-                                    </div>
-                                </div>
-                            </section>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <Button size="lg" className="text-lg px-8 h-14 bg-yellow-600 hover:bg-yellow-700 text-black shadow-lg shadow-yellow-500/20 font-semibold" asChild>
+                            <Link href="/enroll">
+                                Start This Track <ArrowRight className="ml-2 w-5 h-5" />
+                            </Link>
+                        </Button>
+                        <Button size="lg" variant="outline" className="text-lg px-8 h-14 border-white/10 bg-white/5 hover:bg-white/10" asChild>
+                            <a href="/brochures/SkillCred_Mobile_Brochure.pdf" download>
+                                Download Syllabus <Download className="ml-2 w-5 h-5" />
+                            </a>
+                        </Button>
+                    </div>
+                </div>
+            </section>
 
                             {/* WHY & WHO SECTION */}
                             <section className="py-20 bg-secondary/20">

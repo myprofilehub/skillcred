@@ -11,12 +11,12 @@ export function Logo({ className, width = 140, height = 40 }: LogoProps) {
     return (
         <Link href="/" className={`flex items-center gap-2 ${className}`}>
             <Image
-                src="/logo-v3.png"
+                src="/logo-v3-transparent.png"
                 alt="SkillCred Logo"
                 width={width}
                 height={height}
-                className="object-contain mix-blend-screen" // ensure it fits well and blends with dark bg
-                priority // Logo should load fast
+                className="object-contain" 
+                priority 
             />
         </Link>
     );

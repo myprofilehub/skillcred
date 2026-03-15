@@ -1,6 +1,6 @@
 "use client";
 
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { submitQuery } from "@/app/actions/query-action";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,7 +16,7 @@ const initialState = {
 };
 
 export function QuerySection() {
-    const [state, formAction] = useFormState(submitQuery, initialState);
+    const [state, formAction] = useActionState(submitQuery, initialState);
     const formRef = useRef<HTMLFormElement>(null);
     const { toast } = useToast();
 

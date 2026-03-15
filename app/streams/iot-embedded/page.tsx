@@ -38,17 +38,17 @@ export default async function IotEmbeddedPage() {
             {/* HERO SECTION */}
             <section className="relative pt-32 pb-20 overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[128px] opacity-30 animate-pulse" />
-                    <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[128px] opacity-30 animate-pulse" />
+                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[128px] opacity-30 animate-pulse" />
+                    <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-teal-500/10 rounded-full blur-[128px] opacity-30 animate-pulse" />
                 </div>
 
                 <div className="container relative z-10 mx-auto px-4 text-center">
-                    <Badge variant="outline" className="mb-6 border-cyan-500/30 text-cyan-400 bg-cyan-500/10 px-4 py-1 text-sm uppercase tracking-wider">
+                    <Badge variant="outline" className="mb-6 border-emerald-500/30 text-emerald-400 bg-emerald-500/10 px-4 py-1 text-sm uppercase tracking-wider">
                         IoT and Embedded DEVELOPMENT TRACK
                     </Badge>
                     <h1 className="text-4xl md:text-6xl font-bold font-heading mb-6 tracking-tight">
                         Design, Build, & Deploy<br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-500">
                             Complete Web Applications
                         </span>
                     </h1>
@@ -58,24 +58,24 @@ export default async function IotEmbeddedPage() {
 
                     <div className="flex flex-wrap justify-center gap-4 mb-12">
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-cyan-400" /> Live mentor support
+                            <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Live mentor support
                         </div>
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-cyan-400" /> 5 real-world projects
+                            <CheckCircle2 className="w-4 h-4 text-emerald-400" /> 5 real-world projects
                         </div>
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-cyan-400" /> Verified portfolio
+                            <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Verified portfolio
                         </div>
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-cyan-400" /> Project-based assessment
+                            <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Project-based assessment
                         </div>
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-cyan-400" /> HR-visible skill profile
+                            <CheckCircle2 className="w-4 h-4 text-emerald-400" /> HR-visible skill profile
                         </div>
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button size="lg" className="text-lg px-8 h-14 bg-cyan-600 hover:bg-cyan-700 text-white shadow-lg shadow-cyan-500/20" asChild>
+                        <Button size="lg" className="text-lg px-8 h-14 bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-500/20" asChild>
                             <Link href="/enroll">
                                 Start This Track <ArrowRight className="ml-2 w-5 h-5" />
                             </Link>
@@ -95,7 +95,7 @@ export default async function IotEmbeddedPage() {
                     <div className="grid md:grid-cols-2 gap-12">
                         {/* Why This Track */}
                         <div>
-                            <h2 className="text-3xl font-bold font-heading mb-6 border-l-4 border-cyan-500 pl-4">
+                            <h2 className="text-3xl font-bold font-heading mb-6 border-l-4 border-emerald-500 pl-4">
                                 Why This Track?
                             </h2>
                             <p className="text-muted-foreground mb-8">
@@ -111,7 +111,7 @@ export default async function IotEmbeddedPage() {
                                     { text: "Deployment & hosting", icon: Cloud }
                                 ].map((item, i) => (
                                     <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-background/50 border border-white/5">
-                                        <div className="p-2 rounded-lg bg-cyan-500/20 text-cyan-400">
+                                        <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400">
                                             <item.icon className="w-5 h-5" />
                                         </div>
                                         <span className="font-medium">{item.text}</span>
@@ -119,7 +119,7 @@ export default async function IotEmbeddedPage() {
                                 ))}
                             </div>
 
-                            <div className="mt-8 p-4 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-300 text-sm">
+                            <div className="mt-8 p-4 rounded-lg bg-teal-500/10 border border-teal-500/20 text-teal-300 text-sm">
                                 <span className="font-bold">Industry-Relevant Outcome:</span> Students build production-style applications similar to startup and enterprise systems.
                             </div>
                         </div>
@@ -136,12 +136,12 @@ export default async function IotEmbeddedPage() {
                                     "Future startup founders"
                                 ].map((item, i) => (
                                     <li key={i} className="flex items-center gap-3">
-                                        <CheckCircle2 className="w-5 h-5 text-cyan-400 shrink-0" />
+                                        <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
                                         <span>{item}</span>
                                     </li>
                                 ))}
                             </ul>
-                            <div className="mt-8 p-4 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-sm text-cyan-300">
+                            <div className="mt-8 p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-sm text-emerald-300">
                                 <span className="font-semibold">Note:</span> No prior coding required — basics are included.
                             </div>
                         </div>
@@ -160,12 +160,12 @@ export default async function IotEmbeddedPage() {
                     <div className="flex flex-wrap justify-center gap-6 mb-20 max-w-5xl mx-auto">
                         {[
                             { name: "HTML/CSS/JS", sub: "Core Web Tech", color: "text-orange-400" },
-                            { name: "React/Vue/Angular", sub: "Frontend Frameworks", color: "text-cyan-400" },
+                            { name: "React/Vue/Angular", sub: "Frontend Frameworks", color: "text-emerald-400" },
                             { name: "Node.js / Express", sub: "Backend Runtime", color: "text-green-400" },
                             { name: "SQL / NoSQL", sub: "Databases", color: "text-yellow-400" },
-                            { name: "REST APIs", sub: "Communication", color: "text-blue-400" },
+                            { name: "REST APIs", sub: "Communication", color: "text-teal-400" },
                             { name: "Git & GitHub", sub: "Version Control", color: "text-gray-400" },
-                            { name: "Docker", sub: "Containerization", color: "text-blue-500" },
+                            { name: "Docker", sub: "Containerization", color: "text-teal-500" },
                             { name: "AWS / Vercel", sub: "Cloud Hosting", color: "text-purple-400" }
                         ].map((tool) => (
                             <div key={tool.name} className="text-center p-6 rounded-xl bg-secondary/30 w-44 hover:bg-secondary/50 transition-colors border border-white/5">
@@ -188,7 +188,7 @@ export default async function IotEmbeddedPage() {
                             { title: "Recorded Modules", desc: "Learn at your pace", icon: FileCheck },
                         ].map((item, i) => (
                             <div key={i} className="flex items-start gap-4 p-6 rounded-xl border border-white/5 bg-background/50">
-                                <div className="p-3 rounded-lg bg-cyan-500/10 text-cyan-400">
+                                <div className="p-3 rounded-lg bg-emerald-500/10 text-emerald-400">
                                     <item.icon className="w-6 h-6" />
                                 </div>
                                 <div>
@@ -211,7 +211,7 @@ export default async function IotEmbeddedPage() {
 
                     <div className="space-y-8 relative">
                         {/* Vertical Line */}
-                        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-500/50 to-blue-500/50 hidden md:block" />
+                        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-500/50 to-teal-500/50 hidden md:block" />
 
                         {[
                             {
@@ -242,7 +242,7 @@ export default async function IotEmbeddedPage() {
                                 title: "Job Portal System",
                                 tools: "Node.js, Express, MySQL",
                                 desc: "Create a multi-user job portal with recruiter and applicant dashboards.",
-                                color: "border-blue-500",
+                                color: "border-teal-500",
                                 type: "Project 4",
                                 icon: Briefcase
                             },
@@ -284,7 +284,7 @@ export default async function IotEmbeddedPage() {
                     {/* Mentor Support Section */}
                     <div className="mb-20">
                         <h2 className="text-3xl font-bold font-heading mb-8 flex items-center gap-3">
-                            <MessageSquare className="w-8 h-8 text-cyan-400" />
+                            <MessageSquare className="w-8 h-8 text-emerald-400" />
                             Mentor Support & Verification
                         </h2>
                         <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -302,15 +302,15 @@ export default async function IotEmbeddedPage() {
                                         "Issue recommendation letters"
                                     ].map((item, i) => (
                                         <li key={i} className="flex items-center gap-3">
-                                            <CheckCircle2 className="w-5 h-5 text-cyan-400 shrink-0" />
+                                            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
                                             <span>{item}</span>
                                         </li>
                                     ))}
                                 </ul>
                             </div>
-                            <Card className="bg-gradient-to-br from-cyan-500/10 to-transparent border-cyan-500/20">
+                            <Card className="bg-gradient-to-br from-emerald-500/10 to-transparent border-emerald-500/20">
                                 <CardContent className="p-8 text-center">
-                                    <Badge className="mb-4 bg-cyan-500 text-black">Mentor Verified</Badge>
+                                    <Badge className="mb-4 bg-emerald-500 text-black">Mentor Verified</Badge>
                                     <h3 className="text-2xl font-bold mb-2">Projects Are Not Self-Assessed</h3>
                                     <p className="text-muted-foreground">
                                         "You cannot certify yourself. A working professional mentor must start, review, and approve your work."
@@ -461,8 +461,8 @@ export default async function IotEmbeddedPage() {
                                     </div>
 
                                     {/* Certification Logic */}
-                                    <div className="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-6">
-                                        <h4 className="font-bold flex items-center gap-2 mb-4 text-blue-400">
+                                    <div className="bg-teal-500/10 border border-teal-500/20 rounded-2xl p-6">
+                                        <h4 className="font-bold flex items-center gap-2 mb-4 text-teal-400">
                                             <FileCheck className="w-5 h-5" /> Certification
                                         </h4>
                                         <p className="text-sm text-muted-foreground mb-4">
@@ -489,7 +489,7 @@ export default async function IotEmbeddedPage() {
 
                             <div className="space-y-6">
                                 <div className="flex gap-4">
-                                    <div className="p-3 rounded-lg bg-cyan-500/20 text-cyan-400 h-fit"><GraduationCap className="w-6 h-6" /></div>
+                                    <div className="p-3 rounded-lg bg-emerald-500/20 text-emerald-400 h-fit"><GraduationCap className="w-6 h-6" /></div>
                                     <div>
                                         <h4 className="font-bold">HR-Ready Profile</h4>
                                         <p className="text-sm text-gray-400">Recruiters can filter candidates based on these specific skills.</p>
@@ -508,12 +508,12 @@ export default async function IotEmbeddedPage() {
                         </div>
 
                         <div className="relative">
-                            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl opacity-20 blur-2xl" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl opacity-20 blur-2xl" />
                             <Card className="relative bg-black/80 border-white/10">
                                 <CardHeader>
                                     <CardTitle className="flex justify-between items-center">
                                         <span>HR Corner (Preview)</span>
-                                        <Badge className="bg-cyan-600">Recruiter View</Badge>
+                                        <Badge className="bg-emerald-600">Recruiter View</Badge>
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent>
@@ -556,7 +556,7 @@ export default async function IotEmbeddedPage() {
                         ))}
                     </div>
 
-                    <div className="text-center bg-gradient-to-r from-cyan-900/50 to-blue-900/50 p-12 rounded-3xl border border-white/10 relative overflow-hidden">
+                    <div className="text-center bg-gradient-to-r from-emerald-900/50 to-teal-900/50 p-12 rounded-3xl border border-white/10 relative overflow-hidden">
                         <div className="relative z-10">
                             <h2 className="text-4xl font-bold mb-4">Start Your Web Development Journey</h2>
                             <p className="text-xl text-gray-300 mb-8">Build apps. Build proof. Get hired.</p>
