@@ -78,6 +78,15 @@ export function LandingMenu() {
                     </NavigationMenuContent>
                 </NavigationMenuItem>
 
+                {/* 1.5 FREE LIBRARY */}
+                <NavigationMenuItem>
+                    <NavigationMenuLink asChild>
+                        <Link href="/library" className={cn(navigationMenuTriggerStyle(), "bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 font-bold")}>
+                            Free Library
+                        </Link>
+                    </NavigationMenuLink>
+                </NavigationMenuItem>
+
                 {/* 2. HOW IT WORKS */}
                 <NavigationMenuItem>
                     <NavigationMenuTrigger>How It Works</NavigationMenuTrigger>

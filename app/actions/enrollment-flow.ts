@@ -15,22 +15,70 @@ import { join } from 'path';
 // SECURE ENROLLMENT DETAILS & UPLOAD
 // -----------------------------------------------------------------------------
 export async function processEnrollmentDetails(formData: FormData) {
-    const session = await auth();
-    if (!session?.user?.id) return { error: 'Not authenticated' };
-
     try {
-        const phone = formData.get('phone') as string;
-        const college = formData.get('college') as string;
-        const year = formData.get('year') as string;
-        const city = formData.get('city') as string;
-        const experienceLevel = formData.get('experienceLevel') as string;
-        const heardAboutUs = formData.get('heardAboutUs') as string;
+        const session = await auth();
+        if (!session?.user) {
+            return { error: 'You must be logged in to enroll.' };
+        }
+
+        // --- Extract basic text fields ---
         const trackSlug = formData.get('trackSlug') as string;
+        const phone = formData.get('phone') as string;
+        const city = formData.get('city') as string;
+        const college = formData.get('college') as string;
+        const graduationYear = formData.get('year') as string;
+        const experience = formData.get('experienceLevel') as string;
+        const source = formData.get('heardAboutUs') as string;
+        const duration = formData.get('duration') as string;
+        const coupon = (formData.get('couponCode') as string || '').trim().toUpperCase();
+        
+        // Use explicitly provided name and email, fallback to session if not provided
+        const providedName = (formData.get('name') as string) || session.user.name;
+        const providedEmail = (formData.get('email') as string) || session.user.email;
 
         if (!trackSlug) return { error: 'Stream selection is required' };
+        if (!duration) return { error: 'Program duration selection is required' };
 
         const track = await prisma.track.findUnique({ where: { slug: trackSlug } });
         if (!track) return { error: 'Invalid stream selected' };
+
+        // --- PRICING ENGINE ---
+        const TIER_1_SLUGS = ['ai', 'machine-learning', 'cyber', 'data-engineering'];
+        const TIER_2_SLUGS = ['full-stack', 'devops', 'cloud', 'data-science', 'analytics'];
+        
+        const isTier1 = TIER_1_SLUGS.some(s => track.slug.toLowerCase().includes(s));
+        const isTier2 = TIER_2_SLUGS.some(s => track.slug.toLowerCase().includes(s));
+        
+        let basePrice = 9999; // Default 8-week Tier 3
+        if (duration === '2-week') {
+            basePrice = 3499; // Capstone flat rate
+        } else if (duration === '4-week') {
+            if (isTier1) basePrice = 7999;
+            else if (isTier2) basePrice = 6499;
+            else basePrice = 4999;
+        } else { // 8-week
+            if (isTier1) basePrice = 14999;
+            else if (isTier2) basePrice = 11999;
+            else basePrice = 9999;
+        }
+
+        let finalPrice = basePrice;
+        let appliedCoupon = null;
+
+        // Apply College Partner Booster
+        if (coupon?.replace(/\s/g, '').toUpperCase() === 'COLLEGEPARTNER' && duration === '8-week') {
+            finalPrice = 7999;
+            appliedCoupon = 'COLLEGEPARTNER';
+        } else if (duration !== '2-week') {
+            // Apply Early Bird Booster (First 50 seats per track)
+            const activeSeats = await prisma.enrollment.count({
+                where: { trackId: track.id, status: 'ACTIVE' }
+            });
+            if (activeSeats < 50) {
+                finalPrice = Math.floor(finalPrice * 0.8); // 20% off
+                appliedCoupon = 'EARLYBIRD20';
+            }
+        }
 
         // Save Resume File
         let resumeUrl = null;
@@ -55,30 +103,45 @@ export async function processEnrollmentDetails(formData: FormData) {
         // Prepare bio to store extra fields
         const extraDetails = [
             city ? `City: ${city}` : null,
-            experienceLevel ? `Experience: ${experienceLevel}` : null,
-            heardAboutUs ? `Source: ${heardAboutUs}` : null
+            experience ? `Experience: ${experience}` : null,
+            source ? `Source: ${source}` : null
         ].filter(Boolean).join(' | ');
+
+        const userId = session.user.id;
+        if (!userId) return { error: "User ID not found in session" };
 
         // Update User mobile (if provided)
         if (phone) {
-            await prisma.user.update({
-                where: { id: session.user.id },
-                data: { mobile: phone }
+            const existingUserWithPhone = await prisma.user.findUnique({
+                where: { mobile: phone }
             });
+
+            if (existingUserWithPhone && existingUserWithPhone.id !== userId) {
+                return { error: 'This phone number is already registered to another account' };
+            }
         }
+
+        // Always update the User's name if provided in the form
+        await prisma.user.update({
+            where: { id: userId },
+            data: { 
+                ...(phone ? { mobile: phone } : {}),
+                name: providedName,
+            }
+        });
 
         // Update Student Profile
         const student = await prisma.student.upsert({
-            where: { userId: session.user.id },
+            where: { userId: userId },
             create: {
-                userId: session.user.id,
+                userId: userId,
                 college,
-                year,
+                year: graduationYear,
                 bio: extraDetails || undefined,
             },
             update: {
                 college,
-                year,
+                year: graduationYear,
                 bio: extraDetails || undefined,
             }
         });
@@ -95,15 +158,17 @@ export async function processEnrollmentDetails(formData: FormData) {
             }
         });
 
-        // Create Payment Intent (Local record for Zoho verification later)
+        // Create Payment Intent (Local record for Razorpay verification later)
         const payment = await prisma.payment.create({
             data: {
-                userId: session.user.id,
-                amount: 4999, // Fixed enrollment price
+                userId: userId,
+                amount: finalPrice, 
                 currency: 'INR',
                 status: 'PENDING',
-                provider: 'ZOHO',
+                provider: 'RAZORPAY',
                 trackId: track.id,
+                programDuration: duration,
+                couponCode: appliedCoupon || (coupon && coupon.length > 0 ? coupon : null),
             }
         });
 
@@ -115,9 +180,11 @@ export async function processEnrollmentDetails(formData: FormData) {
             projectName: `Enrollment: ${track.title}`,
         };
 
-    } catch (error) {
-        console.error('Enrollment processing failed:', error);
-        return { error: 'Failed to process enrollment details' };
+    } catch (error: any) {
+        console.error('Enrollment processing failed!');
+        console.error('Error string:', error.toString());
+        if (error.stack) console.error('Stack:', error.stack);
+        return { error: `Failed to process enrollment details: ${error.message || error}` };
     }
 }
 
@@ -138,6 +205,8 @@ export async function verifyPaymentAndEnroll(paymentId: string) {
         if (!payment.trackId) {
             return { error: 'Invalid payment record' };
         }
+        const user = await prisma.user.findUnique({ where: { id: session.user.id } });
+        if (!user) return { error: 'User profile missing' };
 
         const student = await prisma.student.findUnique({ where: { userId: session.user.id } });
         if (!student) return { error: 'Student profile missing' };
@@ -154,12 +223,16 @@ export async function verifyPaymentAndEnroll(paymentId: string) {
                 studentId: student.id,
                 trackId: payment.trackId,
                 batchId: payment.batchId, // can be null
+                programDuration: payment.programDuration || "8-week",
+                couponCode: payment.couponCode,
                 status: 'ACTIVE',
                 progress: 0,
                 mentorId: null
             },
             update: {
                 batchId: payment.batchId, // can be null
+                programDuration: payment.programDuration || "8-week",
+                couponCode: payment.couponCode,
                 status: 'ACTIVE' // Reactivate if it was dropped/paused
             }
         });
@@ -218,8 +291,8 @@ export async function verifyPaymentAndEnroll(paymentId: string) {
         // Send Email via Brevo
         try {
             const emailResult = await sendLMSCredentials(
-                session.user.email!, // Send to personal email
-                session.user.name || "Student",
+                user.email || session.user.email!, // Send to explicitly provided email
+                user.name || session.user.name || "Student",
                 lmsEmail,
                 tempPassword
             );

@@ -86,6 +86,7 @@ export async function addProjectToCatalog(data: {
 }
 
 export async function updateCatalogProject(id: string, data: Partial<{
+    trackId: string;
     name: string;
     tagline: string;
     description: string;

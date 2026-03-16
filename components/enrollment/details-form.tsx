@@ -12,7 +12,50 @@ export function DetailsForm({ onSubmit, loading, initialEmail, initialName }: { 
     const [streams, setStreams] = useState<any[]>([]);
     const [fetchingStreams, setFetchingStreams] = useState(true);
     const [selectedTrack, setSelectedTrack] = useState<string>('');
+    const [programDuration, setProgramDuration] = useState<string>('');
+    const [couponCode, setCouponCode] = useState<string>('');
     const formRef = useRef<HTMLFormElement>(null);
+
+    // Dynamic Price Calculation
+    const getPriceDetails = () => {
+        if (!selectedTrack || !programDuration) return null;
+        
+        const trackObj = streams.find(t => t.slug === selectedTrack);
+        if (!trackObj) return null;
+        
+        const slug = trackObj.slug.toLowerCase();
+        const TIER_1_SLUGS = ['ai', 'machine-learning', 'cyber', 'data-engineering'];
+        const TIER_2_SLUGS = ['full-stack', 'devops', 'cloud', 'data-science', 'analytics'];
+        
+        const isTier1 = TIER_1_SLUGS.some(s => slug.includes(s));
+        const isTier2 = TIER_2_SLUGS.some(s => slug.includes(s));
+        
+        let basePrice = 9999;
+        if (programDuration === '2-week') basePrice = 3499;
+        else if (programDuration === '4-week') {
+            if (isTier1) basePrice = 7999;
+            else if (isTier2) basePrice = 6499;
+            else basePrice = 4999;
+        } else {
+            if (isTier1) basePrice = 14999;
+            else if (isTier2) basePrice = 11999;
+            else basePrice = 9999;
+        }
+
+        let finalPrice = basePrice;
+        let appliedBooster = null;
+
+        if (couponCode.replace(/\s/g, '').toUpperCase() === 'COLLEGEPARTNER' && programDuration === '8-week') {
+            finalPrice = 7999;
+            appliedBooster = 'College Partner Flat Rate';
+        } else if (programDuration !== '2-week') {
+            // Assume Early Bird applies for frontend UI preview (backend verifies actual count)
+            finalPrice = Math.floor(basePrice * 0.8);
+            appliedBooster = 'Early Bird 20% Off!';
+        }
+
+        return { basePrice, finalPrice, appliedBooster, discount: basePrice - finalPrice };
+    };
 
     // Some state for the file upload UI
     const [fileName, setFileName] = useState<string | null>(null);
@@ -57,19 +100,22 @@ export function DetailsForm({ onSubmit, loading, initialEmail, initialName }: { 
         }
     };
 
+    const priceDetails = getPriceDetails();
+
     return (
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
+            {/* ... Rest of the form ... */}
             {/* Personal Info */}
             <div className="space-y-4">
                 <h3 className="text-lg font-semibold text-cyan-400 border-b border-white/10 pb-2">1. Personal Information</h3>
                 <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                        <Label>Full Name</Label>
-                        <Input disabled value={initialName || ''} className="bg-slate-800/50 border-slate-700 text-slate-400" />
+                        <Label htmlFor="name">Full Name *</Label>
+                        <Input id="name" name="name" required defaultValue={initialName || ''} className="bg-slate-800 border-slate-700 text-white" placeholder="John Doe" />
                     </div>
                     <div className="space-y-2">
-                        <Label>Email</Label>
-                        <Input disabled value={initialEmail || ''} className="bg-slate-800/50 border-slate-700 text-slate-400" />
+                        <Label htmlFor="email">Email *</Label>
+                        <Input id="email" name="email" type="email" required defaultValue={initialEmail || ''} className="bg-slate-800 border-slate-700 text-white" placeholder="john@example.com" />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="phone">Phone Number *</Label>
@@ -152,10 +198,41 @@ export function DetailsForm({ onSubmit, loading, initialEmail, initialName }: { 
                 </div>
             </div>
 
-            {/* Choose Stream */}
+            {/* Choose Program */}
             <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-cyan-400 border-b border-white/10 pb-2">3. Choose Your Stream</h3>
-                {fetchingStreams ? (
+                <h3 className="text-lg font-semibold text-cyan-400 border-b border-white/10 pb-2">3. Choose Your Program</h3>
+                
+                <div className="space-y-3 mb-6">
+                    <Label htmlFor="programDuration">Program Duration *</Label>
+                    <select 
+                        id="programDuration" 
+                        name="programDuration" 
+                        value={programDuration}
+                        onChange={(e) => setProgramDuration(e.target.value)}
+                        required 
+                        className="flex h-10 w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white"
+                    >
+                        <option value="">Select Duration</option>
+                        <option value="2-week">2-Week Capstone Project Only (Fast-Track)</option>
+                        <option value="4-week">4-Week Accelerated Program</option>
+                        <option value="8-week">8-Week Standard Program (Recommended)</option>
+                    </select>
+                </div>
+
+                <div className="space-y-3 mb-6">
+                    <Label htmlFor="couponCode">Partner / Promo Code (Optional)</Label>
+                    <Input 
+                        id="couponCode" 
+                        name="couponCode"
+                        value={couponCode}
+                        onChange={(e) => setCouponCode(e.target.value)}
+                        className="border-slate-700 bg-slate-800 text-white placeholder:text-slate-500"
+                    />
+                </div>
+
+                <div className="space-y-3">
+                    <Label>Select Stream *</Label>
+                    {fetchingStreams ? (
                     <div className="flex justify-center p-8"><Loader2 className="animate-spin text-cyan-400" /></div>
                 ) : (
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
@@ -175,6 +252,7 @@ export function DetailsForm({ onSubmit, loading, initialEmail, initialName }: { 
                         ))}
                     </div>
                 )}
+                </div>
             </div>
 
             {/* Submit Button */}

@@ -50,6 +50,13 @@ function LMSLoginContent() {
                     color: "text-amber-400",
                     description: "Enterprise access for recruitment and analytics."
                 };
+            case "admin":
+                return {
+                    title: "Admin Portal",
+                    icon: ShieldCheck,
+                    color: "text-red-400",
+                    description: "System administration and management."
+                };
             case "student":
             default:
                 return {
@@ -86,7 +93,7 @@ function LMSLoginContent() {
                             id="email"
                             name="email"
                             type="email"
-                            placeholder={`name@${role === 'hr' ? 'company' : 'codequestzone'}.com`}
+                            placeholder="name@skillcred.com"
                             required
                             className="bg-white/5 border-white/10"
                         />

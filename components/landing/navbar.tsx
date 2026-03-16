@@ -98,20 +98,24 @@ export function LandingNavbar() {
                                 <DropdownMenuContent align="end" className="w-48 bg-black/95 border-white/10 backdrop-blur-xl">
                                     <DropdownMenuItem onClick={() => router.push("/auth/lms?role=student")} className="cursor-pointer gap-2 focus:bg-white/10 focus:text-white my-1">
                                         <GraduationCap className="w-4 h-4 text-indigo-400" />
-                                        Student Login
+                                        Student Portal
                                     </DropdownMenuItem>
                                     <DropdownMenuItem onClick={() => router.push("/auth/lms?role=mentor")} className="cursor-pointer gap-2 focus:bg-white/10 focus:text-white my-1">
                                         <Users className="w-4 h-4 text-emerald-400" />
-                                        Mentor Login
+                                        Mentor Portal
                                     </DropdownMenuItem>
                                     <DropdownMenuItem onClick={() => router.push("/auth/lms?role=hr")} className="cursor-pointer gap-2 focus:bg-white/10 focus:text-white my-1">
                                         <ShieldCheck className="w-4 h-4 text-amber-400" />
                                         HR Portal
                                     </DropdownMenuItem>
                                     <DropdownMenuSeparator className="bg-white/10" />
+                                    <DropdownMenuItem onClick={() => router.push("/auth/lms?role=admin")} className="cursor-pointer gap-2 focus:bg-white/10 focus:text-white my-1">
+                                        <ShieldCheck className="w-4 h-4 text-red-400" />
+                                        Admin Portal
+                                    </DropdownMenuItem>
                                     <DropdownMenuItem onClick={() => router.push("/auth/investor/login")} className="cursor-pointer gap-2 focus:bg-white/10 focus:text-white my-1">
                                         <LayoutDashboard className="w-4 h-4 text-orange-400" />
-                                        Investor Login
+                                        Investor Portal
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>

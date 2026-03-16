@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 // import { OTPInput, OTPInputContext } from "input-otp" // Commented out to isolate error
 
 // Simplified Mock Component
-const InputOTP = React.forwardRef<HTMLInputElement, React.ComponentPropsWithoutRef<"input">>(
+const InputOTP = React.forwardRef<HTMLInputElement, React.ComponentPropsWithoutRef<"input"> & { containerClassName?: string }>(
     ({ className, containerClassName, ...props }, ref) => (
         <div className={cn("flex items-center gap-2", containerClassName)}>
             <input

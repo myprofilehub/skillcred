@@ -121,7 +121,7 @@ export default function StreamCatalog({ streams, enrollments }: { streams: Track
                         </CardContent>
                         <CardFooter className="pt-0">
                             {isEnrolled ? (
-                                <Button className="w-full gap-2" variant="outline" onClick={() => router.push(`/dashboard/student/lms/${stream.slug}`)}>
+                                <Button className="w-full gap-2" variant="outline" onClick={() => router.push(`/dashboard/student/classroom`)}>
                                     Continue Learning <ArrowRight className="w-4 h-4" />
                                 </Button>
                             ) : (

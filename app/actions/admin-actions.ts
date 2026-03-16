@@ -19,17 +19,13 @@ async function requireAdmin() {
 export async function getAdminDashboardStats() {
     await requireAdmin();
 
-    const [totalUsers, mentors, paidStudents, totalStudents, recentCredentials] = await Promise.all([
-        prisma.user.count(),
-        prisma.user.count({ where: { role: "MENTOR" } }),
-        prisma.student.count({ where: { subscription: "PRO" } }),
-        prisma.student.count(),
+    const [activeStreams, enrolledStudents, totalProjects, totalCourses, recentActivity] = await Promise.all([
+        prisma.track.count(),
+        prisma.enrollment.count({ where: { status: "ACTIVE" } }),
+        prisma.projectCatalogItem.count(),
+        prisma.course.count(),
         prisma.user.findMany({
             where: {
-                OR: [
-                    { email: { endsWith: "@codequestzone.com" } },
-                    { email: { endsWith: "@skillcred.com" } },
-                ],
                 role: { in: ["MENTOR", "STUDENT"] }
             },
             orderBy: { createdAt: "desc" },
@@ -45,11 +41,11 @@ export async function getAdminDashboardStats() {
     ]);
 
     return {
-        totalUsers,
-        mentors,
-        paidStudents,
-        totalStudents,
-        recentCredentials
+        activeStreams,
+        enrolledStudents,
+        totalProjects,
+        totalCourses,
+        recentActivity
     };
 }
 

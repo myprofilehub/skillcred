@@ -13,7 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Pencil, Trash2, Loader2, Star, CheckCircle2, AlertCircle } from "lucide-react";
+import { Plus, Pencil, Trash2, Loader2, Star, CheckCircle2, AlertCircle, User, Users, Trophy } from "lucide-react";
 import { toast } from "sonner";
 
 interface Stream {
@@ -47,15 +47,15 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
     const [isEditOpen, setIsEditOpen] = useState(false);
     const [currentProject, setCurrentProject] = useState<Project | null>(null);
 
-    // Form State
     const [formData, setFormData] = useState({
         name: "",
         tagline: "",
         description: "",
-        difficulty: 2,
+        difficulty: 1,
         coreFeatures: "", // split by newline
         startupAngle: "",
-        isActive: true
+        isActive: true,
+        trackSlug: ""
     });
 
     useEffect(() => {
@@ -73,7 +73,6 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
         setLoading(false);
     }
 
-    // Handlers
     function handleEditClick(project: Project) {
         setCurrentProject(project);
         setFormData({
@@ -83,7 +82,8 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
             difficulty: project.difficulty,
             coreFeatures: project.coreFeatures.join("\n"),
             startupAngle: project.startupAngle || "",
-            isActive: project.isActive
+            isActive: project.isActive,
+            trackSlug: selectedStreamSlug
         });
         setIsEditOpen(true);
     }
@@ -93,10 +93,11 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
             name: "",
             tagline: "",
             description: "",
-            difficulty: 2,
+            difficulty: 1,
             coreFeatures: "",
             startupAngle: "",
-            isActive: true
+            isActive: true,
+            trackSlug: selectedStreamSlug
         });
     }
 
@@ -106,7 +107,7 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
             return;
         }
 
-        const track = streams.find(s => s.slug === selectedStreamSlug);
+        const track = streams.find(s => s.slug === formData.trackSlug);
         if (!track) return;
 
         const result = await addProjectToCatalog({
@@ -131,8 +132,11 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
 
     async function handleEditSubmit() {
         if (!currentProject) return;
+        
+        const track = streams.find(s => s.slug === formData.trackSlug);
 
         const result = await updateCatalogProject(currentProject.id, {
+            trackId: track?.id,
             name: formData.name,
             tagline: formData.tagline,
             description: formData.description,
@@ -172,6 +176,69 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
         }
     }
 
+    const solo1 = projects.filter(p => p.difficulty === 1);
+    const solo2 = projects.filter(p => p.difficulty === 2);
+    const pair = projects.filter(p => p.difficulty === 3);
+    const capstones = projects.filter(p => p.difficulty >= 4);
+
+    const renderProjectSection = (title: string, icon: React.ReactNode, projList: Project[]) => (
+        <div className="mb-10">
+            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2 border-b border-slate-800 pb-2">
+                {icon} {title}
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {projList.length === 0 ? (
+                    <div className="text-slate-500 text-sm italic py-4 col-span-full">No projects found.</div>
+                ) : (
+                    projList.map(project => (
+                        <Card key={project.id} className="bg-slate-900 border-slate-800 flex flex-col justify-between">
+                            <CardContent className="p-5 flex-1 flex flex-col">
+                                <div className="space-y-2 flex-1">
+                                    <div className="flex items-start justify-between gap-2">
+                                        <h4 className="text-lg font-semibold text-white">{project.name}</h4>
+                                        <div className="flex gap-1 shrink-0">
+                                            <Button variant="ghost" size="icon" onClick={() => handleEditClick(project)} className="w-8 h-8 rounded-full">
+                                                <Pencil className="w-4 h-4 text-slate-400 hover:text-white" />
+                                            </Button>
+                                            {userRole === "ADMIN" && (
+                                                <Button variant="ghost" size="icon" onClick={() => handleDelete(project.id)} className="w-8 h-8 rounded-full hover:bg-red-500/10">
+                                                    <Trash2 className="w-4 h-4 text-red-500 hover:text-red-400" />
+                                                </Button>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <p className="text-sm text-cyan-400 font-medium">{project.tagline}</p>
+                                    {project.description && (
+                                        <div className="text-sm text-slate-400 mt-3 bg-slate-950 p-3 rounded-md leading-relaxed whitespace-pre-wrap">
+                                            {project.description}
+                                        </div>
+                                    )}
+                                    <div className="flex flex-wrap gap-2 mt-4 pt-2">
+                                        {project.coreFeatures.map((f, i) => (
+                                            <Badge key={i} variant="outline" className="border-slate-700 text-slate-300 bg-slate-800/30">
+                                                {f}
+                                            </Badge>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="flex items-center justify-between mt-6 pt-4 border-t border-slate-800/50">
+                                    <div className="flex items-center gap-2">
+                                        <span className={`w-2 h-2 rounded-full ${project.isActive ? 'bg-emerald-500' : 'bg-slate-600'}`} />
+                                        <span className="text-sm text-slate-400">{project.isActive ? 'Active in Curriculum' : 'Draft / Hidden'}</span>
+                                    </div>
+                                    <Switch
+                                        checked={project.isActive}
+                                        onCheckedChange={() => handleToggleActive(project)}
+                                    />
+                                </div>
+                            </CardContent>
+                        </Card>
+                    ))
+                )}
+            </div>
+        </div>
+    );
+
     return (
         <div className="space-y-6">
             {/* Stream Selector */}
@@ -188,7 +255,7 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
                         <TabsTrigger
                             key={stream.id}
                             value={stream.slug}
-                            className="data-[state=active]:bg-cyan-600 data-[state=active]:text-white px-3 py-2 text-sm"
+                            className="data-[state=active]:bg-cyan-600 data-[state=active]:text-white px-3 py-2 text-sm whitespace-nowrap"
                         >
                             {stream.title}
                         </TabsTrigger>
@@ -197,88 +264,44 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
             </Tabs>
 
             {/* Project List */}
-            <Card className="bg-slate-900 border-slate-800">
-                <CardContent className="p-0">
-                    <Table>
-                        <TableHeader className="bg-slate-950">
-                            <TableRow className="hover:bg-transparent border-slate-800">
-                                <TableHead className="text-slate-400">Project Name</TableHead>
-                                <TableHead className="text-slate-400">Difficulty</TableHead>
-                                <TableHead className="text-slate-400">Features</TableHead>
-                                <TableHead className="text-slate-400">Status</TableHead>
-                                <TableHead className="text-right text-slate-400">Actions</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {loading ? (
-                                <TableRow>
-                                    <TableCell colSpan={5} className="h-24 text-center text-slate-500">
-                                        <Loader2 className="w-5 h-5 animate-spin mx-auto mb-2" />
-                                        Loading projects...
-                                    </TableCell>
-                                </TableRow>
-                            ) : projects.length === 0 ? (
-                                <TableRow>
-                                    <TableCell colSpan={5} className="h-24 text-center text-slate-500">
-                                        No projects found for this stream. Add one to get started.
-                                    </TableCell>
-                                </TableRow>
-                            ) : (
-                                projects.map(project => (
-                                    <TableRow key={project.id} className="border-slate-800 hover:bg-slate-800/50">
-                                        <TableCell>
-                                            <div className="font-medium text-white">{project.name}</div>
-                                            <div className="text-xs text-slate-400 truncate max-w-[200px]">{project.tagline}</div>
-                                        </TableCell>
-                                        <TableCell>
-                                            <div className="flex">
-                                                {[...Array(project.difficulty)].map((_, i) => (
-                                                    <Star key={i} className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                                                ))}
-                                                {[...Array(3 - project.difficulty)].map((_, i) => (
-                                                    <Star key={i} className="w-4 h-4 text-slate-700" />
-                                                ))}
-                                            </div>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Badge variant="outline" className="text-xs border-slate-700 text-slate-300">
-                                                {project.coreFeatures.length} features
-                                            </Badge>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Switch
-                                                checked={project.isActive}
-                                                onCheckedChange={() => handleToggleActive(project)}
-                                            />
-                                        </TableCell>
-                                        <TableCell className="text-right">
-                                            <div className="flex justify-end gap-2">
-                                                <Button variant="ghost" size="icon" onClick={() => handleEditClick(project)}>
-                                                    <Pencil className="w-4 h-4 text-slate-400 hover:text-white" />
-                                                </Button>
-                                                {userRole === "ADMIN" && (
-                                                    <Button variant="ghost" size="icon" onClick={() => handleDelete(project.id)}>
-                                                        <Trash2 className="w-4 h-4 text-red-400 hover:text-red-300" />
-                                                    </Button>
-                                                )}
-                                            </div>
-                                        </TableCell>
-                                    </TableRow>
-                                ))
-                            )}
-                        </TableBody>
-                    </Table>
-                </CardContent>
-            </Card>
+            {loading ? (
+                <div className="flex flex-col items-center justify-center p-12 text-slate-500">
+                    <Loader2 className="w-8 h-8 animate-spin mb-4 text-cyan-500" />
+                    <p>Loading curriculum design...</p>
+                </div>
+            ) : (
+                <div className="mt-8 space-y-12">
+                    {renderProjectSection("Solo Project 1", <User className="w-5 h-5 text-emerald-400" />, solo1)}
+                    {renderProjectSection("Solo Project 2", <User className="w-5 h-5 text-blue-400" />, solo2)}
+                    {renderProjectSection("Pair Project", <Users className="w-5 h-5 text-purple-400" />, pair)}
+                    {renderProjectSection("Capstone Options", <Trophy className="w-5 h-5 text-yellow-500" />, capstones)}
+                </div>
+            )}
 
             {/* Add/Edit Modal */}
             <Dialog open={isAddOpen || isEditOpen} onOpenChange={(open) => { if (!open) { setIsAddOpen(false); setIsEditOpen(false); } }}>
-                <DialogContent className="bg-slate-900 border-slate-700 text-white max-w-2xl">
+                <DialogContent className="bg-slate-900 border-slate-700 text-white max-w-2xl max-h-[90vh] overflow-y-auto">
                     <DialogHeader>
                         <DialogTitle>{isAddOpen ? "Add New Project" : "Edit Project"}</DialogTitle>
                     </DialogHeader>
 
                     <div className="grid gap-4 py-4">
+                        <div className="space-y-2">
+                            <Label>Stream / Track</Label>
+                            <Select
+                                value={formData.trackSlug}
+                                onValueChange={(val) => setFormData({ ...formData, trackSlug: val })}
+                            >
+                                <SelectTrigger className="bg-slate-950 border-slate-800 text-white">
+                                    <SelectValue placeholder="Select Stream..." />
+                                </SelectTrigger>
+                                <SelectContent className="bg-slate-900 border-slate-800 text-white max-h-[250px]">
+                                    {streams.map(s => (
+                                        <SelectItem key={s.id} value={s.slug}>{s.title}</SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <Label>Project Name</Label>
@@ -290,29 +313,30 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label>Difficulty (1-3)</Label>
+                                <Label>Project Category</Label>
                                 <Select
                                     value={String(formData.difficulty)}
                                     onValueChange={(val) => setFormData({ ...formData, difficulty: Number(val) })}
                                 >
                                     <SelectTrigger className="bg-slate-950 border-slate-800 text-white">
-                                        <SelectValue placeholder="Select difficulty" />
+                                        <SelectValue placeholder="Select Category" />
                                     </SelectTrigger>
                                     <SelectContent className="bg-slate-900 border-slate-800 text-white">
-                                        <SelectItem value="1">⭐ Beginner</SelectItem>
-                                        <SelectItem value="2">⭐⭐ Intermediate</SelectItem>
-                                        <SelectItem value="3">⭐⭐⭐ Advanced</SelectItem>
+                                        <SelectItem value="1">👤 Solo Project 1</SelectItem>
+                                        <SelectItem value="2">👤 Solo Project 2</SelectItem>
+                                        <SelectItem value="3">👥 Pair Project</SelectItem>
+                                        <SelectItem value="4">🏆 Capstone Option</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
                         </div>
 
                         <div className="space-y-2">
-                            <Label>Tagline (One-Liner)</Label>
+                            <Label>HR Signal / Tagline</Label>
                             <Input
                                 value={formData.tagline}
                                 onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
-                                placeholder="e.g., Multi-vendor e-commerce marketplace"
+                                placeholder="e.g., HR Signal: Junior Fullstack"
                                 className="bg-slate-950 border-slate-800 text-white"
                             />
                         </div>
@@ -323,7 +347,7 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
                                 value={formData.description}
                                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                 placeholder="Detailed description..."
-                                className="bg-slate-950 border-slate-800 text-white min-h-[80px]"
+                                className="bg-slate-950 border-slate-800 text-white min-h-[120px]"
                             />
                         </div>
 
@@ -333,12 +357,12 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
                                 <Textarea
                                     value={formData.coreFeatures}
                                     onChange={(e) => setFormData({ ...formData, coreFeatures: e.target.value })}
-                                    placeholder="- Feature 1\n- Feature 2"
+                                    placeholder="React 18&#10;Node.js"
                                     className="bg-slate-950 border-slate-800 text-white min-h-[100px]"
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label>Startup Potential / Angle</Label>
+                                <Label>Startup Potential / Angle (Optional)</Label>
                                 <Textarea
                                     value={formData.startupAngle}
                                     onChange={(e) => setFormData({ ...formData, startupAngle: e.target.value })}
@@ -350,7 +374,7 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
                     </div>
 
                     <DialogFooter>
-                        <Button variant="outline" onClick={() => { setIsAddOpen(false); setIsEditOpen(false); }}>Cancel</Button>
+                        <Button variant="outline" className="border-slate-700 text-white hover:bg-slate-800 hover:text-white bg-slate-900" onClick={() => { setIsAddOpen(false); setIsEditOpen(false); }}>Cancel</Button>
                         <Button
                             className="bg-cyan-600 hover:bg-cyan-700 text-white"
                             onClick={isAddOpen ? handleAddSubmit : handleEditSubmit}

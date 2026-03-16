@@ -362,15 +362,93 @@ export async function getStudentDashboardSummary() {
     const hasGoogleToken = !!session.accessToken && !session.error;
 
     try {
-        // If no Google Token, return empty data (Dashboard works in "Offline/Local" mode)
+        // If no Google Token, fallback to DB-only data (Offline/Local mode)
         if (!hasGoogleToken) {
+            const student = await prisma.student.findUnique({
+                where: { userId: session.user.id }
+            });
+
+            if (!student) {
+                return {
+                    upNext: null, classroomsCount: 0, pendingAssignments: [],
+                    recentRecordings: [], overallAttendance: null, attendanceStats: []
+                };
+            }
+
+            // DB Fallback: Enrollments
+            const enrollments = await prisma.enrollment.findMany({
+                where: { studentId: student.id, status: 'ACTIVE' },
+                include: { track: true }
+            });
+
+            // DB Fallback: Mentorship Sessions (Up Next)
+            const upcomingSession = await prisma.mentorshipSession.findFirst({
+                where: { 
+                    studentId: session.user.id,
+                    startTime: { gt: new Date() },
+                    status: 'SCHEDULED'
+                },
+                orderBy: { startTime: 'asc' }
+            });
+
+            const upNext = upcomingSession ? {
+                id: upcomingSession.id,
+                title: 'Mentorship Session',
+                start: upcomingSession.startTime.toISOString(),
+                meetLink: upcomingSession.meetingLink || undefined,
+            } : null;
+
+            // DB Fallback: Assignments
+            const assignments = await prisma.projectAssignment.findMany({
+                where: { 
+                    studentId: student.id,
+                    status: { notIn: ['VERIFIED', 'SUBMITTED'] }
+                },
+                include: { project: true },
+                take: 5
+            });
+
+            const pendingAssignments = assignments.map(a => ({
+                id: a.id,
+                title: a.project.title,
+                courseName: 'Project Assignment',
+                dueDate: null,
+                state: a.status === 'NOT_STARTED' ? 'NEW' : a.status
+            }));
+
+            // DB Fallback: Recordings
+            const trackIds = enrollments.map(e => e.trackId);
+            const recordings = await prisma.recording.findMany({
+                where: {
+                    OR: [
+                        { isPublic: true },
+                        { trackId: { in: trackIds } }
+                    ]
+                },
+                orderBy: { createdAt: 'desc' },
+                take: 3
+            });
+
+            const recentRecordings = recordings.map(r => ({
+                id: r.id,
+                title: r.title,
+                url: r.url,
+                createdAt: r.createdAt
+            }));
+
+            const attendance = await getMyAttendance();
+            const attendanceStats = !("error" in attendance) && attendance.stats ? attendance.stats : [];
+            const overallAttendance = attendanceStats.length > 0
+                ? Math.round(attendanceStats.reduce((sum, s) => sum + s.percentage, 0) / attendanceStats.length)
+                : null;
+
             return {
-                upNext: null,
-                classroomsCount: 0,
-                pendingAssignments: [],
-                recentRecordings: [],
-                overallAttendance: null,
-                attendanceStats: [],
+                upNext,
+                classroomsCount: enrollments.length,
+                pendingAssignments,
+                recentRecordings,
+                overallAttendance,
+                attendanceStats,
             };
         }
 

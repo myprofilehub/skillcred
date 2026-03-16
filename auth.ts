@@ -111,67 +111,44 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 token.forcePasswordChange = session.user.forcePasswordChange;
             }
 
-            // Initial sign in
-            if (account && user) {
-                // CRITICAL: Explicitly save the refresh_token to the DB if it exists
-                // The Adapter might not update it if the Account already exists
-                if (account.refresh_token) {
+            if (account) {
+                // Initial sign in - attach token from account
+                token.accessToken = account.access_token;
+                token.refreshToken = account.refresh_token; 
+                token.accessTokenExpires = account.expires_at ? account.expires_at * 1000 : Date.now() + 3600 * 1000;
+                
+                // Explicitly save the refresh_token to the DB if it exists (e.g. from prompt=consent)
+                if (account.refresh_token && user?.id) {
                     try {
-                        await prisma.account.update({
-                            where: {
-                                provider_providerAccountId: {
-                                    provider: account.provider,
-                                    providerAccountId: account.providerAccountId
-                                }
-                            },
-                            data: {
-                                refresh_token: account.refresh_token,
-                                access_token: account.access_token,
-                                expires_at: account.expires_at,
-                                token_type: account.token_type,
-                                scope: account.scope,
-                                id_token: account.id_token,
-                            }
+                        const existingAccount = await prisma.account.findFirst({
+                            where: { provider: account.provider, providerAccountId: account.providerAccountId }
                         });
+                        
+                        if (existingAccount) {
+                            await prisma.account.update({
+                                where: { id: existingAccount.id },
+                                data: {
+                                    refresh_token: account.refresh_token,
+                                    access_token: account.access_token,
+                                    expires_at: account.expires_at,
+                                    token_type: account.token_type,
+                                    scope: account.scope,
+                                    id_token: account.id_token,
+                                }
+                            });
+                        }
                     } catch (error) {
                         console.error("Failed to save tokens to DB:", error);
-                        // If update fails (e.g. account doesn't exist yet but is being created by adapter), 
-                        // it might be a race condition, but usually adapter runs before this.
-                        // Or if account is not linked yet.
-                        // Actually, if it's a new link, Adapter creates it. 
-                        // If it's an existing link, we verify/update it.
                     }
                 }
-
-                return {
-                    ...token,
-                    id: user.id,
-                    role: (user as any).role,
-                    username: (user as any).username, // Add username
-                    lmsEmail: (user as any).lmsEmail,
-                    forcePasswordChange: (user as any).forcePasswordChange,
-                    accessToken: account.access_token,
-                    refreshToken: account.refresh_token, // Might be undefined if no consent prompt
-                    accessTokenExpires: account.expires_at ? account.expires_at * 1000 : Date.now() + 3600 * 1000,
-                };
             }
 
-            // If we don't have a refresh token (e.g. re-login without consent), try to fetch from DB
-            if (!token.refreshToken) {
-                try {
-                    const dbAccount = await prisma.account.findFirst({
-                        where: {
-                            userId: token.id as string,
-                            provider: "google"
-                        }
-                    });
-
-                    if (dbAccount?.refresh_token) {
-                        token.refreshToken = dbAccount.refresh_token;
-                    }
-                } catch (error) {
-                    console.error("Error fetching refresh token from DB:", error);
-                }
+            if (user) {
+                token.id = user.id;
+                token.role = (user as any).role;
+                token.username = (user as any).username;
+                token.lmsEmail = (user as any).lmsEmail;
+                token.forcePasswordChange = (user as any).forcePasswordChange;
             }
 
             // Return previous token if the access token has not expired yet

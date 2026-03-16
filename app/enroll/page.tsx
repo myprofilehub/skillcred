@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { DetailsForm } from '@/components/enrollment/details-form';
 import { PaymentGateway } from '@/components/enrollment/payment-gateway';
 import { processEnrollmentDetails, verifyPaymentAndEnroll } from '@/app/actions/enrollment-flow';
-import { useToast } from '@/components/ui/use-toast';
+import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Logo } from '@/components/logo';
 import { useSession } from 'next-auth/react';
@@ -18,7 +18,6 @@ export default function EnrollmentPage() {
     const [order, setOrder] = useState<{ orderId: string, amount: number, currency: string, projectName?: string } | null>(null);
 
     const router = useRouter();
-    const { toast } = useToast();
 
     const handleDetailsSubmit = async (formData: FormData) => {
         setLoading(true);
@@ -34,7 +33,7 @@ export default function EnrollmentPage() {
             });
             setStep(2);
         } else {
-            toast({ title: "Error", description: result.error, variant: "destructive" });
+            toast.error(result.error || "An error occurred");
         }
     };
 
@@ -45,10 +44,10 @@ export default function EnrollmentPage() {
         setLoading(false);
 
         if (result.success) {
-            toast({ title: "Enrollment Complete!", description: "Redirecting to your dashboard..." });
+            toast.success("Enrollment Complete! Redirecting to your dashboard...");
             router.push('/dashboard/student');
         } else {
-            toast({ title: "Verification Failed", description: result.error, variant: "destructive" });
+            toast.error(result.error || "Verification Failed");
         }
     };
 

@@ -1,7 +1,7 @@
 import { getAdminDashboardStats } from "@/app/actions/admin-actions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Users, UserCheck, Shield, KeyRound, Sparkles, ArrowRight, GraduationCap } from "lucide-react";
+import { Users, UserCheck, Shield, KeyRound, Sparkles, ArrowRight, GraduationCap, Layout, BookOpen, FolderGit2 } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
 
@@ -28,53 +28,53 @@ export default async function AdminDashboardPage() {
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <Card className="bg-slate-900/60 border-cyan-500/20 backdrop-blur-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium text-slate-300">Total Users</CardTitle>
+                        <CardTitle className="text-sm font-medium text-slate-300">Active Streams</CardTitle>
                         <div className="w-8 h-8 rounded-md bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-                            <Users className="h-4 w-4 text-cyan-400" />
+                            <Layout className="h-4 w-4 text-cyan-400" />
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold text-white font-mono">{stats.totalUsers}</div>
-                        <p className="text-xs text-slate-500 mt-1">Registered accounts</p>
+                        <div className="text-3xl font-bold text-white font-mono">{stats.activeStreams}</div>
+                        <p className="text-xs text-slate-500 mt-1">Managed career tracks</p>
                     </CardContent>
                 </Card>
 
                 <Card className="bg-slate-900/60 border-cyan-500/20 backdrop-blur-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium text-slate-300">Mentors</CardTitle>
-                        <div className="w-8 h-8 rounded-md bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-                            <UserCheck className="h-4 w-4 text-cyan-400" />
-                        </div>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-3xl font-bold text-white font-mono">{stats.mentors}</div>
-                        <p className="text-xs text-slate-500 mt-1">Active-role mentors</p>
-                    </CardContent>
-                </Card>
-
-                <Card className="bg-slate-900/60 border-cyan-500/20 backdrop-blur-sm">
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium text-slate-300">Paid Students</CardTitle>
+                        <CardTitle className="text-sm font-medium text-slate-300">Active Students</CardTitle>
                         <div className="w-8 h-8 rounded-md bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
                             <GraduationCap className="h-4 w-4 text-cyan-400" />
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold text-white font-mono">{stats.paidStudents}</div>
-                        <p className="text-xs text-slate-500 mt-1">Vs {stats.totalStudents} total</p>
+                        <div className="text-3xl font-bold text-white font-mono">{stats.enrolledStudents}</div>
+                        <p className="text-xs text-slate-500 mt-1">Currently enrolled</p>
                     </CardContent>
                 </Card>
 
                 <Card className="bg-slate-900/60 border-cyan-500/20 backdrop-blur-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium text-slate-300">Credentials Issued</CardTitle>
+                        <CardTitle className="text-sm font-medium text-slate-300">Total Projects</CardTitle>
                         <div className="w-8 h-8 rounded-md bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-                            <Shield className="h-4 w-4 text-cyan-400" />
+                            <FolderGit2 className="h-4 w-4 text-cyan-400" />
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold text-white font-mono">{stats.recentCredentials.length}</div>
-                        <p className="text-xs text-slate-500 mt-1">Manually created</p>
+                        <div className="text-3xl font-bold text-white font-mono">{stats.totalProjects}</div>
+                        <p className="text-xs text-slate-500 mt-1">In curriculum catalog</p>
+                    </CardContent>
+                </Card>
+
+                <Card className="bg-slate-900/60 border-cyan-500/20 backdrop-blur-sm">
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="text-sm font-medium text-slate-300">LMS Courses</CardTitle>
+                        <div className="w-8 h-8 rounded-md bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
+                            <BookOpen className="h-4 w-4 text-cyan-400" />
+                        </div>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="text-3xl font-bold text-white font-mono">{stats.totalCourses}</div>
+                        <p className="text-xs text-slate-500 mt-1">Associated learning modules</p>
                     </CardContent>
                 </Card>
             </div>
@@ -89,10 +89,10 @@ export default async function AdminDashboardPage() {
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-4">
-                        {stats.recentCredentials.length === 0 ? (
+                        {stats.recentActivity.length === 0 ? (
                             <p className="text-slate-500 text-sm">No recent activity found.</p>
                         ) : (
-                            stats.recentCredentials.map((user: any) => (
+                            stats.recentActivity.map((user: any) => (
                                 <div key={user.id} className="flex items-center justify-between border-b border-slate-800 pb-4 last:border-0 last:pb-0">
                                     <div className="space-y-1">
                                         <p className="text-sm font-medium leading-none text-white">{user.name}</p>

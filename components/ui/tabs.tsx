@@ -8,8 +8,21 @@ const TabsContext = React.createContext<{
     setActiveTab: (value: string) => void;
 } | null>(null);
 
-const Tabs = ({ defaultValue, className, children }: { defaultValue: string, className?: string, children: React.ReactNode }) => {
-    const [activeTab, setActiveTab] = React.useState(defaultValue);
+const Tabs = ({ defaultValue, value, onValueChange, className, children }: { defaultValue?: string, value?: string, onValueChange?: (value: string) => void, className?: string, children: React.ReactNode }) => {
+    const [activeTab, setActiveTabInternal] = React.useState(defaultValue || value || "");
+
+    React.useEffect(() => {
+        if (value !== undefined) {
+             setActiveTabInternal(value);
+        }
+    }, [value]);
+
+    const setActiveTab = (val: string) => {
+        setActiveTabInternal(val);
+        if (onValueChange) {
+            onValueChange(val);
+        }
+    };
 
     return (
         <TabsContext.Provider value={{ activeTab, setActiveTab }}>

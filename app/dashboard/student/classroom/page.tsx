@@ -30,7 +30,9 @@ export default async function StudentClassroomPage() {
                     <form action={async () => {
                         "use server";
                         const { googleLogin } = await import("@/actions/login");
-                        await googleLogin("/dashboard/student/classroom");
+                        const { auth } = await import("@/auth");
+                        const session = await auth();
+                        await googleLogin("/dashboard/student/classroom", session?.user?.email || undefined);
                     }}>
                         <Button variant="destructive" size="sm" className="bg-red-500/20 hover:bg-red-500/30 text-red-500 border-0">
                             Connect Google Account

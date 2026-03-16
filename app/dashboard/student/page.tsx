@@ -16,13 +16,15 @@ export default async function StudentDashboardPage() {
         where: { userId: session.user.id },
         include: {
             enrollments: {
+                where: { status: 'ACTIVE' },
+                orderBy: { createdAt: 'desc' },
                 include: {
                     track: true,
                     batch: {
                         include: { project: true }
                     }
                 },
-                take: 1 // Get primary enrollment
+                take: 1 // Get most recent primary enrollment
             },
         }
     });

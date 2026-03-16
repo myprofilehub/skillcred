@@ -267,6 +267,8 @@ model Enrollment {
   mentorId  String?
   status    EnrollmentStatus @default(ACTIVE)
   progress  Int      @default(0) // Percentage calculated from projects/courses
+  programDuration String @default("8-week") // 4-week or 8-week
+  couponCode      String?  // Early bird, partner codes, etc.
   
   student   Student  @relation(fields: [studentId], references: [id])
   track     Track    @relation(fields: [trackId], references: [id])
@@ -336,13 +338,15 @@ model Payment {
   amount          Float
   currency        String   @default("INR")
   status          PaymentStatus @default(PENDING)
-  provider        String   @default("ZOHO") // ZOHO, RAZORPAY, MANUAL
-  transactionId   String?  // External ID from Zoho
+  provider        String   @default("RAZORPAY") // RAZORPAY, MANUAL
+  transactionId   String?  // External ID from Razorpay
   
   // Metadata for what was bought
   trackId         String?
   projectId       String?
   batchId         String?
+  programDuration String?
+  couponCode      String?
   
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt

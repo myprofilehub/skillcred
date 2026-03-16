@@ -1,7 +1,6 @@
-"use client";
-
 import { LandingNavbar } from "@/components/landing/navbar";
 import { HeroSection } from "@/components/landing/hero-section";
+import { LandingInterestForm } from "@/components/landing/interest-form";
 import { FeaturesSection } from "@/components/landing/features";
 import { CareerPaths } from "@/components/landing/career-paths";
 import { HowItWorksSection } from "@/components/landing/how-it-works-section";
@@ -9,14 +8,26 @@ import { QuerySection } from "@/components/landing/query-section";
 import Link from "next/link";
 import { Github, Twitter, Linkedin } from "lucide-react";
 import { Logo } from "@/components/logo";
+import { prisma } from "@/lib/db";
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const tracks = await prisma.track.findMany({
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      slug: true,
+    },
+    orderBy: { title: "asc" }
+  });
+
   return (
     <div className="min-h-screen bg-black text-white selection:bg-indigo-500/30">
       <LandingNavbar />
 
       <main>
         <HeroSection />
+        <LandingInterestForm tracks={tracks} />
         <FeaturesSection />
         <HowItWorksSection />
         <CareerPaths />

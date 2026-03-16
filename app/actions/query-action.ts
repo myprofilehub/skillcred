@@ -24,7 +24,7 @@ export async function submitQuery(prevState: any, formData: FormData) {
 
         if (!brevoApiKey) {
             console.error("Missing BREVO_API_KEY");
-            return { error: "Email service is temporarily unavailable." };
+            return { error: "Email service is temporarily unavailable.", success: false };
         }
 
         // Send Email via Brevo REST API
@@ -54,15 +54,15 @@ export async function submitQuery(prevState: any, formData: FormData) {
         if (!response.ok) {
             const errorData = await response.json();
             console.error("Brevo API error:", errorData);
-            return { error: "Failed to send the query. Please try again later." };
+            return { error: "Failed to send the query. Please try again later.", success: false };
         }
 
-        return { success: true };
+        return { success: true, error: null };
     } catch (error) {
         console.error("Query submission error:", error);
         if (error instanceof z.ZodError) {
-            return { error: error.errors[0].message };
+            return { error: (error as any).errors[0].message, success: false };
         }
-        return { error: "An unexpected error occurred." };
+        return { error: "An unexpected error occurred.", success: false };
     }
 }

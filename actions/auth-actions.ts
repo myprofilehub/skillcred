@@ -21,8 +21,19 @@ export async function login(formData: FormData) {
             password,
             redirect: false,
         });
+        
+        const user = await prisma.user.findUnique({
+            where: { email },
+            include: { studentProfile: true }
+        });
+
+        let path = callbackUrl || "/";
+        if (user?.role === "STUDENT" && user?.studentProfile?.subscription === "FREE" && !callbackUrl) {
+            path = "/library";
+        }
+        
         revalidatePath("/", "layout"); // Force RootLayout to re-render
-        return { success: true, redirectTo: callbackUrl || "/" };
+        return { success: true, redirectTo: path };
     } catch (error) {
         if (error instanceof AuthError) {
             switch (error.type) {
@@ -45,11 +56,10 @@ export async function lmsLogin(formData: FormData) {
     const role = formData.get("role") as string; // student, mentor, hr
     const callbackUrl = formData.get("callbackUrl") as string;
 
-    // 1. Verify Domain (Must not be public)
-    const publicDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "live.com", "icloud.com"];
+    // 1. Verify Domain (Must be skillcred.com)
     const domain = email.split("@")[1];
-    if (publicDomains.includes(domain)) {
-        return { error: "LMS Login requires an organizational email." };
+    if (domain !== "skillcred.com") {
+        return { error: "LMS Login is restricted to @skillcred.com email addresses." };
     }
 
     // 2. Determine Redirect Path based on Role (or callbackUrl if provided)
@@ -59,6 +69,7 @@ export async function lmsLogin(formData: FormData) {
     } else if (role === "student") redirectTo = "/dashboard/student";
     else if (role === "mentor") redirectTo = "/dashboard/mentor";
     else if (role === "hr") redirectTo = "/dashboard/hr";
+    else if (role === "admin") redirectTo = "/dashboard/admin";
 
     // 3. Attempt Login
     try {

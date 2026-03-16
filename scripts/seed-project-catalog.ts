@@ -1189,13 +1189,13 @@ async function main() {
             create: {
                 slug: stream.slug,
                 title: stream.title,
-                description: \`Master \${stream.title} through real-world projects.\`,
+                description: `Master ${stream.title} through real-world projects.`,
             }
         });
-        console.log(\`✅ Track verified: \${track.title}\`);
+        console.log(`✅ Track verified: ${track.title}`);
 
         // 2. Seed Projects for this Track
-        const projects = projectsData[stream.slug] || [];
+        const projects = projectsData[stream.slug as keyof typeof projectsData] || [];
         for (const project of projects) {
             // Check if exists by name within track to avoid duplicates on re-run
             const existing = await prisma.projectCatalogItem.findFirst({
@@ -1220,9 +1220,9 @@ async function main() {
                         addedBy: 'SYSTEM'
                     }
                 });
-                console.log(\`   ➕ Added \${project.name}\`);
+                console.log(`   ➕ Added ${project.name}`);
             } else {
-                console.log(\`   🔹 \${project.name} already exists. Updating...\`);
+                console.log(`   🔹 ${project.name} already exists. Updating...`);
                 await prisma.projectCatalogItem.update({
                     where: { id: existing.id },
                     data: {
