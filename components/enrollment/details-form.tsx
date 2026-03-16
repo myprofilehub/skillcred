@@ -131,15 +131,7 @@ export function DetailsForm({ onSubmit, loading, initialEmail, initialName }: { 
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="year">Graduation Year (Optional)</Label>
-                        <select id="year" name="year" className="flex h-10 w-full rounded-md border border-slate-700 bg-slate-800 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 text-white">
-                            <option value="">Select Year</option>
-                            <option value="2024">2024</option>
-                            <option value="2025">2025</option>
-                            <option value="2026">2026</option>
-                            <option value="2027">2027</option>
-                            <option value="2028">2028 or later</option>
-                            <option value="Graduated">Already Graduated</option>
-                        </select>
+                        <Input id="year" name="year" type="number" min="1950" max="2035" className="bg-slate-800 border-slate-700 text-white" placeholder="e.g. 2025" />
                     </div>
                 </div>
             </div>
