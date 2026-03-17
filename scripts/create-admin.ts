@@ -7,8 +7,8 @@ async function main() {
         throw new Error("DATABASE_URL is not defined");
     }
 
-    const email = "admin@skillcred.com";
-    const password = "admin@123";
+    const email = "admin@skillcred.in";
+    const password = "Admin@123";
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const existingUser = await prisma.user.findUnique({ where: { email } });
