@@ -51,7 +51,7 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
         name: "",
         tagline: "",
         description: "",
-        difficulty: 1,
+        difficulty: 3,
         coreFeatures: "", // split by newline
         startupAngle: "",
         isActive: true,
@@ -93,7 +93,7 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
             name: "",
             tagline: "",
             description: "",
-            difficulty: 1,
+            difficulty: 3,
             coreFeatures: "",
             startupAngle: "",
             isActive: true,
@@ -176,10 +176,9 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
         }
     }
 
-    const solo1 = projects.filter(p => p.difficulty === 1);
-    const solo2 = projects.filter(p => p.difficulty === 2);
-    const pair = projects.filter(p => p.difficulty === 3);
-    const capstones = projects.filter(p => p.difficulty >= 4);
+    const solo = projects.filter(p => p.difficulty === 3);
+    const pair = projects.filter(p => p.difficulty === 4);
+    const capstones = projects.filter(p => p.difficulty >= 5);
 
     const renderProjectSection = (title: string, icon: React.ReactNode, projList: Project[]) => (
         <div className="mb-10">
@@ -271,8 +270,7 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
                 </div>
             ) : (
                 <div className="mt-8 space-y-12">
-                    {renderProjectSection("Solo Project 1", <User className="w-5 h-5 text-emerald-400" />, solo1)}
-                    {renderProjectSection("Solo Project 2", <User className="w-5 h-5 text-blue-400" />, solo2)}
+                    {renderProjectSection("Solo Project", <User className="w-5 h-5 text-emerald-400" />, solo)}
                     {renderProjectSection("Pair Project", <Users className="w-5 h-5 text-purple-400" />, pair)}
                     {renderProjectSection("Capstone Options", <Trophy className="w-5 h-5 text-yellow-500" />, capstones)}
                 </div>
@@ -322,10 +320,9 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
                                         <SelectValue placeholder="Select Category" />
                                     </SelectTrigger>
                                     <SelectContent className="bg-slate-900 border-slate-800 text-white">
-                                        <SelectItem value="1">👤 Solo Project 1</SelectItem>
-                                        <SelectItem value="2">👤 Solo Project 2</SelectItem>
-                                        <SelectItem value="3">👥 Pair Project</SelectItem>
-                                        <SelectItem value="4">🏆 Capstone Option</SelectItem>
+                                        <SelectItem value="3">👤 Solo Project</SelectItem>
+                                        <SelectItem value="4">👥 Pair Project</SelectItem>
+                                        <SelectItem value="5">🏆 Capstone Option</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>
