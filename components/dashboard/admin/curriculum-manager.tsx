@@ -186,7 +186,7 @@ export function CurriculumManager({ streams, userRole }: { streams: Stream[], us
             <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2 border-b border-slate-800 pb-2">
                 {icon} {title}
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4">
                 {projList.length === 0 ? (
                     <div className="text-slate-500 text-sm italic py-4 col-span-full">No projects found.</div>
                 ) : (
