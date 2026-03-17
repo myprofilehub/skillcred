@@ -93,7 +93,7 @@ function LMSLoginContent() {
                             id="email"
                             name="email"
                             type="email"
-                            placeholder="name@skillcred.com"
+                            placeholder="name@skillcred.in"
                             required
                             className="bg-white/5 border-white/10"
                         />

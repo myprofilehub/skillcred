@@ -56,10 +56,10 @@ export async function lmsLogin(formData: FormData) {
     const role = formData.get("role") as string; // student, mentor, hr
     const callbackUrl = formData.get("callbackUrl") as string;
 
-    // 1. Verify Domain (Must be skillcred.com)
+    // 1. Verify Domain (Must be skillcred.in)
     const domain = email.split("@")[1];
-    if (domain !== "skillcred.com") {
-        return { error: "LMS Login is restricted to @skillcred.com email addresses." };
+    if (domain !== "skillcred.in") {
+        return { error: "LMS Login is restricted to @skillcred.in email addresses." };
     }
 
     // 2. Determine Redirect Path based on Role (or callbackUrl if provided)

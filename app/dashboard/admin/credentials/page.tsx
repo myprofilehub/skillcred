@@ -24,7 +24,7 @@ export default function AdminCredentialsPage() {
     const [formData, setFormData] = useState({
         name: "",
         username: "",
-        domain: "skillcred.com",
+        domain: "skillcred.in",
         password: "",
         role: "MENTOR" as "MENTOR" | "STUDENT",
     });
@@ -65,7 +65,7 @@ export default function AdminCredentialsPage() {
                 setFormData({
                     name: "",
                     username: "",
-                    domain: "skillcred.com",
+                    domain: "skillcred.in",
                     password: "",
                     role: "MENTOR"
                 });
@@ -170,7 +170,7 @@ export default function AdminCredentialsPage() {
                                             <SelectValue />
                                         </SelectTrigger>
                                         <SelectContent className="bg-slate-900 border-cyan-500/20 text-white">
-                                            <SelectItem value="skillcred.com">@skillcred.com</SelectItem>
+                                            <SelectItem value="skillcred.in">@skillcred.in</SelectItem>
                                             <SelectItem value="codequestzone.com">@codequestzone.com</SelectItem>
                                         </SelectContent>
                                     </Select>

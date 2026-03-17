@@ -120,7 +120,7 @@ export async function getAllCredentials() {
         where: {
             OR: [
                 { email: { endsWith: "@codequestzone.com" } },
-                { email: { endsWith: "@skillcred.com" } },
+                { email: { endsWith: "@skillcred.in" } },
             ],
             role: { in: ["MENTOR", "STUDENT"] }
         },
