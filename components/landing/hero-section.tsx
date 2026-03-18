@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export function HeroSection() {
     return (
-        <section className="relative pt-32 pb-20 overflow-hidden">
+        <section className="relative pt-32 pb-12 overflow-hidden">
             {/* Background gradients */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full z-0 opacity-40 pointer-events-none">
                 <div className="absolute top-20 left-1/4 w-96 h-96 bg-indigo-500 rounded-full mix-blend-screen filter blur-[120px] animate-blob" />
@@ -34,12 +34,12 @@ export function HeroSection() {
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Button size="lg" className="h-12 px-8 text-lg bg-gradient-to-r from-purple-600 to-pink-600 border-none hover:opacity-90 shadow-[0_0_15px_rgba(168,85,247,0.4)] text-white font-bold" asChild>
                             <Link href="/enroll">
-                                Enroll Now <ArrowRight className="ml-2 h-5 w-5" />
+                                Enroll Now
                             </Link>
                         </Button>
                         <Button size="lg" variant="outline" className="h-12 px-8 text-lg" asChild>
-                            <Link href="/pat/about">
-                                PAT Assessment
+                            <Link href="/library">
+                                Explore Masterclass
                             </Link>
                         </Button>
                     </div>

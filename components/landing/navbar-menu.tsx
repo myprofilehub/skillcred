@@ -25,13 +25,13 @@ import {
     Users,
     Building2,
     Landmark,
-    Briefcase,
+    BriefcaseBusiness as Briefcase,
     Search,
     Calendar,
     Award
 } from "lucide-react"
 
-const programItems = [
+const syllabusItems = [
     { title: "Full stack development", href: "/streams/full-stack-development", icon: Code2, color: "text-purple-400" },
     { title: "AI & ML", href: "/streams/ai-ml", icon: BrainCircuit, color: "text-blue-400" },
     { title: "Cybersecurity", href: "/streams/cybersecurity", icon: Shield, color: "text-green-400" },
@@ -42,10 +42,10 @@ const programItems = [
     { title: "Data Science & Analytics", href: "/streams/data-science", icon: Search, color: "text-indigo-400" },
 ]
 
-const howItWorksItems = [
-    { title: "For Students", href: "/how-it-works/students", icon: GraduationCap },
-    { title: "For HR", href: "/how-it-works/hr", icon: Briefcase },
-    { title: "For Investors", href: "/how-it-works/investors", icon: Building2 },
+const programItems = [
+    { title: "Standard (8 Weeks)", href: "/programs/standard", icon: Calendar },
+    { title: "Fast Track (4 Weeks)", href: "/programs/fast-track", icon: Calendar },
+    { title: "Capstone Track (2 Weeks)", href: "/programs/capstone", icon: Award },
 ]
 
 const patItems = [
@@ -58,46 +58,38 @@ const patItems = [
 export function LandingMenu() {
     return (
         <NavigationMenu>
-            <NavigationMenuList>
+            <NavigationMenuList suppressHydrationWarning>
 
                 {/* 1. PROGRAMS */}
                 <NavigationMenuItem>
                     <NavigationMenuTrigger>Programs</NavigationMenuTrigger>
                     <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                        <ul className="grid w-[250px] gap-2 p-2">
                             {programItems.map((item) => (
                                 <ListItem
                                     key={item.title}
                                     title={item.title}
                                     href={item.href}
                                     icon={item.icon}
-                                    iconColor={item.color}
                                 />
                             ))}
                         </ul>
                     </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {/* 1.5 FREE LIBRARY */}
-                <NavigationMenuItem>
-                    <NavigationMenuLink asChild>
-                        <Link href="/library" className={cn(navigationMenuTriggerStyle(), "bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 font-bold")}>
-                            Free Library
-                        </Link>
-                    </NavigationMenuLink>
-                </NavigationMenuItem>
 
-                {/* 2. HOW IT WORKS */}
+                {/* 2. SYLLABUS */}
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger>How It Works</NavigationMenuTrigger>
+                    <NavigationMenuTrigger>Syllabus</NavigationMenuTrigger>
                     <NavigationMenuContent>
-                        <ul className="grid w-[200px] gap-2 p-2 md:w-[300px]">
-                            {howItWorksItems.map((item) => (
+                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                            {syllabusItems.map((item) => (
                                 <ListItem
                                     key={item.title}
                                     title={item.title}
                                     href={item.href}
                                     icon={item.icon}
+                                    iconColor={item.color}
                                 />
                             ))}
                         </ul>
@@ -119,6 +111,15 @@ export function LandingMenu() {
                             ))}
                         </ul>
                     </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* 3.5. RESOURCES */}
+                <NavigationMenuItem>
+                    <NavigationMenuLink asChild>
+                        <Link href="/library" className={cn(navigationMenuTriggerStyle(), "bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 font-bold")}>
+                            Resources
+                        </Link>
+                    </NavigationMenuLink>
                 </NavigationMenuItem>
 
                 {/* 4. ABOUT US */}

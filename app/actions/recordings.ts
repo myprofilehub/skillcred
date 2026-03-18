@@ -170,6 +170,8 @@ export async function createManualRecording(data: { title: string, url: string, 
             }
         });
         revalidatePath("/dashboard/mentor/recordings");
+        revalidatePath("/library"); // clear global library
+        revalidatePath("/"); // clear landing page free library
         return { success: true };
     } catch (error) {
         console.error("Create Error:", error);

@@ -2,13 +2,15 @@ import "dotenv/config";
 import { prisma } from "@/lib/db";
 
 async function main() {
-    console.log("Checking courses in DB...");
-    const courses = await prisma.course.findMany({
-        include: { track: true, modules: true }
-    });
-    console.log(`Found ${courses.length} courses:`);
-    for (const c of courses) {
-        console.log(`- Course: ${c.title} (Track: ${c.track.title}) with ${c.modules.length} modules`);
-    }
+  const tracks = await prisma.track.findMany({
+    include: { courses: true }
+  });
+  console.log("Tracks in DB:", tracks.length);
+  tracks.forEach(t => {
+    console.log(`- ${t.title} (${t.slug}): ${t.courses.length} courses`);
+  });
 }
-main().catch(console.error).finally(() => prisma.$disconnect());
+
+main()
+  .catch(console.error)
+  .finally(() => prisma.$disconnect());

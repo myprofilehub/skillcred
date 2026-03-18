@@ -29,6 +29,8 @@ import {
     Mail
 } from "lucide-react";
 import Link from "next/link";
+import { ProjectRoadmap } from "@/components/public/project-roadmap";
+import { CurriculumSyllabus } from "@/components/public/curriculum-syllabus";
 
 import { auth } from "@/auth";
 
@@ -204,82 +206,22 @@ export default async function MobileDevelopmentPage() {
                                 </div>
                             </section>
 
-                            {/* PROJECT ROADMAP */}
-                            <section className="py-20 bg-secondary/10">
-                                <div className="container mx-auto px-4 max-w-5xl">
-                                    <div className="text-center mb-16">
-                                        <h2 className="text-3xl font-bold font-heading mb-4">Project Roadmap (5 Projects)</h2>
-                                        <p className="text-muted-foreground">From simple scripts to intelligent autonomous agents</p>
-                                    </div>
-
-                                    <div className="space-y-8 relative">
-                                        {/* Vertical Line */}
-                                        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-yellow-500/50 to-indigo-500/50 hidden md:block" />
-
-                                        {[
-                                            {
-                                                title: "Automated Data Extraction System",
-                                                tools: "Python, Selenium",
-                                                desc: "Build a bot that extracts data from websites and stores it in Excel or CSV.",
-                                                color: "border-blue-500",
-                                                type: "Project 1",
-                                                icon: Database
-                                            },
-                                            {
-                                                title: "Resume Screening Mobile Development Tool",
-                                                tools: "Python, APIs, Pandas",
-                                                desc: "Automatically scan resumes and classify them based on job role keywords.",
-                                                color: "border-green-500",
-                                                type: "Project 2",
-                                                icon: FileCheck
-                                            },
-                                            {
-                                                title: "Email & Report Mobile Development System",
-                                                tools: "Python, SMTP, Excel",
-                                                desc: "Generate daily reports and send them automatically to managers.",
-                                                color: "border-yellow-500",
-                                                type: "Project 3",
-                                                icon: Mail
-                                            },
-                                            {
-                                                title: "Business Process Mobile Development (RPA)",
-                                                tools: "UiPath / Mobile Development Anywhere",
-                                                desc: "Automate invoice processing or form filling for a simulated company.",
-                                                color: "border-orange-500",
-                                                type: "Project 4",
-                                                icon: FileSpreadsheet
-                                            },
-                                            {
-                                                title: "End-to-End Workflow Mobile Development (Capstone)",
-                                                tools: "Python, APIs, Streamlit",
-                                                desc: "Build a system that automates data collection → processing → reporting → alerting.",
-                                                color: "border-indigo-500",
-                                                type: "Project 5",
-                                                icon: Workflow
-                                            },
-                                        ].map((project, i) => (
-                                            <div key={i} className="relative md:pl-24">
-                                                <div className="hidden md:flex absolute left-4 -translate-x-1/2 top-6 w-8 h-8 rounded-full bg-background border-4 border-muted items-center justify-center z-10">
-                                                    <div className="w-2 h-2 rounded-full bg-primary" />
-                                                </div>
-                                                <Card className={`border-l-4 ${project.color} bg-white/5`}>
-                                                    <CardContent className="p-6">
-                                                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
-                                                            <Badge variant="outline" className="w-fit">{project.type}</Badge>
-                                                            <Badge className="w-fit bg-secondary text-secondary-foreground">{project.tools}</Badge>
-                                                        </div>
-                                                        <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
-                                                            <project.icon className="w-5 h-5 text-muted-foreground" />
-                                                            {project.title}
-                                                        </h3>
-                                                        <p className="text-muted-foreground">{project.desc}</p>
-                                                    </CardContent>
-                                                </Card>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </section>
+            {/* CURRICULUM & ROADMAP */}
+            <section className="py-20 bg-secondary/10">
+                <div className="container mx-auto px-4 max-w-7xl">
+                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                        {/* LEFT PANEL: Curriculum by Program */}
+                        <div>
+                            <CurriculumSyllabus trackSlug="mobile-development" />
+                        </div>
+                        
+                        {/* RIGHT PANEL: Project Roadmap */}
+                        <div className="lg:border-l border-white/10 lg:pl-16">
+                            <ProjectRoadmap trackSlug="mobile-development" accentColor="yellow" />
+                        </div>
+                    </div>
+                </div>
+            </section>
 
                             {/* MENTOR & ASSESSMENT (PAT) */}
                             <section className="py-20">

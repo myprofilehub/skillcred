@@ -26,6 +26,8 @@ import {
     Award
 } from "lucide-react";
 import Link from "next/link";
+import { ProjectRoadmap } from "@/components/public/project-roadmap";
+import { CurriculumSyllabus } from "@/components/public/curriculum-syllabus";
 
 import { auth } from "@/auth";
 
@@ -201,79 +203,19 @@ export default async function DevopsCloudPage() {
                 </div>
             </section>
 
-            {/* PROJECT ROADMAP */}
+            {/* CURRICULUM & ROADMAP */}
             <section className="py-20 bg-secondary/10">
-                <div className="container mx-auto px-4 max-w-5xl">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold font-heading mb-4">Project Roadmap (5 Projects)</h2>
-                        <p className="text-muted-foreground">From basic server setup to scalable microservices infrastructure</p>
-                    </div>
-
-                    <div className="space-y-8 relative">
-                        {/* Vertical Line */}
-                        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-500/50 to-blue-500/50 hidden md:block" />
-
-                        {[
-                            {
-                                title: "Cloud Server Setup & Web App Hosting",
-                                tools: "AWS / Azure, Linux, Nginx",
-                                desc: "Deploy a simple web app on a cloud VM.",
-                                color: "border-green-500",
-                                type: "Project 1",
-                                icon: Server
-                            },
-                            {
-                                title: "Cloud Storage & Backup System",
-                                tools: "AWS S3 / Azure Blob, Python",
-                                desc: "Automate file uploads and backup in cloud storage.",
-                                color: "border-yellow-500",
-                                type: "Project 2",
-                                icon: Database
-                            },
-                            {
-                                title: "Dockerized Application Deployment",
-                                tools: "Docker, Linux, AWS / Azure",
-                                desc: "Containerize an application and deploy it on cloud.",
-                                color: "border-yellow-500",
-                                type: "Project 3",
-                                icon: Layers
-                            },
-                            {
-                                title: "CI/CD Pipeline for Web Application",
-                                tools: "GitHub Actions / Jenkins, Docker",
-                                desc: "Automate build, test, and deployment pipelines.",
-                                color: "border-orange-500",
-                                type: "Project 4",
-                                icon: Workflow
-                            },
-                            {
-                                title: "Scalable Cloud Infra (Capstone)",
-                                tools: "AWS/Azure, RDS, Scaling, TF",
-                                desc: "Design & deploy scalable infra with monitoring & load balancing.",
-                                color: "border-red-500",
-                                type: "Project 5",
-                                icon: Cloud
-                            },
-                        ].map((project, i) => (
-                            <div key={i} className="relative md:pl-24">
-                                <div className="hidden md:flex absolute left-4 -translate-x-1/2 top-6 w-8 h-8 rounded-full bg-background border-4 border-muted items-center justify-center z-10">
-                                    <div className="w-2 h-2 rounded-full bg-primary" />
-                                </div>
-                                <Card className={`border-l-4 ${project.color} bg-white/5`}>
-                                    <CardContent className="p-6">
-                                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
-                                            <Badge variant="outline" className="w-fit">{project.type}</Badge>
-                                            <Badge className="w-fit bg-secondary text-secondary-foreground">{project.tools}</Badge>
-                                        </div>
-                                        <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
-                                            <project.icon className="w-5 h-5 text-muted-foreground" />
-                                            {project.title}
-                                        </h3>
-                                        <p className="text-muted-foreground">{project.desc}</p>
-                                    </CardContent>
-                                </Card>
-                            </div>
-                        ))}
+                <div className="container mx-auto px-4 max-w-7xl">
+                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                        {/* LEFT PANEL: Curriculum by Program */}
+                        <div>
+                            <CurriculumSyllabus trackSlug="devops-cloud" />
+                        </div>
+                        
+                        {/* RIGHT PANEL: Project Roadmap */}
+                        <div className="lg:border-l border-white/10 lg:pl-16">
+                            <ProjectRoadmap trackSlug="devops-cloud" accentColor="blue" />
+                        </div>
                     </div>
                 </div>
             </section>

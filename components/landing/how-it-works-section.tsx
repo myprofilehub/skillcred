@@ -46,7 +46,7 @@ export function HowItWorksSection() {
   };
 
   return (
-    <section id="how-it-works" className="py-24 bg-white/5 relative">
+    <section id="how-it-works" className="py-12 bg-white/5 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <Badge variant="outline" className="mb-4 text-white">Workflow</Badge>
         <h2 className="text-3xl md:text-5xl font-bold font-heading mb-12">

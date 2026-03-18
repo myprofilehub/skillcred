@@ -5,21 +5,16 @@ import { FeaturesSection } from "@/components/landing/features";
 import { CareerPaths } from "@/components/landing/career-paths";
 import { HowItWorksSection } from "@/components/landing/how-it-works-section";
 import { QuerySection } from "@/components/landing/query-section";
+import { FeaturedProjects } from "@/components/landing/featured-projects";
 import Link from "next/link";
 import { Github, Twitter, Linkedin } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { prisma } from "@/lib/db";
 
+import { getPublicLibraryRecordings } from "@/app/actions/curriculum-actions";
+
 export default async function LandingPage() {
-  const tracks = await prisma.track.findMany({
-    select: {
-      id: true,
-      title: true,
-      description: true,
-      slug: true,
-    },
-    orderBy: { title: "asc" }
-  });
+  const recordings = await getPublicLibraryRecordings();
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-indigo-500/30">
@@ -27,7 +22,8 @@ export default async function LandingPage() {
 
       <main>
         <HeroSection />
-        <LandingInterestForm tracks={tracks} />
+        <LandingInterestForm recordings={recordings} />
+        <FeaturedProjects />
         <FeaturesSection />
         <HowItWorksSection />
         <CareerPaths />

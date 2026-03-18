@@ -61,17 +61,46 @@ export default async function ClassRosterPage({ params }: { params: Promise<{ id
 
     const emailToUserMap = new Map(dbUsers.map((u: any) => [u.email, u]));
 
-    const enrichedStudents = students.map((courseStudent: any) => {
+    const enrichedStudents = await Promise.all(students.map(async (courseStudent: any) => {
         const dbUser = emailToUserMap.get(courseStudent.profile.emailAddress);
+        let projectsCompleted = 0;
+        let projectsTotal = 0;
+
+        if (dbUser?.studentProfile) {
+            // Get the student's active enrollment to find their track
+            const enrollment = await prisma.enrollment.findFirst({
+                where: { studentId: dbUser.studentProfile.id },
+                include: { track: true }
+            });
+
+            if (enrollment) {
+                // Get all catalog projects for this track
+                const catalogProjects = await prisma.projectCatalogItem.findMany({
+                    where: { trackId: enrollment.trackId, isActive: true }
+                });
+                projectsTotal = catalogProjects.length;
+
+                // Count verified assignments
+                if (projectsTotal > 0) {
+                    projectsCompleted = await prisma.projectAssignment.count({
+                        where: {
+                            studentId: dbUser.studentProfile.id,
+                            catalogProjectId: { in: catalogProjects.map((p: any) => p.id) },
+                            status: "VERIFIED"
+                        }
+                    });
+                }
+            }
+        }
+
         return {
             ...courseStudent,
             dbUserId: dbUser?.id,
             patEligible: dbUser?.studentProfile?.patEligible || false,
-            // Mock project count for demo until we do deep fetch
-            projectsCompleted: dbUser ? 3 : 0,
-            projectsTotal: 5
+            projectsCompleted,
+            projectsTotal
         };
-    });
+    }));
 
     return (
         <div className="space-y-6">
@@ -135,7 +164,7 @@ export default async function ClassRosterPage({ params }: { params: Promise<{ id
                                                 <div className="flex flex-col gap-1">
                                                     <div className="text-sm font-medium">{student.projectsCompleted} / {student.projectsTotal} Projects</div>
                                                     <div className="w-24 h-5  bg-secondary rounded-full overflow-hidden">
-                                                        <div className="h-full bg-blue-500" style={{ width: `${(student.projectsCompleted / student.projectsTotal) * 100}%` }} />
+                                                        <div className="h-full bg-blue-500" style={{ width: `${student.projectsTotal > 0 ? (student.projectsCompleted / student.projectsTotal) * 100 : 0}%` }} />
                                                     </div>
                                                 </div>
                                             </TableCell>

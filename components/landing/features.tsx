@@ -48,48 +48,8 @@ const patFlow = [
 
 export function FeaturesSection() {
     return (
-        <section id="features" className="py-24 px-6 bg-black relative">
+        <section id="features" className="py-12 px-6 bg-black relative">
             <div className="max-w-7xl mx-auto space-y-24">
-
-                {/* ============================================== */}
-                {/* 8 ENGINEERING STREAMS SECTION */}
-                {/* ============================================== */}
-                <div className="space-y-12">
-                    <div className="text-center space-y-4 max-w-3xl mx-auto">
-                        <Badge variant="outline" className="border-indigo-500/30 text-indigo-400 px-4 py-1">
-                            8 Engineering Streams
-                        </Badge>
-                        <h2 className="text-3xl md:text-5xl font-bold font-heading">
-                            Choose Your Path.{" "}
-                            <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                                Master Your Craft.
-                            </span>
-                        </h2>
-                        <p className="text-muted-foreground text-lg">
-                            Industry-aligned learning tracks designed with 100+ real-world projects across diverse engineering domains.
-                        </p>
-                    </div>
-
-                    {/* Streams Grid */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {streams.map((stream) => (
-                            <Card
-                                key={stream.name}
-                                className="p-6 border-white/10 bg-white/5 hover:bg-white/[0.08] transition-all duration-300 group cursor-pointer"
-                            >
-                                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stream.color} p-0.5 mb-4`}>
-                                    <div className="w-full h-full rounded-[10px] bg-black flex items-center justify-center">
-                                        <stream.icon className="w-5 h-5 text-white" />
-                                    </div>
-                                </div>
-                                <h3 className="font-semibold text-sm md:text-base mb-1 group-hover:text-white transition-colors">
-                                    {stream.name}
-                                </h3>
-                                <p className="text-xs text-muted-foreground">{stream.projects}</p>
-                            </Card>
-                        ))}
-                    </div>
-                </div>
 
                 {/* ============================================== */}
                 {/* PROJECT-BASED LEARNING HIGHLIGHT */}

@@ -258,6 +258,7 @@ model ProjectCatalogItem {
   updatedAt       DateTime @updatedAt
   
   batches         Batch[]
+  assignments     ProjectAssignment[]  // Track progress via Classroom assignments
 }
 
 model Enrollment {
@@ -386,10 +387,12 @@ model ProjectAssignment {
   id          String   @id @default(cuid())
   studentId   String
   projectId   String
+  catalogProjectId String?  // Links to curriculum ProjectCatalogItem
   status      ProjectStatus @default(NOT_STARTED)
   
   student     Student  @relation(fields: [studentId], references: [id])
   project     Project  @relation(fields: [projectId], references: [id])
+  catalogProject ProjectCatalogItem? @relation(fields: [catalogProjectId], references: [id])
   
   submissions Submission[]
   

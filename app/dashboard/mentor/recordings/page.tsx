@@ -24,6 +24,10 @@ export default async function RecordedContentPage() {
     // 2. Fetch Pre-recorded Library
     const libraryRecordings = await getRecordings({ type: "PRE_RECORDED" });
 
+    // 3. Fetch Tracks for Upload Dialog
+    const dbTracks = await prisma.track.findMany({ select: { id: true, title: true } });
+    const tracksForDialog = dbTracks.map(t => ({ id: t.id, name: t.title }));
+
     // 3. Organize Live Recordings
     // We fetch ALL live recordings and filter/group them in JS to save N+1 DB calls if possible,
     // OR we iterate classrooms and fetch. Since we might have many recordings, fetching all LIVE_SESSION first is better.
@@ -78,7 +82,7 @@ export default async function RecordedContentPage() {
                     <h1 className="text-3xl font-bold font-heading">Recorded Content</h1>
                     <p className="text-muted-foreground">Manage live session archives and pre-recorded lessons.</p>
                 </div>
-                <AddRecordingDialog />
+                <AddRecordingDialog tracks={tracksForDialog} />
             </div>
 
             <Tabs defaultValue="live" className="space-y-6">

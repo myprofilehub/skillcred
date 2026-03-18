@@ -12,6 +12,7 @@ import {
     LogOut,
     BookOpen,
     GraduationCap,
+    Video,
 } from "lucide-react";
 
 const sidebarItems = [
@@ -34,6 +35,11 @@ const sidebarItems = [
         title: "Curriculum",
         href: "/dashboard/admin/curriculum",
         icon: BookOpen,
+    },
+    {
+        title: "Recordings",
+        href: "/dashboard/admin/recordings",
+        icon: Video,
     },
 ];
 

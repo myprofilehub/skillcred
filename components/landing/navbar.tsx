@@ -14,7 +14,12 @@ import {
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { Logo } from "@/components/logo";
-import { LandingMenu } from "./navbar-menu";
+import dynamic from "next/dynamic";
+
+const LandingMenu = dynamic(() => import("./navbar-menu").then(m => m.LandingMenu), {
+    ssr: false,
+    loading: () => <div className="hidden md:flex h-10 w-[400px] animate-pulse bg-white/5 rounded-md" />
+});
 
 export function LandingNavbar() {
     const router = useRouter();

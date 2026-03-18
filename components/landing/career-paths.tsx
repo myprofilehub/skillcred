@@ -22,7 +22,7 @@ import Link from "next/link";
 
 export function CareerPaths() {
     return (
-        <section id="career-paths" className="py-24 px-6 bg-black relative overflow-hidden">
+        <section id="career-paths" className="py-12 px-6 bg-black relative overflow-hidden">
             {/* Background Effects */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.08),transparent_70%)]" />
 

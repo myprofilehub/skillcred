@@ -20,15 +20,7 @@ import { Upload } from "lucide-react";
 import { createManualRecording } from "@/app/actions/recordings";
 import { useRouter } from "next/navigation";
 
-// Hardcoded tracks for now or could be passed as props
-const tracks = [
-    { id: "ai-ml", name: "AI & Machine Learning" },
-    { id: "iot-embedded", name: "IoT and Embedded" },
-    { id: "devops-cloud", name: "Devops & Cloud" },
-    { id: "data-science", name: "Data Science" },
-];
-
-export function AddRecordingDialog() {
+export function AddRecordingDialog({ tracks }: { tracks: { id: string, name: string }[] }) {
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const router = useRouter();
