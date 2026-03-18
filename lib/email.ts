@@ -23,7 +23,7 @@ export async function sendEmail({ to, subject, htmlContent }: EmailParams) {
                 "content-type": "application/json",
             },
             body: JSON.stringify({
-                sender: { name: "SkillCred LMS", email: "admin@codequestzone.com" }, // Verified sender
+                sender: { name: "SkillCred LMS", email: "support@skillcred.in" }, // Verified sender
                 to: to,
                 subject: subject,
                 htmlContent: htmlContent,
