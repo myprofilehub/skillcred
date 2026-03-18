@@ -9,9 +9,6 @@ export async function getAdminRecordings() {
             include: {
                 track: {
                     select: { title: true, slug: true }
-                },
-                googleClassroom: {
-                    select: { name: true }
                 }
             },
             orderBy: { createdAt: "desc" }
