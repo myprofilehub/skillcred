@@ -1,0 +1,10 @@
+
+  GNU nano 7.2                                                        robots.txt                                                                  
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /actions/
+Disallow: /unauthorized
+
+Sitemap: https://www.skillcred.in/sitemap.xml
