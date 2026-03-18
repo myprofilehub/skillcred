@@ -6,70 +6,49 @@ datasource db {
   provider = "postgresql"
 }
 
-// NextAuth Models
-
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  username      String?   @unique
-  mobile        String?   @unique
-  password      String?
-  emailVerified DateTime?
-  image         String?
-  role          UserRole  @default(STUDENT)
-  
-  accounts      Account[]
-  sessions      Session[]
-  
-  // Custom Domain Credentials
-  lmsEmail        String?   @unique
-  forcePasswordChange Boolean @default(false)
-
-  // Preferences
-  emailNotifications Boolean @default(true)
-  projectUpdateNotifications Boolean @default(true)
-  
-  // Role specific relations
-  studentProfile Student?
-  mentorProfile  Mentor?
-  hrProfile      HRProtocol?
-  investorProfile Investor?
-  
-  // Common relations
-  sentMessages     Message[] @relation("SentMessages")
-  receivedMessages Message[] @relation("ReceivedMessages")
-  notifications    Notification[]
-  attendanceRecords AttendanceRecord[]
-  payments         Payment[]    // New relation
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-enum UserRole {
-  STUDENT
-  MENTOR
-  HR
-  INVESTOR
-  ADMIN
+  id                         String             @id @default(cuid())
+  name                       String?
+  email                      String?            @unique
+  username                   String?            @unique
+  mobile                     String?            @unique
+  password                   String?
+  emailVerified              DateTime?
+  image                      String?
+  role                       UserRole           @default(STUDENT)
+  createdAt                  DateTime           @default(now())
+  updatedAt                  DateTime           @updatedAt
+  emailNotifications         Boolean            @default(true)
+  projectUpdateNotifications Boolean            @default(true)
+  forcePasswordChange        Boolean            @default(false)
+  lmsEmail                   String?            @unique
+  accounts                   Account[]
+  attendanceRecords          AttendanceRecord[]
+  hrProfile                  HRProtocol?
+  investorProfile            Investor?
+  mentorProfile              Mentor?
+  receivedMessages           Message[]          @relation("ReceivedMessages")
+  sentMessages               Message[]          @relation("SentMessages")
+  notifications              Notification[]
+  payments                   Payment[]
+  sessions                   Session[]
+  studentProfile             Student?
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -90,202 +69,611 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// -----------------------------------------------------------------------------
-// STUDENT & MENTOR PROFILES
-// -----------------------------------------------------------------------------
-
 model Student {
-  id          String   @id @default(cuid())
-  userId      String   @unique
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  college     String?
-  stream      String?
-  year        String?
-  bio         String?
-  githubUrl   String?
-  linkedinUrl String?
-  
-  patEligible Boolean @default(false)
-  
-  // Relationships
-  
-  attendedWorkshops WorkshopRegistration[]
-  
-  enrollments      Enrollment[]
-  assignments      ProjectAssignment[]
-  assessmentResults Result[]
-  portfolio        Portfolio?
-  lessonProgress   LessonProgress[]
-  
-  // Subscription
-  subscription SubscriptionTier @default(FREE)
-
-  // HR Visibility
-  hrVisibile       Boolean @default(false)
-  hrViews          HRView[]
+  id                String                 @id @default(cuid())
+  userId            String                 @unique
+  college           String?
+  stream            String?
+  year              String?
+  bio               String?
+  githubUrl         String?
+  linkedinUrl       String?
+  subscription      SubscriptionTier       @default(FREE)
+  hrVisibile        Boolean                @default(false)
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
+  patEligible       Boolean                @default(false)
+  enrollments       Enrollment[]
+  hrViews           HRView[]
   interviewRequests InterviewRequest[]
-  jobApplications  JobApplication[]
-  
-  // Investor Connect
-  projectShowcases ProjectShowcase[]
-  pitchRequests    PitchRequest[]
+  jobApplications   JobApplication[]
+  lessonProgress    LessonProgress[]
+  pitchRequests     PitchRequest[]
+  portfolio         Portfolio?
+  assignments       ProjectAssignment[]
+  projectShowcases  ProjectShowcase[]
+  assessmentResults Result[]
+  user              User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attendedWorkshops WorkshopRegistration[]
+}
 
-  createdAt DateTime @default(now())
+model Mentor {
+  id               String              @id @default(cuid())
+  userId           String              @unique
+  specialization   String?
+  bio              String?
+  availability     String?
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+  batches          Batch[]
+  assignedStudents Enrollment[]        @relation("MentorEnrollments")
+  user             User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sessions         MentorshipSession[]
+  recommendations  Recommendation[]
+  reviews          Review[]
+  leadingTracks    Track[]             @relation("TrackLead")
+}
+
+model HRProtocol {
+  id                String             @id @default(cuid())
+  userId            String             @unique
+  company           String
+  position          String
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  viewedProfiles    HRView[]
+  interviewRequests InterviewRequest[]
+  jobs              Job[]
+}
+
+model Track {
+  id               String               @id @default(cuid())
+  title            String
+  slug             String               @unique
+  description      String
+  icon             String?
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+  defaultMentorId  String?
+  assessments      Assessment[]
+  batches          Batch[]
+  courses          Course[]
+  curriculumPhases CurriculumPhase[]
+  students         Enrollment[]
+  projects         Project[]
+  catalogProjects  ProjectCatalogItem[]
+  recordings       Recording[]
+  defaultMentor    Mentor?              @relation("TrackLead", fields: [defaultMentorId], references: [id])
+}
+
+model CurriculumPhase {
+  id          String              @id @default(cuid())
+  trackId     String
+  phaseNumber Int
+  title       String
+  weekStart   Int
+  weekEnd     Int
+  description String?
+  track       Track               @relation(fields: [trackId], references: [id])
+  sessions    CurriculumSession[]
+
+  @@unique([trackId, phaseNumber])
+}
+
+model CurriculumSession {
+  id            String          @id @default(cuid())
+  phaseId       String
+  sessionNumber Int
+  title         String
+  objectives    String[]
+  activities    String[]
+  deliverables  String[]
+  keyTech       String[]
+  duration      Int             @default(120)
+  phase         CurriculumPhase @relation(fields: [phaseId], references: [id])
+
+  @@unique([phaseId, sessionNumber])
+}
+
+model ProjectCatalogItem {
+  id              String              @id @default(cuid())
+  trackId         String
+  name            String
+  tagline         String
+  description     String?
+  difficulty      Int                 @default(2)
+  coreFeatures    String[]
+  conceptsCovered Json?
+  startupAngle    String?
+  isActive        Boolean             @default(true)
+  addedBy         String?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  batches         Batch[]
+  assignments     ProjectAssignment[]
+  track           Track               @relation(fields: [trackId], references: [id])
+}
+
+model Enrollment {
+  id              String           @id @default(cuid())
+  studentId       String
+  trackId         String
+  mentorId        String?
+  status          EnrollmentStatus @default(ACTIVE)
+  progress        Int              @default(0)
+  certIssued      Boolean          @default(false)
+  certUrl         String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  batchId         String?
+  programDuration String           @default("8-week")
+  couponCode      String?
+  batch           Batch?           @relation(fields: [batchId], references: [id])
+  mentor          Mentor?          @relation("MentorEnrollments", fields: [mentorId], references: [id])
+  student         Student          @relation(fields: [studentId], references: [id])
+  track           Track            @relation(fields: [trackId], references: [id])
+
+  @@unique([studentId, trackId])
+}
+
+model Batch {
+  id          String             @id @default(cuid())
+  trackId     String
+  projectId   String
+  mentorId    String?
+  name        String
+  status      BatchStatus        @default(OPEN)
+  maxStudents Int                @default(20)
+  startDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  mentor      Mentor?            @relation(fields: [mentorId], references: [id])
+  project     ProjectCatalogItem @relation(fields: [projectId], references: [id])
+  track       Track              @relation(fields: [trackId], references: [id])
+  students    Enrollment[]
+}
+
+model Payment {
+  id              String        @id @default(cuid())
+  userId          String
+  amount          Float
+  currency        String        @default("INR")
+  status          PaymentStatus @default(PENDING)
+  provider        String        @default("RAZORPAY")
+  transactionId   String?
+  trackId         String?
+  projectId       String?
+  batchId         String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  programDuration String?
+  couponCode      String?
+  user            User          @relation(fields: [userId], references: [id])
+}
+
+model Project {
+  id             String              @id @default(cuid())
+  trackId        String
+  title          String
+  description    String
+  level          String
+  order          Int
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  skills         String[]
+  portfolioItems PortfolioProject[]
+  track          Track               @relation(fields: [trackId], references: [id])
+  assignments    ProjectAssignment[]
+}
+
+model ProjectAssignment {
+  id               String              @id @default(cuid())
+  studentId        String
+  projectId        String
+  status           ProjectStatus       @default(NOT_STARTED)
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+  catalogProjectId String?
+  catalogProject   ProjectCatalogItem? @relation(fields: [catalogProjectId], references: [id])
+  project          Project             @relation(fields: [projectId], references: [id])
+  student          Student             @relation(fields: [studentId], references: [id])
+  submissions      Submission[]
+
+  @@unique([studentId, projectId])
+}
+
+model Submission {
+  id           String            @id @default(cuid())
+  assignmentId String
+  githubLink   String?
+  files        String?
+  notes        String?
+  createdAt    DateTime          @default(now())
+  reviews      Review[]
+  assignment   ProjectAssignment @relation(fields: [assignmentId], references: [id])
+}
+
+model Review {
+  id           String     @id @default(cuid())
+  submissionId String
+  mentorId     String
+  verified     Boolean
+  feedback     String?
+  rating       Int?
+  createdAt    DateTime   @default(now())
+  mentor       Mentor     @relation(fields: [mentorId], references: [id])
+  submission   Submission @relation(fields: [submissionId], references: [id])
+}
+
+model Course {
+  id          String         @id @default(cuid())
+  trackId     String
+  title       String
+  description String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  track       Track          @relation(fields: [trackId], references: [id])
+  modules     CourseModule[]
+}
+
+model CourseModule {
+  id       String   @id @default(cuid())
+  courseId String
+  title    String
+  order    Int
+  course   Course   @relation(fields: [courseId], references: [id])
+  lessons  Lesson[]
+}
+
+model Lesson {
+  id         String           @id @default(cuid())
+  moduleId   String
+  title      String
+  type       LessonType
+  contentUrl String?
+  duration   Int?
+  module     CourseModule     @relation(fields: [moduleId], references: [id])
+  progress   LessonProgress[]
+}
+
+model LessonProgress {
+  id        String   @id @default(cuid())
+  lessonId  String
+  studentId String
+  completed Boolean  @default(false)
   updatedAt DateTime @updatedAt
+  lesson    Lesson   @relation(fields: [lessonId], references: [id])
+  student   Student  @relation(fields: [studentId], references: [id])
+
+  @@unique([studentId, lessonId])
+}
+
+model MentorshipSession {
+  id          String        @id @default(cuid())
+  mentorId    String
+  studentId   String?
+  startTime   DateTime
+  endTime     DateTime
+  status      SessionStatus @default(SCHEDULED)
+  meetingLink String?
+  mentor      Mentor        @relation(fields: [mentorId], references: [id])
+}
+
+model Message {
+  id         String   @id @default(cuid())
+  senderId   String
+  receiverId String
+  content    String
+  read       Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  sender     User     @relation("SentMessages", fields: [senderId], references: [id])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  type      String?
+  link      String?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Assessment {
+  id           String   @id @default(cuid())
+  trackId      String
+  title        String
+  type         String
+  totalMarks   Int
+  passingMarks Int
+  createdAt    DateTime @default(now())
+  track        Track    @relation(fields: [trackId], references: [id])
+  results      Result[]
+}
+
+model Result {
+  id           String     @id @default(cuid())
+  assessmentId String
+  studentId    String
+  score        Int
+  passed       Boolean
+  feedback     String?
+  createdAt    DateTime   @default(now())
+  assessment   Assessment @relation(fields: [assessmentId], references: [id])
+  student      Student    @relation(fields: [studentId], references: [id])
+}
+
+model Portfolio {
+  id              String             @id @default(cuid())
+  studentId       String             @unique
+  bio             String?
+  skills          String[]
+  resumeUrl       String?
+  linkedinUrl     String?
+  githubUrl       String?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  education       Json?
+  experience      Json?
+  headline        String?
+  isPublic        Boolean            @default(false)
+  isUnlocked      Boolean            @default(false)
+  patPassedAt     DateTime?
+  publicSlug      String?            @unique
+  student         Student            @relation(fields: [studentId], references: [id])
+  projects        PortfolioProject[]
+  recommendations Recommendation[]
+}
+
+model PortfolioProject {
+  id          String    @id @default(cuid())
+  portfolioId String
+  projectId   String?
+  createdAt   DateTime  @default(now())
+  description String
+  feedback    String?
+  githubUrl   String?
+  grade       Int?
+  imageUrl    String?
+  projectUrl  String?
+  skills      String[]
+  title       String
+  updatedAt   DateTime  @updatedAt
+  verifiedBy  String?
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id])
+  project     Project?  @relation(fields: [projectId], references: [id])
+}
+
+model Recommendation {
+  id          String    @id @default(cuid())
+  portfolioId String
+  mentorId    String
+  content     String?
+  issuedAt    DateTime  @default(now())
+  fileUrl     String?
+  mentor      Mentor    @relation(fields: [mentorId], references: [id])
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id])
+}
+
+model HRView {
+  id        String     @id @default(cuid())
+  hrId      String
+  studentId String
+  viewedAt  DateTime   @default(now())
+  hr        HRProtocol @relation(fields: [hrId], references: [id])
+  student   Student    @relation(fields: [studentId], references: [id])
+}
+
+model InterviewRequest {
+  id        String     @id @default(cuid())
+  hrId      String
+  studentId String
+  status    String     @default("PENDING")
+  message   String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  hr        HRProtocol @relation(fields: [hrId], references: [id])
+  student   Student    @relation(fields: [studentId], references: [id])
+}
+
+model GoogleClassroom {
+  id                 String              @id @default(cuid())
+  googleCourseId     String              @unique
+  meetLink           String
+  mentorId           String
+  updatedAt          DateTime            @updatedAt
+  attendanceSessions AttendanceSession[]
+  recordings         Recording[]
+}
+
+model AttendanceSession {
+  id                String             @id @default(cuid())
+  googleCourseId    String
+  googleClassroomId String?
+  startTime         DateTime
+  endTime           DateTime
+  durationMinutes   Int
+  meetCode          String?
+  verifiedBy        String
+  createdAt         DateTime           @default(now())
+  records           AttendanceRecord[]
+  googleClassroom   GoogleClassroom?   @relation(fields: [googleClassroomId], references: [id])
+
+  @@unique([googleCourseId, startTime])
+}
+
+model AttendanceRecord {
+  id        String            @id @default(cuid())
+  sessionId String
+  studentId String
+  status    AttendanceStatus  @default(PRESENT)
+  createdAt DateTime          @default(now())
+  session   AttendanceSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  student   User              @relation(fields: [studentId], references: [id])
+}
+
+model Recording {
+  id                String           @id @default(cuid())
+  title             String
+  description       String?
+  url               String
+  type              RecordingType
+  meetCode          String?
+  googleClassroomId String?
+  trackId           String?
+  isPublic          Boolean          @default(false)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  googleClassroom   GoogleClassroom? @relation(fields: [googleClassroomId], references: [id])
+  track             Track?           @relation(fields: [trackId], references: [id])
+}
+
+model Job {
+  id           String           @id @default(cuid())
+  hrId         String
+  title        String
+  description  String
+  location     String
+  type         JobType          @default(FULL_TIME)
+  skills       String[]
+  salary       String?
+  isActive     Boolean          @default(true)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  hr           HRProtocol       @relation(fields: [hrId], references: [id])
+  applications JobApplication[]
+}
+
+model JobApplication {
+  id          String            @id @default(cuid())
+  jobId       String
+  studentId   String
+  status      ApplicationStatus @default(APPLIED)
+  coverLetter String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  job         Job               @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  student     Student           @relation(fields: [studentId], references: [id])
+
+  @@unique([jobId, studentId])
+}
+
+model Investor {
+  id              String         @id @default(cuid())
+  userId          String         @unique
+  company         String
+  position        String
+  bio             String?
+  focusAreas      String[]
+  investmentRange String?
+  portfolioUrl    String?
+  linkedinUrl     String?
+  isActive        Boolean        @default(true)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  posts           InvestorPost[]
+  pitchRequests   PitchRequest[]
+  workshops       Workshop[]
+}
+
+model ProjectShowcase {
+  id            String         @id @default(cuid())
+  studentId     String
+  title         String
+  tagline       String
+  description   String
+  problemSolved String
+  techStack     String[]
+  demoUrl       String?
+  pitchDeckUrl  String?
+  videoUrl      String?
+  marketSize    String?
+  fundingNeeded String?
+  isApproved    Boolean        @default(false)
+  isFeatured    Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  pitchRequests PitchRequest[]
+  student       Student        @relation(fields: [studentId], references: [id])
+}
+
+model PitchRequest {
+  id            String          @id @default(cuid())
+  showcaseId    String
+  investorId    String
+  studentId     String
+  status        PitchStatus     @default(PENDING)
+  message       String?
+  investorNotes String?
+  scheduledAt   DateTime?
+  meetingLink   String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  investor      Investor        @relation(fields: [investorId], references: [id])
+  showcase      ProjectShowcase @relation(fields: [showcaseId], references: [id], onDelete: Cascade)
+  student       Student         @relation(fields: [studentId], references: [id])
+
+  @@unique([showcaseId, investorId])
+}
+
+model Workshop {
+  id            String                 @id @default(cuid())
+  investorId    String
+  title         String
+  description   String
+  date          DateTime
+  duration      String
+  meetingLink   String?
+  maxCapacity   Int?
+  createdAt     DateTime               @default(now())
+  updatedAt     DateTime               @updatedAt
+  investor      Investor               @relation(fields: [investorId], references: [id])
+  registrations WorkshopRegistration[]
+}
+
+model WorkshopRegistration {
+  id           String   @id @default(cuid())
+  workshopId   String
+  studentId    String
+  registeredAt DateTime @default(now())
+  attended     Boolean  @default(false)
+  student      Student  @relation(fields: [studentId], references: [id])
+  workshop     Workshop @relation(fields: [workshopId], references: [id])
+
+  @@unique([workshopId, studentId])
+}
+
+model InvestorPost {
+  id          String    @id @default(cuid())
+  investorId  String
+  title       String
+  description String
+  type        PostType  @default(FUNDING)
+  deadline    DateTime?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  investor    Investor  @relation(fields: [investorId], references: [id])
+}
+
+enum UserRole {
+  STUDENT
+  MENTOR
+  HR
+  ADMIN
+  INVESTOR
 }
 
 enum SubscriptionTier {
   FREE
   PRO
   PREMIUM
-}
-
-model Mentor {
-  id          String   @id @default(cuid())
-  userId      String   @unique
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  specialization String?
-  bio            String?
-  availability   String?  // Could be JSON or specialized structure later
-  
-  // Relationships
-  assignedStudents Enrollment[] @relation("MentorEnrollments")
-  leadingTracks    Track[]      @relation("TrackLead")
-  batches          Batch[]      // New relation
-  reviews          Review[]
-  sessions         MentorshipSession[]
-  recommendations  Recommendation[]
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model HRProtocol {
-  id          String   @id @default(cuid())
-  userId      String   @unique
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  company     String
-  position    String
-  
-  viewedProfiles HRView[]
-  interviewRequests InterviewRequest[]
-  jobs        Job[]
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-// -----------------------------------------------------------------------------
-// CORE ACADEMIC MODELS (TRACKS / STREAMS)
-// -----------------------------------------------------------------------------
-
-model Track {
-  id          String   @id @default(cuid())
-  title       String   
-  slug        String   @unique // e.g., 'ai-ml', 'full-stack'
-  description String
-  icon        String?  
-  
-  projects    Project[]
-  students    Enrollment[]
-  assessments Assessment[]
-  courses     Course[] // A track can have multiple courses (LMS)
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  
-  recordings  Recording[]
-  
-  defaultMentorId String?
-  defaultMentor   Mentor? @relation("TrackLead", fields: [defaultMentorId], references: [id])
-  curriculumPhases    CurriculumPhase[]
-  
-  // Curriculum
-  catalogProjects     ProjectCatalogItem[]
-  batches             Batch[]      // New relation
-}
-
-model CurriculumPhase {
-  id          String   @id @default(cuid())
-  trackId     String
-  track       Track    @relation(fields: [trackId], references: [id])
-  phaseNumber Int      // 1–8
-  title       String   // e.g., "Discovery & Setup"
-  weekStart   Int      // Week 1
-  weekEnd     Int      // Week 1
-  description String?
-  
-  sessions    CurriculumSession[]
-  
-  @@unique([trackId, phaseNumber])
-}
-
-model CurriculumSession {
-  id            String   @id @default(cuid())
-  phaseId       String
-  phase         CurriculumPhase @relation(fields: [phaseId], references: [id])
-  sessionNumber Int      // 1–48
-  title         String
-  objectives    String[] // Learning objectives
-  activities    String[] // Hands-on activities
-  deliverables  String[] // Session deliverables
-  keyTech       String[] // Key technologies
-  duration      Int      @default(120) // minutes
-  
-  @@unique([phaseId, sessionNumber])
-}
-
-model ProjectCatalogItem {
-  id              String   @id @default(cuid())
-  trackId         String
-  track           Track    @relation(fields: [trackId], references: [id])
-  
-  name            String   // e.g., "ShopSync"
-  tagline         String   // One-liner
-  description     String?  @db.Text
-  difficulty      Int      @default(2) // 1=⭐, 2=⭐⭐, 3=⭐⭐⭐
-  coreFeatures    String[] // Core feature list
-  conceptsCovered Json?    // Phase-mapped concept coverage (P1-P8 mapping)
-  startupAngle    String?  // Startup potential description
-  
-  isActive        Boolean  @default(true)
-  addedBy         String?  // Admin/Mentor who added it
-  
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  
-  batches         Batch[]
-  assignments     ProjectAssignment[]  // Track progress via Classroom assignments
-}
-
-model Enrollment {
-  id        String   @id @default(cuid())
-  studentId String
-  trackId   String
-  mentorId  String?
-  status    EnrollmentStatus @default(ACTIVE)
-  progress  Int      @default(0) // Percentage calculated from projects/courses
-  programDuration String @default("8-week") // 4-week or 8-week
-  couponCode      String?  // Early bird, partner codes, etc.
-  
-  student   Student  @relation(fields: [studentId], references: [id])
-  track     Track    @relation(fields: [trackId], references: [id])
-  mentor    Mentor?  @relation("MentorEnrollments", fields: [mentorId], references: [id])
-  
-  certIssued Boolean @default(false)
-  certUrl    String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  
-  // Enrollment & Batching
-  batchId   String?
-  batch     Batch?   @relation(fields: [batchId], references: [id])
-  
-  @@unique([studentId, trackId])
 }
 
 enum EnrollmentStatus {
@@ -295,35 +683,6 @@ enum EnrollmentStatus {
   DROPPED
 }
 
-// -----------------------------------------------------------------------------
-// BATCH & PAYMENT MODULE (NEW)
-// -----------------------------------------------------------------------------
-
-model Batch {
-  id              String   @id @default(cuid())
-  trackId         String
-  track           Track    @relation(fields: [trackId], references: [id])
-  
-  // A batch is specific to a project in the new design
-  projectId       String
-  project         ProjectCatalogItem @relation(fields: [projectId], references: [id])
-  
-  mentorId        String?
-  mentor          Mentor?  @relation(fields: [mentorId], references: [id])
-  
-  students        Enrollment[]
-  
-  name            String   // e.g., "AI-Chatbot-B1"
-  status          BatchStatus @default(OPEN) 
-  
-  maxStudents     Int      @default(20)
-  startDate       DateTime?
-  endDate         DateTime?
-
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-}
-
 enum BatchStatus {
   OPEN
   FULL
@@ -331,75 +690,11 @@ enum BatchStatus {
   COMPLETED
 }
 
-model Payment {
-  id              String   @id @default(cuid())
-  userId          String
-  user            User     @relation(fields: [userId], references: [id])
-  
-  amount          Float
-  currency        String   @default("INR")
-  status          PaymentStatus @default(PENDING)
-  provider        String   @default("RAZORPAY") // RAZORPAY, MANUAL
-  transactionId   String?  // External ID from Razorpay
-  
-  // Metadata for what was bought
-  trackId         String?
-  projectId       String?
-  batchId         String?
-  programDuration String?
-  couponCode      String?
-  
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-}
-
 enum PaymentStatus {
   PENDING
   SUCCESS
   FAILED
   REFUNDED
-}
-
-// -----------------------------------------------------------------------------
-// PROJECT MANAGEMENT
-// -----------------------------------------------------------------------------
-
-model Project {
-  id          String   @id @default(cuid())
-  trackId     String
-  track       Track    @relation(fields: [trackId], references: [id])
-  
-  title       String
-  description String
-  level       String   // Beginner, Intermediate, Advanced, Capstone
-  order       Int      // 1, 2, 3...
-  
-  skills      String[]
-  
-  assignments ProjectAssignment[]
-  portfolioItems PortfolioProject[]
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
-model ProjectAssignment {
-  id          String   @id @default(cuid())
-  studentId   String
-  projectId   String
-  catalogProjectId String?  // Links to curriculum ProjectCatalogItem
-  status      ProjectStatus @default(NOT_STARTED)
-  
-  student     Student  @relation(fields: [studentId], references: [id])
-  project     Project  @relation(fields: [projectId], references: [id])
-  catalogProject ProjectCatalogItem? @relation(fields: [catalogProjectId], references: [id])
-  
-  submissions Submission[]
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@unique([studentId, projectId])
 }
 
 enum ProjectStatus {
@@ -410,72 +705,6 @@ enum ProjectStatus {
   REJECTED
 }
 
-model Submission {
-  id           String   @id @default(cuid())
-  assignmentId String
-  githubLink   String?
-  files        String?  // JSON or CSV of file URLs
-  notes        String?
-  
-  assignment   ProjectAssignment @relation(fields: [assignmentId], references: [id])
-  reviews      Review[]
-  
-  createdAt    DateTime @default(now())
-}
-
-model Review {
-  id           String   @id @default(cuid())
-  submissionId String
-  mentorId     String
-  verified     Boolean
-  feedback     String?
-  rating       Int?     // 1-5
-  
-  submission   Submission @relation(fields: [submissionId], references: [id])
-  mentor       Mentor     @relation(fields: [mentorId], references: [id])
-  
-  createdAt    DateTime @default(now())
-}
-
-// -----------------------------------------------------------------------------
-// LMS MODULE
-// -----------------------------------------------------------------------------
-
-model Course {
-  id          String   @id @default(cuid())
-  trackId     String
-  track       Track    @relation(fields: [trackId], references: [id])
-  title       String
-  description String?
-  
-  modules     CourseModule[]
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
-model CourseModule {
-  id          String   @id @default(cuid())
-  courseId    String
-  course      Course   @relation(fields: [courseId], references: [id])
-  title       String
-  order       Int
-  
-  lessons     Lesson[]
-}
-
-model Lesson {
-  id          String   @id @default(cuid())
-  moduleId    String
-  module      CourseModule @relation(fields: [moduleId], references: [id])
-  title       String
-  type        LessonType // VIDEO, READING, QUIZ
-  contentUrl  String?
-  duration    Int?     // in minutes
-  
-  progress    LessonProgress[]
-}
-
 enum LessonType {
   VIDEO
   READING
@@ -483,259 +712,10 @@ enum LessonType {
   ASSIGNMENT
 }
 
-model LessonProgress {
-  id          String   @id @default(cuid())
-  lessonId    String
-  studentId   String // Actually User ID usually, but sticking to Student model here for consistency with other modules? 
-                       // Usually LMS progress is tied to User. Let's link to Student model for consistency in this system.
-  completed   Boolean @default(false)
-  
-  lesson      Lesson   @relation(fields: [lessonId], references: [id])
-  // student     Student  @relation(fields: [studentId], references: [id]) 
-  // Simplified: just store ID for now or link to Enrollment if needed. 
-  // Let's go with linking to User or Student. Linking to User is safer for LMS but here Student makes sense.
-  // Actually, User is better for authentication context. But let's stick to Student ID for strict separation.
-  // Wait, I didn't add the relation field in Student model to LessonProgress.
-  // I will skip the relation field in Student for now to avoid clutter, or add it.
-  // Let's add relationships properly.
-  // enrollment seems the best place to aggregate progress.
-  // For granular progress:
-  // Let's actually link to Enrollment? No, LessonProgress is per student.
-  student     Student @relation(fields: [studentId], references: [id])
-
-  updatedAt   DateTime @updatedAt
-
-  @@unique([studentId, lessonId])
-}
-
-// -----------------------------------------------------------------------------
-// MENTOR INTERACTION
-// -----------------------------------------------------------------------------
-
-model MentorshipSession {
-  id          String   @id @default(cuid())
-  mentorId    String
-  studentId   String? // Nullable if it's an open slot? Or only booked sessions. Let's say Booked.
-  startTime   DateTime
-  endTime     DateTime
-  status      SessionStatus @default(SCHEDULED)
-  meetingLink String?
-  
-  mentor      Mentor   @relation(fields: [mentorId], references: [id])
-  // student     Student? @relation(fields: [studentId], references: [id]) 
-  // Avoiding circular dependency issues or too many relations on Student. 
-  // Let's just keep it simple.
-}
-
 enum SessionStatus {
   SCHEDULED
   COMPLETED
   CANCELLED
-}
-
-model Message {
-  id          String   @id @default(cuid())
-  senderId    String
-  receiverId  String
-  content     String
-  read        Boolean  @default(false)
-  
-  sender      User     @relation("SentMessages", fields: [senderId], references: [id])
-  receiver    User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
-  
-  createdAt   DateTime @default(now())
-}
-
-model Notification {
-  id          String   @id @default(cuid())
-  userId      String
-  title       String
-  message     String
-  read        Boolean  @default(false)
-  type        String?  // 'info', 'success', 'warning', 'error'
-  link        String?
-  
-  user        User     @relation(fields: [userId], references: [id])
-  
-  createdAt   DateTime @default(now())
-}
-
-// -----------------------------------------------------------------------------
-// ASSESSMENT MODULE
-// -----------------------------------------------------------------------------
-
-model Assessment {
-  id          String   @id @default(cuid())
-  trackId     String
-  track       Track    @relation(fields: [trackId], references: [id])
-  title       String
-  type        String   // MCQ, CODING, VIVA
-  totalMarks  Int
-  passingMarks Int
-  
-  results     Result[]
-  
-  createdAt   DateTime @default(now())
-}
-
-model Result {
-  id            String   @id @default(cuid())
-  assessmentId  String
-  studentId     String
-  score         Int
-  passed        Boolean
-  feedback      String?
-  
-  assessment    Assessment @relation(fields: [assessmentId], references: [id])
-  student       Student    @relation(fields: [studentId], references: [id])
-  
-  createdAt     DateTime @default(now())
-}
-
-// -----------------------------------------------------------------------------
-// PORTFOLIO & HR MODULE
-// -----------------------------------------------------------------------------
-
-model Portfolio {
-  id          String   @id @default(cuid())
-  studentId   String   @unique
-  student     Student  @relation(fields: [studentId], references: [id])
-  
-  headline    String?
-  bio         String?  // Short bio / summary
-  skills      String[]
-  resumeUrl   String?
-  linkedinUrl String?
-  githubUrl   String?
-  
-  experience  Json?    // Array of { title, company, startDate, endDate, description }
-  education   Json?    // Array of { school, degree, year, field }
-  
-  publicSlug  String?  @unique
-  isUnlocked  Boolean  @default(false)
-  isPublic    Boolean  @default(false)
-  patPassedAt DateTime?
-  
-  projects    PortfolioProject[]
-  recommendations Recommendation[]
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
-model PortfolioProject {
-  id          String   @id @default(cuid())
-  portfolioId String
-  
-  portfolio   Portfolio @relation(fields: [portfolioId], references: [id])
-  
-  // Optional link to platform project
-  projectId   String?
-  project     Project?  @relation(fields: [projectId], references: [id])
-  
-  title       String
-  description String
-  imageUrl    String?
-  projectUrl  String?
-  githubUrl   String?
-  skills      String[]
-
-  verifiedBy  String? // Mentor ID
-  grade       Int?
-  feedback    String?
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
-model Recommendation {
-  id          String   @id @default(cuid())
-  portfolioId String
-  mentorId    String
-  content     String?  @db.Text
-  fileUrl     String?  // URL to the storage location (e.g., Drive link or S3)
-  
-  portfolio   Portfolio @relation(fields: [portfolioId], references: [id])
-  mentor      Mentor    @relation(fields: [mentorId], references: [id])
-  
-  issuedAt    DateTime @default(now())
-}
-
-model HRView {
-  id          String   @id @default(cuid())
-  hrId        String
-  studentId   String
-  viewedAt    DateTime @default(now())
-  
-  hr          HRProtocol @relation(fields: [hrId], references: [id])
-  student     Student    @relation(fields: [studentId], references: [id])
-}
-
-model InterviewRequest {
-  id          String   @id @default(cuid())
-  hrId        String
-  studentId   String
-  status      String   @default("PENDING") // PENDING, ACCEPTED, REJECTED
-  message     String?
-  
-  hr          HRProtocol @relation(fields: [hrId], references: [id])
-  student     Student    @relation(fields: [studentId], references: [id])
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
-// -----------------------------------------------------------------------------
-// GOOGLE INTEGRATION
-// -----------------------------------------------------------------------------
-
-model GoogleClassroom {
-  id             String   @id @default(cuid())
-  googleCourseId String   @unique
-  meetLink       String
-  mentorId       String
-  
-  updatedAt      DateTime @updatedAt
-  
-  recordings     Recording[]
-  attendanceSessions AttendanceSession[]
-}
-
-model AttendanceSession {
-  id              String   @id @default(cuid())
-  googleCourseId  String
-  
-  // Link to our local GoogleClassroom model if it exists, but verification 
-  // might happen for courses not fully synced yet.
-  // Ideally, link to GoogleClassroom.
-  googleClassroom   GoogleClassroom? @relation(fields: [googleClassroomId], references: [id])
-  googleClassroomId String?
-
-  startTime       DateTime
-  endTime         DateTime
-  durationMinutes Int
-  
-  meetCode        String?
-  
-  verifiedBy      String   // Mentor ID (User ID)
-  
-  records         AttendanceRecord[]
-  
-  createdAt       DateTime @default(now())
-
-  @@unique([googleCourseId, startTime]) // Prevent duplicate verification of same session
-}
-
-model AttendanceRecord {
-  id          String   @id @default(cuid())
-  sessionId   String
-  studentId   String   // User ID of the student
-  status      AttendanceStatus @default(PRESENT)
-  
-  session     AttendanceSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  student     User     @relation(fields: [studentId], references: [id])
-  
-  createdAt   DateTime @default(now())
 }
 
 enum AttendanceStatus {
@@ -745,55 +725,9 @@ enum AttendanceStatus {
   LATE
 }
 
-model Recording {
-  id          String   @id @default(cuid())
-  title       String
-  description String?
-  url         String
-  type        RecordingType
-  
-  // For Live Sessions (Auto-synced or manually linked to a class)
-  meetCode    String?
-  googleClassroomId String?
-  googleClassroom   GoogleClassroom? @relation(fields: [googleClassroomId], references: [id])
-  
-  // For Pre-recorded Lessons (Library)
-  trackId     String?
-  track       Track? @relation(fields: [trackId], references: [id])
-  
-  isPublic    Boolean  @default(false)
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
 enum RecordingType {
   LIVE_SESSION
   PRE_RECORDED
-}
-
-// -----------------------------------------------------------------------------
-// JOB POSTING MODULE
-// -----------------------------------------------------------------------------
-
-model Job {
-  id          String   @id @default(cuid())
-  hrId        String
-  hr          HRProtocol @relation(fields: [hrId], references: [id])
-  
-  title       String
-  description String   @db.Text
-  location    String
-  type        JobType  @default(FULL_TIME)
-  skills      String[]
-  salary      String?
-  
-  isActive    Boolean  @default(true)
-  
-  applications JobApplication[]
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
 }
 
 enum JobType {
@@ -801,22 +735,6 @@ enum JobType {
   PART_TIME
   INTERNSHIP
   CONTRACT
-}
-
-model JobApplication {
-  id          String   @id @default(cuid())
-  jobId       String
-  studentId   String
-  status      ApplicationStatus @default(APPLIED)
-  coverLetter String?  @db.Text
-  
-  job         Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
-  student     Student  @relation(fields: [studentId], references: [id])
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  
-  @@unique([jobId, studentId])
 }
 
 enum ApplicationStatus {
@@ -827,81 +745,6 @@ enum ApplicationStatus {
   INTERVIEW_SCHEDULED
 }
 
-// -----------------------------------------------------------------------------
-// INVESTOR MARKETPLACE
-// -----------------------------------------------------------------------------
-
-model Investor {
-  id              String   @id @default(cuid())
-  userId          String   @unique
-  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  company         String
-  position        String
-  bio             String?  @db.Text
-  focusAreas      String[]   // ["AI/ML", "FinTech", "EdTech"]
-  investmentRange String?    // "$50K - $500K"
-  portfolioUrl    String?    // Link to portfolio/website
-  linkedinUrl     String?
-  
-  isActive        Boolean  @default(true)
-  
-  pitchRequests   PitchRequest[]
-  workshops       Workshop[]
-  posts           InvestorPost[]
-  
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-}
-
-model ProjectShowcase {
-  id              String   @id @default(cuid())
-  studentId       String
-  student         Student  @relation(fields: [studentId], references: [id])
-  
-  title           String
-  tagline         String
-  description     String   @db.Text
-  problemSolved   String   @db.Text
-  techStack       String[]
-  demoUrl         String?
-  pitchDeckUrl    String?
-  videoUrl        String?
-  marketSize      String?
-  fundingNeeded   String?
-  
-  isApproved      Boolean  @default(false)  // Mentor must approve
-  isFeatured      Boolean  @default(false)
-  
-  pitchRequests   PitchRequest[]
-  
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-}
-
-model PitchRequest {
-  id              String   @id @default(cuid())
-  showcaseId      String
-  investorId      String
-  studentId       String
-  
-  status          PitchStatus @default(PENDING)
-  message         String?  @db.Text  // Student's pitch message
-  investorNotes   String?  @db.Text  // Investor's feedback
-  
-  scheduledAt     DateTime?
-  meetingLink     String?
-  
-  showcase        ProjectShowcase @relation(fields: [showcaseId], references: [id], onDelete: Cascade)
-  investor        Investor @relation(fields: [investorId], references: [id])
-  student         Student  @relation(fields: [studentId], references: [id])
-  
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  
-  @@unique([showcaseId, investorId])
-}
-
 enum PitchStatus {
   PENDING
   REVIEWED
@@ -909,54 +752,6 @@ enum PitchStatus {
   DECLINED
   SCHEDULED
   COMPLETED
-}
-
-model Workshop {
-  id              String   @id @default(cuid())
-  investorId      String
-  investor        Investor @relation(fields: [investorId], references: [id])
-  
-  title           String
-  description     String   @db.Text
-  date            DateTime
-  duration        String
-  meetingLink     String?
-  maxCapacity     Int?
-  
-  registrations   WorkshopRegistration[]
-  
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-}
-
-model WorkshopRegistration {
-  id              String   @id @default(cuid())
-  workshopId      String
-  studentId       String
-  
-  workshop        Workshop @relation(fields: [workshopId], references: [id])
-  student         Student  @relation(fields: [studentId], references: [id])
-  
-  registeredAt    DateTime @default(now())
-  attended        Boolean  @default(false)
-  
-  @@unique([workshopId, studentId])
-}
-
-model InvestorPost {
-  id              String   @id @default(cuid())
-  investorId      String
-  investor        Investor @relation(fields: [investorId], references: [id])
-  
-  title           String
-  description     String   @db.Text
-  type            PostType  @default(FUNDING) // Funding, Mentorship, Incubation
-  deadline        DateTime?
-  
-  isActive        Boolean  @default(true)
-  
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
 }
 
 enum PostType {
