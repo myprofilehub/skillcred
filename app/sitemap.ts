@@ -6,10 +6,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Public primary routes
   const routes = [
     "",
-    "/about",
     "/contact",
     "/library",
-    "/portfolio",
     "/enroll",
     "/apply-mentor",
   ].map((route) => ({
@@ -17,20 +15,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: route === "" ? 1 : 0.8,
-  }));
-
-  // How It Works routes
-  const howItWorksRoutes = [
-    "/how-it-works/colleges",
-    "/how-it-works/hr",
-    "/how-it-works/investors",
-    "/how-it-works/mentors",
-    "/how-it-works/students",
-  ].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
   }));
 
   // Programs routes
@@ -62,5 +46,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...routes, ...howItWorksRoutes, ...programRoutes, ...streamRoutes];
+  // PAT routes
+  const patRoutes = [
+    "/pat/about",
+    "/pat/evaluate",
+    "/pat/process",
+  ].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  // Auth routes
+  const authRoutes = [
+    "/auth/login",
+    "/auth/signup",
+    "/auth/lms",
+  ].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...routes, ...programRoutes, ...streamRoutes, ...patRoutes, ...authRoutes];
 }
