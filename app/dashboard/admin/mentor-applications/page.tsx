@@ -24,12 +24,12 @@ export default async function MentorApplicationsPage() {
         redirect("/");
     }
 
-    const applications = await prisma.mentorApplication.findMany({
+    const applications = await (prisma as any).mentorApplication.findMany({
         orderBy: { createdAt: 'desc' }
     });
 
     const totalApps = applications.length;
-    const pendingApps = applications.filter(a => a.status === 'PENDING').length;
+    const pendingApps = applications.filter((a: any) => String(a.status) === 'PENDING').length;
 
     return (
         <div className="min-h-[calc(100vh-4rem)]">
@@ -81,7 +81,7 @@ export default async function MentorApplicationsPage() {
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                        {applications.map((app) => (
+                        {applications.map((app: any) => (
                             <div key={app.id} className="bg-slate-900/40 backdrop-blur-xl rounded-2xl border border-cyan-500/10 overflow-hidden hover:border-cyan-500/30 transition-all duration-300 group flex flex-col shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_0_20px_rgba(6,182,212,0.05)] hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_0_30px_rgba(6,182,212,0.15)] relative">
                                 
                                 {/* Card Header */}
@@ -104,10 +104,10 @@ export default async function MentorApplicationsPage() {
                                         </div>
                                         <div className="flex flex-col items-end shrink-0">
                                             <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
-                                                app.status === 'PENDING' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' : 
-                                                app.status === 'APPROVED' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
+                                                String(app.status) === 'PENDING' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' : 
+                                                String(app.status) === 'APPROVED' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
                                             }`}>
-                                                {app.status === 'PENDING' && <div className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)] animate-pulse"></div>}
+                                                {String(app.status) === 'PENDING' && <div className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)] animate-pulse"></div>}
                                                 {app.status}
                                             </span>
                                         </div>
@@ -133,7 +133,7 @@ export default async function MentorApplicationsPage() {
                                     <div>
                                         <p className="text-[10px] font-semibold text-cyan-500/50 uppercase tracking-widest mb-3">Expertise Domains</p>
                                         <div className="flex flex-wrap gap-2">
-                                            {app.domains.map((domain, i) => (
+                                            {app.domains.map((domain: string, i: number) => (
                                                 <span key={i} className="inline-flex items-center px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 backdrop-blur-sm shadow-[0_2px_10px_rgba(6,182,212,0.05)]">
                                                     {domain}
                                                 </span>
