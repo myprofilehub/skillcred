@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://skillcred.com";
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.AUTH_URL || "https://www.skillcred.in";
 
   // Public primary routes
   const routes = [
