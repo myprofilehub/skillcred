@@ -36,7 +36,7 @@ const iconMap: Record<string, any> = {
     "Data Science & Analytics": Terminal
 };
 
-export function LandingInterestForm({ recordings }: { recordings: Recording[] }) {
+export function LandingInterestForm({ recordings = [], tracks }: { recordings?: Recording[], tracks?: any }) {
     return (
         <section id="interest-form" className="py-12 bg-black border-y border-white/5 relative overflow-hidden">
             {/* Background elements */}
