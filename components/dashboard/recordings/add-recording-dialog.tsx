@@ -20,7 +20,7 @@ import { Upload } from "lucide-react";
 import { createManualRecording } from "@/app/actions/recordings";
 import { useRouter } from "next/navigation";
 
-export function AddRecordingDialog({ tracks }: { tracks: { id: string, name: string }[] }) {
+export function AddRecordingDialog({ tracks = [] }: { tracks?: { id: string, name: string }[] }) {
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const router = useRouter();
