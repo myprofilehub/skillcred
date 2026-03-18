@@ -13,6 +13,12 @@ import {
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger as DropdownTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
     Code2,
     BrainCircuit,
     Database,
@@ -26,6 +32,7 @@ import {
     Building2,
     Landmark,
     BriefcaseBusiness as Briefcase,
+    ChevronDown,
     Search,
     Calendar,
     Award
@@ -43,15 +50,15 @@ const syllabusItems = [
 ]
 
 const programItems = [
-    { title: "Standard (8 Weeks)", href: "/programs/standard", icon: Calendar },
-    { title: "Fast Track (4 Weeks)", href: "/programs/fast-track", icon: Calendar },
-    { title: "Capstone Track (2 Weeks)", href: "/programs/capstone", icon: Award },
+    { title: "Standard (8 Weeks)", href: "/programs/standard", icon: Calendar, color: "text-sky-400" },
+    { title: "Fast Track (4 Weeks)", href: "/programs/fast-track", icon: Calendar, color: "text-amber-400" },
+    { title: "Capstone Track (2 Weeks)", href: "/programs/capstone", icon: Award, color: "text-fuchsia-400" },
 ]
 
 const patItems = [
-    { title: "What is PAT?", href: "/pat/about", icon: Shield },
-    { title: "Certification Process", href: "/pat/process", icon: Award },
-    { title: "Evaluate Skills", href: "/pat/evaluate", icon: BrainCircuit },
+    { title: "What is PAT?", href: "/pat/about", icon: Shield, color: "text-indigo-400" },
+    { title: "Certification Process", href: "/pat/process", icon: Award, color: "text-emerald-400" },
+    { title: "Evaluate Skills", href: "/pat/evaluate", icon: BrainCircuit, color: "text-rose-400" },
 ]
 
 
@@ -71,6 +78,7 @@ export function LandingMenu() {
                                     title={item.title}
                                     href={item.href}
                                     icon={item.icon}
+                                    iconColor={item.color}
                                 />
                             ))}
                         </ul>
@@ -107,6 +115,7 @@ export function LandingMenu() {
                                     title={item.title}
                                     href={item.href}
                                     icon={item.icon}
+                                    iconColor={item.color}
                                 />
                             ))}
                         </ul>
@@ -122,13 +131,21 @@ export function LandingMenu() {
                     </NavigationMenuLink>
                 </NavigationMenuItem>
 
-                {/* 4. ABOUT US */}
-                <NavigationMenuItem>
-                    <NavigationMenuLink asChild>
-                        <Link href="/about" className={cn(navigationMenuTriggerStyle(), "bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 font-bold")}>
-                            About Us
-                        </Link>
+
+
+                {/* 4. CAREER */}
+                <NavigationMenuItem className="relative group/career">
+                    <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white font-bold outline-none cursor-pointer flex items-center")}>
+                        Career <ChevronDown className="relative top-[1px] ml-1 h-3 w-3 group-hover/career:rotate-180 transition-transform duration-200" />
                     </NavigationMenuLink>
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover/career:opacity-100 group-hover/career:visible transition-all duration-200 ease-in-out z-50">
+                        <div className="w-[180px] bg-black/95 border border-white/10 rounded-md backdrop-blur-xl text-white p-1.5 shadow-2xl">
+                            <Link href="/apply-mentor" className="flex items-center w-full gap-2.5 font-medium hover:bg-white/10 cursor-pointer p-2.5 rounded-sm transition-colors text-sm">
+                                <Users className="h-4 w-4 text-emerald-400" />
+                                Apply as Mentor
+                            </Link>
+                        </div>
+                    </div>
                 </NavigationMenuItem>
 
                 {/* 5. CONTACT US */}

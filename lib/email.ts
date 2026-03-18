@@ -169,3 +169,83 @@ export async function sendMentorAssignmentEmail(
     });
 }
 
+export async function sendMentorApplicationAdminNotification(
+    applicantName: string,
+    applicantEmail: string,
+    domain: string,
+    experience: string,
+    resumeLink: string | null,
+    videoLink: string | null
+) {
+    const htmlContent = `
+    <!DOCTYPE html>
+    <html>
+    <body style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+        <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h1 style="color: #4f46e5;">New Mentor Application</h1>
+            </div>
+            
+            <p>Admin,</p>
+            
+            <p>A new mentor application has been submitted by <strong>${applicantName}</strong>.</p>
+            
+            <div style="background-color: #f3f4f6; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                <p style="margin: 5px 0;"><strong>Email:</strong> ${applicantEmail}</p>
+                <p style="margin: 5px 0;"><strong>Domains:</strong> ${domain}</p>
+                <p style="margin: 5px 0;"><strong>Experience:</strong> ${experience}</p>
+            </div>
+            
+            <p><strong>Attachments (Google Drive):</strong></p>
+            <ol>
+                <li><a href="${resumeLink || '#'}">Resume / CV</a></li>
+                <li><a href="${videoLink || '#'}">Sample Video</a></li>
+            </ol>
+            
+            <p style="margin-top: 30px; font-size: 12px; color: #888;">This is an automated notification from SkillCred LMS.</p>
+        </div>
+    </body>
+    </html>
+    `;
+
+    return sendEmail({
+        to: [{ email: 'admin@skillcred.in', name: 'SkillCred Admin' }],
+        subject: `New Mentor Application from ${applicantName}`,
+        htmlContent
+    });
+}
+
+export async function sendMentorApplicationConfirmation(
+    applicantName: string,
+    applicantEmail: string
+) {
+    const htmlContent = `
+    <!DOCTYPE html>
+    <html>
+    <body style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+        <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h1 style="color: #4f46e5;">Application Received!</h1>
+            </div>
+            
+            <p>Hi ${applicantName},</p>
+            
+            <p>Thank you for applying to be a Freelance Technical Mentor at Team SkillCred! We have successfully received your application, resume, and video submission.</p>
+            
+            <p>Our team will carefully review your qualifications and reach out within 3–5 business days.</p>
+            
+            <p>Best Regards,</p>
+            <p>The SkillCred Team</p>
+            
+            <p style="margin-top: 30px; font-size: 12px; color: #888;">Please do not reply to this email.</p>
+        </div>
+    </body>
+    </html>
+    `;
+
+    return sendEmail({
+        to: [{ email: applicantEmail, name: applicantName }],
+        subject: "Your SkillCred Mentor Application was received",
+        htmlContent
+    });
+}
