@@ -45,6 +45,10 @@ export function LandingNavbar() {
                 </div>
 
                 <div className="flex items-center gap-4">
+                    <Button asChild className="hidden sm:flex bg-gradient-to-r from-green-500 to-yellow-500 hover:from-green-600 hover:to-yellow-600 text-white border-none shadow-[0_0_15px_rgba(34,197,94,0.3)] font-bold h-9 transition-all duration-300">
+                        <Link href="/apply-mentor">Apply as Mentor</Link>
+                    </Button>
+
                     {mounted ? (
                         user ? (
                             <>

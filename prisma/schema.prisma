@@ -662,6 +662,26 @@ model InvestorPost {
   investor    Investor  @relation(fields: [investorId], references: [id])
 }
 
+model MentorApplication {
+  id                 String            @id @default(cuid())
+  firstName          String?
+  lastName           String?
+  email              String
+  phone              String?
+  linkedinUrl        String?
+  githubUrl          String?
+  domains            String[]
+  experience         String?
+  tools              String?
+  teachingExperience String?
+  videosPerMonth     String?
+  resumeUrl          String?
+  videoUrl           String?
+  status             ApplicationStatus @default(APPLIED)
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+}
+
 enum UserRole {
   STUDENT
   MENTOR

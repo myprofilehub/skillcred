@@ -41,6 +41,11 @@ const sidebarItems = [
         href: "/dashboard/admin/recordings",
         icon: Video,
     },
+    {
+        title: "Mentor Apps",
+        href: "/dashboard/admin/mentor-applications",
+        icon: Users,
+    },
 ];
 
 export function AdminSidebar() {
