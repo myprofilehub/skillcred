@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { prisma } from "@/lib/db";
+import { prisma } from "../lib/db";
 import fs from "fs";
 import path from "path";
 
@@ -133,7 +133,7 @@ async function main() {
 
         // Wipe existing courses for this track to start fresh
         const oldCourses = await prisma.course.findMany({ where: { trackId: track.id } });
-        const oldCourseIds = oldCourses.map(c => c.id);
+        const oldCourseIds = oldCourses.map((c: { id: string }) => c.id);
 
         if (oldCourseIds.length > 0) {
             await prisma.lesson.deleteMany({

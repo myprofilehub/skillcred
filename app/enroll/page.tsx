@@ -52,7 +52,7 @@ export default function EnrollmentPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black text-white relative overflow-hidden">
+        <div className="dark min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black text-white relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
 
@@ -115,12 +115,12 @@ export default function EnrollmentPage() {
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.3 }}
                         >
-                            <Card className="bg-slate-900/50 border-white/10 backdrop-blur-xl shadow-2xl overflow-hidden">
+                            <Card className="!bg-slate-900/80 border-white/10 backdrop-blur-2xl shadow-2xl overflow-hidden">
                                 {step === 1 && (
                                     <>
-                                        <CardHeader className="border-b border-white/5 px-8 py-6 bg-white/5">
-                                            <CardTitle className="text-xl">Enrollment Details</CardTitle>
-                                            <CardDescription>Tell us about yourself and choose your stream.</CardDescription>
+                                        <CardHeader className="border-b border-white/5 px-8 py-6 bg-slate-800/60">
+                                            <CardTitle className="text-xl text-white">Enrollment Details</CardTitle>
+                                            <CardDescription className="text-slate-400">Tell us about yourself and choose your stream.</CardDescription>
                                         </CardHeader>
                                         <CardContent className="p-8">
                                             <DetailsForm
@@ -135,9 +135,9 @@ export default function EnrollmentPage() {
 
                                 {step === 2 && order && (
                                     <>
-                                        <CardHeader className="border-b border-white/5 px-8 py-6 bg-white/5">
-                                            <CardTitle className="text-xl">Finalize Enrollment</CardTitle>
-                                            <CardDescription>Secure your spot in the batch to unlock immediate access.</CardDescription>
+                                        <CardHeader className="border-b border-white/5 px-8 py-6 bg-slate-800/60">
+                                            <CardTitle className="text-xl text-white">Finalize Enrollment</CardTitle>
+                                            <CardDescription className="text-slate-400">Secure your spot in the batch to unlock immediate access.</CardDescription>
                                         </CardHeader>
                                         <CardContent className="p-8">
                                             <div className="mb-8 p-6 bg-gradient-to-br from-cyan-500/10 to-transparent rounded-xl border border-cyan-500/20">
