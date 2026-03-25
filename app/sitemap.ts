@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
+import { prisma } from "@/lib/db";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.AUTH_URL || "https://www.skillcred.in";
 
   // Public primary routes
@@ -10,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/library",
     "/enroll",
     "/apply-mentor",
+    "/blog",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
@@ -70,5 +72,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...routes, ...programRoutes, ...streamRoutes, ...patRoutes, ...authRoutes];
+  // Blog post routes (dynamic from DB)
+  let blogRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const posts = await prisma.blogPost.findMany({
+      where: { published: true },
+      select: { slug: true, updatedAt: true },
+    });
+    blogRoutes = posts.map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: post.updatedAt,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }));
+  } catch {
+    // DB unavailable during build — skip
+  }
+
+  return [...routes, ...programRoutes, ...streamRoutes, ...patRoutes, ...authRoutes, ...blogRoutes];
 }

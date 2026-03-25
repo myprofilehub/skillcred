@@ -13,6 +13,7 @@ import {
     BookOpen,
     GraduationCap,
     Video,
+    FileText,
 } from "lucide-react";
 
 const sidebarItems = [
@@ -40,6 +41,11 @@ const sidebarItems = [
         title: "Recordings",
         href: "/dashboard/admin/recordings",
         icon: Video,
+    },
+    {
+        title: "Blog",
+        href: "/dashboard/admin/blog",
+        icon: FileText,
     },
     {
         title: "Mentor Apps",

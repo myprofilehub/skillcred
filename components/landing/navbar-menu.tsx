@@ -65,7 +65,7 @@ const patItems = [
 export function LandingMenu() {
     return (
         <NavigationMenu>
-            <NavigationMenuList suppressHydrationWarning>
+            <NavigationMenuList suppressHydrationWarning className="gap-2">
 
                 {/* 1. PROGRAMS */}
                 <NavigationMenuItem>
@@ -122,13 +122,25 @@ export function LandingMenu() {
                     </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {/* 3.5. RESOURCES */}
+                {/* 3.5. RESOURCES (dropdown) */}
                 <NavigationMenuItem>
-                    <NavigationMenuLink asChild>
-                        <Link href="/library" className={cn(navigationMenuTriggerStyle(), "bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 font-bold")}>
-                            Resources
-                        </Link>
-                    </NavigationMenuLink>
+                    <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                        <ul className="grid w-[220px] gap-2 p-2">
+                            <ListItem
+                                title="Masterclass"
+                                href="/library"
+                                icon={GraduationCap}
+                                iconColor="text-amber-400"
+                            />
+                            <ListItem
+                                title="Blog"
+                                href="/blog"
+                                icon={Coffee}
+                                iconColor="text-indigo-400"
+                            />
+                        </ul>
+                    </NavigationMenuContent>
                 </NavigationMenuItem>
 
 
@@ -144,17 +156,12 @@ export function LandingMenu() {
                                 <Users className="h-4 w-4 text-emerald-400" />
                                 Apply as Mentor
                             </Link>
+                            <Link href="/contact" className="flex items-center w-full gap-2.5 font-medium hover:bg-white/10 cursor-pointer p-2.5 rounded-sm transition-colors text-sm">
+                                <Coffee className="h-4 w-4 text-sky-400" />
+                                Contact Us
+                            </Link>
                         </div>
                     </div>
-                </NavigationMenuItem>
-
-                {/* 5. CONTACT US */}
-                <NavigationMenuItem>
-                    <NavigationMenuLink asChild>
-                        <Link href="/contact" className={cn(navigationMenuTriggerStyle(), "bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white data-[active]:bg-white/10 data-[state=open]:bg-white/10 font-bold")}>
-                            Contact Us
-                        </Link>
-                    </NavigationMenuLink>
                 </NavigationMenuItem>
 
             </NavigationMenuList>
