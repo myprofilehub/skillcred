@@ -6,14 +6,18 @@
 const AI_ENGINE_URL = process.env.NEXT_PUBLIC_AI_ENGINE_URL || "http://localhost:3001";
 
 export interface GenerateTextRequest {
-  prompt: string;
-  systemPrompt?: string;
-  model?: string;
+  topic: string;
+  stream: string;
+  platform: string;
+  contentType: string;
+  tone?: string;
+  numberOfVariations?: number;
 }
 
 export interface GenerateImageRequest {
   prompt: string;
-  style?: string;
+  aspectRatio?: string;
+  numberOfImages?: number;
 }
 
 export interface GenerateVideoRequest {
@@ -41,7 +45,7 @@ class AIEngineClient {
   }
 
   /**
-   * Generate text using the AI engine
+   * Generate text using the AI engine (Copywriter AI)
    */
   async generateText(req: GenerateTextRequest) {
     return this.post("/api/generate/text", req);
