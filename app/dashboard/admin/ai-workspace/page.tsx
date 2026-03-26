@@ -111,6 +111,18 @@ export default function AIWorkspacePage() {
         toast.success("Copied to clipboard!");
     };
 
+    /**
+     * Helper to resolve media URLs to bypass "double URL" issues
+     */
+    const getImageUrl = (url: string) => {
+        if (!url) return "";
+        // If the URL is already absolute (contains http), return it as is
+        if (url.startsWith('http')) return url;
+        // Otherwise, prepend the AI Engine URL
+        const baseUrl = (process.env.NEXT_PUBLIC_AI_ENGINE_URL || "http://localhost:3001").replace(/\/+$/, '');
+        return `${baseUrl}${url.startsWith('/') ? '' : '/'}${url}`;
+    };
+
     return (
         <div className="space-y-8 max-w-6xl mx-auto pb-20">
             <div className="flex flex-col gap-2">
@@ -412,9 +424,18 @@ export default function AIWorkspacePage() {
                             <div className="mt-6 grid grid-cols-2 gap-3 animate-in fade-in zoom-in-95">
                                 {imageResult.map((img, i) => (
                                     <div key={i} className="relative group aspect-square rounded-lg overflow-hidden border border-slate-800">
-                                        <img src={`${process.env.NEXT_PUBLIC_AI_ENGINE_URL || "http://localhost:3001"}${img.url}`} alt="Generated" className="object-cover w-full h-full" />
+                                        <img 
+                                            src={getImageUrl(img.url)} 
+                                            alt="Generated" 
+                                            className="object-cover w-full h-full" 
+                                        />
                                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                            <Button size="icon" variant="secondary" className="h-8 w-8" onClick={() => window.open(`${process.env.NEXT_PUBLIC_AI_ENGINE_URL || "http://localhost:3001"}${img.url}`, '_blank')}>
+                                            <Button 
+                                                size="icon" 
+                                                variant="secondary" 
+                                                className="h-8 w-8" 
+                                                onClick={() => window.open(getImageUrl(img.url), '_blank')}
+                                            >
                                                 <Share2 className="h-4 w-4" />
                                             </Button>
                                         </div>
