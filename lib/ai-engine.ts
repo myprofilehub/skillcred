@@ -3,7 +3,7 @@
  * Provides a standardized interface for communicating with the skillcredaiengine.
  */
 
-const AI_ENGINE_URL = process.env.NEXT_PUBLIC_AI_ENGINE_URL || "http://localhost:3001";
+const AI_ENGINE_URL = process.env.NEXT_PUBLIC_AI_ENGINE_URL || "http://localhost:3001/ai-engine";
 
 export interface GenerateTextRequest {
   topic: string;
