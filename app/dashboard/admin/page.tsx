@@ -79,7 +79,7 @@ export default async function AdminDashboardPage() {
                 </Card>
 
                 {/* AI Entry Point */}
-                <Link href="/dashboard/admin/ai-workspace" className="block">
+                <Link href="/dashboard/admin/ai-workspace" className="block h-full">
                     <Card className="bg-slate-900/60 border-orange-500/20 backdrop-blur-sm group hover:border-orange-500/40 transition-all cursor-pointer overflow-hidden relative h-full">
                         <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
