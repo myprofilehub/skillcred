@@ -28,11 +28,23 @@ export interface GenerateVideoRequest {
 
 class AIEngineClient {
   private async request(endpoint: string, options: RequestInit = {}) {
-    // Ensure base URL doesn't have trailing slash and endpoint has leading slash
-    const cleanBaseUrl = AI_ENGINE_URL.replace(/\/+$/, "");
-    const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+    // Ensure base URL doesn't have trailing slash
+    let baseUrl = AI_ENGINE_URL.replace(/\/+$/, "");
     
-    const response = await fetch(`${cleanBaseUrl}${cleanEndpoint}`, {
+    // RESILIENCE: Handle missing /ai-engine prefix in the base URL
+    if ((baseUrl.includes(":3001") || baseUrl.includes("skillcred.in")) && !baseUrl.includes("/ai-engine")) {
+      baseUrl += "/ai-engine";
+    }
+
+    const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+    // Forcefully remove any trailing slash from the endpoint
+    const sanitizedEndpoint = cleanEndpoint.replace(/\/+$/, "");
+    
+    const fullUrl = `${baseUrl}${sanitizedEndpoint}`;
+    
+    console.log(`[AIEngine] Request URL: ${fullUrl}`);
+    
+    const response = await fetch(fullUrl, {
       ...options,
       headers: {
         "Content-Type": "application/json",
@@ -42,9 +54,8 @@ class AIEngineClient {
 
     if (!response.ok) {
       const error = await response.text();
-      // If the error response is HTML (like a 404 page), don't include it all in the error message
       const errorMessage = error.includes("<!DOCTYPE html>") 
-        ? `Received HTML error page (Status ${response.status})`
+        ? `Received HTML error page (Status ${response.status}) at ${fullUrl}. Check if the endpoint exists and the basePath is correct.`
         : error;
       throw new Error(`AI Engine Error (${response.status}): ${errorMessage}`);
     }
