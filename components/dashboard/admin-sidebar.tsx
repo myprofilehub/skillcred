@@ -14,6 +14,7 @@ import {
     GraduationCap,
     Video,
     FileText,
+    Image as ImageIcon,
 } from "lucide-react";
 
 const sidebarItems = [
@@ -46,6 +47,11 @@ const sidebarItems = [
         title: "Blog",
         href: "/dashboard/admin/blog",
         icon: FileText,
+    },
+    {
+        title: "Creative Gallery",
+        href: "/dashboard/admin/creative-gallery",
+        icon: ImageIcon,
     },
     {
         title: "Mentor Apps",
