@@ -77,6 +77,25 @@ export default async function AdminDashboardPage() {
                         <p className="text-xs text-slate-500 mt-1">Associated learning modules</p>
                     </CardContent>
                 </Card>
+
+                {/* AI Entry Point */}
+                <Link href="/dashboard/admin/ai-workspace" className="block">
+                    <Card className="bg-slate-900/60 border-orange-500/20 backdrop-blur-sm group hover:border-orange-500/40 transition-all cursor-pointer overflow-hidden relative h-full">
+                        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                            <CardTitle className="text-sm font-medium text-orange-200">AI Content Engine</CardTitle>
+                            <div className="w-8 h-8 rounded-md bg-orange-500/10 border border-orange-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <Sparkles className="h-4 w-4 text-orange-400" />
+                            </div>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="text-2xl font-bold text-white group-hover:text-orange-100 transition-colors">SkillCred AI</div>
+                            <p className="text-xs text-slate-400 mt-1 flex items-center gap-1">
+                                Launch workspace <ArrowRight className="w-3 h-3" />
+                            </p>
+                        </CardContent>
+                    </Card>
+                </Link>
             </div>
 
             {/* Recent Activity */}
