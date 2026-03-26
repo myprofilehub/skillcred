@@ -56,7 +56,7 @@ class AIEngineClient {
    * Generate text using the AI engine (Copywriter AI)
    */
   async generateText(req: GenerateTextRequest) {
-    return this.request("/api/generate/text/", {
+    return this.request("/api/generate/text", {
       method: "POST",
       body: JSON.stringify(req),
     });
@@ -66,7 +66,7 @@ class AIEngineClient {
    * Generate an image using the AI engine
    */
   async generateImage(req: GenerateImageRequest) {
-    return this.request("/api/generate/image/", {
+    return this.request("/api/generate/image", {
       method: "POST",
       body: JSON.stringify(req),
     });
@@ -76,7 +76,7 @@ class AIEngineClient {
    * Generate a full video pipeline using the AI engine
    */
   async generateVideo(req: GenerateVideoRequest) {
-    return this.request("/api/generate/video-pipeline/", {
+    return this.request("/api/generate/video-pipeline", {
       method: "POST",
       body: JSON.stringify(req),
     });
@@ -86,7 +86,7 @@ class AIEngineClient {
    * Get public gallery items from the AI engine
    */
   async getGallery() {
-    return this.request("/api/gallery/");
+    return this.request("/api/gallery");
   }
 }
 
