@@ -28,18 +28,16 @@ export interface GenerateVideoRequest {
 
 class AIEngineClient {
   private async request(endpoint: string, options: RequestInit = {}) {
-    // Determine the base URL, ensuring it's absolute
+    // Determine the base URL
     let envUrl = process.env.NEXT_PUBLIC_AI_ENGINE_URL || "";
     let baseUrl = envUrl.replace(/\/+$/, "");
     
-    // If the URL is relative (e.g. just "/ai-engine"), it won't work across different ports locally
-    // We force the local dev absolute URL if we detection a relative path or missing env
-    if (!baseUrl || !baseUrl.startsWith("http")) {
-       console.warn(`[AIEngine] Environment variable NEXT_PUBLIC_AI_ENGINE_URL is "${envUrl || "EMPTY"}". Falling back to default absolute URL.`);
+    // If no URL is provided, fallback to the local dev default
+    if (!baseUrl) {
        baseUrl = "http://localhost:3001/ai-engine";
     }
     
-    // RESILIENCE: Ensure /ai-engine prefix is present
+    // RESILIENCE: Ensure /ai-engine prefix is present if calling a known host
     if ((baseUrl.includes(":3001") || baseUrl.includes("skillcred.in")) && !baseUrl.includes("/ai-engine")) {
       baseUrl += "/ai-engine";
     }
