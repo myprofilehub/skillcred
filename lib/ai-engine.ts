@@ -27,18 +27,26 @@ export interface GenerateVideoRequest {
 }
 
 class AIEngineClient {
-  private async post(endpoint: string, body: any) {
-    const response = await fetch(`${AI_ENGINE_URL}${endpoint}`, {
-      method: "POST",
+  private async request(endpoint: string, options: RequestInit = {}) {
+    // Ensure base URL doesn't have trailing slash and endpoint has leading slash
+    const cleanBaseUrl = AI_ENGINE_URL.replace(/\/+$/, "");
+    const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+    
+    const response = await fetch(`${cleanBaseUrl}${cleanEndpoint}`, {
+      ...options,
       headers: {
         "Content-Type": "application/json",
+        ...options.headers,
       },
-      body: JSON.stringify(body),
     });
 
     if (!response.ok) {
       const error = await response.text();
-      throw new Error(`AI Engine Error (${response.status}): ${error}`);
+      // If the error response is HTML (like a 404 page), don't include it all in the error message
+      const errorMessage = error.includes("<!DOCTYPE html>") 
+        ? `Received HTML error page (Status ${response.status})`
+        : error;
+      throw new Error(`AI Engine Error (${response.status}): ${errorMessage}`);
     }
 
     return response.json();
@@ -48,30 +56,37 @@ class AIEngineClient {
    * Generate text using the AI engine (Copywriter AI)
    */
   async generateText(req: GenerateTextRequest) {
-    return this.post("/api/generate/text", req);
+    return this.request("/api/generate/text", {
+      method: "POST",
+      body: JSON.stringify(req),
+    });
   }
 
   /**
    * Generate an image using the AI engine
    */
   async generateImage(req: GenerateImageRequest) {
-    return this.post("/api/generate/image", req);
+    return this.request("/api/generate/image", {
+      method: "POST",
+      body: JSON.stringify(req),
+    });
   }
 
   /**
    * Generate a full video pipeline using the AI engine
    */
   async generateVideo(req: GenerateVideoRequest) {
-    return this.post("/api/generate/video-pipeline", req);
+    return this.request("/api/generate/video-pipeline", {
+      method: "POST",
+      body: JSON.stringify(req),
+    });
   }
 
   /**
    * Get public gallery items from the AI engine
    */
   async getGallery() {
-    const response = await fetch(`${AI_ENGINE_URL}/api/gallery`);
-    if (!response.ok) throw new Error("Failed to fetch AI gallery");
-    return response.json();
+    return this.request("/api/gallery");
   }
 }
 

@@ -119,7 +119,7 @@ export default function AIWorkspacePage() {
         // If the URL is already absolute (contains http), return it as is
         if (url.startsWith('http')) return url;
         // Otherwise, prepend the AI Engine URL
-        const baseUrl = (process.env.NEXT_PUBLIC_AI_ENGINE_URL || "http://localhost:3001").replace(/\/+$/, '');
+        const baseUrl = (process.env.NEXT_PUBLIC_AI_ENGINE_URL || "http://localhost:3001/ai-engine").replace(/\/+$/, '');
         return `${baseUrl}${url.startsWith('/') ? '' : '/'}${url}`;
     };
 

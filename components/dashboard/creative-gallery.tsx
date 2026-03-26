@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Image as ImageIcon, Video, Loader2, ExternalLink } from 'lucide-react';
 
-const AI_ENGINE_URL = typeof window !== 'undefined' ? process.env.NEXT_PUBLIC_AI_ENGINE_URL || "http://localhost:3001" : "http://localhost:3001";
+const AI_ENGINE_URL = typeof window !== 'undefined' ? process.env.NEXT_PUBLIC_AI_ENGINE_URL || "http://localhost:3001/ai-engine" : "http://localhost:3001/ai-engine";
 
 export default function CreativeGallery() {
   const [items, setItems] = useState<any[]>([]);
