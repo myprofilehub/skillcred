@@ -102,7 +102,7 @@ export default function AboutPage() {
                             Whether you're looking to launch your career, find top talent, or mentor the next generation.
                         </p>
                         <div className="flex flex-wrap justify-center gap-4">
-                            <Link href="/enroll" className="bg-white text-black px-8 py-3 rounded-lg font-semibold hover:bg-white/90 transition-colors">
+                            <Link href="/enroll" className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-all shadow-lg shadow-indigo-500/25">
                                 Start Learning
                             </Link>
                             <Link href="/contact" className="bg-transparent border border-white/20 px-8 py-3 rounded-lg font-semibold hover:bg-white/5 transition-colors">

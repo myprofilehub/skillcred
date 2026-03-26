@@ -508,7 +508,7 @@ export default async function FullStackDevPage() {
                             <p className="text-xl text-gray-300 mb-8">Build applications. Get verified. Get hired.</p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <Link href="/enroll">
-                                    <Button size="lg" className="w-full sm:w-auto h-12 text-lg px-8 bg-white text-black hover:bg-gray-200">
+                                    <Button size="lg" className="w-full sm:w-auto h-12 text-lg px-8 bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:opacity-90 shadow-lg shadow-indigo-500/25">
                                         Enroll Now
                                     </Button>
                                 </Link>

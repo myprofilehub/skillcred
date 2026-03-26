@@ -94,7 +94,7 @@ export default function PatAboutPage() {
                     <div className="bg-gradient-to-r from-indigo-900/40 to-purple-900/40 border border-indigo-500/20 rounded-2xl p-12 text-center max-w-4xl mx-auto">
                         <h2 className="text-3xl font-bold mb-6">Ready to Prove Your Skills?</h2>
                         <div className="flex flex-wrap justify-center gap-4">
-                            <Link href="/enroll" className="bg-white text-black px-8 py-3 rounded-lg font-semibold hover:bg-white/90 transition-colors">
+                            <Link href="/pat/process" className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-all shadow-lg shadow-indigo-500/25">
                                 View the Process
                             </Link>
                             <Link href="/enroll" className="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors border border-indigo-500">

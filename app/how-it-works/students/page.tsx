@@ -27,7 +27,7 @@ export default function HowItWorksStudents() {
                         verifying, and showcasing your skills to employers.
                     </p>
                     <div className="flex gap-4">
-                        <Button asChild size="lg" className="bg-white text-black hover:bg-white/90">
+                        <Button asChild size="lg" className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:opacity-90 shadow-lg shadow-indigo-500/25">
                             <Link href="/auth/signup?role=student">Create Student Account</Link>
                         </Button>
                     </div>

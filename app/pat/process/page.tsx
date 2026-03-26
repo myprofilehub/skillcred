@@ -119,7 +119,7 @@ export default function PatProcessPage() {
                         <p className="text-slate-400 mb-8">
                             The tech industry thrives on continuous improvement, and the PAT is designed to champion that mindset. Every piece of feedback from our expert mentors is a stepping stone. We work alongside you to refine your code, build your confidence, and ensure you emerge as an elite, production-ready software engineer.
                         </p>
-                        <Button asChild className="bg-white text-black font-semibold hover:bg-white/90">
+                        <Button asChild className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold hover:opacity-90 shadow-lg shadow-indigo-500/25">
                             <Link href="/enroll">
                                 Begin Your First Module
                             </Link>
