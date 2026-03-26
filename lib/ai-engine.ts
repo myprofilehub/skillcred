@@ -28,10 +28,18 @@ export interface GenerateVideoRequest {
 
 class AIEngineClient {
   private async request(endpoint: string, options: RequestInit = {}) {
-    // Ensure base URL doesn't have trailing slash
-    let baseUrl = AI_ENGINE_URL.replace(/\/+$/, "");
+    // Determine the base URL, ensuring it's absolute
+    let envUrl = process.env.NEXT_PUBLIC_AI_ENGINE_URL || "";
+    let baseUrl = envUrl.replace(/\/+$/, "");
     
-    // RESILIENCE: Handle missing /ai-engine prefix in the base URL
+    // If the URL is relative (e.g. just "/ai-engine"), it won't work across different ports locally
+    // We force the local dev absolute URL if we detection a relative path or missing env
+    if (!baseUrl || !baseUrl.startsWith("http")) {
+       console.warn(`[AIEngine] Environment variable NEXT_PUBLIC_AI_ENGINE_URL is "${envUrl || "EMPTY"}". Falling back to default absolute URL.`);
+       baseUrl = "http://localhost:3001/ai-engine";
+    }
+    
+    // RESILIENCE: Ensure /ai-engine prefix is present
     if ((baseUrl.includes(":3001") || baseUrl.includes("skillcred.in")) && !baseUrl.includes("/ai-engine")) {
       baseUrl += "/ai-engine";
     }
