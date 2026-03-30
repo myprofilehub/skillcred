@@ -41,9 +41,9 @@ export function HeroSection() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <Button size="lg" className="h-12 px-8 text-lg bg-gradient-to-r from-purple-600 to-pink-600 border-none hover:opacity-90 shadow-[0_0_15px_rgba(168,85,247,0.4)] text-white font-bold" asChild>
-                            <Link href="/enroll">
-                                Enroll Now
+                        <Button size="lg" className="h-14 px-10 text-xl bg-gradient-to-r from-purple-600 to-pink-600 border-none hover:opacity-90 shadow-[0_0_20px_rgba(168,85,247,0.5)] text-white font-extrabold tracking-tight transition-all duration-300 hover:scale-105 active:scale-95" asChild>
+                            <Link href="/batch/enroll">
+                                Get Early Access — Free
                             </Link>
                         </Button>
                         <Button size="lg" variant="outline" className="h-12 px-8 text-lg" asChild>

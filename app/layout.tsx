@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { Toaster } from "sonner";
+import { AnnouncementBar } from "@/components/landing/announcement-bar";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -54,6 +55,7 @@ export default async function RootLayout({
         className={`${inter.variable} ${outfit.variable} antialiased bg-background text-foreground`}
       >
         <AuthProvider session={session}>
+            <AnnouncementBar />
             {children}
             <Toaster position="top-right" theme="dark" richColors />
         </AuthProvider>

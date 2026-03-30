@@ -5,19 +5,16 @@ interface LogoProps {
     className?: string;
     width?: number;
     height?: number;
+    variant?: 'light' | 'dark';
 }
 
-export function Logo({ className, width = 140, height = 40 }: LogoProps) {
+export function Logo({ className, width = 140, height = 40, variant = 'light' }: LogoProps) {
+    const skillColor = variant === 'dark' ? 'text-black' : 'text-white';
+    
     return (
-        <Link href="/" className={`flex items-center gap-2 ${className}`}>
-            <Image
-                src="/logo-v3-transparent.png"
-                alt="SkillCred Logo"
-                width={width}
-                height={height}
-                className="object-contain" 
-                priority 
-            />
+        <Link href="/" className={`flex items-center gap-0.5 ${className}`}>
+            <span className={`text-2xl font-black tracking-tighter ${skillColor}`}>Skill</span>
+            <span className="text-2xl font-black tracking-tighter text-cyan-500">Cred</span>
         </Link>
     );
 }

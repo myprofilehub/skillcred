@@ -34,7 +34,7 @@ export function LandingNavbar() {
     }, []);
 
     return (
-        <nav className="fixed top-0 w-full border-b border-white/10 bg-black/50 backdrop-blur-xl z-50">
+        <nav className="fixed top-10 w-full border-b border-white/10 bg-black/50 backdrop-blur-xl z-50">
             <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
                 <div onClick={() => router.push('/')} className="cursor-pointer">
                     <Logo />
@@ -52,9 +52,9 @@ export function LandingNavbar() {
                     {mounted ? (
                         user ? (
                             <>
-                                <Button asChild className="hidden sm:flex bg-gradient-to-r from-purple-600 to-pink-600 border-none hover:opacity-90 shadow-[0_0_15px_rgba(168,85,247,0.4)] text-white font-bold tracking-wide">
-                                    <Link href="/enroll">
-                                        Enroll Now
+                        <Button asChild className="hidden sm:flex bg-gradient-to-r from-purple-600 to-pink-600 border-none hover:opacity-90 shadow-[0_0_15px_rgba(168,85,247,0.4)] text-white font-bold tracking-wide">
+                                    <Link href="/batch/enroll">
+                                        Get Early Access — Free
                                     </Link>
                                 </Button>
 
@@ -99,8 +99,8 @@ export function LandingNavbar() {
                             <>
                                 {/* Enroll Now CTA */}
                                 <Button asChild className="hidden sm:flex bg-gradient-to-r from-purple-600 to-pink-600 border-none hover:opacity-90 shadow-[0_0_15px_rgba(168,85,247,0.4)] text-white font-bold tracking-wide h-9">
-                                    <Link href="/enroll">
-                                        Enroll Now
+                                    <Link href="/batch/enroll">
+                                        Get Early Access — Free
                                     </Link>
                                 </Button>
 
