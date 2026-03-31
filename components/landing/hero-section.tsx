@@ -21,14 +21,6 @@ export function HeroSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <div className="mb-8 flex justify-center">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-sm font-medium backdrop-blur-sm transition-colors hover:bg-indigo-500/20">
-                            <span className="flex h-2 w-2 rounded-full bg-indigo-500 animate-pulse"></span>
-                            <span className="font-bold text-white tracking-wider text-xs sm:text-sm">EARLY BIRD</span>
-                            <span className="text-white/40 px-1">|</span>
-                            <span className="text-indigo-200 text-xs sm:text-sm">First 50 seats &rarr; <span className="font-bold text-white">20% off</span></span>
-                        </div>
-                    </div>
                 
                     <h1 className="text-5xl md:text-7xl font-bold font-heading tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-200">
                         SkillCred <br />
