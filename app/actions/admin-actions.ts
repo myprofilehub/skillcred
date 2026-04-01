@@ -208,9 +208,11 @@ export async function deleteCredential(userId: string) {
 export async function getEnrollmentsForAdmin() {
     await requireAdmin();
 
-    // Fetch all ACTIVE enrollments (these are created only after successful payment)
+    // Fetch all enrollments awaiting approval or active (for assignment)
     const enrollments = await prisma.enrollment.findMany({
-        where: { status: "ACTIVE" },
+        where: { 
+            status: { in: ["PENDING_APPROVAL", "ACTIVE"] } 
+        },
         include: {
             student: {
                 include: {
@@ -290,6 +292,76 @@ export async function assignMentorToEnrollment(enrollmentId: string, mentorId: s
     } catch (error) {
         console.error("Error assigning mentor:", error);
         return { error: "Failed to assign mentor" };
+    }
+}
+
+export async function approveEnrollment(enrollmentId: string) {
+    await requireAdmin();
+
+    try {
+        const enrollment = await prisma.enrollment.findUnique({
+            where: { id: enrollmentId },
+            include: {
+                student: {
+                    include: {
+                        user: true
+                    }
+                },
+                track: true
+            }
+        });
+
+        if (!enrollment) return { error: "Enrollment not found" };
+        if (enrollment.status !== "PENDING_APPROVAL") return { error: "Enrollment is not awaiting approval" };
+
+        const user = enrollment.student.user;
+
+        // Generate LMS Credentials (copied from previous flow)
+        const nameParts = (user.name || "student").toLowerCase().split(" ");
+        const baseUsername = `${nameParts[0]}.${nameParts[1] || ""}`.replace(/[^a-z0-9.]/g, "");
+        const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+        const username = `${baseUsername}${randomSuffix}`;
+        const lmsEmail = `${username}@skillcred.com`;
+
+        const tempPassword = Math.random().toString(36).slice(-8) + "Aa1!";
+        const hashedPassword = await bcrypt.hash(tempPassword, 10);
+
+        // Update User & Enrollment
+        await prisma.$transaction([
+            prisma.user.update({
+                where: { id: user.id },
+                data: {
+                    username: username,
+                    lmsEmail: lmsEmail,
+                    password: hashedPassword,
+                    forcePasswordChange: true
+                }
+            }),
+            prisma.enrollment.update({
+                where: { id: enrollmentId },
+                data: { status: "ACTIVE" }
+            })
+        ]);
+
+        // Send Email via Brevo
+        const { sendLMSCredentials } = await import("@/lib/email");
+        try {
+            await sendLMSCredentials(
+                user.email || "",
+                user.name || "Student",
+                lmsEmail,
+                tempPassword
+            );
+        } catch (emailErr) {
+            console.error("Failed to send LMS credentials email:", emailErr);
+            // We still consider approval successful even if email fails, admin can manually notify or retry later
+        }
+
+        return { success: true, message: `Enrollment approved for ${user.name}. Credentials sent.` };
+
+    } catch (error) {
+        console.error("Error approving enrollment:", error);
+        return { error: "Failed to approve enrollment" };
     }
 }
 

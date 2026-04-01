@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { assignMentorToEnrollment } from "@/app/actions/admin-actions";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { assignMentorToEnrollment, approveEnrollment } from "@/app/actions/admin-actions";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -19,6 +19,7 @@ type EnrollmentData = {
     track: { id: string; title: string; slug: string };
     mentor: { id: string; user: { id: string; name: string | null; email: string | null } } | null;
     batch: { id: string; name: string } | null;
+    status: string;
 };
 
 type MentorData = {
@@ -35,10 +36,12 @@ export function EnrollmentsList({
 }) {
     const [enrollments, setEnrollments] = useState(initialEnrollments);
     const [assigningId, setAssigningId] = useState<string | null>(null);
+    const [approvingId, setApprovingId] = useState<string | null>(null);
     const [selectedMentors, setSelectedMentors] = useState<Record<string, string>>({});
 
-    const unassigned = enrollments.filter((e) => !e.mentor);
-    const assigned = enrollments.filter((e) => !!e.mentor);
+    const awaitingApproval = enrollments.filter((e) => e.status === "PENDING_APPROVAL");
+    const unassigned = enrollments.filter((e) => e.status === "ACTIVE" && !e.mentor);
+    const assigned = enrollments.filter((e) => e.status === "ACTIVE" && !!e.mentor);
 
     // Group by track
     const unassignedByTrack: Record<string, EnrollmentData[]> = {};
@@ -47,6 +50,24 @@ export function EnrollmentsList({
         if (!unassignedByTrack[key]) unassignedByTrack[key] = [];
         unassignedByTrack[key].push(e);
     });
+
+    const handleApprove = async (enrollmentId: string) => {
+        setApprovingId(enrollmentId);
+        const result = await approveEnrollment(enrollmentId);
+        setApprovingId(null);
+
+        if (result.success) {
+            toast.success(result.message);
+            // Update local state: change status to ACTIVE
+            setEnrollments((prev) =>
+                prev.map((e) =>
+                    e.id === enrollmentId ? { ...e, status: "ACTIVE" } : e
+                )
+            );
+        } else {
+            toast.error(result.error || "Failed to approve enrollment");
+        }
+    };
 
     const handleAssign = async (enrollmentId: string) => {
         const mentorId = selectedMentors[enrollmentId];
@@ -106,6 +127,57 @@ export function EnrollmentsList({
                     </CardContent>
                 </Card>
             </div>
+
+            {/* Awaiting Approval Section */}
+            {awaitingApproval.length > 0 && (
+                <div className="space-y-4">
+                    <h2 className="text-lg font-semibold text-cyan-400 flex items-center gap-2">
+                        <AlertCircle className="w-5 h-5" />
+                        Students Awaiting LMS Access Approval
+                    </h2>
+                    <Card className="bg-slate-900/60 border-cyan-500/20 backdrop-blur-sm">
+                        <CardHeader className="pb-3 border-b border-white/5">
+                            <CardDescription className="text-slate-400">
+                                These students have completed payment. Approve them to generate LMS credentials and send them the welcome email.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent className="pt-4">
+                            <div className="space-y-3">
+                                {awaitingApproval.map((enrollment) => (
+                                    <div
+                                        key={enrollment.id}
+                                        className="flex items-center justify-between p-4 rounded-lg bg-slate-800/50 border border-white/5"
+                                    >
+                                        <div className="space-y-1">
+                                            <p className="text-sm font-medium text-white">
+                                                {enrollment.student.user.name || "Unnamed Student"}
+                                            </p>
+                                            <p className="text-xs text-slate-400 font-mono">
+                                                {enrollment.student.user.email}
+                                            </p>
+                                            <Badge variant="outline" className="mt-1 bg-cyan-500/10 text-cyan-400 border-cyan-500/20">
+                                                {enrollment.track.title}
+                                            </Badge>
+                                        </div>
+                                        <Button
+                                            onClick={() => handleApprove(enrollment.id)}
+                                            disabled={approvingId === enrollment.id}
+                                            className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold"
+                                        >
+                                            {approvingId === enrollment.id ? (
+                                                <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                                            ) : (
+                                                <CheckCircle2 className="w-4 h-4 mr-2" />
+                                            )}
+                                            Approve & Grant Access
+                                        </Button>
+                                    </div>
+                                ))}
+                            </div>
+                        </CardContent>
+                    </Card>
+                </div>
+            )}
 
             {/* Unassigned Students (grouped by stream) */}
             {Object.keys(unassignedByTrack).length > 0 && (

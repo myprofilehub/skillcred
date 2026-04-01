@@ -718,6 +718,7 @@ enum SubscriptionTier {
 
 enum EnrollmentStatus {
   ACTIVE
+  PENDING_APPROVAL
   COMPLETED
   PAUSED
   DROPPED

@@ -9,14 +9,17 @@ export function AnnouncementBar() {
             {/* Animated subtle light sweep */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg] -translate-x-[100%] group-hover:translate-x-[200%] transition-all duration-1000 ease-in-out" />
             
-            <div className="flex items-center justify-center gap-3 text-xs sm:text-sm font-bold relative z-10">
-                <Sparkles className="w-4 h-4 text-amber-300 animate-pulse" />
+            <div className="flex items-center justify-center gap-3 text-xs sm:text-sm font-bold relative z-10 text-center px-4">
+                <Sparkles className="w-4 h-4 text-amber-300 animate-pulse shrink-0" />
                 <Link 
                     href="/batch/enroll" 
-                    className="tracking-tight sm:tracking-normal hover:text-amber-200 transition-colors"
+                    className="tracking-tight sm:tracking-normal hover:text-amber-200 transition-colors flex items-center gap-2"
                 >
-                    Join our 4-Week Accelerated Batch for <span className="bg-white text-purple-600 px-1.5 py-0.5 rounded text-[10px] sm:text-xs">FREE</span>
-                    <ArrowRight className="inline-block ml-2 w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    <span className="hidden sm:inline">Join our 4-Week Accelerated Batch:</span>
+                    <span className="bg-white text-purple-600 px-2 py-0.5 rounded text-[10px] sm:text-xs font-black uppercase tracking-tighter shadow-sm self-center">
+                        Limited Launch offer at 40% discount
+                    </span>
+                    <ArrowRight className="inline-block w-3.5 h-3.5 group-hover:translate-x-1 transition-transform shrink-0" />
                 </Link>
             </div>
         </div>

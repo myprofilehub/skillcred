@@ -35,7 +35,7 @@ export function HeroSection() {
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Button size="lg" className="h-14 px-10 text-xl bg-gradient-to-r from-purple-600 to-pink-600 border-none hover:opacity-90 shadow-[0_0_20px_rgba(168,85,247,0.5)] text-white font-extrabold tracking-tight transition-all duration-300 hover:scale-105 active:scale-95" asChild>
                             <Link href="/batch/enroll">
-                                Get Early Access — Free
+                                Get Early Access — 40% OFF
                             </Link>
                         </Button>
                         <Button size="lg" variant="outline" className="h-12 px-8 text-lg" asChild>

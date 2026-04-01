@@ -54,7 +54,7 @@ export function LandingNavbar() {
                             <>
                         <Button asChild className="hidden sm:flex bg-gradient-to-r from-purple-600 to-pink-600 border-none hover:opacity-90 shadow-[0_0_15px_rgba(168,85,247,0.4)] text-white font-bold tracking-wide">
                                     <Link href="/batch/enroll">
-                                        Get Early Access — Free
+                                        Get Early Access — 40% OFF
                                     </Link>
                                 </Button>
 
@@ -100,7 +100,7 @@ export function LandingNavbar() {
                                 {/* Enroll Now CTA */}
                                 <Button asChild className="hidden sm:flex bg-gradient-to-r from-purple-600 to-pink-600 border-none hover:opacity-90 shadow-[0_0_15px_rgba(168,85,247,0.4)] text-white font-bold tracking-wide h-9">
                                     <Link href="/batch/enroll">
-                                        Get Early Access — Free
+                                        Get Early Access — 40% OFF
                                     </Link>
                                 </Button>
 

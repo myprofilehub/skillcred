@@ -28,7 +28,16 @@ export async function processBatchEnrollment(formData: FormData) {
         if (!trackSlug) return { error: 'Stream selection is required' };
 
         const track = await prisma.track.findUnique({ where: { slug: trackSlug } });
-        if (!track) return { error: 'Invalid stream selected' };
+        const allowedSlugs = ['ai-ml', 'data-engineering', 'data-science'];
+        if (!track || !allowedSlugs.includes(track.slug)) return { error: 'Invalid or restricted stream selected' };
+
+        // --- PRICING ENGINE ---
+        const isTier1 = ['ai-ml', 'data-engineering'].includes(track.slug);
+        const isTier2 = track.slug === 'data-science';
+
+        let finalPrice = 1999; // Fallback
+        if (isTier1) finalPrice = 2999;
+        else if (isTier2) finalPrice = 2499;
 
         // Save Resume File
         let resumeUrl = null;
@@ -120,106 +129,28 @@ export async function processBatchEnrollment(formData: FormData) {
             }
         });
 
-        // 4. Create Active Enrollment (No Payment Needed!)
-        const enrollment = await prisma.enrollment.upsert({
-            where: {
-                studentId_trackId: {
-                    studentId: student.id,
-                    trackId: track.id
-                }
-            },
-            create: {
-                studentId: student.id,
+        // 4. Create PENDING Payment (Transition from Free to 40% Discounted)
+        const payment = await prisma.payment.create({
+            data: {
+                userId: userId,
+                amount: finalPrice,
+                currency: 'INR',
+                status: 'PENDING',
+                provider: 'RAZORPAY',
                 trackId: track.id,
                 programDuration: duration,
-                couponCode: 'BATCH_FREE',
-                status: 'ACTIVE',
-                progress: 0,
-                mentorId: null
-            },
-            update: {
-                programDuration: duration,
-                couponCode: 'BATCH_FREE',
-                status: 'ACTIVE'
+                couponCode: 'SKILLCRED_40_OFF',
             }
         });
 
-        // 5. Generate LMS Credentials (if not exists) & Send Email
-        if (!user.username || !user.lmsEmail) {
-            const nameParts = (user.name || "student").toLowerCase().split(" ");
-            const baseUsername = `${nameParts[0]}.${nameParts[1] || ""}`.replace(/[^a-z0-9.]/g, "");
-            const randomSuffix = Math.floor(1000 + Math.random() * 9000);
-            const username = `${baseUsername}${randomSuffix}`;
-            const lmsEmail = `${username}@skillcred.com`;
-
-            const tempPassword = Math.random().toString(36).slice(-8) + "Aa1!";
-            const hashedPassword = await bcrypt.hash(tempPassword, 10);
-
-            await prisma.user.update({
-                where: { id: userId },
-                data: {
-                    username: username,
-                    lmsEmail: lmsEmail,
-                    password: hashedPassword,
-                    forcePasswordChange: true
-                }
-            });
-
-            try {
-                await sendLMSCredentials(
-                    providedEmail,
-                    user.name || "Student",
-                    lmsEmail,
-                    tempPassword
-                );
-            } catch (emailErr) {
-                console.error("Student Email sending exception:", emailErr);
-            }
-        }
-
-        // 6. Send Admin Notification
-        try {
-            const adminHtmlContent = `
-            <!DOCTYPE html>
-            <html>
-            <body style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
-                <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <h1 style="color: #06b6d4;">New Pilot Batch Enrollment</h1>
-                    </div>
-                    
-                    <p>Admin,</p>
-                    
-                    <p>A new student has registered for the Free 4-Week Pilot Batch. Here are their details:</p>
-                    
-                    <div style="background-color: #f3f4f6; padding: 15px; border-radius: 5px; margin: 20px 0;">
-                        <p style="margin: 5px 0;"><strong>Name:</strong> ${providedName}</p>
-                        <p style="margin: 5px 0;"><strong>Email:</strong> ${providedEmail}</p>
-                        <p style="margin: 5px 0;"><strong>Phone:</strong> ${phone || 'N/A'}</p>
-                        <p style="margin: 5px 0;"><strong>City:</strong> ${city || 'N/A'}</p>
-                        <p style="margin: 5px 0;"><strong>College:</strong> ${college || 'N/A'}</p>
-                        <p style="margin: 5px 0;"><strong>Graduation Year:</strong> ${graduationYear || 'N/A'}</p>
-                        <p style="margin: 5px 0;"><strong>Experience Level:</strong> ${experience || 'N/A'}</p>
-                        <p style="margin: 5px 0;"><strong>Stream Selected:</strong> ${track.title}</p>
-                    </div>
-                    
-                    <p style="margin-top: 30px; font-size: 12px; color: #888;">This is an automated notification from SkillCred LMS.</p>
-                </div>
-            </body>
-            </html>
-            `;
-
-            await sendEmail({
-                to: [{ email: 'admin@skillcred.in', name: 'SkillCred Admin' }],
-                subject: `New Batch Enrollment: ${providedName} - ${track.title}`,
-                htmlContent: adminHtmlContent
-            });
-        } catch (adminErr) {
-            console.error("Admin Email sending exception:", adminErr);
-        }
-
         revalidatePath('/dashboard');
-        return { success: true };
+        return { 
+            success: true,
+            orderId: payment.id,
+            amount: payment.amount,
+            currency: payment.currency,
+            projectName: `Fast Track: ${track.slug === 'data-science' ? 'Data Science & Analytics' : track.title}`
+        };
 
     } catch (error: any) {
         console.error('Batch Enrollment processing failed:', error);

@@ -225,7 +225,7 @@ export async function verifyPaymentAndEnroll(paymentId: string) {
                 batchId: payment.batchId, // can be null
                 programDuration: payment.programDuration || "8-week",
                 couponCode: payment.couponCode,
-                status: 'ACTIVE',
+                status: 'PENDING_APPROVAL',
                 progress: 0,
                 mentorId: null
             },
@@ -233,9 +233,55 @@ export async function verifyPaymentAndEnroll(paymentId: string) {
                 batchId: payment.batchId, // can be null
                 programDuration: payment.programDuration || "8-week",
                 couponCode: payment.couponCode,
-                status: 'ACTIVE' // Reactivate if it was dropped/paused
+                status: 'PENDING_APPROVAL' // Stay in pending approval if reactivated
             }
         });
+
+        // 3. Notify Admin of New Paid Enrollment
+        try {
+            const track = await prisma.track.findUnique({ where: { id: payment.trackId } });
+            
+            const adminHtmlContent = `
+            <!DOCTYPE html>
+            <html>
+            <body style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+                <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <h1 style="color: #4f46e5;">New Enrollment Awaiting Approval</h1>
+                    </div>
+                    <p>Admin,</p>
+                    <p>A new student has completed their payment and is awaiting LMS access approval.</p>
+                    <div style="background-color: #f3f4f6; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                        <p style="margin: 5px 0;"><strong>Student:</strong> ${user.name || 'Unnamed'}</p>
+                        <p style="margin: 5px 0;"><strong>Email:</strong> ${user.email}</p>
+                        <p style="margin: 5px 0;"><strong>Stream:</strong> ${track?.title || 'Unknown'}</p>
+                        <p style="margin: 5px 0;"><strong>Amount Paid:</strong> ₹${payment.amount}</p>
+                    </div>
+                    <div style="text-align: center; margin-top: 30px;">
+                        <a href="${process.env.NEXTAUTH_URL}/dashboard/admin/enrollments" style="background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">Review Enrollment</a>
+                    </div>
+                </div>
+            </body>
+            </html>
+            `;
+
+            await sendLMSCredentials( // Reusing the sender infrastructure for admin
+                'admin@skillcred.in',
+                'SkillCred Admin',
+                'Approval Required',
+                '' 
+            ); 
+            // Note: I should use sendEmail directly for more control
+            const { sendEmail } = await import('@/lib/email');
+            await sendEmail({
+                to: [{ email: 'admin@skillcred.in', name: 'SkillCred Admin' }],
+                subject: `Approval Required: New Enrollment from ${user.name || 'Student'}`,
+                htmlContent: adminHtmlContent
+            });
+
+        } catch (adminErr) {
+            console.error("Admin Email notification failed:", adminErr);
+        }
 
         // 3. Add Project to Portfolio (If project assigned)
         if (payment.projectId) {
@@ -261,49 +307,6 @@ export async function verifyPaymentAndEnroll(paymentId: string) {
             }
         }
 
-
-        // -------------------------------------------------------------------------
-        // 4. Generate LMS Credentials & Send Email
-        // -------------------------------------------------------------------------
-
-        // Generate Username: firstname.lastname + random (lowercase)
-        const nameParts = (session.user.name || "student").toLowerCase().split(" ");
-        const baseUsername = `${nameParts[0]}.${nameParts[1] || ""}`.replace(/[^a-z0-9.]/g, "");
-        const randomSuffix = Math.floor(1000 + Math.random() * 9000);
-        const username = `${baseUsername}${randomSuffix}`;
-        const lmsEmail = `${username}@skillcred.com`;
-
-        // Generate Temp Password
-        const tempPassword = Math.random().toString(36).slice(-8) + "Aa1!";
-        const hashedPassword = await bcrypt.hash(tempPassword, 10);
-
-        // Update User with Credentials
-        await prisma.user.update({
-            where: { id: session.user.id },
-            data: {
-                username: username,
-                lmsEmail: lmsEmail,
-                password: hashedPassword, // Sets/Overwrites password
-                forcePasswordChange: true // Require reset on next login
-            }
-        });
-
-        // Send Email via Brevo
-        try {
-            const emailResult = await sendLMSCredentials(
-                user.email || session.user.email!, // Send to explicitly provided email
-                user.name || session.user.name || "Student",
-                lmsEmail,
-                tempPassword
-            );
-
-            if (emailResult.error) {
-                console.error("Failed to send LMS credentials email:", emailResult.error);
-                // We don't fail the transaction here, but we should log it
-            }
-        } catch (emailErr) {
-            console.error("Email sending exception:", emailErr);
-        }
 
         revalidatePath('/dashboard');
         return { success: true };

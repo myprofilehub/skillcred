@@ -51,12 +51,12 @@ export function PilotBatchSection() {
                         </h2>
                         
                         <p className="text-lg text-slate-400 mb-8 leading-relaxed">
-                            We are opening a limited-time accelerated cohort for builders who want to skip the noise and get straight to the code. Work on production-grade projects, get verified by experts, and jumpstart your career—completely for free.
+                            We are opening a limited-time accelerated cohort for builders who want to skip the noise and get straight to the code. Work on production-grade projects, get verified by experts, and jumpstart your career with a <span className="text-cyan-400 font-bold">40% exclusive launch discount.</span>
                         </p>
-
+                        
                         <ul className="space-y-4 mb-10">
                             {[
-                                "No Upfront Cost (100% Free Access)",
+                                "Limited Launch offer at 40% discount (Save up to ₹5,000)",
                                 "Direct Mentor Code Reviews",
                                 "Verified Digital Certificate & Portfolio",
                                 "Priority Hiring Access"

@@ -15,6 +15,7 @@ export default function EnrollmentPage() {
     const { data: session } = useSession();
     const [step, setStep] = useState(1);
     const [loading, setLoading] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
     const [order, setOrder] = useState<{ orderId: string, amount: number, currency: string, projectName?: string } | null>(null);
 
     const router = useRouter();
@@ -44,8 +45,8 @@ export default function EnrollmentPage() {
         setLoading(false);
 
         if (result.success) {
-            toast.success("Enrollment Complete! Redirecting to your dashboard...");
-            router.push('/dashboard/student');
+            toast.success("Enrollment Successful!");
+            setIsSuccess(true);
         } else {
             toast.error(result.error || "Verification Failed");
         }
@@ -108,62 +109,95 @@ export default function EnrollmentPage() {
 
                     {/* Steps Content */}
                     <AnimatePresence mode="wait">
-                        <motion.div
-                            key={step}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <Card className="!bg-slate-900/80 border-white/10 backdrop-blur-2xl shadow-2xl overflow-hidden">
-                                {step === 1 && (
-                                    <>
-                                        <CardHeader className="border-b border-white/5 px-8 py-6 bg-slate-800/60">
-                                            <CardTitle className="text-xl text-white">Enrollment Details</CardTitle>
-                                            <CardDescription className="text-slate-400">Tell us about yourself and choose your stream.</CardDescription>
-                                        </CardHeader>
-                                        <CardContent className="p-8">
-                                            <DetailsForm
-                                                onSubmit={handleDetailsSubmit}
-                                                loading={loading}
-                                                initialEmail={session?.user?.email || undefined}
-                                                initialName={session?.user?.name || undefined}
-                                            />
-                                        </CardContent>
-                                    </>
-                                )}
+                        {!isSuccess ? (
+                            <motion.div
+                                key={step}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                                className="w-full"
+                            >
+                                <Card className="!bg-slate-900/80 border-white/10 backdrop-blur-2xl shadow-2xl overflow-hidden">
+                                    {step === 1 && (
+                                        <>
+                                            <CardHeader className="border-b border-white/5 px-8 py-6 bg-slate-800/60">
+                                                <CardTitle className="text-xl text-white">Enrollment Details</CardTitle>
+                                                <CardDescription className="text-slate-400">Tell us about yourself and choose your stream.</CardDescription>
+                                            </CardHeader>
+                                            <CardContent className="p-8">
+                                                <DetailsForm
+                                                    onSubmit={handleDetailsSubmit}
+                                                    loading={loading}
+                                                    initialEmail={session?.user?.email || undefined}
+                                                    initialName={session?.user?.name || undefined}
+                                                />
+                                            </CardContent>
+                                        </>
+                                    )}
 
-                                {step === 2 && order && (
-                                    <>
-                                        <CardHeader className="border-b border-white/5 px-8 py-6 bg-slate-800/60">
-                                            <CardTitle className="text-xl text-white">Finalize Enrollment</CardTitle>
-                                            <CardDescription className="text-slate-400">Secure your spot in the batch to unlock immediate access.</CardDescription>
-                                        </CardHeader>
-                                        <CardContent className="p-8">
-                                            <div className="mb-8 p-6 bg-gradient-to-br from-cyan-500/10 to-transparent rounded-xl border border-cyan-500/20">
-                                                <div className="flex justify-between items-center mb-4">
-                                                    <div>
-                                                        <h3 className="text-white font-semibold text-lg">{order.projectName}</h3>
-                                                        <p className="text-cyan-300 text-sm">Batch & Mentor Assignment: Automatic</p>
+                                    {step === 2 && order && (
+                                        <>
+                                            <CardHeader className="border-b border-white/5 px-8 py-6 bg-slate-800/60">
+                                                <CardTitle className="text-xl text-white">Finalize Enrollment</CardTitle>
+                                                <CardDescription className="text-slate-400">Secure your spot in the batch to unlock immediate access.</CardDescription>
+                                            </CardHeader>
+                                            <CardContent className="p-8">
+                                                <div className="mb-8 p-6 bg-gradient-to-br from-cyan-500/10 to-transparent rounded-xl border border-cyan-500/20">
+                                                    <div className="flex justify-between items-center mb-4">
+                                                        <div>
+                                                            <h3 className="text-white font-semibold text-lg">{order.projectName}</h3>
+                                                            <p className="text-cyan-300 text-sm">Batch & Mentor Assignment: Automatic</p>
+                                                        </div>
+                                                        <div className="text-right">
+                                                            <p className="text-3xl font-bold text-white">₹{order.amount}</p>
+                                                            <p className="text-slate-400 text-xs">One-time payment</p>
+                                                        </div>
                                                     </div>
-                                                    <div className="text-right">
-                                                        <p className="text-3xl font-bold text-white">₹{order.amount}</p>
-                                                        <p className="text-slate-400 text-xs">One-time payment</p>
-                                                    </div>
+                                                    <div className="h-px w-full bg-white/10 my-4" />
+                                                    <ul className="text-sm text-slate-300 space-y-2">
+                                                        <li className="flex items-center gap-2">✓ Lifetime LMS Access</li>
+                                                        <li className="flex items-center gap-2">✓ Verified Project Certificate</li>
+                                                        <li className="flex items-center gap-2">✓ Mentor Support</li>
+                                                    </ul>
                                                 </div>
-                                                <div className="h-px w-full bg-white/10 my-4" />
-                                                <ul className="text-sm text-slate-300 space-y-2">
-                                                    <li className="flex items-center gap-2">✓ Lifetime LMS Access</li>
-                                                    <li className="flex items-center gap-2">✓ Verified Project Certificate</li>
-                                                    <li className="flex items-center gap-2">✓ Mentor Support</li>
-                                                </ul>
-                                            </div>
-                                            <PaymentGateway order={order} onSuccess={handlePaymentSuccess} loading={loading} />
-                                        </CardContent>
-                                    </>
-                                )}
-                            </Card>
-                        </motion.div>
+                                                <PaymentGateway order={order} onSuccess={handlePaymentSuccess} loading={loading} />
+                                            </CardContent>
+                                        </>
+                                    )}
+                                </Card>
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key="success"
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="w-full max-w-2xl mx-auto"
+                            >
+                                <Card className="!bg-slate-900/80 border-green-500/20 backdrop-blur-2xl shadow-2xl overflow-hidden p-12 text-center">
+                                    <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-green-500/30">
+                                        <svg className="w-10 h-10 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <h2 className="text-3xl font-bold text-white mb-4">You're Enrolled!</h2>
+                                    <p className="text-lg text-slate-400 mb-8 max-w-md mx-auto">
+                                        Your payment is verified. Our team is now reviewing your application to provision your dedicated LMS workspace.
+                                    </p>
+                                    <div className="bg-slate-800/50 p-6 rounded-2xl border border-white/5 mb-8">
+                                        <p className="text-cyan-400 font-bold">
+                                            LMS credentials will be sent to your registered email ID within 24 hours.
+                                        </p>
+                                    </div>
+                                    <button 
+                                        onClick={() => window.location.href = '/'}
+                                        className="bg-white text-slate-900 font-bold px-8 py-3 rounded-full hover:bg-slate-200 transition-all"
+                                    >
+                                        Back to Home
+                                    </button>
+                                </Card>
+                            </motion.div>
+                        )}
                     </AnimatePresence>
                 </div>
             </div>

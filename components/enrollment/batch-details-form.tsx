@@ -27,12 +27,9 @@ export function BatchDetailsForm({ onSubmit, loading, initialEmail, initialName 
         async function fetchStreams() {
             try {
                 const data = await getStreams();
-                const allowedKeywords = ['ai', 'machine-learning', 'full-stack', 'fullstack', 'data-engineering', 'data-science'];
-                const filtered = data.filter(track => {
-                    const slug = track.slug.toLowerCase();
-                    return allowedKeywords.some(keyword => slug.includes(keyword));
-                });
-                setStreams(filtered.length > 0 ? filtered : data);
+                const allowedSlugs = ['ai-ml', 'data-engineering', 'data-science'];
+                const filtered = data.filter(track => allowedSlugs.includes(track.slug));
+                setStreams(filtered);
             } catch (e) {
                 console.error(e);
             } finally {
@@ -160,9 +157,6 @@ export function BatchDetailsForm({ onSubmit, loading, initialEmail, initialName 
                         <BookOpen className="w-4 h-4 text-indigo-600" />
                     </div>
                     <h3 className="text-xl font-bold tracking-tight text-slate-900 flex-1">Select Program Focus <span className="text-red-500 text-base">*</span></h3>
-                    <div className="hidden sm:inline-flex bg-gradient-to-r from-cyan-100 to-blue-100 text-cyan-800 text-xs font-bold px-3 py-1 rounded-full border border-cyan-200">
-                        100% Free
-                    </div>
                 </div>
                 
                 {fetchingStreams ? (
@@ -189,7 +183,7 @@ export function BatchDetailsForm({ onSubmit, loading, initialEmail, initialName 
                                         "text-base md:text-lg font-bold tracking-tight z-10",
                                         isSelected ? "text-cyan-900" : "text-slate-600 group-hover:text-slate-900"
                                     )}>
-                                        {track.title}
+                                        {track.slug === 'data-science' ? 'Data Science & Analytics' : track.title}
                                     </span>
                                     <div className={cn(
                                         "w-6 h-6 rounded-full flex items-center justify-center transition-all z-10 shrink-0 shadow-inner",
@@ -236,12 +230,32 @@ export function BatchDetailsForm({ onSubmit, loading, initialEmail, initialName 
                     
                     {loading ? (
                         <span className="flex items-center gap-3 z-10 relative">
-                            <Loader2 className="w-6 h-6 animate-spin" /> Finalizing Enrollment...
+                            <Loader2 className="w-6 h-6 animate-spin" /> Processing...
                         </span>
                     ) : (
-                        <span className="flex items-center justify-center w-full z-10 relative">
-                            Register Now
-                            <ChevronRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform opacity-70" />
+                        <span className="flex flex-col items-center justify-center w-full z-10 relative py-1">
+                            <div className="flex items-center gap-3 mb-1">
+                                {selectedTrack && (
+                                    <>
+                                        <span className="text-sm line-through opacity-50 decoration-white/50 text-white/70 font-medium">
+                                            ₹{selectedTrack === 'data-science' ? '6,499' : '7,999'}
+                                        </span>
+                                        <span className="text-white bg-white/10 px-2 py-0.5 rounded text-[10px] uppercase tracking-tighter">
+                                            LAUNCH OFFER
+                                        </span>
+                                    </>
+                                )}
+                            </div>
+                            <div className="flex items-center">
+                                {selectedTrack ? (
+                                    <span>
+                                        ₹{selectedTrack === 'data-science' ? '2,499' : '2,999'} — Secure My Spot
+                                    </span>
+                                ) : (
+                                    "Select Stream to Enroll"
+                                )}
+                                <ChevronRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform opacity-70" />
+                            </div>
                         </span>
                     )}
                 </Button>
