@@ -122,7 +122,7 @@ export default async function BlogListingPage() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 <Link
-                  href="#"
+                  href="/privacy-policy"
                   className="hover:text-white transition-colors"
                 >
                   Privacy Policy
