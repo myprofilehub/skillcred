@@ -21,7 +21,7 @@ export function HeroSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                 >
-                
+
                     <h1 className="text-5xl md:text-7xl font-bold font-heading tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-200">
                         SkillCred <br />
                         <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-blue-400 to-cyan-300">Learn. Build. Verify. Get Hired.</span>
@@ -34,8 +34,8 @@ export function HeroSection() {
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Button size="lg" className="h-14 px-10 text-xl bg-gradient-to-r from-purple-600 to-pink-600 border-none hover:opacity-90 shadow-[0_0_20px_rgba(168,85,247,0.5)] text-white font-extrabold tracking-tight transition-all duration-300 hover:scale-105 active:scale-95" asChild>
-                            <Link href="/batch/enroll">
-                                Get Early Access — 40% OFF
+                            <Link href="/enroll">
+                                Enroll Now
                             </Link>
                         </Button>
                         <Button size="lg" variant="outline" className="h-12 px-8 text-lg" asChild>

@@ -12,7 +12,7 @@ import { Logo } from "@/components/logo";
 import { prisma } from "@/lib/db";
 
 import { getPublicLibraryRecordings } from "@/app/actions/curriculum-actions";
-import { PilotBatchSection } from "@/components/landing/pilot-batch-section";
+
 
 export default async function LandingPage() {
   const recordings = await getPublicLibraryRecordings();
@@ -23,7 +23,7 @@ export default async function LandingPage() {
 
       <main>
         <HeroSection />
-        <PilotBatchSection />
+
         <LandingInterestForm recordings={recordings} />
         <FeaturedProjects />
         <FeaturesSection />
