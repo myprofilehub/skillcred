@@ -3,14 +3,14 @@ const PDFDocument = require('pdfkit');
 const path = require('path');
 
 const streams = [
-    { id: 'ai-ml', title: 'AI & Machine Learning', file: 'SkillCred_AI_ML_Brochure.pdf' },
-    { id: 'cybersecurity', title: 'Cybersecurity', file: 'SkillCred_Cyber_Brochure.pdf' },
-    { id: 'data-engineering', title: 'Data Engineering', file: 'SkillCred_DataEng_Brochure.pdf' },
-    { id: 'data-science', title: 'Data Science & Analytics', file: 'SkillCred_DataSci_Brochure.pdf' },
-    { id: 'devops-cloud', title: 'DevOps & Cloud', file: 'SkillCred_DevOps_Brochure.pdf' },
-    { id: 'full-stack-development', title: 'Full Stack Development', file: 'SkillCred_Fullstack_4p.pdf' },
-    { id: 'iot-embedded', title: 'IoT & Embedded Systems', file: 'SkillCred_IoT_Brochure.pdf' },
-    { id: 'mobile-development', title: 'Mobile Development', file: 'SkillCred_Mobile_Brochure.pdf' },
+    { id: 'ai-ml', title: 'AI & Machine Learning', file: 'SkillCred_AI_Machine_Learning_Brochure.pdf' },
+    { id: 'cybersecurity', title: 'Cybersecurity', file: 'SkillCred_Cybersecurity_Brochure.pdf' },
+    { id: 'data-engineering', title: 'Data Engineering', file: 'SkillCred_Data_Engineering_Brochure.pdf' },
+    { id: 'data-science', title: 'Data Science & Analytics', file: 'SkillCred_Data_Science_Analytics_Brochure.pdf' },
+    { id: 'devops-cloud', title: 'DevOps & Cloud', file: 'SkillCred_DevOps_Cloud_Brochure.pdf' },
+    { id: 'full-stack-development', title: 'Full Stack Development', file: 'SkillCred_Full_Stack_Development_Brochure.pdf' },
+    { id: 'iot-embedded', title: 'IoT & Embedded Systems', file: 'SkillCred_IoT_Embedded_Systems_Brochure.pdf' },
+    { id: 'mobile-development', title: 'Mobile Development', file: 'SkillCred_Mobile_Development_Brochure.pdf' },
 ];
 
 // Program schedule details

@@ -84,7 +84,7 @@ export default async function AIMLPage() {
                             </Link>
                         </Button>
                         <Button size="lg" variant="outline" className="text-lg px-8 h-14 border-white/10 bg-white/5 hover:bg-white/10" asChild>
-                            <a href="/brochures/SkillCred_AI_ML_Brochure.pdf" download>
+                            <a href="/brochures/SkillCred_AI_Machine_Learning_Brochure.pdf" download>
                                 Download Syllabus <Download className="ml-2 w-5 h-5" />
                             </a>
                         </Button>
@@ -511,7 +511,7 @@ export default async function AIMLPage() {
                                     </Button>
                                 </Link>
                                 <Button size="lg" variant="outline" className="w-full sm:w-auto h-12 text-lg px-8" asChild>
-                                    <a href="/brochures/SkillCred_AI_ML_Brochure.pdf" download>
+                                    <a href="/brochures/SkillCred_AI_Machine_Learning_Brochure.pdf" download>
                                         Download Brochure
                                     </a>
                                 </Button>

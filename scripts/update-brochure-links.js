@@ -2,14 +2,14 @@ const fs = require('fs');
 const path = require('path');
 
 const streamToBrochure = {
-    'ai-ml': 'SkillCred_AI_ML_Brochure.pdf',
-    'cybersecurity': 'SkillCred_Cyber_Brochure.pdf',
-    'data-engineering': 'SkillCred_DataEng_Brochure.pdf',
-    'data-science': 'SkillCred_DataSci_Brochure.pdf',
-    'devops-cloud': 'SkillCred_DevOps_Brochure.pdf',
-    'full-stack-development': 'SkillCred_Fullstack_4p.pdf',
-    'iot-embedded': 'SkillCred_IoT_Brochure.pdf',
-    'mobile-development': 'SkillCred_Mobile_Brochure.pdf'
+    'ai-ml': 'SkillCred_AI_Machine_Learning_Brochure.pdf',
+    'cybersecurity': 'SkillCred_Cybersecurity_Brochure.pdf',
+    'data-engineering': 'SkillCred_Data_Engineering_Brochure.pdf',
+    'data-science': 'SkillCred_Data_Science_Analytics_Brochure.pdf',
+    'devops-cloud': 'SkillCred_DevOps_Cloud_Brochure.pdf',
+    'full-stack-development': 'SkillCred_Full_Stack_Development_Brochure.pdf',
+    'iot-embedded': 'SkillCred_IoT_Embedded_Systems_Brochure.pdf',
+    'mobile-development': 'SkillCred_Mobile_Development_Brochure.pdf'
 };
 
 Object.entries(streamToBrochure).forEach(([stream, newBrochure]) => {
