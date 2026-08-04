@@ -92,7 +92,24 @@ export function StreamLeadCaptureHero({ slug, accentColor, bootcampName, trackNa
                     </li>
                 </ul>
 
-                <div className="mb-6 grid grid-cols-2 gap-4">
+                <div className="mb-6 p-4 rounded-xl bg-slate-50 border border-slate-100">
+                    <p className="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
+                        <ShieldCheck className={`w-4 h-4 ${styles.text}`} /> PAT Bundle Includes:
+                    </p>
+                    <ul className="space-y-2 text-sm text-slate-600 font-medium">
+                        <li className="flex items-start gap-2">
+                            <CheckCircle2 className={`w-4 h-4 mt-0.5 ${styles.text} shrink-0`} /> Live Oral Defense of Projects
+                        </li>
+                        <li className="flex items-start gap-2">
+                            <CheckCircle2 className={`w-4 h-4 mt-0.5 ${styles.text} shrink-0`} /> Mentor Recommendation Letter
+                        </li>
+                        <li className="flex items-start gap-2">
+                            <CheckCircle2 className={`w-4 h-4 mt-0.5 ${styles.text} shrink-0`} /> Resume & Interview Preparation
+                        </li>
+                    </ul>
+                </div>
+
+                <div className="mb-8 grid grid-cols-2 gap-4">
                     <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100">
                         <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider mb-1">Standalone Cohort</p>
                         <div className="flex items-baseline gap-2">
@@ -112,23 +129,6 @@ export function StreamLeadCaptureHero({ slug, accentColor, bootcampName, trackNa
                             </span>
                         </div>
                     </div>
-                </div>
-
-                <div className="mb-8 p-4 rounded-xl bg-slate-50 border border-slate-100">
-                    <p className="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
-                        <ShieldCheck className={`w-4 h-4 ${styles.text}`} /> PAT Bundle Includes:
-                    </p>
-                    <ul className="space-y-2 text-sm text-slate-600 font-medium">
-                        <li className="flex items-start gap-2">
-                            <CheckCircle2 className={`w-4 h-4 mt-0.5 ${styles.text} shrink-0`} /> Live Oral Defense of Projects
-                        </li>
-                        <li className="flex items-start gap-2">
-                            <CheckCircle2 className={`w-4 h-4 mt-0.5 ${styles.text} shrink-0`} /> Mentor Recommendation Letter
-                        </li>
-                        <li className="flex items-start gap-2">
-                            <CheckCircle2 className={`w-4 h-4 mt-0.5 ${styles.text} shrink-0`} /> Resume & Interview Preparation
-                        </li>
-                    </ul>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3">
