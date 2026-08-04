@@ -93,8 +93,19 @@ export function StreamLeadCaptureHero({ slug, accentColor, bootcampName, trackNa
                 </ul>
 
                 <div className="mb-8 grid grid-cols-2 gap-4 items-start">
-                    <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 self-end">
-                        <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider mb-1">Standalone Cohort</p>
+                    <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100">
+                        <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider mb-3">Standalone Cohort Includes</p>
+                        <ul className="space-y-1.5 text-xs text-slate-600 font-medium mb-3">
+                            <li className="flex items-start gap-1.5">
+                                <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-slate-400 shrink-0" /> Live Mentor Classes
+                            </li>
+                            <li className="flex items-start gap-1.5">
+                                <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-slate-400 shrink-0" /> 4 Real-World Projects
+                            </li>
+                            <li className="flex items-start gap-1.5">
+                                <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 text-slate-400 shrink-0" /> Recruiter-Visible Portfolio
+                            </li>
+                        </ul>
                         <div className="flex items-baseline gap-2">
                             <span className="text-3xl font-extrabold text-slate-900 tracking-tight">
                                 ₹{data.pilotBase.toLocaleString('en-IN')}
