@@ -1,61 +1,14 @@
-"use client";
+import os
+import re
 
-import { useState, useEffect } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { submitLead } from "@/app/actions/submit-lead";
-import { Loader2, ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react";
-import { toast } from "sonner";
+file_path = "components/public/lp-hero-form.tsx"
+with open(file_path, "r", encoding="utf-8") as f:
+    content = f.read()
 
-export function LpHeroForm({ trackName, accentColor = "orange" }: { trackName: string, accentColor?: string }) {
-    const searchParams = useSearchParams();
-    const router = useRouter();
-    const [isLoading, setIsLoading] = useState(false);
-    
-    // UTM Parameters
-    const [utms, setUtms] = useState({
-        source: "",
-        medium: "",
-        campaign: "",
-        gclid: ""
-    });
+# Let's replace the main return statement of LpHeroForm.
+# We will use regex to find the start of the return statement and replace it.
 
-    useEffect(() => {
-        setUtms({
-            source: searchParams.get("utm_source") || "",
-            medium: searchParams.get("utm_medium") || "",
-            campaign: searchParams.get("utm_campaign") || "",
-            gclid: searchParams.get("gclid") || ""
-        });
-    }, [searchParams]);
-
-    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-        setIsLoading(true);
-
-        const formData = new FormData(e.currentTarget);
-        
-        // Append context and tracking info
-        const context = `Landing Page: ${trackName} | Source: ${utms.source} | Medium: ${utms.medium} | Campaign: ${utms.campaign} | GCLID: ${utms.gclid}`;
-        formData.append("track", context);
-
-        try {
-            const res = await submitLead(formData);
-            if (res.success) {
-                router.push("/thank-you");
-            } else {
-                toast.error(res.error || "Failed to submit request.");
-                setIsLoading(false);
-            }
-        } catch (error) {
-            toast.error("Something went wrong. Please try again.");
-            setIsLoading(false);
-        }
-    }
-
-    const isProductEngineering = trackName.includes("Full Stack") || trackName.includes("AI & ML") || trackName.includes("Mobile");
+new_return = """    const isProductEngineering = trackName.includes("Full Stack") || trackName.includes("AI & ML") || trackName.includes("Mobile");
     const isDataPlatform = trackName.includes("Data Science") || trackName.includes("Data Engineering") || trackName.includes("DevOps");
     const pricing = isProductEngineering ? "9,999" : (isDataPlatform ? "6,999" : "4,999");
 
@@ -131,5 +84,10 @@ export function LpHeroForm({ trackName, accentColor = "orange" }: { trackName: s
                 </p>
             </div>
         </div>
-    );
-}
+    );"""
+
+# The return starts at line 58. We can use a regex to match from return ( down to the end of the file.
+content = re.sub(r'    return \(\n        <div className="bg-white dark:bg-slate-900 shadow-2xl border.*?</form>\s*<p.*?</p>\s*</div>\s*\);\s*\}', new_return + '\n}', content, flags=re.DOTALL)
+
+with open(file_path, "w", encoding="utf-8") as f:
+    f.write(content)
