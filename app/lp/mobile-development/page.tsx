@@ -1,0 +1,333 @@
+import { StreamBottomCTA } from "@/components/public/stream-pricing-components";
+import { LpHeroForm } from "@/components/public/lp-hero-form";
+import { StreamPortfolioPreview } from "@/components/public/stream-portfolio-preview";
+import { LpNavbar } from "@/components/landing/lp-navbar";
+import { Footer } from "@/components/layout/footer";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+    CheckCircle2,
+    Download,
+    ArrowRight,
+    Bot,
+    Database,
+    Globe,
+    Server,
+    Layout,
+    Lock,
+    Briefcase,
+    GraduationCap,
+    MessageSquare,
+    FileCheck,
+    Layers,
+    Workflow,
+    AlertTriangle,
+    ClipboardCheck,
+    Award,
+    Terminal,
+    Settings,
+    Clock,
+    FileSpreadsheet,
+    Mail
+} from "lucide-react";
+import Link from "next/link";
+
+
+
+import { auth } from "@/auth";
+
+
+export const metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
+export default async function MobileDevelopmentPage() {
+    const session = await auth();
+    return (
+        <main className="min-h-screen bg-background text-foreground">
+            <LpNavbar />
+
+            {/* HERO SECTION */}
+            <section className="relative pt-32 pb-20 overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-yellow-500/10 rounded-full blur-[128px] opacity-30 animate-pulse" />
+                    <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[128px] opacity-30 animate-pulse" />
+                </div>
+
+                <div className="container relative z-10 mx-auto px-4 text-center">
+                    <Badge variant="outline" className="mb-6 border-yellow-500/30 text-yellow-400 bg-yellow-500/10 px-4 py-1 text-sm uppercase tracking-wider">
+                        MOBILE DEVELOPMENT TRACK
+                    </Badge>
+                    <h1 className="text-4xl md:text-6xl font-bold font-heading mb-6 tracking-tight">
+                        Design Systems That Eliminate<br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-indigo-500">
+                            Manual Work & Scale Productivity
+                        </span>
+                    </h1>
+                    <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
+                        Learn how to automate business processes, IT operations, and data workflows using industry tools and mentor-guided real-world projects.
+                    </p>
+
+                    <div className="flex flex-wrap justify-center gap-4 mb-12">
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
+                            <CheckCircle2 className="w-4 h-4 text-yellow-400" /> Live mentor support
+                        </div>
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
+                            <CheckCircle2 className="w-4 h-4 text-yellow-400" /> 4 real-world projects
+                        </div>
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
+                            <CheckCircle2 className="w-4 h-4 text-yellow-400" /> Verified portfolio
+                        </div>
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
+                            <CheckCircle2 className="w-4 h-4 text-yellow-400" /> Project-based assessment
+                        </div>
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
+                            <CheckCircle2 className="w-4 h-4 text-yellow-400" /> HR-visible profile
+                        </div>
+                    </div>
+
+                    <div className="w-full mt-12 text-left">
+                        <LpHeroForm trackName="Mobile Development Track" accentColor="purple" />
+                    </div>
+                </div>
+            </section>
+
+                            {/* WHY & WHO SECTION */}
+                            <section className="py-20 bg-secondary/20">
+                                <div className="container mx-auto px-4">
+                                    <div className="grid md:grid-cols-2 gap-12">
+                                        {/* Why This Track */}
+                                        <div>
+                                            <h2 className="text-3xl font-bold font-heading mb-6 border-l-4 border-yellow-500 pl-4">
+                                                Why This Track?
+                                            </h2>
+                                            <p className="text-muted-foreground mb-8">
+                                                Mobile Development is the key to enterprise efficiency. This track empowers you to build bots, automate data flows, and design systems that work autonomously.
+                                            </p>
+
+                                            <div className="space-y-4">
+                                                {[
+                                                    { text: "Process Mobile Development and workflow design", icon: Workflow },
+                                                    { text: "API-based system Mobile Development", icon: Server },
+                                                    { text: "Task scheduling and monitoring", icon: Clock },
+                                                    { text: "Web and data Mobile Development", icon: Globe },
+                                                    { text: "Robotic Process Mobile Development (RPA) concepts", icon: Bot }
+                                                ].map((item, i) => (
+                                                    <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-background/50 border border-white/5">
+                                                        <div className="p-2 rounded-lg bg-yellow-500/20 text-yellow-400">
+                                                            <item.icon className="w-5 h-5" />
+                                                        </div>
+                                                        <span className="font-medium">{item.text}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                            <div className="mt-8 p-4 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-sm">
+                                                <span className="font-bold">Real-World Impact:</span> Students learn to identify repetitive tasks and convert them into automated systems used in real businesses.
+                                            </div>
+                                        </div>
+
+                                        {/* Who This Track Is For */}
+                                        <div className="bg-white/5 rounded-2xl p-8 border border-white/10">
+                                            <h2 className="text-2xl font-bold font-heading mb-6">Who This Track Is For</h2>
+                                            <ul className="space-y-4">
+                                                {[
+                                                    "College students (any stream)",
+                                                    "Beginners in Mobile Development & scripting",
+                                                    "Operations & business students",
+                                                    "IT & non-IT professionals",
+                                                    "Career switchers into Mobile Development roles"
+                                                ].map((item, i) => (
+                                                    <li key={i} className="flex items-center gap-3">
+                                                        <CheckCircle2 className="w-5 h-5 text-yellow-400 shrink-0" />
+                                                        <span>{item}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                            <div className="mt-8 p-4 rounded-lg bg-yellow-500/10 border border-yellow-500/20 text-sm text-yellow-300">
+                                                <span className="font-semibold">Note:</span> No prior Mobile Development experience required — fundamentals are included.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* LEARNING TOOLS & METHODOLOGY */}
+            <section className="py-24 bg-slate-50/40 dark:bg-slate-900/20 border-y border-slate-200 dark:border-white/5">
+                <div className="container mx-auto px-4 max-w-7xl">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-slate-950 dark:text-white">
+                            Learning Tools and Methodology
+                        </h2>
+                        <p className="text-muted-foreground text-base md:text-lg">
+                            Master an industry-standard technical stack through our hands-on engineering pedagogy and structured practice.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+                        {/* Column 1: Tools */}
+                        <div className="p-8 rounded-3xl bg-background border border-slate-200 dark:border-white/10 shadow-sm flex flex-col">
+                            <h3 className="text-2xl font-bold font-heading mb-6 text-slate-900 dark:text-white">
+                                Tools You Will Master
+                            </h3>
+                            <div className="flex flex-wrap justify-center sm:justify-start gap-4">
+                                        {[
+                                            { name: "Python", sub: "Mobile Development Scripting", color: "text-blue-400" },
+                                            { name: "Selenium", sub: "Web Mobile Development", color: "text-green-400" },
+                                            { name: "UiPath / AA", sub: "RPA Concepts", color: "text-orange-400" },
+                                            { name: "REST APIs", sub: "Integrations", color: "text-purple-400" },
+                                            { name: "Excel", sub: "Data Mobile Development", color: "text-green-500" },
+                                            { name: "Zapier / n8n", sub: "Low - Code", color: "text-yellow-400" },
+                                            { name: "GitHub", sub: "Version Control", color: "text-gray-400" },
+                                            { name: "Cron", sub: "Scheduling", color: "text-red-400" }
+                                        ].map((tool) => (
+                                            <div key={tool.name} className="text-center p-6 rounded-xl bg-secondary/30 w-44 hover:bg-secondary/50 transition-colors border border-white/5">
+                                                <div className={`text-lg font-bold mb-1 ${tool.color}`}>{tool.name}</div>
+                                                <div className="text-xs text-muted-foreground">{tool.sub}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                        </div>
+
+                        {/* Column 2: Methodology */}
+                        <div className="p-8 rounded-3xl bg-background border border-slate-200 dark:border-white/10 shadow-sm flex flex-col">
+                            <h3 className="text-2xl font-bold font-heading mb-6 text-slate-900 dark:text-white">
+                                How You Will Learn
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        {[
+                                            { title: "Live Mentor Sessions", desc: "Project-led guidance", icon: Briefcase },
+                                            { title: "Weekly Challenges", desc: "Solve Mobile Development puzzles", icon: Bot },
+                                            { title: "Real Business Cases", desc: "Automate actual workflows", icon: Layers },
+                                            { title: "Step-by-step", desc: "Project building", icon: CheckCircle2 },
+                                            { title: "Recorded Tutorials", desc: "Concept revision", icon: FileCheck },
+                                            { title: "Mentor Reviews", desc: "Code correction & feedback", icon: MessageSquare },
+                                        ].map((item, i) => (
+                                            <div key={i} className="flex items-start gap-4 p-6 rounded-xl border border-white/5 bg-background/50">
+                                                <div className="p-3 rounded-lg bg-yellow-500/10 text-yellow-400">
+                                                    <item.icon className="w-6 h-6" />
+                                                </div>
+                                                <div>
+                                                    <h3 className="font-bold mb-1">{item.title}</h3>
+                                                    <p className="text-sm text-muted-foreground">{item.desc}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <StreamPortfolioPreview
+                variant="roadmap"
+            slug="mobile-development"
+            accentColor="purple"
+            skills={['Mobile Development', 'RPA', 'Python', 'Workflow']}
+            outcomes={['Mobile Development Engineer', 'RPA Developer', 'Process Mobile Development Analyst', 'Workflow Engineer', 'IT Mobile Development Specialist']}
+            projects={[{'title': 'E-Commerce Mobile App', 'desc': 'Cross-platform store client built with React Native, Expo, and Redux.', 'tech': ['React Native', 'Expo', 'Redux Toolkit', 'REST APIs'], 'metrics': [{'name': 'FPS Stability', 'score': 93}, {'name': 'Bundle Size', 'score': 89}], 'githubUrl': 'https://github.com/skillcred/mobile-store', 'liveUrl': 'https://app-store.skillcred.in'}, {'title': 'Social Media iOS App', 'desc': 'Native iOS UI written in SwiftUI, powered by Firebase backend.', 'tech': ['SwiftUI', 'Firebase', 'Swift Packages', 'iOS SDK'], 'metrics': [{'name': 'Startup Time (ms)', 'score': 96}, {'name': 'Crash Rate', 'score': 99}], 'githubUrl': 'https://github.com/skillcred/ios-social', 'liveUrl': 'https://app-ios.skillcred.in'}]}
+            />
+
+            {/* SEPARATE PORTFOLIO OUTPUT SECTION */}
+            <StreamPortfolioPreview
+                variant="default"
+            slug="mobile-development"
+            accentColor="purple"
+            skills={['Mobile Development', 'RPA', 'Python', 'Workflow']}
+            outcomes={['Mobile Development Engineer', 'RPA Developer', 'Process Mobile Development Analyst', 'Workflow Engineer', 'IT Mobile Development Specialist']}
+            projects={[{'title': 'E-Commerce Mobile App', 'desc': 'Cross-platform store client built with React Native, Expo, and Redux.', 'tech': ['React Native', 'Expo', 'Redux Toolkit', 'REST APIs'], 'metrics': [{'name': 'FPS Stability', 'score': 93}, {'name': 'Bundle Size', 'score': 89}], 'githubUrl': 'https://github.com/skillcred/mobile-store', 'liveUrl': 'https://app-store.skillcred.in'}, {'title': 'Social Media iOS App', 'desc': 'Native iOS UI written in SwiftUI, powered by Firebase backend.', 'tech': ['SwiftUI', 'Firebase', 'Swift Packages', 'iOS SDK'], 'metrics': [{'name': 'Startup Time (ms)', 'score': 96}, {'name': 'Crash Rate', 'score': 99}], 'githubUrl': 'https://github.com/skillcred/ios-social', 'liveUrl': 'https://app-ios.skillcred.in'}]}
+            />
+
+            {/* MENTOR SUPPORT & FAQS */}
+            <section className="py-24 bg-slate-50/50 dark:bg-slate-900/30 border-t border-slate-200 dark:border-white/5">
+                <div className="container mx-auto px-4 max-w-7xl">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-slate-950 dark:text-white">
+                            Mentor Support & Frequently Asked Questions
+                        </h2>
+                        <p className="text-muted-foreground text-base md:text-lg">
+                            Understand how working professionals review your code every week and get answers to common questions before starting your journey.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+                        {/* Column 1: Mentor Support & Verification */}
+                        <div className="p-8 md:p-10 rounded-3xl bg-background border border-slate-200 dark:border-white/10 shadow-sm">
+                            <h3 className="text-2xl font-bold font-heading mb-8 flex items-center gap-3 text-slate-900 dark:text-white">
+                                <MessageSquare className="w-7 h-7 text-purple-400 shrink-0" />
+                                <span>Mentor Support & Verification</span>
+                            </h3>
+                            <div className="space-y-8">
+                                            <div className="prose prose-invert">
+                                                <p className="text-lg text-muted-foreground mb-6">
+                                                    Our mentors don't just teach — they verify your skills. Every project you build is reviewed, ensuring you meet industry standards before you get certified.
+                                                </p>
+                                                <ul className="space-y-4">
+                                                    {[
+                                                        "Assign Mobile Development projects",
+                                                        "Review Mobile Development logic",
+                                                        "Validate working bots",
+                                                        "Approve assessment eligibility",
+                                                        "Provide performance feedback",
+                                                        "Issue recommendation letters"
+                                                    ].map((item, i) => (
+                                                        <li key={i} className="flex items-center gap-3">
+                                                            <CheckCircle2 className="w-5 h-5 text-yellow-400 shrink-0" />
+                                                            <span>{item}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                            <Card className="bg-gradient-to-br from-yellow-500/10 to-transparent border-yellow-500/20">
+                                                <CardContent className="p-8 text-center">
+                                                    <Badge className="mb-4 bg-yellow-500 text-black">Mentor Verified</Badge>
+                                                    <h3 className="text-2xl font-bold mb-2">Projects Are Not Self-Assessed</h3>
+                                                    <p className="text-muted-foreground">
+                                                        "You cannot certify yourself. A working professional mentor must start, review, and approve your work."
+                                                    </p>
+                                                </CardContent>
+                                            </Card>
+                                        </div>
+                        </div>
+
+                        {/* Column 2: Frequently Asked Questions */}
+                        <div className="p-8 md:p-10 rounded-3xl bg-background border border-slate-200 dark:border-white/10 shadow-sm">
+                            <h3 className="text-2xl font-bold font-heading mb-8 text-slate-900 dark:text-white">
+                                Frequently Asked Questions
+                            </h3>
+                            <div className="space-y-4">
+                                        {[
+                                            { q: "Is this coding-heavy?", a: "Moderate — scripting is taught step by step." },
+                                            { q: "Will I build real bots?", a: "Yes — every project produces a working Mobile Development system." },
+                                            { q: "Can non-IT students take this track?", a: "Yes — it is designed for beginners." },
+                                            { q: "Is this job-oriented?", a: "Yes — Mobile Development is in high demand across industries." },
+                                        ].map((faq, i) => (
+                                            <Card key={i} className="hover:bg-accent/5 transition-colors">
+                                                <CardHeader>
+                                                    <CardTitle className="text-lg">{faq.q}</CardTitle>
+                                                    <CardDescription>{faq.a}</CardDescription>
+                                                </CardHeader>
+                                            </Card>
+                                        ))}
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <StreamBottomCTA
+                slug="mobile-development"
+                accentColor="purple"
+                bootcampName="Mobile Development"
+            />
+
+            <Footer />
+                        </main>
+                        );
+}
+
+

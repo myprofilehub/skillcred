@@ -1,0 +1,333 @@
+import { StreamBottomCTA } from "@/components/public/stream-pricing-components";
+import { LpHeroForm } from "@/components/public/lp-hero-form";
+import { StreamPortfolioPreview } from "@/components/public/stream-portfolio-preview";
+import { LpNavbar } from "@/components/landing/lp-navbar";
+import { Footer } from "@/components/layout/footer";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+    CheckCircle2,
+    Download,
+    ArrowRight,
+    Coffee,
+    Database,
+    Globe,
+    Server,
+    Layout,
+    Lock,
+    Briefcase,
+    GraduationCap,
+    MessageSquare,
+    FileCheck,
+    Layers,
+    Workflow,
+    AlertTriangle,
+    ClipboardCheck,
+    Award,
+    Terminal,
+    ShoppingCart
+} from "lucide-react";
+import Link from "next/link";
+
+
+
+import { auth } from "@/auth";
+
+
+export const metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
+export default async function FullStackDevPage() {
+    const session = await auth();
+    return (
+        <main className="min-h-screen bg-background text-foreground">
+            <LpNavbar />
+
+            {/* HERO SECTION */}
+            <section className="relative pt-32 pb-20 overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-[128px] opacity-30 animate-pulse" />
+                    <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[128px] opacity-30 animate-pulse" />
+                </div>
+
+                <div className="container relative z-10 mx-auto px-4 text-center">
+                    <Badge variant="outline" className="mb-6 border-orange-500/30 text-orange-400 bg-orange-500/10 px-4 py-1 text-sm uppercase tracking-wider">
+                        FULL STACK DEVELOPMENT TRACK
+                    </Badge>
+                    <h1 className="text-4xl md:text-6xl font-bold font-heading mb-6 tracking-tight">
+                        Build Enterprise Apps from<br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-purple-500">
+                            Backend to Frontend
+                        </span>
+                    </h1>
+                    <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
+                        Learn to design, develop, and deploy full-stack web applications using industry-standard Java technologies through mentor-guided real-world projects.
+                    </p>
+
+                    <div className="flex flex-wrap justify-center gap-4 mb-12">
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
+                            <CheckCircle2 className="w-4 h-4 text-orange-400" /> Live mentor support
+                        </div>
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
+                            <CheckCircle2 className="w-4 h-4 text-orange-400" /> 4 real-world projects
+                        </div>
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
+                            <CheckCircle2 className="w-4 h-4 text-orange-400" /> Verified portfolio
+                        </div>
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
+                            <CheckCircle2 className="w-4 h-4 text-orange-400" /> Project-based assessment
+                        </div>
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
+                            <CheckCircle2 className="w-4 h-4 text-orange-400" /> HR-visible skill profile
+                        </div>
+                    </div>
+
+                    <div className="w-full mt-12 text-left">
+                        <LpHeroForm trackName="Full Stack Development Track" accentColor="orange" />
+                    </div>
+                </div>
+            </section>
+
+            {/* WHY & WHO SECTION */}
+            <section className="py-20 bg-secondary/20">
+                <div className="container mx-auto px-4">
+                    <div className="grid md:grid-cols-2 gap-12">
+                        {/* Why This Track */}
+                        <div>
+                            <h2 className="text-3xl font-bold font-heading mb-6 border-l-4 border-orange-500 pl-4">
+                                Why This Track?
+                            </h2>
+                            <p className="text-muted-foreground mb-8">
+                                Java powers the world's largest enterprises. This track provides deep expertise in building scalable, secure, and high-performance applications.
+                            </p>
+
+                            <div className="space-y-4">
+                                {[
+                                    { text: "Core Java & OOP concepts", icon: Coffee },
+                                    { text: "Backend development using Spring Boot", icon: Server },
+                                    { text: "RESTful API development", icon: Globe },
+                                    { text: "Frontend integration", icon: Layout },
+                                    { text: "Database design & optimization", icon: Database },
+                                    { text: "Secure application development", icon: Lock },
+                                    { text: "Application deployment", icon: Layers }
+                                ].map((item, i) => (
+                                    <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-background/50 border border-white/5">
+                                        <div className="p-2 rounded-lg bg-orange-500/20 text-orange-400">
+                                            <item.icon className="w-5 h-5" />
+                                        </div>
+                                        <span className="font-medium">{item.text}</span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="mt-8 p-4 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-300 text-sm">
+                                <span className="font-bold">Enterprise-Grade Projects:</span> Students will build end-to-end enterprise-grade applications used in real companies.
+                            </div>
+                        </div>
+
+                        {/* Who This Track Is For */}
+                        <div className="bg-white/5 rounded-2xl p-8 border border-white/10">
+                            <h2 className="text-2xl font-bold font-heading mb-6">Who This Track Is For</h2>
+                            <ul className="space-y-4">
+                                {[
+                                    "College students (any stream)",
+                                    "Beginners in Java & web development",
+                                    "Career switchers",
+                                    "Aspiring backend / full-stack developers",
+                                    "Professionals upgrading Java skills"
+                                ].map((item, i) => (
+                                    <li key={i} className="flex items-center gap-3">
+                                        <CheckCircle2 className="w-5 h-5 text-orange-400 shrink-0" />
+                                        <span>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                            <div className="mt-8 p-4 rounded-lg bg-orange-500/10 border border-orange-500/20 text-sm text-orange-300">
+                                <span className="font-semibold">Note:</span> No prior full stack experience required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* LEARNING TOOLS & METHODOLOGY */}
+            <section className="py-24 bg-slate-50/40 dark:bg-slate-900/20 border-y border-slate-200 dark:border-white/5">
+                <div className="container mx-auto px-4 max-w-7xl">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-slate-950 dark:text-white">
+                            Learning Tools and Methodology
+                        </h2>
+                        <p className="text-muted-foreground text-base md:text-lg">
+                            Master an industry-standard technical stack through our hands-on engineering pedagogy and structured practice.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+                        {/* Column 1: Tools */}
+                        <div className="p-8 rounded-3xl bg-background border border-slate-200 dark:border-white/10 shadow-sm flex flex-col">
+                            <h3 className="text-2xl font-bold font-heading mb-6 text-slate-900 dark:text-white">
+                                Tools You Will Master
+                            </h3>
+                            <div className="flex flex-wrap justify-center sm:justify-start gap-4">
+                        {[
+                            { name: "Java", sub: "Core + Advanced", color: "text-orange-400" },
+                            { name: "Spring Boot", sub: "Microservices", color: "text-green-400" },
+                            { name: "Hibernate / JPA", sub: "ORM", color: "text-yellow-400" },
+                            { name: "REST APIs", sub: "Web Services", color: "text-blue-400" },
+                            { name: "React / Angular", sub: "Frontend", color: "text-cyan-400" },
+                            { name: "MySQL / Postgres", sub: "Databases", color: "text-purple-400" },
+                            { name: "Git & GitHub", sub: "Version Control", color: "text-gray-400" },
+                            { name: "Maven / Gradle", sub: "Build Tools", color: "text-red-400" },
+                            { name: "Docker", sub: "Optional", color: "text-blue-500" }
+                        ].map((tool) => (
+                            <div key={tool.name} className="text-center p-6 rounded-xl bg-secondary/30 w-44 hover:bg-secondary/50 transition-colors border border-white/5">
+                                <div className={`text-lg font-bold mb-1 ${tool.color}`}>{tool.name}</div>
+                                <div className="text-xs text-muted-foreground">{tool.sub}</div>
+                            </div>
+                        ))}
+                    </div>
+                        </div>
+
+                        {/* Column 2: Methodology */}
+                        <div className="p-8 rounded-3xl bg-background border border-slate-200 dark:border-white/10 shadow-sm flex flex-col">
+                            <h3 className="text-2xl font-bold font-heading mb-6 text-slate-900 dark:text-white">
+                                How You Will Learn
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {[
+                            { title: "Live Mentor Sessions", desc: "Coding walkthroughs", icon: Briefcase },
+                            { title: "Recorded Lessons", desc: "Concept deep dives", icon: Coffee },
+                            { title: "Step-by-step", desc: "Project building", icon: Layers },
+                            { title: "Code Reviews", desc: "Weekly feedback", icon: CheckCircle2 },
+                            { title: "Doubt Support", desc: "Clear your queries", icon: MessageSquare },
+                            { title: "Best Practices", desc: "Industry standards", icon: Award },
+                        ].map((item, i) => (
+                            <div key={i} className="flex items-start gap-4 p-6 rounded-xl border border-white/5 bg-background/50">
+                                <div className="p-3 rounded-lg bg-orange-500/10 text-orange-400">
+                                    <item.icon className="w-6 h-6" />
+                                </div>
+                                <div>
+                                    <h3 className="font-bold mb-1">{item.title}</h3>
+                                    <p className="text-sm text-muted-foreground">{item.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <StreamPortfolioPreview
+                variant="roadmap"
+            slug="full-stack-development"
+            accentColor="orange"
+            skills={['Java', 'Spring Boot', 'REST APIs', 'Full Stack']}
+            outcomes={['Java Developer', 'Backend Developer', 'Full Stack Developer', 'Software Engineer', 'Application Developer']}
+            projects={[{'title': 'E-Commerce System', 'desc': 'A scalable e-commerce backend with Spring Boot, PostgreSQL, and Next.js frontend.', 'tech': ['Next.js', 'Spring Boot', 'PostgreSQL', 'Tailwind CSS'], 'metrics': [{'name': 'API Response Time', 'score': 92}, {'name': 'Test Coverage', 'score': 88}], 'githubUrl': 'https://github.com/skillcred/ecommerce-system', 'liveUrl': 'https://ecommerce.skillcred.in'}, {'title': 'Real-Time Chat App', 'desc': 'A live messaging platform using React, Node.js, and WebSockets.', 'tech': ['React', 'Node.js', 'WebSockets', 'MongoDB'], 'metrics': [{'name': 'Connection Speed', 'score': 95}, {'name': 'Lighthouse Score', 'score': 94}], 'githubUrl': 'https://github.com/skillcred/realtime-chat', 'liveUrl': 'https://chat.skillcred.in'}]}
+            />
+
+            {/* SEPARATE PORTFOLIO OUTPUT SECTION */}
+            <StreamPortfolioPreview
+                variant="default"
+            slug="full-stack-development"
+            accentColor="orange"
+            skills={['Java', 'Spring Boot', 'REST APIs', 'Full Stack']}
+            outcomes={['Java Developer', 'Backend Developer', 'Full Stack Developer', 'Software Engineer', 'Application Developer']}
+            projects={[{'title': 'E-Commerce System', 'desc': 'A scalable e-commerce backend with Spring Boot, PostgreSQL, and Next.js frontend.', 'tech': ['Next.js', 'Spring Boot', 'PostgreSQL', 'Tailwind CSS'], 'metrics': [{'name': 'API Response Time', 'score': 92}, {'name': 'Test Coverage', 'score': 88}], 'githubUrl': 'https://github.com/skillcred/ecommerce-system', 'liveUrl': 'https://ecommerce.skillcred.in'}, {'title': 'Real-Time Chat App', 'desc': 'A live messaging platform using React, Node.js, and WebSockets.', 'tech': ['React', 'Node.js', 'WebSockets', 'MongoDB'], 'metrics': [{'name': 'Connection Speed', 'score': 95}, {'name': 'Lighthouse Score', 'score': 94}], 'githubUrl': 'https://github.com/skillcred/realtime-chat', 'liveUrl': 'https://chat.skillcred.in'}]}
+            />
+
+            {/* MENTOR SUPPORT & FAQS */}
+            <section className="py-24 bg-slate-50/50 dark:bg-slate-900/30 border-t border-slate-200 dark:border-white/5">
+                <div className="container mx-auto px-4 max-w-7xl">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-slate-950 dark:text-white">
+                            Mentor Support & Frequently Asked Questions
+                        </h2>
+                        <p className="text-muted-foreground text-base md:text-lg">
+                            Understand how working professionals review your code every week and get answers to common questions before starting your journey.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+                        {/* Column 1: Mentor Support & Verification */}
+                        <div className="p-8 md:p-10 rounded-3xl bg-background border border-slate-200 dark:border-white/10 shadow-sm">
+                            <h3 className="text-2xl font-bold font-heading mb-8 flex items-center gap-3 text-slate-900 dark:text-white">
+                                <MessageSquare className="w-7 h-7 text-orange-400 shrink-0" />
+                                <span>Mentor Support & Verification</span>
+                            </h3>
+                            <div className="space-y-8">
+                            <div className="prose prose-invert">
+                                <p className="text-lg text-muted-foreground mb-6">
+                                    Our mentors don't just teach — they verify your skills. Every project you build is reviewed, ensuring you meet industry standards before you get certified.
+                                </p>
+                                <ul className="space-y-4">
+                                    {[
+                                        "Assign projects",
+                                        "Review code submissions",
+                                        "Verify project completion",
+                                        "Provide feedback",
+                                        "Approve assessment eligibility",
+                                        "Issue recommendation letters"
+                                    ].map((item, i) => (
+                                        <li key={i} className="flex items-center gap-3">
+                                            <CheckCircle2 className="w-5 h-5 text-orange-400 shrink-0" />
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <Card className="bg-gradient-to-br from-orange-500/10 to-transparent border-orange-500/20">
+                                <CardContent className="p-8 text-center">
+                                    <Badge className="mb-4 bg-orange-500 text-black">Mentor Verified</Badge>
+                                    <h3 className="text-2xl font-bold mb-2">Projects Are Not Self-Assessed</h3>
+                                    <p className="text-muted-foreground">
+                                        "You cannot certify yourself. A working professional mentor must start, review, and approve your work."
+                                    </p>
+                                </CardContent>
+                            </Card>
+                        </div>
+                        </div>
+
+                        {/* Column 2: Frequently Asked Questions */}
+                        <div className="p-8 md:p-10 rounded-3xl bg-background border border-slate-200 dark:border-white/10 shadow-sm">
+                            <h3 className="text-2xl font-bold font-heading mb-8 text-slate-900 dark:text-white">
+                                Frequently Asked Questions
+                            </h3>
+                            <div className="space-y-4">
+                        {[
+                            { q: "Is frontend included?", a: "Yes, basic frontend with React or Angular is included." },
+                            { q: "Will I learn deployment?", a: "Yes, applications are deployed using Docker and cloud hosting." },
+                            { q: "Is this suitable for beginners?", a: "Yes, Java fundamentals are covered before full stack projects." },
+                            { q: "Will I build real applications?", a: "Yes, all projects simulate real business systems." },
+                        ].map((faq, i) => (
+                            <Card key={i} className="hover:bg-accent/5 transition-colors">
+                                <CardHeader>
+                                    <CardTitle className="text-lg">{faq.q}</CardTitle>
+                                    <CardDescription>{faq.a}</CardDescription>
+                                </CardHeader>
+                            </Card>
+                        ))}
+                    </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <StreamBottomCTA
+                slug="full-stack-development"
+                accentColor="orange"
+                bootcampName="Full Stack Development"
+            />
+
+            <Footer />
+        </main>
+    );
+}
+
+
