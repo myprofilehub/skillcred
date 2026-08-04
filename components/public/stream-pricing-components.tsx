@@ -301,7 +301,7 @@ export function StreamBottomCTA({ slug, accentColor, bootcampName, syllabusUrl }
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
                     <Button size="lg" className={`text-base px-8 h-12 text-white font-bold transition-all shadow-md bg-gradient-to-r ${styles.btnBg} hover:opacity-90`} asChild>
-                        <Link href="/price-lock">
+                        <Link href="/enroll">
                             Apply Now — Pay ₹500 Deposit to Hold Seat <ArrowRight className="ml-2 w-5 h-5" />
                         </Link>
                     </Button>
