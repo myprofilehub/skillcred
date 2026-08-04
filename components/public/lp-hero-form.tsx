@@ -15,6 +15,7 @@ export function LpHeroForm({ trackName, accentColor = "orange" }: { trackName: s
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const [isDemoOpen, setIsDemoOpen] = useState(false);
+    const [isWebinarLoading, setIsWebinarLoading] = useState(false);
     
     // UTM Parameters
     const [utms, setUtms] = useState({
@@ -32,6 +33,30 @@ export function LpHeroForm({ trackName, accentColor = "orange" }: { trackName: s
             gclid: searchParams.get("gclid") || ""
         });
     }, [searchParams]);
+
+    
+    async function handleWebinarSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        setIsWebinarLoading(true);
+
+        const formData = new FormData(e.currentTarget);
+        const context = `Webinar Registration: ${trackName} | Source: ${utms.source} | Medium: ${utms.medium} | Campaign: ${utms.campaign} | GCLID: ${utms.gclid}`;
+        formData.append("track", context);
+
+        try {
+            const res = await submitLead(formData);
+            if (res.success) {
+                toast.success("Registered successfully! Check your email for the Zoom link.");
+                setIsDemoOpen(false);
+            } else {
+                toast.error(res.error || "Failed to register.");
+            }
+        } catch (error) {
+            toast.error("Something went wrong. Please try again.");
+        } finally {
+            setIsWebinarLoading(false);
+        }
+    }
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -111,16 +136,22 @@ export function LpHeroForm({ trackName, accentColor = "orange" }: { trackName: s
                                     Join our next Open House to see a live walkthrough of the platform and curriculum.
                                 </DialogDescription>
                             </DialogHeader>
-                            <form onSubmit={(e) => { e.preventDefault(); toast.success("Registered successfully! Check your email for the Zoom link."); setIsDemoOpen(false); }} className="space-y-4 pt-4">
+                            <form onSubmit={handleWebinarSubmit} className="space-y-4 pt-4">
                                 <div className="space-y-2">
                                     <Label htmlFor="demo-name">Full Name</Label>
-                                    <Input id="demo-name" required placeholder="John Doe" />
+                                    <Input id="demo-name" name="name" required placeholder="John Doe" />
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="demo-email">Email Address</Label>
-                                    <Input id="demo-email" type="email" required placeholder="john@example.com" />
+                                    <Input id="demo-email" name="email" type="email" required placeholder="john@example.com" />
                                 </div>
-                                <Button type="submit" className={`w-full bg-${accentColor}-600 hover:bg-${accentColor}-700 text-white font-bold h-12`}>Register Now</Button>
+                                <div className="space-y-2">
+                                    <Label htmlFor="demo-phone">Phone Number</Label>
+                                    <Input id="demo-phone" name="phone" type="tel" required placeholder="+91 9876543210" />
+                                </div>
+                                <Button type="submit" disabled={isWebinarLoading} className={`w-full bg-${accentColor}-600 hover:bg-${accentColor}-700 text-white font-bold h-12`}>
+                                    {isWebinarLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Register Now"}
+                                </Button>
                             </form>
                         </DialogContent>
                     </Dialog>
