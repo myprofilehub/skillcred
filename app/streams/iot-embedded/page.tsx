@@ -26,12 +26,14 @@ import {
     Award,
     Terminal,
     Code2,
-    Cloud
+    Cloud,
+    Cpu,
+    Radio,
+    Wifi,
+    Zap,
+    Activity
 } from "lucide-react";
 import Link from "next/link";
-
-
-
 import { auth } from "@/auth";
 
 export default async function IotEmbeddedPage() {
@@ -49,34 +51,27 @@ export default async function IotEmbeddedPage() {
 
                 <div className="container relative z-10 mx-auto px-4 text-center">
                     <Badge variant="outline" className="mb-6 border-emerald-500/30 text-emerald-400 bg-emerald-500/10 px-4 py-1 text-sm uppercase tracking-wider">
-                        IoT and Embedded DEVELOPMENT TRACK
+                        IOT & EMBEDDED TRACK
                     </Badge>
                     <h1 className="text-4xl md:text-6xl font-bold font-heading mb-6 tracking-tight">
-                        Design, Build, & Deploy<br />
+                        Build Devices That Work<br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-500">
-                            Complete Web Applications
+                            in the Physical World
                         </span>
                     </h1>
                     <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
-                        Learn to create modern, scalable web apps through mentor-guided, real-world projects covering frontend, backend, and deployment.
+                        Learn embedded firmware, sensor interfacing and device-to-cloud telemetry on real hardware, through mentor-guided projects built and demonstrated on physical devices.
                     </p>
 
-                    
                     <div className="flex justify-center gap-6 mt-8 mb-4 text-sm text-slate-600 dark:text-slate-300">
                         <div className="flex flex-col items-center"><span className="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-[10px]">Next Cohort</span><span>Starts 1 September 2026</span></div>
                         <div className="w-px h-8 bg-slate-200 dark:bg-white/10"></div>
-                        <div className="flex flex-col items-center"><span className="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-[10px]">Duration</span><span>4-5 Weeks</span></div>
+                        <div className="flex flex-col items-center"><span className="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-[10px]">Duration</span><span>5-6 Weeks</span></div>
                         <div className="w-px h-8 bg-slate-200 dark:bg-white/10"></div>
                         <div className="flex flex-col items-center"><span className="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-[10px]">Format</span><span>100% Online</span></div>
                     </div>
 
                     <div className="flex flex-wrap justify-center gap-4 mb-12">
-                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Live mentor support
-                        </div>
-                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-400" /> 4 real-world projects
-                        </div>
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
                             <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Verified portfolio
                         </div>
@@ -93,7 +88,7 @@ export default async function IotEmbeddedPage() {
                             slug="iot-embedded"
                             accentColor="green"
                             trackName="IoT & Embedded Track"
-                                syllabusUrl="/brochures/SkillCred_IoT_Embedded_Brochure.pdf"
+                            syllabusUrl="/brochures/SkillCred_IoT_Embedded_Brochure.pdf"
                         />
                     </div>
                 </div>
@@ -109,16 +104,17 @@ export default async function IotEmbeddedPage() {
                                 Why This Track?
                             </h2>
                             <p className="text-muted-foreground mb-8">
-                                Master the art of building complete web solutions. From pixel-perfect UIs to robust APIs and database architectures, this track covers it all.
+                                Software that controls hardware fails differently. Power drops, networks vanish, memory is measured in kilobytes. This track teaches you to build for those constraints.
                             </p>
 
                             <div className="space-y-4">
                                 {[
-                                    { text: "Responsive UI development", icon: Layout },
-                                    { text: "Backend API creation", icon: Server },
-                                    { text: "Database design & integration", icon: Database },
-                                    { text: "Authentication & security basics", icon: Lock },
-                                    { text: "Deployment & hosting", icon: Cloud }
+                                    { text: "Embedded C and microcontroller fundamentals", icon: Cpu },
+                                    { text: "Sensor interfacing over UART, SPI and I2C", icon: Radio },
+                                    { text: "Real-time scheduling with FreeRTOS", icon: Activity },
+                                    { text: "BLE and MQTT device communication", icon: Wifi },
+                                    { text: "Power profiling and low-power design", icon: Zap },
+                                    { text: "Hardware debugging with a logic analyzer", icon: Terminal }
                                 ].map((item, i) => (
                                     <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-background/50 border border-white/5">
                                         <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400">
@@ -129,8 +125,8 @@ export default async function IotEmbeddedPage() {
                                 ))}
                             </div>
 
-                            <div className="mt-8 p-4 rounded-lg bg-teal-500/10 border border-teal-500/20 text-teal-300 text-sm">
-                                <span className="font-bold">Industry-Relevant Outcome:</span> Students build production-style applications similar to startup and enterprise systems.
+                            <div className="mt-8 p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-sm">
+                                <span className="font-bold">Real Hardware, Not Simulation:</span> Every project runs on a physical ESP32 or STM32 board and is demonstrated live on the device during assessment.
                             </div>
                         </div>
 
@@ -139,11 +135,11 @@ export default async function IotEmbeddedPage() {
                             <h2 className="text-2xl font-bold font-heading mb-6">Who This Track Is For</h2>
                             <ul className="space-y-4">
                                 {[
-                                    "College students (any stream)",
-                                    "Beginners in web development",
-                                    "Career switchers",
-                                    "Design + tech enthusiasts",
-                                    "Future startup founders"
+                                    "Engineering students in ECE, EEE, Mechatronics or CSE",
+                                    "Beginners in embedded systems and microcontrollers",
+                                    "Hobbyists moving from Arduino sketches to production firmware",
+                                    "Software developers wanting hardware exposure",
+                                    "Career switchers targeting embedded and IoT roles"
                                 ].map((item, i) => (
                                     <li key={i} className="flex items-center gap-3">
                                         <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
@@ -152,7 +148,7 @@ export default async function IotEmbeddedPage() {
                                 ))}
                             </ul>
                             <div className="mt-8 p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-sm text-emerald-300">
-                                <span className="font-semibold">Note:</span> No prior coding required — basics are included.
+                                <span className="font-semibold">Note:</span> No prior embedded experience required. A hardware kit list is shared before the cohort begins.
                             </div>
                         </div>
                     </div>
@@ -178,22 +174,22 @@ export default async function IotEmbeddedPage() {
                                 Tools You Will Master
                             </h3>
                             <div className="flex flex-wrap justify-center sm:justify-start gap-4">
-                        {[
-                            { name: "HTML/CSS/JS", sub: "Core Web Tech", color: "text-orange-400" },
-                            { name: "React/Vue/Angular", sub: "Frontend Frameworks", color: "text-emerald-400" },
-                            { name: "Node.js / Express", sub: "Backend Runtime", color: "text-green-400" },
-                            { name: "SQL / NoSQL", sub: "Databases", color: "text-yellow-400" },
-                            { name: "REST APIs", sub: "Communication", color: "text-teal-400" },
-                            { name: "Git & GitHub", sub: "Version Control", color: "text-gray-400" },
-                            { name: "Docker", sub: "Containerization", color: "text-teal-500" },
-                            { name: "AWS / Vercel", sub: "Cloud Hosting", color: "text-purple-400" }
-                        ].map((tool) => (
-                            <div key={tool.name} className="text-center p-6 rounded-xl bg-secondary/30 w-44 hover:bg-secondary/50 transition-colors border border-white/5">
-                                <div className={`text-lg font-bold mb-1 ${tool.color}`}>{tool.name}</div>
-                                <div className="text-xs text-muted-foreground">{tool.sub}</div>
+                                {[
+                                    { name: "Embedded C", sub: "Core Language", color: "text-orange-400" },
+                                    { name: "ESP32 / STM32", sub: "Microcontrollers", color: "text-emerald-400" },
+                                    { name: "FreeRTOS", sub: "Real-Time OS", color: "text-green-400" },
+                                    { name: "UART / SPI / I2C", sub: "Peripheral Protocols", color: "text-yellow-400" },
+                                    { name: "BLE", sub: "Short-Range Comms", color: "text-teal-400" },
+                                    { name: "MQTT", sub: "Telemetry Protocol", color: "text-gray-400" },
+                                    { name: "Logic Analyzer", sub: "Hardware Debugging", color: "text-cyan-400" },
+                                    { name: "PlatformIO", sub: "Build & Flash", color: "text-purple-400" }
+                                ].map((tool) => (
+                                    <div key={tool.name} className="text-center p-6 rounded-xl bg-secondary/30 w-44 hover:bg-secondary/50 transition-colors border border-white/5">
+                                        <div className={`text-lg font-bold mb-1 ${tool.color}`}>{tool.name}</div>
+                                        <div className="text-xs text-muted-foreground">{tool.sub}</div>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
                         </div>
 
                         {/* Column 2: Methodology */}
@@ -202,25 +198,25 @@ export default async function IotEmbeddedPage() {
                                 How You Will Learn
                             </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {[
-                            { title: "Live Mentor Sessions", desc: "Project-led guidance", icon: Briefcase },
-                            { title: "Weekly Coding Challenges", desc: "Sharpen your logic", icon: Code2 },
-                            { title: "Real Architecture", desc: "Build scalable apps", icon: Layers },
-                            { title: "Step-by-step", desc: "Project building", icon: CheckCircle2 },
-                            { title: "Code Reviews", desc: "Feedback & optimization", icon: MessageSquare },
-                            { title: "Recorded Modules", desc: "Learn at your pace", icon: FileCheck },
-                        ].map((item, i) => (
-                            <div key={i} className="flex items-start gap-4 p-6 rounded-xl border border-white/5 bg-background/50">
-                                <div className="p-3 rounded-lg bg-emerald-500/10 text-emerald-400">
-                                    <item.icon className="w-6 h-6" />
-                                </div>
-                                <div>
-                                    <h3 className="font-bold mb-1">{item.title}</h3>
-                                    <p className="text-sm text-muted-foreground">{item.desc}</p>
-                                </div>
+                                {[
+                                    { title: "Live Mentor Sessions", desc: "Firmware design guidance", icon: Briefcase },
+                                    { title: "Real Hardware", desc: "Every project on a physical board", icon: Cpu },
+                                    { title: "Fault Injection", desc: "Power and network loss drills", icon: AlertTriangle },
+                                    { title: "Scope & Logic Analyzer", desc: "Debug what the code can't tell you", icon: Activity },
+                                    { title: "Recorded Lessons", desc: "Protocol deep dives", icon: FileCheck },
+                                    { title: "Doubt Support", desc: "Clear your queries", icon: MessageSquare },
+                                ].map((item, i) => (
+                                    <div key={i} className="flex items-start gap-4 p-6 rounded-xl border border-white/5 bg-background/50">
+                                        <div className="p-3 rounded-lg bg-emerald-500/10 text-emerald-400">
+                                            <item.icon className="w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-bold mb-1">{item.title}</h3>
+                                            <p className="text-sm text-muted-foreground">{item.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
                         </div>
                     </div>
                 </div>
@@ -228,21 +224,21 @@ export default async function IotEmbeddedPage() {
 
             <StreamPortfolioPreview
                 variant="roadmap"
-            slug="iot-embedded"
-            accentColor="green"
-            skills={['React', 'Node.js', 'APIs', 'Databases']}
-            outcomes={['Full Stack Developer', 'Web Application Developer', 'Frontend Engineer', 'Backend Engineer', 'Junior Software Engineer']}
-            projects={[{'title': 'Smart Home Controller', 'desc': 'ESP32 home control firmware written in Embedded C with FreeRTOS multitasking.', 'tech': ['Embedded C', 'ESP32', 'FreeRTOS', 'UART'], 'metrics': [{'name': 'Task Jitter (ms)', 'score': 95}, {'name': 'Memory Overhead', 'score': 91}], 'githubUrl': 'https://github.com/skillcred/smarthome-fw', 'liveUrl': 'https://smarthome.skillcred.in'}, {'title': 'Network Gateway Hub', 'desc': 'Raspberry Pi gateway communicating with peripheral nodes via MQTT.', 'tech': ['C++', 'Raspberry Pi', 'MQTT', 'Linux'], 'metrics': [{'name': 'MQTT Drop Rate', 'score': 98}, {'name': 'Throughput', 'score': 93}], 'githubUrl': 'https://github.com/skillcred/gateway-hub', 'liveUrl': 'https://gateway.skillcred.in'}]}
+                slug="iot-embedded"
+                accentColor="green"
+                skills={['Embedded C', 'FreeRTOS', 'MQTT', 'Hardware Debug']}
+                outcomes={['Embedded Software Engineer', 'IoT Developer', 'Firmware Engineer', 'Embedded Systems Engineer', 'Hardware Test Engineer']}
+                projects={[{'title': 'Smart Greenhouse Automation Node', 'desc': 'Automated climate monitoring utilizing ESP32, FreeRTOS, and MQTT.', 'tech': ['ESP32', 'FreeRTOS', 'MQTT', 'Embedded C'], 'metrics': [{'name': 'Uptime Guarantee', 'score': 99}, {'name': 'Power Efficiency', 'score': 91}], 'githubUrl': 'https://github.com/skillcred/greenhouse-automation', 'liveUrl': 'https://greenhouse.skillcred.in'}, {'title': 'Industrial Equipment Vibration Analyzer', 'desc': 'High-frequency accelerometer data logging via SPI and custom DSP.', 'tech': ['STM32', 'SPI', 'DSP', 'C++'], 'metrics': [{'name': 'Sampling Rate (kHz)', 'score': 92}, {'name': 'Signal Accuracy', 'score': 95}], 'githubUrl': 'https://github.com/skillcred/vibration-analyzer', 'liveUrl': 'https://analyzer.skillcred.in'}]}
             />
 
             {/* SEPARATE PORTFOLIO OUTPUT SECTION */}
             <StreamPortfolioPreview
                 variant="default"
-            slug="iot-embedded"
-            accentColor="green"
-            skills={['React', 'Node.js', 'APIs', 'Databases']}
-            outcomes={['Full Stack Developer', 'Web Application Developer', 'Frontend Engineer', 'Backend Engineer', 'Junior Software Engineer']}
-            projects={[{'title': 'Smart Home Controller', 'desc': 'ESP32 home control firmware written in Embedded C with FreeRTOS multitasking.', 'tech': ['Embedded C', 'ESP32', 'FreeRTOS', 'UART'], 'metrics': [{'name': 'Task Jitter (ms)', 'score': 95}, {'name': 'Memory Overhead', 'score': 91}], 'githubUrl': 'https://github.com/skillcred/smarthome-fw', 'liveUrl': 'https://smarthome.skillcred.in'}, {'title': 'Network Gateway Hub', 'desc': 'Raspberry Pi gateway communicating with peripheral nodes via MQTT.', 'tech': ['C++', 'Raspberry Pi', 'MQTT', 'Linux'], 'metrics': [{'name': 'MQTT Drop Rate', 'score': 98}, {'name': 'Throughput', 'score': 93}], 'githubUrl': 'https://github.com/skillcred/gateway-hub', 'liveUrl': 'https://gateway.skillcred.in'}]}
+                slug="iot-embedded"
+                accentColor="green"
+                skills={['Embedded C', 'FreeRTOS', 'MQTT', 'Hardware Debug']}
+                outcomes={['Embedded Software Engineer', 'IoT Developer', 'Firmware Engineer', 'Embedded Systems Engineer', 'Hardware Test Engineer']}
+                projects={[{'title': 'Smart Greenhouse Automation Node', 'desc': 'Automated climate monitoring utilizing ESP32, FreeRTOS, and MQTT.', 'tech': ['ESP32', 'FreeRTOS', 'MQTT', 'Embedded C'], 'metrics': [{'name': 'Uptime Guarantee', 'score': 99}, {'name': 'Power Efficiency', 'score': 91}], 'githubUrl': 'https://github.com/skillcred/greenhouse-automation', 'liveUrl': 'https://greenhouse.skillcred.in'}, {'title': 'Industrial Equipment Vibration Analyzer', 'desc': 'High-frequency accelerometer data logging via SPI and custom DSP.', 'tech': ['STM32', 'SPI', 'DSP', 'C++'], 'metrics': [{'name': 'Sampling Rate (kHz)', 'score': 92}, {'name': 'Signal Accuracy', 'score': 95}], 'githubUrl': 'https://github.com/skillcred/vibration-analyzer', 'liveUrl': 'https://analyzer.skillcred.in'}]}
             />
 
             {/* MENTOR SUPPORT & FAQS */}
@@ -265,36 +261,36 @@ export default async function IotEmbeddedPage() {
                                 <span>Mentor Support & Verification</span>
                             </h3>
                             <div className="space-y-8">
-                            <div className="prose prose-invert">
-                                <p className="text-lg text-muted-foreground mb-6">
-                                    Our mentors don't just teach — they verify your skills. Every project you build is reviewed, ensuring you meet industry standards before you get certified.
-                                </p>
-                                <ul className="space-y-4">
-                                    {[
-                                        "Assign projects",
-                                        "Review source code",
-                                        "Verify project completion",
-                                        "Provide feedback",
-                                        "Approve assessment eligibility",
-                                        "Issue recommendation letters"
-                                    ].map((item, i) => (
-                                        <li key={i} className="flex items-center gap-3">
-                                            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
-                                            <span>{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <Card className="bg-gradient-to-br from-emerald-500/10 to-transparent border-emerald-500/20">
-                                <CardContent className="p-8 text-center">
-                                    <Badge className="mb-4 bg-emerald-500 text-black">Mentor Verified</Badge>
-                                    <h3 className="text-2xl font-bold mb-2">Projects Are Not Self-Assessed</h3>
-                                    <p className="text-muted-foreground">
-                                        "You cannot certify yourself. A working professional mentor must start, review, and approve your work."
+                                <div className="prose prose-invert">
+                                    <p className="text-lg text-muted-foreground mb-6">
+                                        Our mentors don't just teach — they verify your skills. Every project you build is reviewed, ensuring you meet industry standards before you get certified.
                                     </p>
-                                </CardContent>
-                            </Card>
-                        </div>
+                                    <ul className="space-y-4">
+                                        {[
+                                            "Assign projects",
+                                            "Review source code",
+                                            "Verify project completion",
+                                            "Provide feedback",
+                                            "Approve assessment eligibility",
+                                            "Issue recommendation letters"
+                                        ].map((item, i) => (
+                                            <li key={i} className="flex items-center gap-3">
+                                                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                                                <span>{item}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <Card className="bg-gradient-to-br from-emerald-500/10 to-transparent border-emerald-500/20">
+                                    <CardContent className="p-8 text-center">
+                                        <Badge className="mb-4 bg-emerald-500 text-black">Mentor Verified</Badge>
+                                        <h3 className="text-2xl font-bold mb-2">Projects Are Not Self-Assessed</h3>
+                                        <p className="text-muted-foreground">
+                                            "You cannot certify yourself. A working professional mentor must start, review, and approve your work."
+                                        </p>
+                                    </CardContent>
+                                </Card>
+                            </div>
                         </div>
 
                         {/* Column 2: Frequently Asked Questions */}
@@ -303,20 +299,20 @@ export default async function IotEmbeddedPage() {
                                 Frequently Asked Questions
                             </h3>
                             <div className="space-y-4">
-                        {[
-                            { q: "Will I learn frontend and backend both?", a: "Yes — this track covers complete web development." },
-                            { q: "Are projects real-world?", a: "Yes — each project mirrors real production apps." },
-                            { q: "Is hosting included?", a: "Yes — you will deploy applications to live servers." },
-                            { q: "Is this suitable for school students?", a: "Yes — the basics are simplified for beginners." },
-                        ].map((faq, i) => (
-                            <Card key={i} className="hover:bg-accent/5 transition-colors">
-                                <CardHeader>
-                                    <CardTitle className="text-lg">{faq.q}</CardTitle>
-                                    <CardDescription>{faq.a}</CardDescription>
-                                </CardHeader>
-                            </Card>
-                        ))}
-                    </div>
+                                {[
+                                    { q: "Do I need to buy hardware?", a: "Yes — a kit list is shared before the cohort starts, typically under ₹2,500. It is yours to keep." },
+                                    { q: "Is prior electronics knowledge required?", a: "No — the track starts from microcontroller fundamentals." },
+                                    { q: "Will projects run on real devices?", a: "Yes — the capstone is demonstrated live on physical hardware during the defense." },
+                                    { q: "Is this useful without an ECE degree?", a: "Yes — the track is open to any engineering stream, though ECE students will find the hardware concepts familiar." },
+                                ].map((faq, i) => (
+                                    <Card key={i} className="hover:bg-accent/5 transition-colors">
+                                        <CardHeader>
+                                            <CardTitle className="text-lg">{faq.q}</CardTitle>
+                                            <CardDescription>{faq.a}</CardDescription>
+                                        </CardHeader>
+                                    </Card>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -332,5 +328,3 @@ export default async function IotEmbeddedPage() {
         </main>
     );
 }
-
-
