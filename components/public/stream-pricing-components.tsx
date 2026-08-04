@@ -11,121 +11,85 @@ export const STREAM_PRICING_DATA: Record<string, {
     tier: 'A' | 'B' | 'C';
     duration: string;
     pilotBase: number;
-    regularBase: number;
     pilotAddon: number;
-    regularAddon: number;
     pilotTotal: number;
-    regularTotal: number;
 }> = {
     "standard": {
         tier: 'A',
         duration: "8–10 Weeks",
         pilotBase: 9999,
-        regularBase: 14999,
         pilotAddon: 3000,
-        regularAddon: 4000,
         pilotTotal: 12999,
-        regularTotal: 18999
     },
     "fast-track": {
         tier: 'B',
         duration: "5–6 Weeks",
         pilotBase: 6999,
-        regularBase: 9999,
         pilotAddon: 2500,
-        regularAddon: 3500,
         pilotTotal: 9499,
-        regularTotal: 13499
     },
     "capstone": {
         tier: 'C',
         duration: "4–5 Weeks",
         pilotBase: 4999,
-        regularBase: 6999,
         pilotAddon: 2000,
-        regularAddon: 3000,
         pilotTotal: 6999,
-        regularTotal: 9999
     },
     "ai-ml": {
         tier: 'A',
         duration: "8–10 Weeks",
         pilotBase: 9999,
-        regularBase: 14999,
         pilotAddon: 3000,
-        regularAddon: 4000,
         pilotTotal: 12999,
-        regularTotal: 18999
     },
     "full-stack-development": {
         tier: 'A',
         duration: "8–10 Weeks",
         pilotBase: 9999,
-        regularBase: 14999,
         pilotAddon: 3000,
-        regularAddon: 4000,
         pilotTotal: 12999,
-        regularTotal: 18999
     },
     "mobile-development": {
         tier: 'A',
         duration: "8–10 Weeks",
         pilotBase: 9999,
-        regularBase: 14999,
         pilotAddon: 3000,
-        regularAddon: 4000,
         pilotTotal: 12999,
-        regularTotal: 18999
     },
     "devops-cloud": {
         tier: 'B',
         duration: "5–6 Weeks",
         pilotBase: 6999,
-        regularBase: 9999,
         pilotAddon: 2500,
-        regularAddon: 3500,
         pilotTotal: 9499,
-        regularTotal: 13499
     },
     "data-engineering": {
         tier: 'B',
         duration: "5–6 Weeks",
         pilotBase: 6999,
-        regularBase: 9999,
         pilotAddon: 2500,
-        regularAddon: 3500,
         pilotTotal: 9499,
-        regularTotal: 13499
     },
     "data-science": {
         tier: 'B',
         duration: "5–6 Weeks",
         pilotBase: 6999,
-        regularBase: 9999,
         pilotAddon: 2500,
-        regularAddon: 3500,
         pilotTotal: 9499,
-        regularTotal: 13499
     },
     "cybersecurity": {
         tier: 'C',
         duration: "4–5 Weeks",
         pilotBase: 4999,
-        regularBase: 6999,
         pilotAddon: 2000,
-        regularAddon: 3000,
         pilotTotal: 6999,
-        regularTotal: 9999
     },
     "iot-embedded": {
         tier: 'C',
         duration: "4–5 Weeks (may extend to 5–6 for hardware logistics)",
         pilotBase: 4999,
-        regularBase: 6999,
         pilotAddon: 2000,
-        regularAddon: 3000,
         pilotTotal: 6999,
-        regularTotal: 9999
     }
 };
 
@@ -247,9 +211,7 @@ export function StreamHeroPricing({ slug, accentColor, bootcampName, syllabusUrl
                 </p>
 
                 <div className="py-2 flex items-center justify-center gap-4">
-                    <span className="text-lg md:text-xl line-through text-slate-400 decoration-slate-300 decoration-2">
-                        ₹{data.regularBase.toLocaleString('en-IN')}
-                    </span>
+                    
                     <span className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight flex items-baseline gap-1">
                         ₹{data.pilotBase.toLocaleString('en-IN')}
                         <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider ml-3 bg-emerald-100 px-2 py-0.5 rounded-md border border-emerald-200">
@@ -259,7 +221,7 @@ export function StreamHeroPricing({ slug, accentColor, bootcampName, syllabusUrl
                 </div>
 
                 <div className={`py-2 px-5 rounded-full ${styles.bg} border ${styles.border} text-xs font-semibold tracking-wider ${styles.text} w-fit mx-auto shadow-sm`}>
-                    ⚡ 20 seats • Cohort starts {COHORT_START_DATE} • Pilot pricing ends {PILOT_PRICING_END_DATE}
+                    ⚡ Cohort starts {COHORT_START_DATE}
                 </div>
 
                 <div className="pt-6 flex flex-col sm:flex-row gap-4 justify-center">
@@ -330,7 +292,7 @@ export function StreamBottomCTA({ slug, accentColor, bootcampName, syllabusUrl }
                 
                 <div className="mx-auto max-w-4xl relative z-10 space-y-6">
                 <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-white font-heading">
-                    20 seats. First 20 students, pilot pricing.
+                    Lock in Your Pilot Pricing
                 </h3>
                 
                 <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
@@ -353,7 +315,7 @@ export function StreamBottomCTA({ slug, accentColor, bootcampName, syllabusUrl }
                 </div>
 
                 <div className="pt-4 text-xs font-medium text-slate-400 italic">
-                    Pilot cohort pricing. Only 20 seats available.
+                    Pilot cohort pricing available.
                 </div>
             </div>
             </div>

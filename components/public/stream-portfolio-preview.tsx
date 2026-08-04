@@ -95,7 +95,7 @@ export function StreamPortfolioPreview({ slug, accentColor, skills, outcomes, pr
             <div className="lg:col-span-5 space-y-8">
               <div className="space-y-4">
                 <Badge variant="outline" className={`${styles.badgeBg}`}>
-                  <ShieldCheck className="w-3.5 h-3.5 mr-1.5" /> Recruiter Verified
+                  <ShieldCheck className="w-3.5 h-3.5 mr-1.5" /> Built for Recruiter Review
                 </Badge>
                 <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-950 dark:text-white font-heading">
                   Your Portfolio Output
@@ -173,7 +173,7 @@ export function StreamPortfolioPreview({ slug, accentColor, skills, outcomes, pr
                       ★ PAT Certified
                     </Badge>
                     <Badge className="bg-slate-100 text-slate-600 border border-slate-200 text-[10px] dark:bg-white/5 dark:text-slate-300 dark:border-white/10">
-                      Recruiter View
+                      Sample Profile — Illustrative Only
                     </Badge>
                   </div>
                 </div>
@@ -246,15 +246,11 @@ export function StreamPortfolioPreview({ slug, accentColor, skills, outcomes, pr
 
                     {/* Links */}
                     <div className="flex gap-3 pt-2">
-                      <Button size="sm" variant="outline" className="h-8 text-xs border-slate-200 hover:bg-slate-100 text-slate-700 gap-1.5 dark:border-white/10 dark:hover:bg-white/5 dark:text-slate-200" asChild>
-                        <a href={projects[activeProject].githubUrl} target="_blank" rel="noopener noreferrer">
+                      <Button size="sm" variant="outline" className="h-8 text-xs border-slate-200 hover:bg-slate-100 text-slate-700 gap-1.5 dark:border-white/10 dark:hover:bg-white/5 dark:text-slate-200 cursor-help" onClick={() => alert('This is a sample illustrative profile. Repositories and demos are not live.')}>
                           <Github className="w-3.5 h-3.5" /> Repository <ArrowUpRight className="w-3 h-3 text-slate-400" />
-                        </a>
                       </Button>
-                      <Button size="sm" variant="outline" className="h-8 text-xs border-slate-200 hover:bg-slate-100 text-slate-700 gap-1.5 dark:border-white/10 dark:hover:bg-white/5 dark:text-slate-200" asChild>
-                        <a href={projects[activeProject].liveUrl} target="_blank" rel="noopener noreferrer">
+                      <Button size="sm" variant="outline" className="h-8 text-xs border-slate-200 hover:bg-slate-100 text-slate-700 gap-1.5 dark:border-white/10 dark:hover:bg-white/5 dark:text-slate-200 cursor-help" onClick={() => alert('This is a sample illustrative profile. Repositories and demos are not live.')}>
                           <ExternalLink className="w-3.5 h-3.5" /> Live Demo <ArrowUpRight className="w-3 h-3 text-slate-400" />
-                        </a>
                       </Button>
                     </div>
                   </div>

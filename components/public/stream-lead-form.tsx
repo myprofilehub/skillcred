@@ -165,6 +165,14 @@ export function StreamLeadForm({ trackName, accentColor = "purple", variant = "d
                         <p className="text-sm text-red-600 font-medium text-left">{errorMessage}</p>
                     )}
 
+                    <div className="flex items-start space-x-2 pt-2">
+                        <input type="checkbox" id="consent_stream" name="consent" required className="mt-1 w-4 h-4 rounded border-slate-300 text-purple-600 focus:ring-purple-600" />
+                        <Label htmlFor="consent_stream" className="text-xs text-slate-600 dark:text-slate-400 font-normal leading-relaxed">
+                            I agree to be contacted by phone and WhatsApp regarding this enquiry.
+                        </Label>
+                        <input type="hidden" name="consent_timestamp" value={new Date().toISOString()} />
+                    </div>
+
                     <Button 
                         type="submit" 
                         className={`w-full h-11 font-bold text-white shadow-md ${buttonClass}`}

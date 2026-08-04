@@ -20,8 +20,7 @@ const programs = [
         duration: "8–10 Weeks",
         color: "purple",
         pilotPrice: "₹9,999",
-        regularPrice: "₹14,999",
-        savings: "₹5,000",
+        patPrice: "₹12,999",
         streams: ["Full Stack Dev", "AI/ML", "Mobile Dev"],
     },
     {
@@ -30,8 +29,7 @@ const programs = [
         duration: "5–6 Weeks",
         color: "blue",
         pilotPrice: "₹6,999",
-        regularPrice: "₹9,999",
-        savings: "₹3,000",
+        patPrice: "₹9,499",
         streams: ["DevOps & Cloud", "Data Eng", "Data Science"],
     },
     {
@@ -40,8 +38,7 @@ const programs = [
         duration: "4–5 Weeks",
         color: "green",
         pilotPrice: "₹4,999",
-        regularPrice: "₹6,999",
-        savings: "₹2,000",
+        patPrice: "₹6,999",
         streams: ["Cybersecurity", "IoT & Embedded"],
     },
 ];
@@ -198,19 +195,17 @@ export default function PriceLockPage() {
                                         <h3 className="text-lg font-bold mb-1">{program.name}</h3>
                                         <p className="text-xs text-muted-foreground mb-4">{program.duration} · {program.streams.join(", ")}</p>
 
+                                        
+                                        
                                         {/* Price Comparison */}
                                         <div className="space-y-3 mb-6">
-                                            <div className="flex items-center justify-between p-3 rounded-lg bg-red-500/5 border border-red-500/10">
-                                                <span className="text-sm text-muted-foreground">Regular Price</span>
-                                                <span className="text-lg font-bold text-red-400 line-through">{program.regularPrice}</span>
-                                            </div>
                                             <div className={`flex items-center justify-between p-3 rounded-lg ${colors.bg} ${colors.border}`}>
-                                                <span className="text-sm text-muted-foreground">Pilot Price</span>
+                                                <span className="text-sm text-muted-foreground">Standalone Cohort</span>
                                                 <span className={`text-lg font-bold ${colors.text}`}>{program.pilotPrice}</span>
                                             </div>
-                                            <div className="flex items-center justify-center gap-1.5 text-sm">
-                                                <Sparkles className={`w-4 h-4 ${colors.text}`} />
-                                                <span className={`font-semibold ${colors.text}`}>You save {program.savings}</span>
+                                            <div className={`flex items-center justify-between p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20`}>
+                                                <span className="text-sm text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1.5"><Sparkles className="w-3.5 h-3.5" /> With PAT Credential</span>
+                                                <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{program.patPrice}</span>
                                             </div>
                                         </div>
 

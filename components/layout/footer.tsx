@@ -18,9 +18,9 @@ export function Footer() {
                     <div>
                         <h3 className="text-lg font-semibold mb-4 text-foreground">Platform</h3>
                         <ul className="space-y-2">
-                            <li><Link href="#streams" className="text-muted-foreground hover:text-primary transition-colors text-sm">Streams</Link></li>
-                            <li><Link href="#mentors" className="text-muted-foreground hover:text-primary transition-colors text-sm">Mentors</Link></li>
-                            <li><Link href="#hr" className="text-muted-foreground hover:text-primary transition-colors text-sm">For Recruiters</Link></li>
+                            <li><Link href="/#streams" className="text-muted-foreground hover:text-primary transition-colors text-sm">Streams</Link></li>
+                            <li><Link href="/#mentors" className="text-muted-foreground hover:text-primary transition-colors text-sm">Mentors</Link></li>
+                            <li><Link href="/#hr" className="text-muted-foreground hover:text-primary transition-colors text-sm">For Recruiters</Link></li>
                         </ul>
                     </div>
 
@@ -28,13 +28,15 @@ export function Footer() {
                         <h3 className="text-lg font-semibold mb-4 text-foreground">Legal</h3>
                         <ul className="space-y-2">
                             <li><Link href="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors text-sm">Privacy Policy</Link></li>
-                            <li><Link href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">Terms of Service</Link></li>
+                            <li><Link href="/terms" className="text-muted-foreground hover:text-primary transition-colors text-sm">Terms of Service</Link></li>
+                            <li><Link href="/refund-policy" className="text-muted-foreground hover:text-primary transition-colors text-sm">Refund & Cancellation Policy</Link></li>
                         </ul>
                     </div>
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-white/10 text-center text-muted-foreground text-sm">
-                    &copy; {new Date().getFullYear()} SkillCred. All rights reserved.
+                    <p className="mb-2">24/9, Gandhi Street, Vanuvampet, Chennai 600091</p>
+                    <p>&copy; {new Date().getFullYear()} SkillCred. All rights reserved.</p>
                 </div>
             </div>
         </footer>

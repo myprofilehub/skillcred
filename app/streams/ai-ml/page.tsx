@@ -62,6 +62,15 @@ export default async function AIMLPage() {
                         Learn how to design, train, and deploy machine learning models through mentor-guided, real-world projects.
                     </p>
 
+                    
+                    <div className="flex justify-center gap-6 mt-8 mb-4 text-sm text-slate-600 dark:text-slate-300">
+                        <div className="flex flex-col items-center"><span className="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-[10px]">Next Cohort</span><span>Starts 1st</span></div>
+                        <div className="w-px h-8 bg-slate-200 dark:bg-white/10"></div>
+                        <div className="flex flex-col items-center"><span className="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-[10px]">Duration</span><span>8-10 Weeks</span></div>
+                        <div className="w-px h-8 bg-slate-200 dark:bg-white/10"></div>
+                        <div className="flex flex-col items-center"><span className="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-[10px]">Format</span><span>100% Online</span></div>
+                    </div>
+
                     <div className="flex flex-wrap justify-center gap-4 mb-12">
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
                             <CheckCircle2 className="w-4 h-4 text-purple-400" /> Live mentor support
@@ -299,7 +308,7 @@ export default async function AIMLPage() {
                             { q: "Do I need prior Python experience?", a: "No — Python basics are included in the track." },
                             { q: "Are projects real-world?", a: "Yes, each project replicates real industry problems." },
                             { q: "Is deployment included?", a: "Yes, models are deployed via Streamlit / Flask for live testing." },
-                            { q: "Will I be job-ready?", a: "Absolutely — the track covers building, evaluating, and deploying AI systems." },
+                            { q: "Will I be job-ready?", a: "The track covers building, evaluating, and deploying AI systems." },
                         ].map((faq, i) => (
                             <Card key={i} className="hover:bg-accent/5 transition-colors">
                                 <CardHeader>

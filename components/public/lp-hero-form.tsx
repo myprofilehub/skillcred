@@ -95,6 +95,14 @@ export function LpHeroForm({ trackName, accentColor = "orange" }: { trackName: s
                     <Input id="phone" name="phone" type="tel" required placeholder="+91 9876543210" className="bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-slate-400" />
                 </div>
 
+                <div className="flex items-start space-x-2 pt-2">
+                    <input type="checkbox" id="consent" name="consent" required className="mt-1 w-4 h-4 rounded border-slate-300 text-orange-500 focus:ring-orange-500" />
+                    <Label htmlFor="consent" className="text-xs text-slate-600 dark:text-slate-400 font-normal leading-relaxed">
+                        I agree to be contacted by phone and WhatsApp regarding this enquiry.
+                    </Label>
+                    <input type="hidden" name="consent_timestamp" value={new Date().toISOString()} />
+                </div>
+
                 <Button 
                     type="submit" 
                     className={`w-full mt-4 bg-${accentColor}-600 hover:bg-${accentColor}-700 text-white font-bold h-12 text-lg shadow-lg shadow-${accentColor}-500/20`}

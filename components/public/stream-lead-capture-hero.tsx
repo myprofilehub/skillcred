@@ -98,12 +98,10 @@ export function StreamLeadCaptureHero({ slug, accentColor, bootcampName, trackNa
                         <span className="text-4xl font-extrabold text-slate-900 tracking-tight">
                             ₹{data.pilotBase.toLocaleString('en-IN')}
                         </span>
-                        <span className="text-lg line-through text-slate-400 decoration-slate-300 decoration-2">
-                            ₹{data.regularBase.toLocaleString('en-IN')}
-                        </span>
+                        
                     </div>
                     <p className="text-sm text-emerald-600 font-medium mt-2">
-                        ⚡ Only 20 seats available at this price
+                        Special Pilot Pricing Available
                     </p>
                 </div>
 

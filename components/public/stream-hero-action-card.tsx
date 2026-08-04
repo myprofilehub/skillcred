@@ -74,9 +74,7 @@ export function StreamHeroActionCard({ slug, accentColor, trackName, syllabusUrl
                                 <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                                     ₹{data.pilotBase.toLocaleString('en-IN')}
                                 </span>
-                                <span className="text-sm line-through text-slate-400 decoration-slate-300 dark:decoration-slate-600 decoration-2">
-                                    ₹{data.regularBase.toLocaleString('en-IN')}
-                                </span>
+                                
                             </div>
                             <div className="mt-auto pt-3 border-t border-slate-200 dark:border-slate-700/50">
                                 <ul className="space-y-2 text-[11px] sm:text-xs text-slate-600 dark:text-slate-300">
@@ -95,9 +93,7 @@ export function StreamHeroActionCard({ slug, accentColor, trackName, syllabusUrl
                                 <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                                     ₹{data.pilotTotal.toLocaleString('en-IN')}
                                 </span>
-                                <span className="text-sm line-through text-slate-400 decoration-slate-300 dark:decoration-slate-600 decoration-2">
-                                    ₹{data.regularTotal.toLocaleString('en-IN')}
-                                </span>
+                                
                             </div>
                             <div className="mt-auto pt-3 border-t border-slate-200 dark:border-slate-700/50 relative z-10">
                                 <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2">PAT Advantages:</p>
@@ -110,7 +106,7 @@ export function StreamHeroActionCard({ slug, accentColor, trackName, syllabusUrl
                         </div>
                     </div>
                     <p className={`text-sm font-medium mb-6 ${styles.text} flex items-center gap-1.5`}>
-                        ⚡ Pilot pricing: Only 20 seats available
+                        Special Pilot Pricing
                     </p>
                 </div>
 
