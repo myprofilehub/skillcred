@@ -12,7 +12,7 @@ const programs = [
         icon: BrainCircuit,
         description: "Full Stack, AI/ML, and Mobile Dev focused on product-company DSA and machine-coding funnels.",
         tech: ["React", "Node", "Python", "System Design"],
-        link: "/programs/standard"
+        link: "/programs/product-engineering"
     },
     {
         title: "Data & Platform Engineering",
@@ -21,7 +21,7 @@ const programs = [
         icon: Database,
         description: "DevOps, Data Engineering, and Data Science focused on SQL, infrastructure, and system-design.",
         tech: ["SQL", "AWS", "Spark", "Docker"],
-        link: "/programs/fast-track"
+        link: "/programs/data-and-platform-engineering"
     },
     {
         title: "Embedded & Security Engineering",
@@ -30,7 +30,7 @@ const programs = [
         icon: Shield,
         description: "Cybersecurity and IoT & Embedded systems focused on scenario drills and hardware-debug cycles.",
         tech: ["C++", "Linux", "Network Security", "RTOS"],
-        link: "/programs/capstone"
+        link: "/programs/embedded-and-security-engineering"
     }
 ];
 

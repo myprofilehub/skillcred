@@ -33,7 +33,7 @@ import {
 const programsData = [
     {
         title: "Product Engineering",
-        href: "/programs/standard",
+        href: "/programs/product-engineering",
         duration: "8–10 Weeks",
         color: "purple",
         icon: BrainCircuit,
@@ -45,7 +45,7 @@ const programsData = [
     },
     {
         title: "Data & Platform Engineering",
-        href: "/programs/fast-track",
+        href: "/programs/data-and-platform-engineering",
         duration: "5–6 Weeks",
         color: "blue",
         icon: Database,
@@ -57,7 +57,7 @@ const programsData = [
     },
     {
         title: "Embedded & Security Engineering",
-        href: "/programs/capstone",
+        href: "/programs/embedded-and-security-engineering",
         duration: "4–5 Weeks",
         color: "green",
         icon: Cpu,

@@ -21,9 +21,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Programs routes
   const programRoutes = [
-    "/programs/capstone",
-    "/programs/fast-track",
-    "/programs/standard",
+    "/programs/embedded-and-security-engineering",
+    "/programs/data-and-platform-engineering",
+    "/programs/product-engineering",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
