@@ -308,7 +308,7 @@ export function DetailsForm({ onSubmit, loading, initialEmail, initialName }: { 
                                                     <div className="h-px bg-slate-200 flex-1" />
                                                 </div>
                                                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                                                    {groupStreams.map((track) => (
+                                                    {groupStreams.map((track: any) => (
                                                         <button
                                                             key={track.id}
                                                             type="button"
