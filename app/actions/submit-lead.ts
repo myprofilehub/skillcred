@@ -1,6 +1,6 @@
 "use server"
 
-import { db } from "@/lib/db";
+import { prisma } from "@/lib/db";
 
 export async function submitLead(formData: FormData) {
   const name = formData.get("name") as string;
@@ -22,7 +22,7 @@ export async function submitLead(formData: FormData) {
 
 
   try {
-    await db.lead.create({
+    await prisma.lead.create({
       data: {
         name,
         email,
