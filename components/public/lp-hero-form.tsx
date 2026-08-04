@@ -125,7 +125,7 @@ export function LpHeroForm({ trackName, accentColor = "orange" }: { trackName: s
 
                     <Dialog open={isDemoOpen} onOpenChange={setIsDemoOpen}>
                         <DialogTrigger asChild>
-                            <Button className={`w-full mt-8 bg-${accentColor}-100 hover:bg-${accentColor}-200 text-${accentColor}-700 font-bold h-12 text-lg`}>
+                            <Button className="w-full mt-8 bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-500/20 font-bold h-12 text-lg">
                                 Request a Demo
                             </Button>
                         </DialogTrigger>
