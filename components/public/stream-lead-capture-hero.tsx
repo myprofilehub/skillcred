@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Download, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Download, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { StreamLeadForm } from "@/components/public/stream-lead-form";
 import { STREAM_PRICING_DATA } from "@/components/public/stream-pricing-components";
 
@@ -92,17 +92,26 @@ export function StreamLeadCaptureHero({ slug, accentColor, bootcampName, trackNa
                     </li>
                 </ul>
 
-                <div className="mb-6 p-5 rounded-2xl bg-slate-50 border border-slate-100">
-                    <p className="text-sm text-slate-500 font-semibold uppercase tracking-wider mb-1">Pilot Cohort Pricing</p>
-                    <div className="flex items-baseline gap-3">
-                        <span className="text-4xl font-extrabold text-slate-900 tracking-tight">
-                            ₹{data.pilotBase.toLocaleString('en-IN')}
-                        </span>
-                        
+                <div className="mb-6 grid grid-cols-2 gap-4">
+                    <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100">
+                        <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider mb-1">Standalone Cohort</p>
+                        <div className="flex items-baseline gap-2">
+                            <span className="text-3xl font-extrabold text-slate-900 tracking-tight">
+                                ₹{data.pilotBase.toLocaleString('en-IN')}
+                            </span>
+                        </div>
                     </div>
-                    <p className="text-sm text-emerald-600 font-medium mt-2">
-                        Special Pilot Pricing Available
-                    </p>
+                    <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm relative overflow-hidden">
+                        <div className={`absolute top-0 right-0 w-2 h-full ${styles.bg}`} />
+                        <p className={`text-xs ${styles.text} font-bold uppercase tracking-wider mb-1 flex items-center gap-1`}>
+                            <ShieldCheck className="w-3.5 h-3.5" /> Cohort + PAT
+                        </p>
+                        <div className="flex items-baseline gap-2">
+                            <span className="text-3xl font-extrabold text-slate-900 tracking-tight">
+                                ₹{data.pilotTotal.toLocaleString('en-IN')}
+                            </span>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3">
