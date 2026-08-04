@@ -10,7 +10,7 @@ export function Footer() {
                     <div className="space-y-4">
                         <Logo />
                         <p className="text-muted-foreground text-sm">
-                            Learn. Build. Verify. Get Hired. <br />
+                            Learn. Build. Verify. <br />
                             The ultimate platform for skill verification and career growth.
                         </p>
                     </div>
@@ -35,7 +35,10 @@ export function Footer() {
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-white/10 text-center text-muted-foreground text-sm">
-                    <p className="mb-2">24/9, Gandhi Street, Vanuvampet, Chennai 600091</p>
+                    <p className="mb-2">
+                        24/9, Gandhi Street, Vanuvampet, Chennai 600091 <br />
+                        <a href="tel:+918870314954" className="hover:text-primary transition-colors">+91 8870314954</a> | <a href="mailto:support@skillcred.in" className="hover:text-primary transition-colors">support@skillcred.in</a>
+                    </p>
                     <p>&copy; {new Date().getFullYear()} SkillCred. All rights reserved.</p>
                 </div>
             </div>

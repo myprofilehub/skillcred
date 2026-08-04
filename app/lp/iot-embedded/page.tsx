@@ -70,7 +70,7 @@ export default async function IotEmbeddedPage() {
 
                     
                     <div className="flex justify-center gap-6 mt-8 mb-4 text-sm text-slate-600 dark:text-slate-300">
-                        <div className="flex flex-col items-center"><span className="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-[10px]">Next Cohort</span><span>Starts 1st</span></div>
+                        <div className="flex flex-col items-center"><span className="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-[10px]">Next Cohort</span><span>Starts 1 September 2026</span></div>
                         <div className="w-px h-8 bg-slate-200 dark:bg-white/10"></div>
                         <div className="flex flex-col items-center"><span className="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-[10px]">Duration</span><span>4-5 Weeks</span></div>
                         <div className="w-px h-8 bg-slate-200 dark:bg-white/10"></div>

@@ -101,7 +101,7 @@ export function StreamPortfolioPreview({ slug, accentColor, skills, outcomes, pr
                   Your Portfolio Output
                 </h2>
                 <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-base">
-                  Your SkillCred portfolio isn't a static resume. It is a live, verified candidate profile showcasing working architectures, clean code, and assessment scores hiring managers trust.
+                  Your SkillCred portfolio isn't a static resume. It is a live, verified candidate profile showcasing working architectures, clean code, and assessment scores structured for recruiter review.
                 </p>
               </div>
 
@@ -122,8 +122,8 @@ export function StreamPortfolioPreview({ slug, accentColor, skills, outcomes, pr
                     <Code className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-slate-950 dark:text-white text-sm">Interactive Architecture Diagrams</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Showcase the real microservices and databases you designed and deployed, not just code snippets.</p>
+                    <h4 className="font-bold text-slate-950 dark:text-white text-sm">Architecture & Implementation</h4>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Showcase the real-world systems you designed and deployed, not just code snippets.</p>
                   </div>
                 </div>
               </div>

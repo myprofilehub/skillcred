@@ -97,7 +97,7 @@ export function LpHeroForm({ trackName, accentColor = "orange" }: { trackName: s
 
     const isProductEngineering = trackName.includes("Full Stack") || trackName.includes("AI & ML") || trackName.includes("Mobile");
     const isDataPlatform = trackName.includes("Data Science") || trackName.includes("Data Engineering") || trackName.includes("DevOps");
-    const pricing = isProductEngineering ? "9,999" : (isDataPlatform ? "6,999" : "4,999");
+    const pricing = isProductEngineering ? "12,999" : (isDataPlatform ? "9,499" : "6,999");
 
     return (
         <div className="grid md:grid-cols-2 gap-8 items-stretch w-full max-w-4xl mx-auto relative z-20">
@@ -118,9 +118,9 @@ export function LpHeroForm({ trackName, accentColor = "orange" }: { trackName: s
                     <p className="text-slate-500 dark:text-slate-400 text-sm mb-6">Program Pricing (Pilot Cohort)</p>
                     <ul className="space-y-4 text-sm text-slate-600 dark:text-slate-300">
                         <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" /> <span>Includes Live Mentor Support</span></li>
-                        <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" /> <span>Guaranteed Project Verification</span></li>
+                        <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" /> <span>Every project mentor-verified before certification</span></li>
                         <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" /> <span>100% Online Format</span></li>
-                        <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" /> <span>Placement Assistance</span></li>
+                        <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" /> <span>Portfolio review and interview preparation. We do not guarantee placement.</span></li>
                     </ul>
 
                     <Dialog open={isDemoOpen} onOpenChange={setIsDemoOpen}>
