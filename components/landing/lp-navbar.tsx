@@ -9,9 +9,9 @@ export function LpNavbar() {
                     <Image 
                         src="/logo.png"
                         alt="SkillCred Logo"
-                        width={180}
-                        height={40}
-                        className="h-10 w-auto group-hover:scale-105 transition-transform duration-300"
+                        width={200}
+                        height={56}
+                        className="h-12 md:h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                         priority
                     />
                 </Link>
