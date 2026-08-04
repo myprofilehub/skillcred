@@ -80,17 +80,7 @@ export function StreamLeadCaptureHero({ slug, accentColor, bootcampName, trackNa
                     {bootcampName}
                 </h2>
                 
-                <ul className="space-y-3 mb-8 text-slate-600 font-medium">
-                    <li className="flex items-center gap-3">
-                        <CheckCircle2 className={`w-5 h-5 ${styles.text}`} /> Live Mentor Support & Classes
-                    </li>
-                    <li className="flex items-center gap-3">
-                        <CheckCircle2 className={`w-5 h-5 ${styles.text}`} /> 4 Real-World Verified Projects
-                    </li>
-                    <li className="flex items-center gap-3">
-                        <CheckCircle2 className={`w-5 h-5 ${styles.text}`} /> Recruiter-Visible Portfolio
-                    </li>
-                </ul>
+
 
                 <div className="mb-8 grid grid-cols-2 gap-4 items-start">
                     <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100">
