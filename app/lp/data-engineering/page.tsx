@@ -1,4 +1,3 @@
-import { StreamBottomCTA } from "@/components/public/stream-pricing-components";
 import { LpHeroForm } from "@/components/public/lp-hero-form";
 import { StreamPortfolioPreview } from "@/components/public/stream-portfolio-preview";
 import { LpNavbar } from "@/components/landing/lp-navbar";
@@ -326,11 +325,17 @@ export default async function DataEngPage() {
                 </div>
             </section>
 
-            <StreamBottomCTA
-                slug="data-engineering"
-                accentColor="yellow"
-                bootcampName="Data Engineering"
-            />
+            
+            <section className="py-20 bg-slate-50 dark:bg-slate-900/50">
+                <div className="container mx-auto px-4 text-center mb-12">
+                    <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4">Ready to start?</h2>
+                    <p className="text-slate-500 max-w-2xl mx-auto">Get the curriculum and see if the Data Engineering Track is right for you.</p>
+                </div>
+                <div className="w-full text-left">
+                    <LpHeroForm trackName="Data Engineering Track" accentColor="blue" />
+                </div>
+            </section>
+
 
             <Footer />
         </main>
