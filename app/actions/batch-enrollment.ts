@@ -3,7 +3,7 @@
 import { prisma } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import bcrypt from 'bcryptjs';
-import { sendLMSCredentials, sendEmail } from '@/lib/email';
+import { sendEmail } from '@/lib/email';
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { randomBytes } from 'crypto';
