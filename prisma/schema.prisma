@@ -801,3 +801,12 @@ enum PostType {
   INCUBATION
   CHALLENGE
 }
+
+model Lead {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  track     String
+  createdAt DateTime @default(now())
+}

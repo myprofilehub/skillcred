@@ -1,5 +1,7 @@
 "use server"
 
+import { db } from "@/lib/db";
+
 export async function submitLead(formData: FormData) {
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
@@ -16,6 +18,21 @@ export async function submitLead(formData: FormData) {
     // We still return success to the user so we don't block them if env is missing in dev,
     // but in prod this should be handled properly.
     return { success: true };
+  }
+
+
+  try {
+    await db.lead.create({
+      data: {
+        name,
+        email,
+        phone,
+        track,
+      },
+    });
+  } catch (dbError) {
+    console.error("Failed to save lead to database:", dbError);
+    // Continue executing so we still attempt the Brevo email
   }
 
   try {
