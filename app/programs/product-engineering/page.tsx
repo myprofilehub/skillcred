@@ -22,7 +22,7 @@ export default function StandardProgramPage() {
 
                 <div className="container relative z-10 mx-auto px-4 text-center">
                     <Badge variant="outline" className="mb-6 border-purple-500/30 text-purple-400 bg-purple-500/10 px-4 py-1 text-sm uppercase tracking-wider">
-                        8–10 Weeks · Product Engineering
+                        7–8 Weeks · Product Engineering
                     </Badge>
                     <h1 className="text-4xl md:text-6xl font-bold font-heading mb-6 tracking-tight">
                         Product <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-violet-500">Engineering</span>

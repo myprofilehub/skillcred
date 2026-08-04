@@ -8,7 +8,7 @@ const programs = [
     {
         title: "Product Engineering",
         badge: "Most Popular",
-        duration: "8-10 Weeks",
+        duration: "7-8 Weeks",
         icon: BrainCircuit,
         description: "Full Stack, AI/ML, and Mobile Dev focused on product-company DSA and machine-coding funnels.",
         tech: ["React", "Node", "Python", "System Design"],

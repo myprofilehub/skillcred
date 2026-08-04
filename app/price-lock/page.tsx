@@ -17,7 +17,7 @@ const programs = [
     {
         name: "Product Engineering",
         slug: "standard",
-        duration: "8–10 Weeks",
+        duration: "7–8 Weeks",
         color: "purple",
         pilotPrice: "₹9,999",
         patPrice: "₹12,999",

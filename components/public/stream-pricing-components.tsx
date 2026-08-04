@@ -16,7 +16,7 @@ export const STREAM_PRICING_DATA: Record<string, {
 }> = {
     "standard": {
         tier: 'A',
-        duration: "8–10 Weeks",
+        duration: "7–8 Weeks",
         pilotBase: 9999,
         pilotAddon: 3000,
         pilotTotal: 12999,
@@ -37,21 +37,21 @@ export const STREAM_PRICING_DATA: Record<string, {
     },
     "ai-ml": {
         tier: 'A',
-        duration: "8–10 Weeks",
+        duration: "7–8 Weeks",
         pilotBase: 9999,
         pilotAddon: 3000,
         pilotTotal: 12999,
     },
     "full-stack-development": {
         tier: 'A',
-        duration: "8–10 Weeks",
+        duration: "7–8 Weeks",
         pilotBase: 9999,
         pilotAddon: 3000,
         pilotTotal: 12999,
     },
     "mobile-development": {
         tier: 'A',
-        duration: "8–10 Weeks",
+        duration: "7–8 Weeks",
         pilotBase: 9999,
         pilotAddon: 3000,
         pilotTotal: 12999,

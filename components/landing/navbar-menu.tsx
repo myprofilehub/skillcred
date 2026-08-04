@@ -34,7 +34,7 @@ const programsData = [
     {
         title: "Product Engineering",
         href: "/programs/product-engineering",
-        duration: "8–10 Weeks",
+        duration: "7–8 Weeks",
         color: "purple",
         icon: BrainCircuit,
         streams: [

@@ -32,7 +32,7 @@ export const RM_PBL_CURRICULUM: Record<string, StreamCurriculum> = {
         title: "Full Stack Development",
         slug: "full-stack-development",
         tier: "A",
-        duration: "8–10 weeks",
+        duration: "7–8 weeks",
         funnelDescription: "Online coding assessment (DSA-heavy, still the gatekeeper at product companies) → technical interview on the stack (Java/Spring or MERN) → system design basics → HR/leadership round. 2026 shift: TypeScript expected not optional; basic DevOps/deployment literacy valued; AI-integration skills (LLM APIs, RAG, vector DBs) now a salary differentiator even for 'generalist' roles.",
         drillThread: "Full DSA Speed Layer runs daily throughout — arrays/hashing/strings (Wks 1–4), trees/graphs (Wks 5–6), DP + timed mocks from Wk 5 onward. Highest-volume stream; this is the tier where cold, unseen-problem reps matter most.",
         prerequisites: "Comfort with one programming language. Basic Git. No framework experience assumed.",
@@ -64,7 +64,7 @@ export const RM_PBL_CURRICULUM: Record<string, StreamCurriculum> = {
                 effortHours: 40
             },
             {
-                phase: "Weeks 8–10",
+                phase: "Weeks 7–8",
                 checkpoint: "Capstone",
                 funnelStage: "Full funnel, end to end",
                 brief: "Student-proposed full-stack application with a non-trivial data model, deployed and reachable. (e.g. integrating an LLM API or vector DB).",
@@ -89,7 +89,7 @@ export const RM_PBL_CURRICULUM: Record<string, StreamCurriculum> = {
         title: "AI & Machine Learning",
         slug: "ai-ml",
         tier: "A",
-        duration: "8–10 weeks",
+        duration: "7–8 weeks",
         funnelDescription: "Recruiter screen → technical phone screen (Python + ML fundamentals + one applied question) → live ML system design (data → train → serve → monitor → retrain → cost) → applied domain interview (RAG / fine-tuning / MLOps) where the candidate walks through a shipped system, diagram in hand. 'Live, not take-home' is explicitly the post-2024 bar.",
         drillThread: "Python DSA fundamentals + ML-math drills throughout; lighter graph/DP volume than Full Stack, heavier on hashing/heap (top-k retrieval) and complexity reasoning for pipeline stages.",
         prerequisites: "Python. Basic statistics. Linear algebra literacy, not fluency.",
@@ -121,7 +121,7 @@ export const RM_PBL_CURRICULUM: Record<string, StreamCurriculum> = {
                 effortHours: 40
             },
             {
-                phase: "Weeks 8–10",
+                phase: "Weeks 7–8",
                 checkpoint: "Capstone",
                 funnelStage: "Full funnel, end to end",
                 brief: "Student-proposed applied ML system with a real evaluation story — what it gets wrong, measured. (e.g. Full RAG/agent capstone).",
@@ -144,7 +144,7 @@ export const RM_PBL_CURRICULUM: Record<string, StreamCurriculum> = {
         title: "Mobile Development (Android/iOS)",
         slug: "mobile-development",
         tier: "A",
-        duration: "8–10 weeks",
+        duration: "7–8 weeks",
         funnelDescription: "DSA/algorithmic screen → live coding of a platform-specific feature under real constraints (pagination, offline handling — not toy problems) → past-project walkthrough → release/collaboration discussion. India-specific: low-end-device performance and offline-first design are explicit differentiators.",
         drillThread: "DSA thread moderate-to-heavy (product-company bar is real; 10+ LPA freshers still gated on medium LeetCode). Emphasis on queue, two-pointer, and graph (dependency resolution) patterns over deep DP.",
         prerequisites: "One object-oriented language. Basic API consumption.",
@@ -176,7 +176,7 @@ export const RM_PBL_CURRICULUM: Record<string, StreamCurriculum> = {
                 effortHours: 40
             },
             {
-                phase: "Weeks 8–10",
+                phase: "Weeks 7–8",
                 checkpoint: "Capstone",
                 funnelStage: "Full funnel, end to end",
                 brief: "Student-proposed application built to release standard: signed build, permissions handled, store metadata prepared, installed on a physical device for the defense.",
