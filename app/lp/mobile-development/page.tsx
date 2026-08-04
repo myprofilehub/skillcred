@@ -62,13 +62,13 @@ export default async function MobileDevelopmentPage() {
                         MOBILE DEVELOPMENT TRACK
                     </Badge>
                     <h1 className="text-4xl md:text-6xl font-bold font-heading mb-6 tracking-tight">
-                        Design Systems That Eliminate<br />
+                        Ship Apps That Work<br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-indigo-500">
-                            Manual Work & Scale Productivity
+                            Offline, On Real Devices
                         </span>
                     </h1>
                     <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
-                        Learn how to automate business processes, IT operations, and data workflows using industry tools and mentor-guided real-world projects.
+                        Learn cross-platform mobile development — navigation, state, offline sync and release builds — through mentor-guided projects taken all the way to an installable app.
                     </p>
 
                     
@@ -114,16 +114,17 @@ export default async function MobileDevelopmentPage() {
                                                 Why This Track?
                                             </h2>
                                             <p className="text-muted-foreground mb-8">
-                                                Mobile Development is the key to enterprise efficiency. This track empowers you to build bots, automate data flows, and design systems that work autonomously.
+                                                Mobile is where constraint lives: intermittent connectivity, limited memory, a device the user reboots at will. This track covers the whole path from design brief to signed build.
                                             </p>
 
                                             <div className="space-y-4">
                                                 {[
-                                                    { text: "Process Mobile Development and workflow design", icon: Workflow },
-                                                    { text: "API-based system Mobile Development", icon: Server },
-                                                    { text: "Task scheduling and monitoring", icon: Clock },
-                                                    { text: "Web and data Mobile Development", icon: Globe },
-                                                    { text: "Robotic Process Mobile Development (RPA) concepts", icon: Bot }
+                                                    { text: "Cross-platform development with React Native", icon: Layers },
+                                                    { text: "Navigation, state management and list performance", icon: Workflow },
+                                                    { text: "Offline-first storage and sync reconciliation", icon: Database },
+                                                    { text: "REST API integration and error handling", icon: Server },
+                                                    { text: "Profiling and fixing performance problems", icon: Settings },
+                                                    { text: "Release builds, permissions and store metadata", icon: Lock }
                                                 ].map((item, i) => (
                                                     <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-background/50 border border-white/5">
                                                         <div className="p-2 rounded-lg bg-yellow-500/20 text-yellow-400">
@@ -135,7 +136,7 @@ export default async function MobileDevelopmentPage() {
                                             </div>
 
                                             <div className="mt-8 p-4 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-sm">
-                                                <span className="font-bold">Real-World Impact:</span> Students learn to identify repetitive tasks and convert them into automated systems used in real businesses.
+                                                <span className="font-bold">Shipped, Not Just Built:</span> The capstone is a signed build installed on a physical device and demonstrated live during assessment.
                                             </div>
                                         </div>
 
@@ -145,10 +146,10 @@ export default async function MobileDevelopmentPage() {
                                             <ul className="space-y-4">
                                                 {[
                                                     "College students (any stream)",
-                                                    "Beginners in Mobile Development & scripting",
-                                                    "Operations & business students",
-                                                    "IT & non-IT professionals",
-                                                    "Career switchers into Mobile Development roles"
+                                                    "Beginners in mobile development",
+                                                    "Web developers moving to mobile",
+                                                    "Designers who want to build what they design",
+                                                    "Career switchers targeting mobile engineering roles"
                                                 ].map((item, i) => (
                                                     <li key={i} className="flex items-center gap-3">
                                                         <CheckCircle2 className="w-5 h-5 text-yellow-400 shrink-0" />
@@ -157,7 +158,7 @@ export default async function MobileDevelopmentPage() {
                                                 ))}
                                             </ul>
                                             <div className="mt-8 p-4 rounded-lg bg-yellow-500/10 border border-yellow-500/20 text-sm text-yellow-300">
-                                                <span className="font-semibold">Note:</span> No prior Mobile Development experience required — fundamentals are included.
+                                                <span className="font-semibold">Note:</span> JavaScript fundamentals are included — no prior mobile experience required.
                                             </div>
                                         </div>
                                     </div>
@@ -184,14 +185,14 @@ export default async function MobileDevelopmentPage() {
                             </h3>
                             <div className="flex flex-wrap justify-center sm:justify-start gap-4">
                                         {[
-                                            { name: "Python", sub: "Mobile Development Scripting", color: "text-blue-400" },
-                                            { name: "Selenium", sub: "Web Mobile Development", color: "text-green-400" },
-                                            { name: "UiPath / AA", sub: "RPA Concepts", color: "text-orange-400" },
-                                            { name: "REST APIs", sub: "Integrations", color: "text-purple-400" },
-                                            { name: "Excel", sub: "Data Mobile Development", color: "text-green-500" },
-                                            { name: "Zapier / n8n", sub: "Low - Code", color: "text-yellow-400" },
-                                            { name: "GitHub", sub: "Version Control", color: "text-gray-400" },
-                                            { name: "Cron", sub: "Scheduling", color: "text-red-400" }
+                                            { name: "React Native", sub: "Cross-Platform Framework", color: "text-blue-400" },
+                                            { name: "Expo", sub: "Build & Deploy Toolchain", color: "text-purple-400" },
+                                            { name: "TypeScript", sub: "Type Safety", color: "text-blue-500" },
+                                            { name: "Redux Toolkit", sub: "State Management", color: "text-purple-500" },
+                                            { name: "SQLite / MMKV", sub: "Local Persistence", color: "text-green-400" },
+                                            { name: "REST APIs", sub: "Backend Integration", color: "text-orange-400" },
+                                            { name: "Flipper", sub: "Debugging & Profiling", color: "text-pink-400" },
+                                            { name: "Git & GitHub", sub: "Version Control", color: "text-gray-300" }
                                         ].map((tool) => (
                                             <div key={tool.name} className="text-center p-6 rounded-xl bg-secondary/30 w-44 hover:bg-secondary/50 transition-colors border border-white/5">
                                                 <div className={`text-lg font-bold mb-1 ${tool.color}`}>{tool.name}</div>
@@ -208,12 +209,12 @@ export default async function MobileDevelopmentPage() {
                             </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         {[
-                                            { title: "Live Mentor Sessions", desc: "Project-led guidance", icon: Briefcase },
-                                            { title: "Weekly Challenges", desc: "Solve Mobile Development puzzles", icon: Bot },
-                                            { title: "Real Business Cases", desc: "Automate actual workflows", icon: Layers },
-                                            { title: "Step-by-step", desc: "Project building", icon: CheckCircle2 },
-                                            { title: "Recorded Tutorials", desc: "Concept revision", icon: FileCheck },
-                                            { title: "Mentor Reviews", desc: "Code correction & feedback", icon: MessageSquare },
+                                            { title: "Live Mentor Sessions", desc: "Architecture walkthroughs", icon: Briefcase },
+                                            { title: "Design-to-Build Briefs", desc: "Work from supplied designs and API contracts", icon: Layout },
+                                            { title: "Offline Drills", desc: "Break connectivity and reconcile", icon: Database },
+                                            { title: "Performance Profiling", desc: "Find and fix real jank", icon: Terminal },
+                                            { title: "Recorded Lessons", desc: "Concept revision", icon: FileCheck },
+                                            { title: "Mentor Reviews", desc: "Code correction and feedback", icon: MessageSquare },
                                         ].map((item, i) => (
                                             <div key={i} className="flex items-start gap-4 p-6 rounded-xl border border-white/5 bg-background/50">
                                                 <div className="p-3 rounded-lg bg-yellow-500/10 text-yellow-400">
@@ -235,8 +236,8 @@ export default async function MobileDevelopmentPage() {
                 variant="roadmap"
             slug="mobile-development"
             accentColor="purple"
-            skills={['Mobile Development', 'RPA', 'Python', 'Workflow']}
-            outcomes={['Mobile Development Engineer', 'RPA Developer', 'Process Mobile Development Analyst', 'Workflow Engineer', 'IT Mobile Development Specialist']}
+            skills={['React Native', 'TypeScript', 'Offline Sync', 'Mobile Performance']}
+            outcomes={['Mobile Application Developer', 'React Native Developer', 'Cross-Platform Engineer', 'Frontend Mobile Engineer', 'Junior Mobile Developer']}
             projects={[{'title': 'E-Commerce Mobile App', 'desc': 'Cross-platform store client built with React Native, Expo, and Redux.', 'tech': ['React Native', 'Expo', 'Redux Toolkit', 'REST APIs'], 'metrics': [{'name': 'FPS Stability', 'score': 93}, {'name': 'Bundle Size', 'score': 89}], 'githubUrl': 'https://github.com/skillcred/mobile-store', 'liveUrl': 'https://app-store.skillcred.in'}, {'title': 'Social Media iOS App', 'desc': 'Native iOS UI written in SwiftUI, powered by Firebase backend.', 'tech': ['SwiftUI', 'Firebase', 'Swift Packages', 'iOS SDK'], 'metrics': [{'name': 'Startup Time (ms)', 'score': 96}, {'name': 'Crash Rate', 'score': 99}], 'githubUrl': 'https://github.com/skillcred/ios-social', 'liveUrl': 'https://app-ios.skillcred.in'}]}
             />
 
@@ -245,8 +246,8 @@ export default async function MobileDevelopmentPage() {
                 variant="default"
             slug="mobile-development"
             accentColor="purple"
-            skills={['Mobile Development', 'RPA', 'Python', 'Workflow']}
-            outcomes={['Mobile Development Engineer', 'RPA Developer', 'Process Mobile Development Analyst', 'Workflow Engineer', 'IT Mobile Development Specialist']}
+            skills={['React Native', 'TypeScript', 'Offline Sync', 'Mobile Performance']}
+            outcomes={['Mobile Application Developer', 'React Native Developer', 'Cross-Platform Engineer', 'Frontend Mobile Engineer', 'Junior Mobile Developer']}
             projects={[{'title': 'E-Commerce Mobile App', 'desc': 'Cross-platform store client built with React Native, Expo, and Redux.', 'tech': ['React Native', 'Expo', 'Redux Toolkit', 'REST APIs'], 'metrics': [{'name': 'FPS Stability', 'score': 93}, {'name': 'Bundle Size', 'score': 89}], 'githubUrl': 'https://github.com/skillcred/mobile-store', 'liveUrl': 'https://app-store.skillcred.in'}, {'title': 'Social Media iOS App', 'desc': 'Native iOS UI written in SwiftUI, powered by Firebase backend.', 'tech': ['SwiftUI', 'Firebase', 'Swift Packages', 'iOS SDK'], 'metrics': [{'name': 'Startup Time (ms)', 'score': 96}, {'name': 'Crash Rate', 'score': 99}], 'githubUrl': 'https://github.com/skillcred/ios-social', 'liveUrl': 'https://app-ios.skillcred.in'}]}
             />
 
@@ -276,11 +277,11 @@ export default async function MobileDevelopmentPage() {
                                                 </p>
                                                 <ul className="space-y-4">
                                                     {[
-                                                        "Assign Mobile Development projects",
-                                                        "Review Mobile Development logic",
-                                                        "Validate working bots",
+                                                        "Assign mobile app architecture & features",
+                                                        "Review React Native & TypeScript code",
+                                                        "Validate offline storage & sync reconciliation",
                                                         "Approve assessment eligibility",
-                                                        "Provide performance feedback",
+                                                        "Provide performance profiling feedback",
                                                         "Issue recommendation letters"
                                                     ].map((item, i) => (
                                                         <li key={i} className="flex items-center gap-3">
@@ -309,10 +310,10 @@ export default async function MobileDevelopmentPage() {
                             </h3>
                             <div className="space-y-4">
                                         {[
-                                            { q: "Is this coding-heavy?", a: "Moderate — scripting is taught step by step." },
-                                            { q: "Will I build real bots?", a: "Yes — every project produces a working Mobile Development system." },
-                                            { q: "Can non-IT students take this track?", a: "Yes — it is designed for beginners." },
-                                            { q: "Is this job-oriented?", a: "Yes — Mobile Development is in high demand across industries." },
+                                            { q: "Do I need a Mac to build iOS apps?", a: "No — Expo's cloud build service handles iOS builds without local Apple hardware." },
+                                            { q: "Is JavaScript knowledge required?", a: "No — JavaScript and TypeScript fundamentals are covered before the first project." },
+                                            { q: "Will I publish to the app stores?", a: "The capstone is built to release standard with store metadata prepared. Actual publishing requires a paid developer account, which is your choice." },
+                                            { q: "Native Android or cross-platform?", a: "Cross-platform with React Native, which is where most Indian product-company mobile hiring sits today." },
                                         ].map((faq, i) => (
                                             <Card key={i} className="hover:bg-accent/5 transition-colors">
                                                 <CardHeader>
@@ -340,8 +341,6 @@ export default async function MobileDevelopmentPage() {
 
 
             <Footer />
-                        </main>
-                        );
+        </main>
+    );
 }
-
-
