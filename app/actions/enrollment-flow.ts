@@ -261,7 +261,7 @@ export async function verifyPaymentAndEnroll(paymentId: string) {
             // Email LMS & Login Credentials to student
             const { sendEnrollmentCredentials } = await import('@/lib/email');
             await sendEnrollmentCredentials(
-                user.email,
+                user.email || '',
                 user.name || 'Student',
                 lmsPassword,
                 newGeneralPassword
