@@ -49,7 +49,8 @@ export async function sendEnrollmentCredentials(
     personalEmail: string,
     name: string,
     lmsPassword: string,
-    generalPassword: string
+    generalPassword: string,
+    lmsEmail?: string
 ) {
     const htmlContent = `
     <!DOCTYPE html>
@@ -66,7 +67,7 @@ export async function sendEnrollmentCredentials(
             
             <div style="background-color: #f3f4f6; padding: 15px; border-radius: 5px; margin: 20px 0;">
                 <h3 style="margin-top: 0; color: #4f46e5;">1. LMS Credentials (For Course Content)</h3>
-                <p style="margin: 5px 0;"><strong>LMS Email:</strong> ${personalEmail}</p>
+                <p style="margin: 5px 0;"><strong>LMS Email:</strong> ${lmsEmail || personalEmail}</p>
                 <p style="margin: 5px 0;"><strong>LMS Password:</strong> ${lmsPassword}</p>
                 <p style="margin: 5px 0; font-size: 12px; color: #666;"><em>Note: The LMS password is fixed and cannot be changed.</em></p>
             </div>

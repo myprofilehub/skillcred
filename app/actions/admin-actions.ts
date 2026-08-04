@@ -344,13 +344,14 @@ export async function approveEnrollment(enrollmentId: string) {
         ]);
 
         // Send Email via Brevo
-        const { sendLMSCredentials } = await import("@/lib/email");
+        const { sendEnrollmentCredentials } = await import("@/lib/email");
         try {
-            await sendLMSCredentials(
+            await sendEnrollmentCredentials(
                 user.email || "",
                 user.name || "Student",
-                lmsEmail,
-                tempPassword
+                "SkillCred@123", // Fixed LMS Password
+                tempPassword,
+                lmsEmail
             );
         } catch (emailErr) {
             console.error("Failed to send LMS credentials email:", emailErr);
