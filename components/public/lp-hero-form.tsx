@@ -120,7 +120,7 @@ export function LpHeroForm({ trackName, accentColor = "orange" }: { trackName: s
                         <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" /> <span>Includes Live Mentor Support</span></li>
                         <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" /> <span>Every project mentor-verified before certification</span></li>
                         <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" /> <span>100% Online Format</span></li>
-                        <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" /> <span>Portfolio review and interview preparation. We do not guarantee placement.</span></li>
+                        <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" /> <span>Portfolio review and interview preparation.</span></li>
                     </ul>
 
                     <Dialog open={isDemoOpen} onOpenChange={setIsDemoOpen}>
