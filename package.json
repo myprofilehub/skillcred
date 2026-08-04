@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 8000",
-    "build": "rm -rf .next && next build",
+    "build": "rm -rf .next && NODE_OPTIONS='--max-old-space-size=4096' next build",
     "start": "next start -p 8000",
     "lint": "eslint",
     "generate-challenges": "tsx scripts/generate-challenges.ts"
