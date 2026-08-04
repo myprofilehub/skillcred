@@ -114,6 +114,23 @@ export function StreamLeadCaptureHero({ slug, accentColor, bootcampName, trackNa
                     </div>
                 </div>
 
+                <div className="mb-8 p-4 rounded-xl bg-slate-50 border border-slate-100">
+                    <p className="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
+                        <ShieldCheck className={`w-4 h-4 ${styles.text}`} /> PAT Bundle Includes:
+                    </p>
+                    <ul className="space-y-2 text-sm text-slate-600 font-medium">
+                        <li className="flex items-start gap-2">
+                            <CheckCircle2 className={`w-4 h-4 mt-0.5 ${styles.text} shrink-0`} /> Live Oral Defense of Projects
+                        </li>
+                        <li className="flex items-start gap-2">
+                            <CheckCircle2 className={`w-4 h-4 mt-0.5 ${styles.text} shrink-0`} /> Mentor Recommendation Letter
+                        </li>
+                        <li className="flex items-start gap-2">
+                            <CheckCircle2 className={`w-4 h-4 mt-0.5 ${styles.text} shrink-0`} /> Resume & Interview Preparation
+                        </li>
+                    </ul>
+                </div>
+
                 <div className="flex flex-col sm:flex-row gap-3">
                     <Button size="lg" className={`text-base px-6 h-12 text-white font-bold transition-all shadow-md ${styles.btnBg} ${styles.btnHover} flex-1`} asChild>
                         <Link href="/enroll">
