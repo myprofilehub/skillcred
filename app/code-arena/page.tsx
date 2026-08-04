@@ -561,7 +561,7 @@ export default function CodeArenaPage() {
       {/* ─── REGISTRATION MODAL ───────────────────────────────────────────── */}
       {selectedChallenge && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="bg-background border border-border rounded-3xl p-7 max-w-md w-full relative shadow-2xl">
+          <div className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 border border-border rounded-3xl p-7 max-w-md w-full relative shadow-2xl">
             <button
               onClick={() => { setSelectedChallenge(null); setFormStatus('idle') }}
               className="absolute top-4 right-4 w-8 h-8 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors text-lg"
@@ -632,7 +632,7 @@ export default function CodeArenaPage() {
       {/* ─── SUBMISSION MODAL ───────────────────────────────────────────── */}
       {submitChallenge && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="bg-background border border-border rounded-3xl p-7 max-w-md w-full relative shadow-2xl">
+          <div className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 border border-border rounded-3xl p-7 max-w-md w-full relative shadow-2xl">
             <button
               onClick={() => { setSubmitChallenge(null); setSubmitStatus('idle') }}
               className="absolute top-4 right-4 w-8 h-8 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors text-lg"

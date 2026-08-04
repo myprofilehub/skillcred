@@ -129,7 +129,7 @@ export function LpHeroForm({ trackName, accentColor = "orange" }: { trackName: s
                                 Request a Demo
                             </Button>
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-md">
+                        <DialogContent className="sm:max-w-md bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100">
                             <DialogHeader>
                                 <DialogTitle>Register for Live Webinar</DialogTitle>
                                 <DialogDescription>
