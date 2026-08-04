@@ -71,15 +71,15 @@ export async function processEnrollmentDetails(formData: FormData) {
         const isTierA = TIER_A.some(s => slugLower.includes(s));
         const isTierB = TIER_B.some(s => slugLower.includes(s));
         
-        let pilotBase = 4999; // Tier C default
-        let pilotAddon = 2000;
+        let pilotBase = 3499; // Tier C default
+        let pilotAddon = 1500;
         
         if (isTierA) {
-            pilotBase = 9999;
-            pilotAddon = 3000;
+            pilotBase = 7999;
+            pilotAddon = 2000;
         } else if (isTierB) {
-            pilotBase = 6999;
-            pilotAddon = 2500;
+            pilotBase = 5499;
+            pilotAddon = 1500;
         }
         
         const isUpgrade = duration === 'pat-verified';

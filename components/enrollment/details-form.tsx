@@ -57,22 +57,22 @@ export function DetailsForm({ onSubmit, loading, initialEmail, initialName }: { 
         
         const isTierA = TIER_A.some(s => slug.includes(s));
         
-        let pilotBase = 4999;
-        let regularBase = 6999;
-        let pilotAddon = 2000;
-        let regularAddon = 3000;
+        let pilotBase = 3499;
+        let regularBase = 4999;
+        let pilotAddon = 1500;
+        let regularAddon = 2000;
         
         if (isTierA) {
-            pilotBase = 9999;
-            regularBase = 14999;
-            pilotAddon = 3000;
-            regularAddon = 4000;
+            pilotBase = 7999;
+            regularBase = 9999;
+            pilotAddon = 2000;
+            regularAddon = 3000;
         } else {
             // Tier B/C
-            pilotBase = 6999;
-            regularBase = 9999;
-            pilotAddon = 2500;
-            regularAddon = 3500;
+            pilotBase = 5499;
+            regularBase = 7999;
+            pilotAddon = 1500;
+            regularAddon = 2000;
         }
         
         const isUpgrade = programDuration === 'pat-verified';

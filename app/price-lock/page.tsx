@@ -19,8 +19,8 @@ const programs = [
         slug: "standard",
         duration: "7–8 Weeks",
         color: "purple",
-        pilotPrice: "₹9,999",
-        patPrice: "₹12,999",
+        pilotPrice: "₹7,999",
+        patPrice: "₹9,999",
         streams: ["Full Stack Dev", "AI/ML", "Mobile Dev"],
     },
     {
@@ -28,8 +28,8 @@ const programs = [
         slug: "fast-track",
         duration: "5–6 Weeks",
         color: "blue",
-        pilotPrice: "₹6,999",
-        patPrice: "₹9,499",
+        pilotPrice: "₹5,499",
+        patPrice: "₹6,999",
         streams: ["DevOps & Cloud", "Data Eng", "Data Science"],
     },
     {
@@ -37,8 +37,8 @@ const programs = [
         slug: "capstone",
         duration: "4–5 Weeks",
         color: "green",
-        pilotPrice: "₹4,999",
-        patPrice: "₹6,999",
+        pilotPrice: "₹3,499",
+        patPrice: "₹4,999",
         streams: ["Cybersecurity", "IoT & Embedded"],
     },
 ];

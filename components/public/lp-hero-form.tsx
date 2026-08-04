@@ -97,7 +97,7 @@ export function LpHeroForm({ trackName, accentColor = "orange" }: { trackName: s
 
     const isProductEngineering = trackName.includes("Full Stack") || trackName.includes("AI & ML") || trackName.includes("Mobile");
     const isDataPlatform = trackName.includes("Data Science") || trackName.includes("Data Engineering") || trackName.includes("DevOps");
-    const pricing = isProductEngineering ? "12,999" : (isDataPlatform ? "9,499" : "6,999");
+    const pricing = isProductEngineering ? "9,999" : (isDataPlatform ? "6,999" : "4,999");
 
     return (
         <div className="grid md:grid-cols-2 gap-8 items-stretch w-full max-w-4xl mx-auto relative z-20">
