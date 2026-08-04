@@ -80,7 +80,7 @@ export default async function StudentSchedulePage() {
                                     return (
                                         <Card
                                             key={event.id}
-                                            className={`border-white/10 ${isNow ? "bg-green-500/10 border-green-500/30" : "bg-white/5"
+                                            className={`border-border dark:border-border dark:border-white/10 ${isNow ? "bg-green-500/10 border-green-500/30" : "bg-white/5"
                                                 }`}
                                         >
                                             <CardContent className="p-4">
@@ -100,7 +100,7 @@ export default async function StudentSchedulePage() {
                                                                 <Clock className="w-3 h-3" />
                                                                 <span>{startTime}{endTime ? ` - ${endTime}` : ""}</span>
                                                                 {isNow && (
-                                                                    <Badge className="bg-green-500 text-white text-xs">
+                                                                    <Badge className="bg-green-500 text-foreground dark:text-foreground dark:text-white text-xs">
                                                                         Live Now
                                                                     </Badge>
                                                                 )}
@@ -111,7 +111,7 @@ export default async function StudentSchedulePage() {
                                                         <Link href={event.meetLink} target="_blank">
                                                             <Button
                                                                 className={`gap-2 ${isNow
-                                                                        ? "bg-green-500 hover:bg-green-600 text-white"
+                                                                        ? "bg-green-500 hover:bg-green-600 text-foreground dark:text-foreground dark:text-white"
                                                                         : ""
                                                                     }`}
                                                                 variant={isNow ? "default" : "outline"}

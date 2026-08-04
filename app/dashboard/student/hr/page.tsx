@@ -275,7 +275,7 @@ export default async function CareerHubPage() {
                     Complete your Project Assessment Test (PAT) to unlock access to job opportunities,
                     recruiter visibility, and interview requests.
                 </p>
-                <div className="bg-secondary/20 border border-white/10 rounded-lg p-6 max-w-md w-full mb-6">
+                <div className="bg-secondary/20 border border-border dark:border-border dark:border-white/10 rounded-lg p-6 max-w-md w-full mb-6">
                     <h3 className="font-semibold mb-4 flex items-center gap-2">
                         <CheckCircle2 className="h-5 w-5 text-emerald-500" />
                         What you&apos;ll unlock:

@@ -42,7 +42,7 @@ function SignInContent() {
                 </span>
             </Link>
 
-            <Card className="w-full max-w-md border-white/10 glass-card relative z-10">
+            <Card className="w-full max-w-md border-border dark:border-border dark:border-white/10 glass-card relative z-10">
                 <CardHeader className="text-center space-y-2">
                     <CardTitle className="text-2xl">Welcome back</CardTitle>
                     <CardDescription>

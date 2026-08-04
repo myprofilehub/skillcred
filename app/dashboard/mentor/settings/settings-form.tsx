@@ -47,7 +47,7 @@ export function SettingsForm({ user }: SettingsFormProps) {
 
     return (
         <div className="grid gap-6">
-            <Card className="bg-white/5 border-white/10">
+            <Card className="bg-white/5 border-border dark:border-border dark:border-white/10">
                 <CardHeader>
                     <CardTitle>Profile</CardTitle>
                     <CardDescription>Your public profile information.</CardDescription>
@@ -92,7 +92,7 @@ export function SettingsForm({ user }: SettingsFormProps) {
                 </CardContent>
             </Card>
 
-            <Card className="bg-white/5 border-white/10">
+            <Card className="bg-white/5 border-border dark:border-border dark:border-white/10">
                 <CardHeader>
                     <CardTitle>Notifications</CardTitle>
                     <CardDescription>Configure how you receive alerts.</CardDescription>

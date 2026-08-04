@@ -55,7 +55,7 @@ export default function InvestorSignupPage() {
                 </span>
             </Link>
 
-            <Card className="w-full max-w-2xl border-white/10 bg-black/50 backdrop-blur-xl border-amber-500/20 relative z-10">
+            <Card className="w-full max-w-2xl border-border dark:border-border dark:border-white/10 bg-muted/50 dark:bg-background dark:bg-muted/50 dark:bg-background dark:bg-black/50 backdrop-blur-xl border-amber-500/20 relative z-10">
                 <CardHeader className="space-y-1 flex flex-col items-center">
                     <div className="mx-auto w-12 h-12 bg-amber-500/10 rounded-full flex items-center justify-center mb-2">
                         <Building2 className="w-6 h-6 text-amber-500" />
@@ -74,19 +74,19 @@ export default function InvestorSignupPage() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                     <Label htmlFor="name">Full Name</Label>
-                                    <Input id="name" name="name" placeholder="John Doe" required className="bg-white/5 border-white/10" />
+                                    <Input id="name" name="name" placeholder="John Doe" required className="bg-white/5 border-border dark:border-border dark:border-white/10" />
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="username">Username</Label>
-                                    <Input id="username" name="username" placeholder="johndoe_vc" required className="bg-white/5 border-white/10" />
+                                    <Input id="username" name="username" placeholder="johndoe_vc" required className="bg-white/5 border-border dark:border-border dark:border-white/10" />
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="email">Work Email</Label>
-                                    <Input id="email" name="email" type="email" placeholder="john@fund.com" required className="bg-white/5 border-white/10" />
+                                    <Input id="email" name="email" type="email" placeholder="john@fund.com" required className="bg-white/5 border-border dark:border-border dark:border-white/10" />
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="mobile">Mobile</Label>
-                                    <Input id="mobile" name="mobile" placeholder="+1 234..." className="bg-white/5 border-white/10" />
+                                    <Input id="mobile" name="mobile" placeholder="+1 234..." className="bg-white/5 border-border dark:border-border dark:border-white/10" />
                                 </div>
                             </div>
                         </div>
@@ -97,19 +97,19 @@ export default function InvestorSignupPage() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                     <Label htmlFor="company">Company / Fund Name</Label>
-                                    <Input id="company" name="company" placeholder="Acme Ventures" required className="bg-white/5 border-white/10" />
+                                    <Input id="company" name="company" placeholder="Acme Ventures" required className="bg-white/5 border-border dark:border-border dark:border-white/10" />
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="position">Position</Label>
-                                    <Input id="position" name="position" placeholder="Partner / Angel" required className="bg-white/5 border-white/10" />
+                                    <Input id="position" name="position" placeholder="Partner / Angel" required className="bg-white/5 border-border dark:border-border dark:border-white/10" />
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="linkedinUrl">LinkedIn URL</Label>
-                                    <Input id="linkedinUrl" name="linkedinUrl" placeholder="https://linkedin.com/in/..." className="bg-white/5 border-white/10" />
+                                    <Input id="linkedinUrl" name="linkedinUrl" placeholder="https://linkedin.com/in/..." className="bg-white/5 border-border dark:border-border dark:border-white/10" />
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="website">Website / Portfolio</Label>
-                                    <Input id="website" name="website" placeholder="https://acme.vc" className="bg-white/5 border-white/10" />
+                                    <Input id="website" name="website" placeholder="https://acme.vc" className="bg-white/5 border-border dark:border-border dark:border-white/10" />
                                 </div>
                             </div>
                         </div>
@@ -138,11 +138,11 @@ export default function InvestorSignupPage() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                     <Label htmlFor="password">Password</Label>
-                                    <Input id="password" name="password" type="password" required className="bg-white/5 border-white/10" />
+                                    <Input id="password" name="password" type="password" required className="bg-white/5 border-border dark:border-border dark:border-white/10" />
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="confirmPassword">Confirm Password</Label>
-                                    <Input id="confirmPassword" name="confirmPassword" type="password" required className="bg-white/5 border-white/10" />
+                                    <Input id="confirmPassword" name="confirmPassword" type="password" required className="bg-white/5 border-border dark:border-border dark:border-white/10" />
                                 </div>
                             </div>
                         </div>

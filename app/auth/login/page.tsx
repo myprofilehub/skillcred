@@ -37,7 +37,7 @@ function LoginForm() {
     };
 
     return (
-        <Card className="border-white/10 bg-black/50 backdrop-blur-xl">
+        <Card className="border-border dark:border-border dark:border-white/10 bg-muted/50 dark:bg-background dark:bg-muted/50 dark:bg-background dark:bg-black/50 backdrop-blur-xl">
             <CardHeader className="space-y-1 flex flex-col items-center">
                 <div className="mb-4">
                     <Logo width={150} height={40} />
@@ -58,7 +58,7 @@ function LoginForm() {
                             type="email"
                             placeholder="m@example.com"
                             required
-                            className="bg-white/5 border-white/10"
+                            className="bg-white/5 border-border dark:border-border dark:border-white/10"
                         />
                     </div>
                     <div className="space-y-2">
@@ -73,7 +73,7 @@ function LoginForm() {
                             name="password"
                             type="password"
                             required
-                            className="bg-white/5 border-white/10"
+                            className="bg-white/5 border-border dark:border-border dark:border-white/10"
                         />
                     </div>
 
@@ -83,7 +83,7 @@ function LoginForm() {
                         </div>
                     )}
 
-                    <Button type="submit" className="w-full" disabled={isPending}>
+                    <Button type="submit" className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold tracking-wide transition-colors shadow-md shadow-orange-500/20 border-none" disabled={isPending}>
                         {isPending ? <Loader2 className="mr-2 w-4 h-4 animate-spin" /> : null}
                         Sign In
                     </Button>
@@ -99,14 +99,14 @@ function LoginForm() {
 
                 <div className="relative w-full">
                     <div className="absolute inset-0 flex items-center">
-                        <span className="w-full border-t border-white/10" />
+                        <span className="w-full border-t border-border dark:border-border dark:border-white/10" />
                     </div>
                     <div className="relative flex justify-center text-xs uppercase">
-                        <span className="bg-black px-2 text-muted-foreground">Or</span>
+                        <span className="bg-background dark:bg-background dark:bg-black px-2 text-muted-foreground">Or</span>
                     </div>
                 </div>
 
-                <Link href="/auth/lms" className="w-full text-muted-foreground hover:text-white transition-colors">
+                <Link href="/auth/lms" className="w-full text-muted-foreground hover:text-foreground dark:text-foreground dark:text-white transition-colors">
                     Access via LMS (Enterprise)
                 </Link>
             </CardFooter>

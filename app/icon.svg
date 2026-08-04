@@ -1,0 +1,9 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <!-- Top Orange Triangle -->
+    <polygon points="0,12 12,0 24,12" fill="#F97316" />
+    <!-- Bottom Indigo Triangle -->
+    <polygon points="0,12 24,12 12,24" fill="#4F46E5" />
+    <!-- White Keyhole Cutout -->
+    <circle cx="12" cy="10" r="2.5" fill="#FFFFFF" />
+    <rect x="10.75" y="11" width="2.5" height="7" rx="1.25" fill="#FFFFFF" />
+</svg>

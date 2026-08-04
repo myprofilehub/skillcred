@@ -120,7 +120,7 @@ export default async function StudentProgressPage() {
             </div>
 
             {/* Attendance by Class */}
-            <Card className="border-white/10 bg-white/5">
+            <Card className="border-border dark:border-border dark:border-white/10 bg-white/5">
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <Users className="w-5 h-5 text-green-500" /> Attendance by Class
@@ -131,7 +131,7 @@ export default async function StudentProgressPage() {
                     {!("error" in attendance) && attendance.stats.length > 0 ? (
                         <div className="space-y-4">
                             {attendance.stats.map((stat, i) => (
-                                <div key={i} className="p-4 rounded-lg bg-background/50 border border-white/5">
+                                <div key={i} className="p-4 rounded-lg bg-background/50 border border-border dark:border-border dark:border-white/5">
                                     <div className="flex justify-between items-center mb-3">
                                         <span className="font-medium">{stat.classroomName}</span>
                                         <Badge
@@ -172,7 +172,7 @@ export default async function StudentProgressPage() {
 
             {/* Recent Attendance Sessions */}
             {!("error" in attendance) && attendance.sessions.length > 0 && (
-                <Card className="border-white/10 bg-white/5">
+                <Card className="border-border dark:border-border dark:border-white/10 bg-white/5">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Calendar className="w-5 h-5 text-blue-500" /> Recent Sessions
@@ -184,7 +184,7 @@ export default async function StudentProgressPage() {
                             {attendance.sessions.slice(0, 10).map((session) => (
                                 <div
                                     key={session.id}
-                                    className="flex items-center justify-between p-3 rounded-lg bg-background/50 border border-white/5"
+                                    className="flex items-center justify-between p-3 rounded-lg bg-background/50 border border-border dark:border-border dark:border-white/5"
                                 >
                                     <div className="flex items-center gap-3">
                                         <div

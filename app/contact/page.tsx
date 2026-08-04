@@ -1,163 +1,203 @@
-"use client";
+'use client'
 
-import { LandingNavbar } from "@/components/landing/navbar";
-import { Badge } from "@/components/ui/badge";
-import { Mail, MapPin, Phone, Send, Github, Twitter, Linkedin } from "lucide-react";
-import { Logo } from "@/components/logo";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { useState } from 'react'
+import { LandingNavbar } from "@/components/landing/navbar"
+import { Footer } from "@/components/layout/footer"
+import { submitLead } from "@/app/actions/submit-lead"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { Card, CardContent } from "@/components/ui/card"
+import { Phone, Mail, MapPin, CheckCircle2, ArrowRight } from "lucide-react"
 
 export default function ContactPage() {
-    const { toast } = useToast();
-    const [loading, setLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [error, setError] = useState('')
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setLoading(true);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setError('')
 
-        // Simulate network request
-        await new Promise(resolve => setTimeout(resolve, 1500));
+    const form = e.currentTarget
+    const formData = new FormData(form)
+    
+    // Customize the track field based on the selected program
+    const program = formData.get('program') as string
+    formData.set('track', `Callback Request - ${program}`)
+    
+    try {
+      const result = await submitLead(formData)
+      if (result?.error) {
+        setError(result.error)
+      } else {
+        setIsSuccess(true)
+      }
+    } catch (err) {
+      setError('Something went wrong. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
-        setLoading(false);
-        toast({
-            title: "Message Sent!",
-            description: "We'll get back to you as soon as possible.",
-        });
+  return (
+    <main className="min-h-screen bg-background text-foreground flex flex-col">
+      <LandingNavbar />
+      
+      <div className="flex-grow pt-32 pb-20 relative overflow-hidden">
+        {/* Subtle Background Gradients */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        // Reset form
-        (e.target as HTMLFormElement).reset();
-    };
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+              Let's Talk About Your <span className="text-emerald-500">Career Goals</span>
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Request a callback from our team. We're here to answer your questions and help you decide if SkillCred is the right fit for your career transition.
+            </p>
+          </div>
 
-    return (
-        <div className="min-h-screen bg-black text-white selection:bg-indigo-500/30">
-            <LandingNavbar />
-
-            <main className="pt-32 pb-24">
-                <div className="max-w-7xl mx-auto px-6">
-                    {/* Header */}
-                    <div className="text-center space-y-6 max-w-3xl mx-auto mb-20">
-                        <Badge variant="outline" className="border-emerald-500/30 text-emerald-400 bg-emerald-500/10 px-4 py-1.5 mb-2">
-                            Get In Touch
-                        </Badge>
-                        <h1 className="text-4xl md:text-6xl font-bold font-heading tracking-tight">
-                            Let's Build the <br />
-                            <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
-                                Future Together
-                            </span>
-                        </h1>
-                        <p className="text-xl text-muted-foreground leading-relaxed">
-                            Have questions about our programs, enterprise partnerships, or looking to mentor? We'd love to hear from you.
-                        </p>
+          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
+            {/* Form Section */}
+            <Card className="lg:col-span-2 bg-background/50 border-white/5 backdrop-blur-sm">
+              <CardContent className="p-8">
+                {isSuccess ? (
+                  <div className="flex flex-col items-center justify-center text-center h-full py-12 space-y-4">
+                    <CheckCircle2 className="w-16 h-16 text-emerald-500" />
+                    <h3 className="text-2xl font-semibold">We'll call you within 24 hours!</h3>
+                    <p className="text-muted-foreground">
+                      Thank you for reaching out. One of our career advisors will be in touch with you shortly.
+                    </p>
+                    <Button 
+                      variant="outline" 
+                      className="mt-6 border-emerald-500/20 hover:bg-emerald-500/10"
+                      onClick={() => setIsSuccess(false)}
+                    >
+                      Submit Another Request
+                    </Button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="name">Full Name <span className="text-red-500">*</span></Label>
+                        <Input id="name" name="name" required placeholder="John Doe" className="bg-background" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email Address <span className="text-red-500">*</span></Label>
+                        <Input id="email" name="email" type="email" required placeholder="john@example.com" className="bg-background" />
+                      </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-12 lg:gap-24 mb-24">
-                        {/* Contact Information */}
-                        <div className="space-y-12">
-                            <div>
-                                <h2 className="text-3xl font-bold mb-6">Contact Information</h2>
-                                <p className="text-slate-400">
-                                    Fill out the form and our team will get back to you within 24 hours. Choose the specific department for faster routing.
-                                </p>
-                            </div>
-
-                            <div className="space-y-6">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
-                                        <Mail className="w-5 h-5 text-indigo-400" />
-                                    </div>
-                                    <div>
-                                        <h4 className="font-semibold">Email</h4>
-                                        <p className="text-slate-400 text-sm">support@skillcred.com</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
-                                        <Phone className="w-5 h-5 text-emerald-400" />
-                                    </div>
-                                    <div>
-                                        <h4 className="font-semibold">Phone</h4>
-                                        <p className="text-slate-400 text-sm">+91 (800) 123-4567</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
-                                        <MapPin className="w-5 h-5 text-purple-400" />
-                                    </div>
-                                    <div>
-                                        <h4 className="font-semibold">Office</h4>
-                                        <p className="text-slate-400 text-sm">Tech Park, Bangalore, India</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Contact Form */}
-                        <div className="bg-white/5 border border-white/10 rounded-2xl p-8 lg:p-10 relative overflow-hidden">
-                            <div className="absolute -top-32 -right-32 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-
-                            <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <label htmlFor="firstName" className="text-sm font-medium text-slate-300">First Name</label>
-                                        <Input id="firstName" required className="bg-black/50 border-white/10 focus-visible:ring-emerald-500" placeholder="John" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label htmlFor="lastName" className="text-sm font-medium text-slate-300">Last Name</label>
-                                        <Input id="lastName" required className="bg-black/50 border-white/10 focus-visible:ring-emerald-500" placeholder="Doe" />
-                                    </div>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <label htmlFor="email" className="text-sm font-medium text-slate-300">Email Address</label>
-                                    <Input id="email" type="email" required className="bg-black/50 border-white/10 focus-visible:ring-emerald-500" placeholder="john@example.com" />
-                                </div>
-
-                                <div className="space-y-2">
-                                    <label htmlFor="subject" className="text-sm font-medium text-slate-300">Subject</label>
-                                    <select id="subject" className="flex h-10 w-full rounded-md border border-white/10 bg-black/50 px-3 py-2 text-sm text-slate-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50">
-                                        <option value="general">General Inquiry</option>
-                                        <option value="enterprise">Enterprise Partnerships (Colleges/HR)</option>
-                                        <option value="mentorship">Become a Mentor</option>
-                                        <option value="support">Technical Support</option>
-                                    </select>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <label htmlFor="message" className="text-sm font-medium text-slate-300">Message</label>
-                                    <Textarea id="message" required className="min-h-[120px] bg-black/50 border-white/10 focus-visible:ring-emerald-500" placeholder="How can we help you?" />
-                                </div>
-
-                                <Button type="submit" disabled={loading} className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-6">
-                                    {loading ? "Sending..." : (
-                                        <>
-                                            <Send className="w-4 h-4 mr-2" /> Send Message
-                                        </>
-                                    )}
-                                </Button>
-                            </form>
-                        </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">Phone Number <span className="text-red-500">*</span></Label>
+                        <Input id="phone" name="phone" type="tel" required placeholder="+1 (555) 000-0000" className="bg-background" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="program">Program of Interest</Label>
+                        <select 
+                          id="program" 
+                          name="program" 
+                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                          <option value="Product Engineering">Product Engineering</option>
+                          <option value="Data & Platform Engineering">Data & Platform Engineering</option>
+                          <option value="Embedded & Security Engineering">Embedded & Security Engineering</option>
+                          <option value="Not Sure Yet">Not Sure Yet</option>
+                        </select>
+                      </div>
                     </div>
-                </div>
-            </main>
 
-            {/* Footer */}
-            <footer className="bg-black border-t border-white/10 py-12 px-6">
-                <div className="max-w-7xl mx-auto pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                        <Logo width={100} height={30} />
-                        <span>© 2026 SkillCred Inc.</span>
+                    <div className="space-y-2">
+                      <Label htmlFor="time">Preferred Callback Time</Label>
+                      <select 
+                        id="time" 
+                        name="time" 
+                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        <option value="Morning 9-12">Morning (9 AM - 12 PM)</option>
+                        <option value="Afternoon 12-4">Afternoon (12 PM - 4 PM)</option>
+                        <option value="Evening 4-8">Evening (4 PM - 8 PM)</option>
+                      </select>
                     </div>
-                    <div className="flex gap-4">
-                        <Link href="#" className="hover:text-emerald-400 transition-colors"><Twitter className="w-4 h-4" /></Link>
-                        <Link href="#" className="hover:text-emerald-400 transition-colors"><Github className="w-4 h-4" /></Link>
-                        <Link href="#" className="hover:text-emerald-400 transition-colors"><Linkedin className="w-4 h-4" /></Link>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="message">Additional Context (Optional)</Label>
+                      <Textarea 
+                        id="message" 
+                        name="message" 
+                        placeholder="Tell us a bit about your current background and what you're looking to achieve..." 
+                        className="min-h-[120px] bg-background"
+                      />
                     </div>
-                </div>
-            </footer>
+
+                    {error && (
+                      <div className="text-sm text-red-500 font-medium">
+                        {error}
+                      </div>
+                    )}
+
+                    <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white" disabled={isSubmitting}>
+                      {isSubmitting ? "Submitting..." : "Request a Callback"}
+                      {!isSubmitting && <ArrowRight className="ml-2 h-4 w-4" />}
+                    </Button>
+                  </form>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Contact Info Panel */}
+            <div className="space-y-6">
+              <h3 className="text-2xl font-semibold mb-6">Or reach us directly</h3>
+              
+              <Card className="bg-background/50 border-white/5 backdrop-blur-sm">
+                <CardContent className="p-6 flex items-start space-x-4">
+                  <div className="p-3 rounded-full bg-emerald-500/10">
+                    <Phone className="w-6 h-6 text-emerald-500" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-foreground">Phone</h4>
+                    <p className="text-muted-foreground mt-1">+1 (800) 123-4567</p>
+                    <p className="text-xs text-muted-foreground mt-1">Mon-Fri, 9am-6pm EST</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-background/50 border-white/5 backdrop-blur-sm">
+                <CardContent className="p-6 flex items-start space-x-4">
+                  <div className="p-3 rounded-full bg-emerald-500/10">
+                    <Mail className="w-6 h-6 text-emerald-500" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-foreground">Email</h4>
+                    <p className="text-muted-foreground mt-1">hello@skillcred.com</p>
+                    <p className="text-xs text-muted-foreground mt-1">We aim to reply within 2 hours</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-background/50 border-white/5 backdrop-blur-sm">
+                <CardContent className="p-6 flex items-start space-x-4">
+                  <div className="p-3 rounded-full bg-emerald-500/10">
+                    <MapPin className="w-6 h-6 text-emerald-500" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-foreground">Office</h4>
+                    <p className="text-muted-foreground mt-1">123 Innovation Drive<br />San Francisco, CA 94103</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </div>
-    );
+      </div>
+
+      <Footer />
+    </main>
+  )
 }

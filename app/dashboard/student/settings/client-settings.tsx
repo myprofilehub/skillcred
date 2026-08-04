@@ -121,7 +121,7 @@ export default function ClientSettings({ data }: ClientSettingsProps) {
             </div>
 
             <Tabs defaultValue="profile" className="space-y-6">
-                <TabsList className="bg-secondary/20 p-1 border border-white/5 w-full md:w-auto overflow-x-auto justify-start">
+                <TabsList className="bg-secondary/20 p-1 border border-border dark:border-border dark:border-white/5 w-full md:w-auto overflow-x-auto justify-start">
                     <TabsTrigger value="profile" className="gap-2"><User className="w-4 h-4" /> Profile</TabsTrigger>
                     <TabsTrigger value="notifications" className="gap-2"><Bell className="w-4 h-4" /> Notifications</TabsTrigger>
                     <TabsTrigger value="billing" className="gap-2"><CreditCard className="w-4 h-4" /> Billing</TabsTrigger>
@@ -130,14 +130,14 @@ export default function ClientSettings({ data }: ClientSettingsProps) {
 
                 {/* PROFILE TAB */}
                 <TabsContent value="profile" className="space-y-6">
-                    <Card className="border-white/10">
+                    <Card className="border-border dark:border-border dark:border-white/10">
                         <CardHeader>
                             <CardTitle>Public Profile</CardTitle>
                             <CardDescription>This is how others will see you on the platform.</CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-6">
                             <div className="flex items-center gap-6">
-                                <div className="w-24 h-24 rounded-full bg-secondary/30 flex items-center justify-center text-3xl font-bold border-2 border-white/10 uppercase">
+                                <div className="w-24 h-24 rounded-full bg-secondary/30 flex items-center justify-center text-3xl font-bold border-2 border-border dark:border-border dark:border-white/10 uppercase">
                                     {name.substring(0, 2) || "AJ"}
                                 </div>
                                 <div>
@@ -177,7 +177,7 @@ export default function ClientSettings({ data }: ClientSettingsProps) {
                                 />
                             </div>
                         </CardContent>
-                        <CardFooter className="border-t border-white/5 pt-6 flex justify-end">
+                        <CardFooter className="border-t border-border dark:border-border dark:border-white/5 pt-6 flex justify-end">
                             <Button onClick={handleSaveProfile} disabled={isSavingProfile}>
                                 {isSavingProfile ? "Saving..." : <><Save className="w-4 h-4 mr-2" /> Save Changes</>}
                             </Button>
@@ -187,7 +187,7 @@ export default function ClientSettings({ data }: ClientSettingsProps) {
 
                 {/* NOTIFICATIONS TAB */}
                 <TabsContent value="notifications" className="space-y-6">
-                    <Card className="border-white/10">
+                    <Card className="border-border dark:border-border dark:border-white/10">
                         <CardHeader>
                             <CardTitle>Notification Preferences</CardTitle>
                             <CardDescription>Choose what you want to be notified about.</CardDescription>
@@ -213,7 +213,7 @@ export default function ClientSettings({ data }: ClientSettingsProps) {
                                 </div>
                             </div>
 
-                            <div className="space-y-4 pt-4 border-t border-white/5">
+                            <div className="space-y-4 pt-4 border-t border-border dark:border-border dark:border-white/5">
                                 <h3 className="font-medium flex items-center gap-2">
                                     <Smartphone className="w-4 h-4 text-primary" /> Push Notifications
                                 </h3>
@@ -232,13 +232,13 @@ export default function ClientSettings({ data }: ClientSettingsProps) {
 
                 {/* BILLING TAB */}
                 <TabsContent value="billing" className="space-y-6">
-                    <Card className="border-white/10">
+                    <Card className="border-border dark:border-border dark:border-white/10">
                         <CardHeader>
                             <CardTitle>Current Plan</CardTitle>
                             <CardDescription>View your active subscriptions.</CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-6">
-                            <div className="bg-secondary/10 border border-white/5 rounded-lg p-6 flex flex-col md:flex-row justify-between items-center gap-4">
+                            <div className="bg-secondary/10 border border-border dark:border-border dark:border-white/5 rounded-lg p-6 flex flex-col md:flex-row justify-between items-center gap-4">
                                 <div>
                                     <div className="flex items-center gap-2 mb-2">
                                         <h3 className="text-2xl font-bold">{subscription === "PRO" ? "Pro Tier" : "Free Tier"}</h3>
@@ -295,7 +295,7 @@ export default function ClientSettings({ data }: ClientSettingsProps) {
 
                 {/* ACCOUNT TAB */}
                 <TabsContent value="account" className="space-y-6">
-                    <Card className="border-white/10">
+                    <Card className="border-border dark:border-border dark:border-white/10">
                         <CardHeader>
                             <CardTitle>Security</CardTitle>
                             <CardDescription>Manage your password and security settings.</CardDescription>

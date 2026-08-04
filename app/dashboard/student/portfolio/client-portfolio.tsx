@@ -131,7 +131,7 @@ export default function PortfolioClient({ portfolio, isUnlocked, studentName }: 
     if (!isUnlocked) {
         return (
             <div className="flex flex-col items-center justify-center p-12 text-center space-y-6">
-                <div className="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center border border-white/10">
+                <div className="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center border border-border dark:border-border dark:border-white/10">
                     <Lock className="w-12 h-12 text-muted-foreground/50" />
                 </div>
                 <div>
@@ -238,7 +238,7 @@ export default function PortfolioClient({ portfolio, isUnlocked, studentName }: 
                 {/* Main Content */}
                 <div className="lg:col-span-2 space-y-6">
                     {/* Basic Info */}
-                    <Card className="bg-white/5 border-white/10">
+                    <Card className="bg-white/5 border-border dark:border-border dark:border-white/10">
                         <CardHeader>
                             <CardTitle>About Me</CardTitle>
                         </CardHeader>
@@ -274,7 +274,7 @@ export default function PortfolioClient({ portfolio, isUnlocked, studentName }: 
                     <div className="space-y-4">
                         <h2 className="text-xl font-bold">Projects</h2>
                         {portfolio.projects?.map((project: any) => (
-                            <Card key={project.id} className="bg-white/5 border-white/10">
+                            <Card key={project.id} className="bg-white/5 border-border dark:border-border dark:border-white/10">
                                 <CardContent className="p-6">
                                     <div className="flex justify-between items-start">
                                         <div>
@@ -299,7 +299,7 @@ export default function PortfolioClient({ portfolio, isUnlocked, studentName }: 
                         <div className="space-y-4">
                             <h2 className="text-xl font-bold">Experience</h2>
                             {portfolio.experience.map((exp: any, i: number) => (
-                                <Card key={i} className="bg-white/5 border-white/10">
+                                <Card key={i} className="bg-white/5 border-border dark:border-border dark:border-white/10">
                                     <CardContent className="p-6">
                                         <h3 className="font-bold">{exp.title}</h3>
                                         <p className="text-sm text-primary">{exp.company}</p>
@@ -316,7 +316,7 @@ export default function PortfolioClient({ portfolio, isUnlocked, studentName }: 
 
                 {/* Sidebar Settings */}
                 <div className="space-y-6">
-                    <Card className="bg-white/5 border-white/10">
+                    <Card className="bg-white/5 border-border dark:border-border dark:border-white/10">
                         <CardHeader>
                             <CardTitle>Skills</CardTitle>
                         </CardHeader>
@@ -339,7 +339,7 @@ export default function PortfolioClient({ portfolio, isUnlocked, studentName }: 
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/5 border-white/10">
+                    <Card className="bg-white/5 border-border dark:border-border dark:border-white/10">
                         <CardHeader>
                             <CardTitle>Visibility</CardTitle>
                         </CardHeader>
@@ -367,7 +367,7 @@ export default function PortfolioClient({ portfolio, isUnlocked, studentName }: 
                         </CardContent>
                     </Card>
 
-                    <Card className="bg-white/5 border-white/10">
+                    <Card className="bg-white/5 border-border dark:border-border dark:border-white/10">
                         <CardHeader>
                             <CardTitle>Social Links</CardTitle>
                         </CardHeader>

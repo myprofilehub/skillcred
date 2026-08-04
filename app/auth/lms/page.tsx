@@ -72,7 +72,7 @@ function LMSLoginContent() {
     const Icon = ui.icon;
 
     return (
-        <Card className="border-white/10 bg-black/50 backdrop-blur-xl">
+        <Card className="border-border dark:border-border dark:border-white/10 bg-muted/50 dark:bg-background dark:bg-muted/50 dark:bg-background dark:bg-black/50 backdrop-blur-xl">
             <CardHeader className="space-y-1 text-center flex flex-col items-center">
                 <div className="mb-4">
                     <Logo width={150} height={40} />
@@ -95,7 +95,7 @@ function LMSLoginContent() {
                             type="email"
                             placeholder="name@skillcred.in"
                             required
-                            className="bg-white/5 border-white/10"
+                            className="bg-white/5 border-border dark:border-border dark:border-white/10"
                         />
                     </div>
                     <div className="space-y-2">
@@ -107,7 +107,7 @@ function LMSLoginContent() {
                             name="password"
                             type="password"
                             required
-                            className="bg-white/5 border-white/10"
+                            className="bg-white/5 border-border dark:border-border dark:border-white/10"
                         />
                     </div>
 
@@ -124,7 +124,7 @@ function LMSLoginContent() {
                 </form>
             </CardContent>
             <CardFooter className="flex flex-col gap-4 text-center text-sm">
-                <Link href="/auth/login" className="w-full text-muted-foreground hover:text-white transition-colors">
+                <Link href="/auth/login" className="w-full text-muted-foreground hover:text-foreground dark:text-foreground dark:text-white transition-colors">
                     Back to Standard Login
                 </Link>
             </CardFooter>
@@ -135,8 +135,8 @@ function LMSLoginContent() {
 export default function LMSLoginPage() {
     return (
         <Suspense fallback={
-            <Card className="border-white/10 bg-black/50 backdrop-blur-xl w-full max-w-md h-[400px] flex items-center justify-center">
-                <Loader2 className="w-8 h-8 animate-spin text-white/50" />
+            <Card className="border-border dark:border-border dark:border-white/10 bg-muted/50 dark:bg-background dark:bg-muted/50 dark:bg-background dark:bg-black/50 backdrop-blur-xl w-full max-w-md h-[400px] flex items-center justify-center">
+                <Loader2 className="w-8 h-8 animate-spin text-foreground dark:text-foreground dark:text-white/50" />
             </Card>
         }>
             <LMSLoginContent />

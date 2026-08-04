@@ -12,11 +12,11 @@ export default async function AdminDashboardPage() {
         <div className="space-y-8">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-white">Admin Command Center</h1>
-                    <p className="text-slate-400">System overview and controls</p>
+                    <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-foreground dark:text-white">Admin Command Center</h1>
+                    <p className="text-muted-foreground dark:text-muted-foreground dark:text-slate-400">System overview and controls</p>
                 </div>
                 <div className="flex gap-2">
-                    <Button className="bg-cyan-600 hover:bg-cyan-700 text-white shadow-lg shadow-cyan-500/20 border border-cyan-500/20" asChild>
+                    <Button className="bg-cyan-600 hover:bg-cyan-700 text-foreground dark:text-foreground dark:text-white shadow-lg shadow-cyan-500/20 border border-cyan-500/20" asChild>
                         <Link href="/dashboard/admin/credentials">
                             <KeyRound className="mr-2 h-4 w-4" /> Issue Credentials
                         </Link>
@@ -28,52 +28,52 @@ export default async function AdminDashboardPage() {
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <Card className="bg-slate-900/60 border-cyan-500/20 backdrop-blur-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium text-slate-300">Active Streams</CardTitle>
+                        <CardTitle className="text-sm font-medium text-muted-foreground dark:text-muted-foreground dark:text-slate-300">Active Streams</CardTitle>
                         <div className="w-8 h-8 rounded-md bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
                             <Layout className="h-4 w-4 text-cyan-400" />
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold text-white font-mono">{stats.activeStreams}</div>
+                        <div className="text-3xl font-bold text-foreground dark:text-foreground dark:text-white font-mono">{stats.activeStreams}</div>
                         <p className="text-xs text-slate-500 mt-1">Managed career tracks</p>
                     </CardContent>
                 </Card>
 
                 <Card className="bg-slate-900/60 border-cyan-500/20 backdrop-blur-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium text-slate-300">Active Students</CardTitle>
+                        <CardTitle className="text-sm font-medium text-muted-foreground dark:text-muted-foreground dark:text-slate-300">Active Students</CardTitle>
                         <div className="w-8 h-8 rounded-md bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
                             <GraduationCap className="h-4 w-4 text-cyan-400" />
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold text-white font-mono">{stats.enrolledStudents}</div>
+                        <div className="text-3xl font-bold text-foreground dark:text-foreground dark:text-white font-mono">{stats.enrolledStudents}</div>
                         <p className="text-xs text-slate-500 mt-1">Currently enrolled</p>
                     </CardContent>
                 </Card>
 
                 <Card className="bg-slate-900/60 border-cyan-500/20 backdrop-blur-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium text-slate-300">Total Projects</CardTitle>
+                        <CardTitle className="text-sm font-medium text-muted-foreground dark:text-muted-foreground dark:text-slate-300">Total Projects</CardTitle>
                         <div className="w-8 h-8 rounded-md bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
                             <FolderGit2 className="h-4 w-4 text-cyan-400" />
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold text-white font-mono">{stats.totalProjects}</div>
+                        <div className="text-3xl font-bold text-foreground dark:text-foreground dark:text-white font-mono">{stats.totalProjects}</div>
                         <p className="text-xs text-slate-500 mt-1">In curriculum catalog</p>
                     </CardContent>
                 </Card>
 
                 <Card className="bg-slate-900/60 border-cyan-500/20 backdrop-blur-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium text-slate-300">LMS Courses</CardTitle>
+                        <CardTitle className="text-sm font-medium text-muted-foreground dark:text-muted-foreground dark:text-slate-300">LMS Courses</CardTitle>
                         <div className="w-8 h-8 rounded-md bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
                             <BookOpen className="h-4 w-4 text-cyan-400" />
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold text-white font-mono">{stats.totalCourses}</div>
+                        <div className="text-3xl font-bold text-foreground dark:text-foreground dark:text-white font-mono">{stats.totalCourses}</div>
                         <p className="text-xs text-slate-500 mt-1">Associated learning modules</p>
                     </CardContent>
                 </Card>
@@ -89,8 +89,8 @@ export default async function AdminDashboardPage() {
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-white group-hover:text-orange-100 transition-colors">SkillCred AI</div>
-                            <p className="text-xs text-slate-400 mt-1 flex items-center gap-1">
+                            <div className="text-2xl font-bold text-foreground dark:text-foreground dark:text-white group-hover:text-orange-100 transition-colors">SkillCred AI</div>
+                            <p className="text-xs text-muted-foreground dark:text-muted-foreground dark:text-slate-400 mt-1 flex items-center gap-1">
                                 Launch workspace <ArrowRight className="w-3 h-3" />
                             </p>
                         </CardContent>
@@ -101,7 +101,7 @@ export default async function AdminDashboardPage() {
             {/* Recent Activity */}
             <Card className="bg-slate-900/60 border-cyan-500/20 backdrop-blur-sm">
                 <CardHeader>
-                    <CardTitle className="text-white flex items-center gap-2">
+                    <CardTitle className="text-foreground dark:text-foreground dark:text-white flex items-center gap-2">
                         <Sparkles className="w-5 h-5 text-cyan-400" />
                         Recent System Activity
                     </CardTitle>
@@ -114,8 +114,8 @@ export default async function AdminDashboardPage() {
                             stats.recentActivity.map((user: any) => (
                                 <div key={user.id} className="flex items-center justify-between border-b border-slate-800 pb-4 last:border-0 last:pb-0">
                                     <div className="space-y-1">
-                                        <p className="text-sm font-medium leading-none text-white">{user.name}</p>
-                                        <p className="text-xs text-slate-400 font-mono">{user.email}</p>
+                                        <p className="text-sm font-medium leading-none text-foreground dark:text-foreground dark:text-white">{user.name}</p>
+                                        <p className="text-xs text-muted-foreground dark:text-muted-foreground dark:text-slate-400 font-mono">{user.email}</p>
                                     </div>
                                     <div className="flex items-center gap-4">
                                         <span className={`text-xs px-2 py-1 rounded-sm font-medium border ${user.role === 'MENTOR' ? 'bg-purple-500/10 text-purple-400 border-purple-500/20' :

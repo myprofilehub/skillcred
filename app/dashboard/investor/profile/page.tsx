@@ -74,7 +74,7 @@ export default function InvestorProfilePage() {
         <div className="max-w-4xl mx-auto space-y-8">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold text-white flex items-center gap-2">
+                    <h1 className="text-3xl font-bold text-foreground dark:text-foreground dark:text-white flex items-center gap-2">
                         <Sparkles className="w-7 h-7 text-amber-400" />
                         My Profile
                     </h1>
@@ -85,7 +85,7 @@ export default function InvestorProfilePage() {
                     onClick={() => isEditing ? setIsEditing(false) : setIsEditing(true)}
                     className={isEditing
                         ? "border-amber-500/20 text-neutral-300 hover:text-amber-300 hover:bg-amber-500/10"
-                        : "bg-amber-600 hover:bg-amber-700 text-white shadow-lg shadow-amber-500/20"
+                        : "bg-amber-600 hover:bg-amber-700 text-foreground dark:text-foreground dark:text-white shadow-lg shadow-amber-500/20"
                     }
                 >
                     {isEditing ? <><X className="mr-2 h-4 w-4" /> Cancel</> : <><Pencil className="mr-2 h-4 w-4" /> Edit Profile</>}
@@ -94,7 +94,7 @@ export default function InvestorProfilePage() {
 
             <Card className="bg-neutral-900/80 border-amber-500/10 backdrop-blur-sm">
                 <CardHeader>
-                    <CardTitle className="text-white">Basic Information</CardTitle>
+                    <CardTitle className="text-foreground dark:text-foreground dark:text-white">Basic Information</CardTitle>
                     <CardDescription className="text-neutral-500">Your public profile details</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -102,11 +102,11 @@ export default function InvestorProfilePage() {
                         <div className="space-y-2">
                             <Label htmlFor="company" className="text-neutral-300">Company / Firm</Label>
                             {isEditing ? (
-                                <Input id="company" value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} className="bg-neutral-800 border-amber-500/20 text-white" />
+                                <Input id="company" value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white" />
                             ) : (
                                 <div className="flex items-center gap-2 p-3 bg-neutral-800/50 rounded-md border border-neutral-800">
                                     <Building2 className="h-4 w-4 text-amber-400" />
-                                    <span className="font-medium text-white">{investor.company}</span>
+                                    <span className="font-medium text-foreground dark:text-foreground dark:text-white">{investor.company}</span>
                                 </div>
                             )}
                         </div>
@@ -114,11 +114,11 @@ export default function InvestorProfilePage() {
                         <div className="space-y-2">
                             <Label htmlFor="position" className="text-neutral-300">Position / Role</Label>
                             {isEditing ? (
-                                <Input id="position" value={formData.position} onChange={(e) => setFormData({ ...formData, position: e.target.value })} className="bg-neutral-800 border-amber-500/20 text-white" />
+                                <Input id="position" value={formData.position} onChange={(e) => setFormData({ ...formData, position: e.target.value })} className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white" />
                             ) : (
                                 <div className="flex items-center gap-2 p-3 bg-neutral-800/50 rounded-md border border-neutral-800">
                                     <Briefcase className="h-4 w-4 text-amber-400" />
-                                    <span className="font-medium text-white">{investor.position}</span>
+                                    <span className="font-medium text-foreground dark:text-foreground dark:text-white">{investor.position}</span>
                                 </div>
                             )}
                         </div>
@@ -126,7 +126,7 @@ export default function InvestorProfilePage() {
                         <div className="col-span-1 md:col-span-2 space-y-2">
                             <Label htmlFor="bio" className="text-neutral-300">Bio</Label>
                             {isEditing ? (
-                                <Textarea id="bio" className="min-h-[100px] bg-neutral-800 border-amber-500/20 text-white" value={formData.bio} onChange={(e) => setFormData({ ...formData, bio: e.target.value })} />
+                                <Textarea id="bio" className="min-h-[100px] bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white" value={formData.bio} onChange={(e) => setFormData({ ...formData, bio: e.target.value })} />
                             ) : (
                                 <div className="p-3 bg-neutral-800/50 rounded-md border border-neutral-800">
                                     {investor.bio ? <span className="text-neutral-300">{investor.bio}</span> : <span className="text-neutral-600 italic">No bio added.</span>}
@@ -139,7 +139,7 @@ export default function InvestorProfilePage() {
 
             <Card className="bg-neutral-900/80 border-amber-500/10 backdrop-blur-sm">
                 <CardHeader>
-                    <CardTitle className="text-white">Investment Criteria</CardTitle>
+                    <CardTitle className="text-foreground dark:text-foreground dark:text-white">Investment Criteria</CardTitle>
                     <CardDescription className="text-neutral-500">What you are looking for</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -147,7 +147,7 @@ export default function InvestorProfilePage() {
                         <div className="col-span-1 md:col-span-2 space-y-2">
                             <Label htmlFor="focusAreas" className="text-neutral-300">Focus Areas (comma separated)</Label>
                             {isEditing ? (
-                                <Input id="focusAreas" placeholder="e.g. AI, SaaS, Fintech" value={formData.focusAreas} onChange={(e) => setFormData({ ...formData, focusAreas: e.target.value })} className="bg-neutral-800 border-amber-500/20 text-white placeholder:text-neutral-500" />
+                                <Input id="focusAreas" placeholder="e.g. AI, SaaS, Fintech" value={formData.focusAreas} onChange={(e) => setFormData({ ...formData, focusAreas: e.target.value })} className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white placeholder:text-neutral-500" />
                             ) : (
                                 <div className="flex flex-wrap gap-2 p-2 min-h-[42px]">
                                     {investor.focusAreas && investor.focusAreas.length > 0 ? (
@@ -166,7 +166,7 @@ export default function InvestorProfilePage() {
                         <div className="space-y-2">
                             <Label htmlFor="investmentRange" className="text-neutral-300">Investment Range</Label>
                             {isEditing ? (
-                                <Input id="investmentRange" placeholder="e.g. $10k - $50k" value={formData.investmentRange} onChange={(e) => setFormData({ ...formData, investmentRange: e.target.value })} className="bg-neutral-800 border-amber-500/20 text-white placeholder:text-neutral-500" />
+                                <Input id="investmentRange" placeholder="e.g. $10k - $50k" value={formData.investmentRange} onChange={(e) => setFormData({ ...formData, investmentRange: e.target.value })} className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white placeholder:text-neutral-500" />
                             ) : (
                                 <div className="flex items-center gap-2 p-3 bg-neutral-800/50 rounded-md border border-neutral-800">
                                     <Wallet className="h-4 w-4 text-amber-400" />
@@ -180,7 +180,7 @@ export default function InvestorProfilePage() {
 
             <Card className="bg-neutral-900/80 border-amber-500/10 backdrop-blur-sm">
                 <CardHeader>
-                    <CardTitle className="text-white">Social & Links</CardTitle>
+                    <CardTitle className="text-foreground dark:text-foreground dark:text-white">Social & Links</CardTitle>
                     <CardDescription className="text-neutral-500">Where founders can find you</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -188,7 +188,7 @@ export default function InvestorProfilePage() {
                         <div className="space-y-2">
                             <Label htmlFor="linkedinUrl" className="text-neutral-300">LinkedIn URL</Label>
                             {isEditing ? (
-                                <Input id="linkedinUrl" value={formData.linkedinUrl} onChange={(e) => setFormData({ ...formData, linkedinUrl: e.target.value })} className="bg-neutral-800 border-amber-500/20 text-white" />
+                                <Input id="linkedinUrl" value={formData.linkedinUrl} onChange={(e) => setFormData({ ...formData, linkedinUrl: e.target.value })} className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white" />
                             ) : (
                                 <div className="flex items-center gap-2 p-3 bg-neutral-800/50 rounded-md border border-neutral-800 overflow-hidden text-ellipsis">
                                     <Linkedin className="h-4 w-4 text-amber-400" />
@@ -206,7 +206,7 @@ export default function InvestorProfilePage() {
                         <div className="space-y-2">
                             <Label htmlFor="portfolioUrl" className="text-neutral-300">Portfolio / Website</Label>
                             {isEditing ? (
-                                <Input id="portfolioUrl" value={formData.portfolioUrl} onChange={(e) => setFormData({ ...formData, portfolioUrl: e.target.value })} className="bg-neutral-800 border-amber-500/20 text-white" />
+                                <Input id="portfolioUrl" value={formData.portfolioUrl} onChange={(e) => setFormData({ ...formData, portfolioUrl: e.target.value })} className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white" />
                             ) : (
                                 <div className="flex items-center gap-2 p-3 bg-neutral-800/50 rounded-md border border-neutral-800 overflow-hidden text-ellipsis">
                                     <Globe className="h-4 w-4 text-amber-400" />
@@ -224,7 +224,7 @@ export default function InvestorProfilePage() {
 
                     {isEditing && (
                         <div className="flex justify-end pt-4">
-                            <Button onClick={handleSave} disabled={isSaving} className="w-full md:w-auto bg-amber-600 hover:bg-amber-700 text-white shadow-lg shadow-amber-500/20">
+                            <Button onClick={handleSave} disabled={isSaving} className="w-full md:w-auto bg-amber-600 hover:bg-amber-700 text-foreground dark:text-foreground dark:text-white shadow-lg shadow-amber-500/20">
                                 {isSaving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                                 <Save className="mr-2 h-4 w-4" />
                                 Save Changes

@@ -1,8 +1,10 @@
+import { StreamBottomCTA } from "@/components/public/stream-pricing-components";
 import { LandingNavbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle2, ArrowRight, BookOpen, Clock, Users, Award, Briefcase, GraduationCap } from "lucide-react";
+import { CheckCircle2, ArrowRight, BookOpen, Clock, Users, Award, Briefcase, GraduationCap, Code2, BrainCircuit, Layout } from "lucide-react";
+import { StreamLeadCaptureHero } from "@/components/public/stream-lead-capture-hero";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -19,23 +21,47 @@ export default function StandardProgramPage() {
                 </div>
 
                 <div className="container relative z-10 mx-auto px-4 text-center">
-                    <Badge variant="outline" className="mb-6 border-blue-500/30 text-blue-400 bg-blue-500/10 px-4 py-1 text-sm uppercase tracking-wider">
-                        STANDARD LEARNING TRACK
+                    <Badge variant="outline" className="mb-6 border-purple-500/30 text-purple-400 bg-purple-500/10 px-4 py-1 text-sm uppercase tracking-wider">
+                        8–10 Weeks · Product Engineering
                     </Badge>
                     <h1 className="text-4xl md:text-6xl font-bold font-heading mb-6 tracking-tight">
-                        Standard <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">8-Week</span> Program
+                        Product <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-violet-500">Engineering</span>
                     </h1>
-                    <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
-                        A comprehensive, fully-guided learning journey designed for beginners and those looking to build strong fundamentals alongside real-world projects.
+                    <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-4 leading-relaxed">
+                        Our most comprehensive program. Built for aspiring engineers targeting product companies — where the hiring bar is set by timed DSA, cold machine-coding, and live problem-solving under pressure.
                     </p>
-
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button size="lg" className="text-lg px-8 h-14 bg-gradient-to-r from-blue-600 to-indigo-600 hover:opacity-90 text-white shadow-lg shadow-blue-500/20" asChild>
-                            <Link href="/enroll">
-                                Enroll Now <ArrowRight className="ml-2 w-5 h-5" />
+                    <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-12 text-left">
+                        {[
+                            { title: "Full Stack Development", href: "/streams/full-stack-development", desc: "Frontend, backend, databases, and deployment — end to end.", Icon: Code2 },
+                            { title: "AI & ML Engineering", href: "/streams/ai-ml", desc: "Machine learning, neural networks, and production ML pipelines.", Icon: BrainCircuit },
+                            { title: "Mobile Development", href: "/streams/mobile-development", desc: "iOS, Android, and cross-platform app development.", Icon: Layout },
+                        ].map((stream) => (
+                            <Link key={stream.title} href={stream.href} className="group">
+                                <div className="h-full p-6 rounded-2xl border border-purple-500/20 bg-purple-500/5 hover:bg-purple-500/10 hover:border-purple-500/40 transition-all duration-300">
+                                    <div className="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
+                                        <stream.Icon className="w-5 h-5 text-purple-400" />
+                                    </div>
+                                    <h3 className="font-bold mb-2 group-hover:text-purple-400 transition-colors text-sm">{stream.title}</h3>
+                                    <p className="text-xs text-muted-foreground mb-4 leading-relaxed">{stream.desc}</p>
+                                    <span className="text-xs font-medium text-purple-400 flex items-center gap-1.5">
+                                        View Curriculum <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                                    </span>
+                                </div>
                             </Link>
-                        </Button>
+                        ))}
                     </div>
+                </div>
+
+
+                    
+                <div className="mt-12">
+
+
+                    
+                    <StreamLeadCaptureHero slug="standard" accentColor="purple" bootcampName="Product Engineering" trackName="Product Engineering Program" />
+
+
+                    
                 </div>
             </section>
 
@@ -87,24 +113,24 @@ export default function StandardProgramPage() {
                                 ))}
                             </ul>
                         </div>
-                        <div className="bg-gradient-to-br from-blue-900/20 to-black rounded-3xl p-8 border border-blue-500/20 relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 blur-3xl rounded-full" />
+                        <div className="bg-background rounded-3xl p-8 border border-purple-500/20 shadow-sm relative overflow-hidden relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 blur-[100px] rounded-full -top-10 -right-10" />
                             <h3 className="text-2xl font-bold mb-6 flex items-center gap-2 relative z-10">
-                                <Clock className="w-6 h-6 text-blue-400" /> Program Structure
+                                <Clock className="w-6 h-6 text-purple-500" /> Program Structure
                             </h3>
                             <div className="space-y-6 relative z-10">
                                 <div>
-                                    <h4 className="font-bold text-blue-300">Weeks 1-3: Foundations</h4>
+                                    <h4 className="font-bold text-purple-600 dark:text-purple-400">Weeks 1-3: Foundations</h4>
                                     <p className="text-sm text-muted-foreground">Mastering the core language and tools. Building 2 Solo Projects.</p>
                                 </div>
-                                <div className="h-px bg-white/10" />
+                                <div className="h-px bg-border" />
                                 <div>
-                                    <h4 className="font-bold text-blue-300">Weeks 4-5: Advanced Concepts & APIs</h4>
+                                    <h4 className="font-bold text-purple-600 dark:text-purple-400">Weeks 4-5: Advanced Concepts & APIs</h4>
                                     <p className="text-sm text-muted-foreground">Databases, deployment, and collaboration. Building 1 Pair Project.</p>
                                 </div>
-                                <div className="h-px bg-white/10" />
+                                <div className="h-px bg-border" />
                                 <div>
-                                    <h4 className="font-bold text-blue-300">Weeks 6-8: Capstone & Portfolio</h4>
+                                    <h4 className="font-bold text-purple-600 dark:text-purple-400">Weeks 6-8: Capstone & Portfolio</h4>
                                     <p className="text-sm text-muted-foreground">Building 3 major Capstone projects, resume prep, and Final PAT Demo.</p>
                                 </div>
                             </div>
@@ -113,18 +139,13 @@ export default function StandardProgramPage() {
                 </div>
             </section>
 
+
             {/* CTA */}
-            <section className="py-20 border-t border-white/5">
-                <div className="container mx-auto px-4 max-w-3xl text-center border border-white/10 rounded-3xl bg-secondary/10 p-12">
-                    <h2 className="text-3xl lg:text-4xl font-bold mb-4">Start Learning From Scratch</h2>
-                    <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">
-                        Join the 8-Week Standard Program and build a complete HR-ready portfolio step-by-step.
-                    </p>
-                    <Button size="lg" className="h-14 px-8 text-lg bg-blue-600 hover:bg-blue-700 text-white" asChild>
-                        <Link href="/enroll">Enroll Now</Link>
-                    </Button>
-                </div>
-            </section>
+            <StreamBottomCTA
+                slug="standard"
+                accentColor="purple"
+                bootcampName="Product Engineering"
+            />
 
             <Footer />
         </main>

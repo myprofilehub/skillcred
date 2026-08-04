@@ -72,18 +72,18 @@ export default function InvestorWorkshopsPage() {
         <div className="space-y-8">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-white">Workshops</h1>
+                    <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-foreground dark:text-white">Workshops</h1>
                     <p className="text-neutral-400">Organize and manage your startup workshops</p>
                 </div>
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
                     <DialogTrigger asChild>
-                        <Button className="gap-2 bg-amber-600 hover:bg-amber-700 text-white shadow-lg shadow-amber-500/20">
+                        <Button className="gap-2 bg-amber-600 hover:bg-amber-700 text-foreground dark:text-foreground dark:text-white shadow-lg shadow-amber-500/20">
                             <PlusCircle className="w-4 h-4" /> Schedule Workshop
                         </Button>
                     </DialogTrigger>
-                    <DialogContent className="bg-neutral-900 border-amber-500/20 text-white">
+                    <DialogContent className="bg-neutral-900 border-amber-500/20 text-foreground dark:text-foreground dark:text-white">
                         <DialogHeader>
-                            <DialogTitle className="text-white">Schedule New Workshop</DialogTitle>
+                            <DialogTitle className="text-foreground dark:text-foreground dark:text-white">Schedule New Workshop</DialogTitle>
                             <DialogDescription className="text-neutral-400">Create a workshop event for students and founders</DialogDescription>
                         </DialogHeader>
                         <div className="space-y-4 py-4">
@@ -93,7 +93,7 @@ export default function InvestorWorkshopsPage() {
                                     placeholder="e.g. Pitch Deck Masterclass"
                                     value={formData.title}
                                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                                    className="bg-neutral-800 border-amber-500/20 text-white placeholder:text-neutral-500"
+                                    className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white placeholder:text-neutral-500"
                                 />
                             </div>
                             <div className="grid grid-cols-2 gap-4">
@@ -103,7 +103,7 @@ export default function InvestorWorkshopsPage() {
                                         type="date"
                                         value={formData.date}
                                         onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                                        className="bg-neutral-800 border-amber-500/20 text-white"
+                                        className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white"
                                     />
                                 </div>
                                 <div className="space-y-2">
@@ -112,7 +112,7 @@ export default function InvestorWorkshopsPage() {
                                         type="time"
                                         value={formData.time}
                                         onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                                        className="bg-neutral-800 border-amber-500/20 text-white"
+                                        className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white"
                                     />
                                 </div>
                             </div>
@@ -123,7 +123,7 @@ export default function InvestorWorkshopsPage() {
                                         placeholder="e.g. 1 hour"
                                         value={formData.duration}
                                         onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-                                        className="bg-neutral-800 border-amber-500/20 text-white placeholder:text-neutral-500"
+                                        className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white placeholder:text-neutral-500"
                                     />
                                 </div>
                                 <div className="space-y-2">
@@ -133,7 +133,7 @@ export default function InvestorWorkshopsPage() {
                                         placeholder="Max attendees"
                                         value={formData.maxCapacity}
                                         onChange={(e) => setFormData({ ...formData, maxCapacity: e.target.value })}
-                                        className="bg-neutral-800 border-amber-500/20 text-white placeholder:text-neutral-500"
+                                        className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white placeholder:text-neutral-500"
                                     />
                                 </div>
                             </div>
@@ -143,7 +143,7 @@ export default function InvestorWorkshopsPage() {
                                     placeholder="Zoom / Google Meet URL"
                                     value={formData.meetingLink}
                                     onChange={(e) => setFormData({ ...formData, meetingLink: e.target.value })}
-                                    className="bg-neutral-800 border-amber-500/20 text-white placeholder:text-neutral-500"
+                                    className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white placeholder:text-neutral-500"
                                 />
                             </div>
                             <div className="space-y-2">
@@ -153,10 +153,10 @@ export default function InvestorWorkshopsPage() {
                                     value={formData.description}
                                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                     rows={3}
-                                    className="bg-neutral-800 border-amber-500/20 text-white placeholder:text-neutral-500"
+                                    className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white placeholder:text-neutral-500"
                                 />
                             </div>
-                            <Button className="w-full bg-amber-600 hover:bg-amber-700 text-white" onClick={handleCreate} disabled={isCreating}>
+                            <Button className="w-full bg-amber-600 hover:bg-amber-700 text-foreground dark:text-foreground dark:text-white" onClick={handleCreate} disabled={isCreating}>
                                 {isCreating ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
                                 Schedule Workshop
                             </Button>
@@ -183,7 +183,7 @@ export default function InvestorWorkshopsPage() {
                                                 <Calendar className="w-4 h-4" />
                                                 {format(new Date(workshop.date), "EEEE, MMM d, yyyy 'at' h:mm a")}
                                             </div>
-                                            <h3 className="text-xl font-bold text-white">{workshop.title}</h3>
+                                            <h3 className="text-xl font-bold text-foreground dark:text-foreground dark:text-white">{workshop.title}</h3>
                                             <p className="text-neutral-400">{workshop.description}</p>
                                             <div className="flex items-center gap-4 text-sm text-neutral-500 mt-2">
                                                 <span className="flex items-center gap-1">

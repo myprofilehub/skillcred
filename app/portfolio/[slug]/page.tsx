@@ -96,7 +96,7 @@ export default async function PublicPortfolioPage({ params }: { params: Promise<
                                 </h3>
                                 <div className="space-y-4">
                                     {education.map((edu, i) => (
-                                        <Card key={i} className="bg-white/5 border-white/5">
+                                        <Card key={i} className="bg-white/5 border-border dark:border-border dark:border-white/5">
                                             <CardContent className="p-4">
                                                 <div className="font-semibold">{edu.school}</div>
                                                 <div className="text-sm text-muted-foreground">{edu.degree}</div>
@@ -113,10 +113,10 @@ export default async function PublicPortfolioPage({ params }: { params: Promise<
                     <div className="md:col-span-2 space-y-12">
                         {/* Projects */}
                         <div className="space-y-6">
-                            <h2 className="text-2xl font-bold border-b border-white/10 pb-4">Featured Projects</h2>
+                            <h2 className="text-2xl font-bold border-b border-border dark:border-border dark:border-white/10 pb-4">Featured Projects</h2>
                             <div className="grid gap-6">
                                 {portfolio.projects.map(project => (
-                                    <Card key={project.id} className="bg-white/5 border-white/10 overflow-hidden hover:border-primary/20 transition-colors">
+                                    <Card key={project.id} className="bg-white/5 border-border dark:border-border dark:border-white/10 overflow-hidden hover:border-primary/20 transition-colors">
                                         <CardContent className="p-6 space-y-4">
                                             <div className="flex justify-between items-start">
                                                 <h3 className="text-xl font-bold">{project.title}</h3>
@@ -150,7 +150,7 @@ export default async function PublicPortfolioPage({ params }: { params: Promise<
                         {/* Experience */}
                         {experience.length > 0 && (
                             <div className="space-y-6">
-                                <h2 className="text-2xl font-bold border-b border-white/10 pb-4">Experience</h2>
+                                <h2 className="text-2xl font-bold border-b border-border dark:border-border dark:border-white/10 pb-4">Experience</h2>
                                 <div className="space-y-6">
                                     {experience.map((exp, i) => (
                                         <div key={i} className="space-y-2">

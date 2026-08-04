@@ -17,7 +17,7 @@ export default async function AdminBlogPage() {
         </div>
         <Link
           href="/dashboard/admin/blog/new"
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-foreground dark:text-foreground dark:text-white font-medium text-sm transition-colors"
         >
           <Plus className="w-4 h-4" />
           New Article

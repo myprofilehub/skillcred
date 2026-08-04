@@ -37,7 +37,7 @@ export function RoadmapGenerator() {
     const [generated, setGenerated] = useState(false);
 
     return (
-        <section id="roadmap-generator" className="py-24 px-6 bg-black relative overflow-hidden">
+        <section id="roadmap-generator" className="py-24 px-6 bg-background dark:bg-background dark:bg-black relative overflow-hidden">
             {/* Background decoration */}
             <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px] -translate-y-1/2 -z-10" />
 
@@ -53,10 +53,10 @@ export function RoadmapGenerator() {
                         Our AI analyzes thousands of job descriptions to build the perfect curriculum for your dream role.
                     </p>
 
-                    <div className="p-6 rounded-xl border border-white/10 bg-white/5 space-y-4">
+                    <div className="p-6 rounded-xl border border-border dark:border-border dark:border-white/10 bg-white/5 space-y-4">
                         <label className="text-sm font-medium">I want to become a...</label>
                         <Select value={role} onValueChange={(v) => { setRole(v); setGenerated(false); }}>
-                            <SelectTrigger className="bg-black/50 border-white/20 h-12">
+                            <SelectTrigger className="bg-muted/50 dark:bg-background dark:bg-muted/50 dark:bg-background dark:bg-black/50 border-border dark:border-border dark:border-white/20 h-12">
                                 <SelectValue placeholder="Select Role" />
                             </SelectTrigger>
                             <SelectContent>
@@ -73,11 +73,11 @@ export function RoadmapGenerator() {
 
                 <div className="relative">
                     {/* Timeline Graphic */}
-                    <div className="relative space-y-8 pl-8 border-l-2 border-white/10 ml-4 py-4">
+                    <div className="relative space-y-8 pl-8 border-l-2 border-border dark:border-border dark:border-white/10 ml-4 py-4">
                         {(ROADMAPS[role as keyof typeof ROADMAPS] || ROADMAPS["full-stack"]).map((step, i) => (
                             <div key={i} className="relative animate-in slide-in-from-bottom-2 fade-in" style={{ animationDelay: `${i * 100}ms` }}>
                                 <div className={`absolute -left-[41px] top-1 w-5 h-5 rounded-full border-4 border-black ${i < 3 ? "bg-indigo-500" : "bg-white/20"}`} />
-                                <div className="p-4 rounded-lg border border-white/5 bg-white/5 backdrop-blur-sm">
+                                <div className="p-4 rounded-lg border border-border dark:border-border dark:border-white/5 bg-white/5 backdrop-blur-sm">
                                     <div className="text-xs text-indigo-400 font-bold mb-1">{step.time}</div>
                                     <div className="font-semibold">{step.title}</div>
                                 </div>

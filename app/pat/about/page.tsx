@@ -9,7 +9,7 @@ import { Card } from "@/components/ui/card";
 
 export default function PatAboutPage() {
     return (
-        <div className="min-h-screen bg-black text-white selection:bg-indigo-500/30">
+        <div className="min-h-screen bg-background dark:bg-background dark:bg-black text-foreground dark:text-foreground dark:text-white selection:bg-indigo-500/30">
             <LandingNavbar />
 
             <main className="pt-32 pb-24">
@@ -29,11 +29,11 @@ export default function PatAboutPage() {
 
                     {/* Problem / Solution */}
                     <div className="grid md:grid-cols-2 gap-12 mb-24">
-                        <Card className="bg-white/5 border-white/10 p-8">
+                        <Card className="bg-white/5 border-border dark:border-border dark:border-white/10 p-8">
                             <h3 className="text-2xl font-bold mb-4 flex items-center gap-3">
                                 <span className="text-red-400">✗</span> The Old Way
                             </h3>
-                            <ul className="space-y-4 text-slate-400">
+                            <ul className="space-y-4 text-muted-foreground dark:text-muted-foreground dark:text-slate-400">
                                 <li>Relying on college pedigree instead of actual skill.</li>
                                 <li>Filtering resumes by keywords, missing top talent.</li>
                                 <li>Draining engineering time on repetitive technical interviews.</li>
@@ -45,7 +45,7 @@ export default function PatAboutPage() {
                             <h3 className="text-2xl font-bold mb-4 flex items-center gap-3 relative z-10">
                                 <span className="text-emerald-400">✓</span> The SkillCred PAT
                             </h3>
-                            <ul className="space-y-4 text-slate-300 relative z-10">
+                            <ul className="space-y-4 text-muted-foreground dark:text-muted-foreground dark:text-slate-300 relative z-10">
                                 <li className="flex items-start gap-2">
                                     <CheckCircle2 className="w-5 h-5 text-indigo-400 mt-0.5 shrink-0" />
                                     <span>Verified proof of work through complex, mentor-reviewed projects.</span>
@@ -73,20 +73,20 @@ export default function PatAboutPage() {
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-6 mb-24">
-                        <div className="p-6 bg-white/5 border border-white/10 rounded-xl space-y-4">
+                        <div className="p-6 bg-white/5 border border-border dark:border-border dark:border-white/10 rounded-xl space-y-4">
                             <Zap className="w-8 h-8 text-yellow-400" />
                             <h3 className="text-xl font-bold">50% Faster Hiring</h3>
-                            <p className="text-sm text-slate-400">Companies skip the first two technical screening rounds entirely, trusting our rigorous vetting process.</p>
+                            <p className="text-sm text-muted-foreground dark:text-muted-foreground dark:text-slate-400">Companies skip the first two technical screening rounds entirely, trusting our rigorous vetting process.</p>
                         </div>
-                        <div className="p-6 bg-white/5 border border-white/10 rounded-xl space-y-4">
+                        <div className="p-6 bg-white/5 border border-border dark:border-border dark:border-white/10 rounded-xl space-y-4">
                             <LineChart className="w-8 h-8 text-emerald-400" />
                             <h3 className="text-xl font-bold">Predictive Performance</h3>
-                            <p className="text-sm text-slate-400">A high PAT score directly correlates to high on-the-job performance and faster onboarding times.</p>
+                            <p className="text-sm text-muted-foreground dark:text-muted-foreground dark:text-slate-400">A high PAT score directly correlates to high on-the-job performance and faster onboarding times.</p>
                         </div>
-                        <div className="p-6 bg-white/5 border border-white/10 rounded-xl space-y-4">
+                        <div className="p-6 bg-white/5 border border-border dark:border-border dark:border-white/10 rounded-xl space-y-4">
                             <Award className="w-8 h-8 text-purple-400" />
                             <h3 className="text-xl font-bold">Objective Bias-Free Metric</h3>
-                            <p className="text-sm text-slate-400">Evaluate candidates solely on their code quality, architecture choices, and security practices.</p>
+                            <p className="text-sm text-muted-foreground dark:text-muted-foreground dark:text-slate-400">Evaluate candidates solely on their code quality, architecture choices, and security practices.</p>
                         </div>
                     </div>
 
@@ -94,10 +94,10 @@ export default function PatAboutPage() {
                     <div className="bg-gradient-to-r from-indigo-900/40 to-purple-900/40 border border-indigo-500/20 rounded-2xl p-12 text-center max-w-4xl mx-auto">
                         <h2 className="text-3xl font-bold mb-6">Ready to Prove Your Skills?</h2>
                         <div className="flex flex-wrap justify-center gap-4">
-                            <Link href="/pat/process" className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-all shadow-lg shadow-indigo-500/25">
+                            <Link href="/pat/process" className="bg-gradient-to-r from-indigo-600 to-purple-600 text-foreground dark:text-foreground dark:text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-all shadow-lg shadow-indigo-500/25">
                                 View the Process
                             </Link>
-                            <Link href="/enroll" className="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors border border-indigo-500">
+                            <Link href="/enroll" className="bg-indigo-600 text-foreground dark:text-foreground dark:text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors border border-indigo-500">
                                 Enroll to Get Certified
                             </Link>
                         </div>

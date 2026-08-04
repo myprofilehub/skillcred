@@ -97,7 +97,7 @@ export default function InvestorPitchesPage() {
     return (
         <div className="space-y-8">
             <div>
-                <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
+                <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-foreground dark:text-white flex items-center gap-2">
                     <Sparkles className="w-7 h-7 text-amber-400" />
                     Pitch Requests
                 </h1>
@@ -171,9 +171,9 @@ export default function InvestorPitchesPage() {
                 setIsDialogOpen(open);
                 if (!open) resetForm();
             }}>
-                <DialogContent className="bg-neutral-900 border-amber-500/20 text-white">
+                <DialogContent className="bg-neutral-900 border-amber-500/20 text-foreground dark:text-foreground dark:text-white">
                     <DialogHeader>
-                        <DialogTitle className="text-white">Schedule Pitch Presentation</DialogTitle>
+                        <DialogTitle className="text-foreground dark:text-foreground dark:text-white">Schedule Pitch Presentation</DialogTitle>
                         <DialogDescription className="text-neutral-400">
                             Set a time for the founder to present their deck.
                         </DialogDescription>
@@ -186,7 +186,7 @@ export default function InvestorPitchesPage() {
                                     type="date"
                                     value={scheduleDate}
                                     onChange={(e) => setScheduleDate(e.target.value)}
-                                    className="bg-neutral-800 border-amber-500/20 text-white"
+                                    className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white"
                                 />
                             </div>
                             <div className="space-y-2">
@@ -195,7 +195,7 @@ export default function InvestorPitchesPage() {
                                     type="time"
                                     value={scheduleTime}
                                     onChange={(e) => setScheduleTime(e.target.value)}
-                                    className="bg-neutral-800 border-amber-500/20 text-white"
+                                    className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white"
                                 />
                             </div>
                         </div>
@@ -205,7 +205,7 @@ export default function InvestorPitchesPage() {
                                 placeholder="https://meet.google.com/..."
                                 value={meetingLink}
                                 onChange={(e) => setMeetingLink(e.target.value)}
-                                className="bg-neutral-800 border-amber-500/20 text-white placeholder:text-neutral-500"
+                                className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white placeholder:text-neutral-500"
                             />
                         </div>
                         <div className="space-y-2">
@@ -214,13 +214,13 @@ export default function InvestorPitchesPage() {
                                 placeholder="Looking forward to it..."
                                 value={notes}
                                 onChange={(e) => setNotes(e.target.value)}
-                                className="bg-neutral-800 border-amber-500/20 text-white placeholder:text-neutral-500"
+                                className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white placeholder:text-neutral-500"
                             />
                         </div>
                     </div>
                     <DialogFooter>
                         <Button variant="outline" onClick={() => setIsDialogOpen(false)} className="border-amber-500/20 text-neutral-300 hover:bg-neutral-800">Cancel</Button>
-                        <Button onClick={handleSchedule} disabled={isSubmitting} className="bg-amber-600 hover:bg-amber-700 text-white">
+                        <Button onClick={handleSchedule} disabled={isSubmitting} className="bg-amber-600 hover:bg-amber-700 text-foreground dark:text-foreground dark:text-white">
                             {isSubmitting && <Loader2 className="w-4 h-4 animate-spin mr-2" />}
                             Confirm Schedule
                         </Button>
@@ -239,7 +239,7 @@ function PitchCard({ pitch, onSchedule, onDecline, isScheduled, isHistory }: any
                     <div className="space-y-4 flex-1">
                         <div className="flex items-start justify-between">
                             <div>
-                                <h3 className="text-xl font-bold text-white">{pitch.showcase.title}</h3>
+                                <h3 className="text-xl font-bold text-foreground dark:text-foreground dark:text-white">{pitch.showcase.title}</h3>
                                 <p className="text-sm text-neutral-400">{pitch.showcase.tagline}</p>
                             </div>
                             <Badge variant="secondary" className={
@@ -286,7 +286,7 @@ function PitchCard({ pitch, onSchedule, onDecline, isScheduled, isHistory }: any
 
                         {!isScheduled && !isHistory && (
                             <>
-                                <Button className="w-full justify-start mt-4 bg-amber-600 hover:bg-amber-700 text-white" onClick={onSchedule}>
+                                <Button className="w-full justify-start mt-4 bg-amber-600 hover:bg-amber-700 text-foreground dark:text-foreground dark:text-white" onClick={onSchedule}>
                                     <CheckCircle2 className="w-4 h-4 mr-2" />
                                     Schedule Interview
                                 </Button>

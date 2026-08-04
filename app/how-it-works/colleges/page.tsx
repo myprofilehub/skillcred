@@ -7,7 +7,7 @@ import { Landmark, Users2, BarChart3, GraduationCap, Network } from "lucide-reac
 
 export default function HowItWorksColleges() {
     return (
-        <div className="min-h-screen bg-black text-white selection:bg-indigo-500/30">
+        <div className="min-h-screen bg-background dark:bg-background dark:bg-black text-foreground dark:text-foreground dark:text-white selection:bg-indigo-500/30">
             <LandingNavbar />
 
             <main className="pt-32 pb-16 px-6 max-w-7xl mx-auto">
@@ -27,35 +27,35 @@ export default function HowItWorksColleges() {
                         cohort performance, and track student placements in real-time.
                     </p>
                     <div className="flex gap-4">
-                        <Button asChild size="lg" className="bg-orange-600 hover:bg-orange-700 text-white">
+                        <Button asChild size="lg" className="bg-orange-600 hover:bg-orange-700 text-foreground dark:text-foreground dark:text-white">
                             <Link href="mailto:partnerships@skillcred.com">Request Access</Link>
                         </Button>
                     </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-8 mb-16">
-                    <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/50 transition-colors">
+                    <div className="p-8 rounded-2xl bg-white/5 border border-border dark:border-border dark:border-white/10 hover:border-orange-500/50 transition-colors">
                         <Users2 className="w-10 h-10 text-orange-400 mb-6" />
                         <h3 className="text-2xl font-bold mb-3">Cohort & Roster Management</h3>
                         <p className="text-muted-foreground text-lg">
                             Seamlessly onboard hundreds of students. Manage batches, assign specific tech streams, and provide institutional login credentials centrally.
                         </p>
                     </div>
-                    <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/50 transition-colors">
+                    <div className="p-8 rounded-2xl bg-white/5 border border-border dark:border-border dark:border-white/10 hover:border-orange-500/50 transition-colors">
                         <GraduationCap className="w-10 h-10 text-orange-400 mb-6" />
                         <h3 className="text-2xl font-bold mb-3">Progress Tracking</h3>
                         <p className="text-muted-foreground text-lg">
                             Monitor individual student performance. See who has submitted projects, who has passed their vivas, and who is falling behind on milestones.
                         </p>
                     </div>
-                    <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/50 transition-colors">
+                    <div className="p-8 rounded-2xl bg-white/5 border border-border dark:border-border dark:border-white/10 hover:border-orange-500/50 transition-colors">
                         <Network className="w-10 h-10 text-orange-400 mb-6" />
                         <h3 className="text-2xl font-bold mb-3">Curriculum Integration Tools</h3>
                         <p className="text-muted-foreground text-lg">
                             Map the SkillCred project catalog to your academic semester timelines. Export verifiable progress reports for internal grading and accreditation use.
                         </p>
                     </div>
-                    <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/50 transition-colors">
+                    <div className="p-8 rounded-2xl bg-white/5 border border-border dark:border-border dark:border-white/10 hover:border-orange-500/50 transition-colors">
                         <BarChart3 className="w-10 h-10 text-orange-400 mb-6" />
                         <h3 className="text-2xl font-bold mb-3">Placement Analytics</h3>
                         <p className="text-muted-foreground text-lg">

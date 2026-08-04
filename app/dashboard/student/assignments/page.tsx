@@ -67,7 +67,7 @@ export default async function StudentAssignmentsPage() {
     const AssignmentCard = ({ assignment }: { assignment: typeof assignments[0] }) => {
         const dueInfo = getDueDateInfo(assignment.dueDate);
         return (
-            <Card className="border-white/10 bg-white/5 hover:border-primary/30 transition-colors">
+            <Card className="border-border dark:border-border dark:border-white/10 bg-white/5 hover:border-primary/30 transition-colors">
                 <CardContent className="p-4">
                     <div className="flex items-start justify-between gap-4">
                         <div className="flex-1 min-w-0">

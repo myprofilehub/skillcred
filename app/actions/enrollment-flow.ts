@@ -6,7 +6,6 @@ import { prisma } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import bcrypt from 'bcryptjs';
-import { sendLMSCredentials } from '@/lib/email';
 
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
@@ -17,9 +16,6 @@ import { join } from 'path';
 export async function processEnrollmentDetails(formData: FormData) {
     try {
         const session = await auth();
-        if (!session?.user) {
-            return { error: 'You must be logged in to enroll.' };
-        }
 
         // --- Extract basic text fields ---
         const trackSlug = formData.get('trackSlug') as string;
@@ -33,51 +29,66 @@ export async function processEnrollmentDetails(formData: FormData) {
         const coupon = (formData.get('couponCode') as string || '').trim().toUpperCase();
         
         // Use explicitly provided name and email, fallback to session if not provided
-        const providedName = (formData.get('name') as string) || session.user.name;
-        const providedEmail = (formData.get('email') as string) || session.user.email;
+        const providedName = (formData.get('name') as string) || session?.user?.name || 'New Student';
+        const providedEmail = (formData.get('email') as string) || session?.user?.email;
 
-        if (!trackSlug) return { error: 'Stream selection is required' };
-        if (!duration) return { error: 'Program duration selection is required' };
-
-        const track = await prisma.track.findUnique({ where: { slug: trackSlug } });
-        if (!track) return { error: 'Invalid stream selected' };
-
-        // --- PRICING ENGINE ---
-        const TIER_1_SLUGS = ['ai', 'machine-learning', 'cyber', 'data-engineering'];
-        const TIER_2_SLUGS = ['full-stack', 'devops', 'cloud', 'data-science', 'analytics'];
-        
-        const isTier1 = TIER_1_SLUGS.some(s => track.slug.toLowerCase().includes(s));
-        const isTier2 = TIER_2_SLUGS.some(s => track.slug.toLowerCase().includes(s));
-        
-        let basePrice = 9999; // Default 8-week Tier 3
-        if (duration === '2-week') {
-            basePrice = 3499; // Capstone flat rate
-        } else if (duration === '4-week') {
-            if (isTier1) basePrice = 7999;
-            else if (isTier2) basePrice = 6499;
-            else basePrice = 4999;
-        } else { // 8-week
-            if (isTier1) basePrice = 14999;
-            else if (isTier2) basePrice = 11999;
-            else basePrice = 9999;
+        if (!providedEmail) {
+            return { error: 'Email is required to enroll. Please go back and provide your email.' };
         }
 
-        let finalPrice = basePrice;
+        let userId = session?.user?.id;
+        
+        // If not logged in, find or create the user by email
+        if (!userId) {
+            let existingUser = await prisma.user.findUnique({ where: { email: providedEmail } });
+            if (!existingUser) {
+                // Create with a temporary password, will be reset & emailed after payment
+                const tempPassword = Math.random().toString(36).slice(-8);
+                const hashedPassword = await bcrypt.hash(tempPassword, 10);
+                existingUser = await prisma.user.create({
+                    data: {
+                        email: providedEmail,
+                        name: providedName,
+                        password: hashedPassword,
+                    }
+                });
+            }
+            userId = existingUser.id;
+        }
+
+        if (!trackSlug) return { error: 'Stream selection is required' };
+        if (!duration) return { error: 'Program option selection is required' };
+
+        const dbSlug = trackSlug === 'full-stack-development' ? 'full-stack' : trackSlug;
+        const track = await prisma.track.findUnique({ where: { slug: dbSlug } });
+        if (!track) return { error: 'Invalid stream selected' };
+
+        // --- PRICING ENGINE (Revised Strategy) ---
+        const slugLower = track.slug.toLowerCase();
+        const TIER_A = ['full-stack', 'ai-ml', 'mobile-development'];
+        const TIER_B = ['devops-cloud', 'data-engineering', 'data-science'];
+        
+        const isTierA = TIER_A.some(s => slugLower.includes(s));
+        const isTierB = TIER_B.some(s => slugLower.includes(s));
+        
+        let pilotBase = 4999; // Tier C default
+        let pilotAddon = 2000;
+        
+        if (isTierA) {
+            pilotBase = 9999;
+            pilotAddon = 3000;
+        } else if (isTierB) {
+            pilotBase = 6999;
+            pilotAddon = 2500;
+        }
+        
+        const isUpgrade = duration === 'pat-verified';
+        const finalPrice = isUpgrade ? (pilotBase + pilotAddon) : pilotBase;
         let appliedCoupon = null;
 
-        // Apply College Partner Booster
-        if (coupon?.replace(/\s/g, '').toUpperCase() === 'COLLEGEPARTNER' && duration === '8-week') {
-            finalPrice = 7999;
+        // Apply College Partner Flat Rate
+        if (coupon?.replace(/\s/g, '').toUpperCase() === 'COLLEGEPARTNER') {
             appliedCoupon = 'COLLEGEPARTNER';
-        } else if (duration !== '2-week') {
-            // Apply Early Bird Booster (First 50 seats per track)
-            const activeSeats = await prisma.enrollment.count({
-                where: { trackId: track.id, status: 'ACTIVE' }
-            });
-            if (activeSeats < 50) {
-                finalPrice = Math.floor(finalPrice * 0.8); // 20% off
-                appliedCoupon = 'EARLYBIRD20';
-            }
         }
 
         // Save Resume File
@@ -89,7 +100,7 @@ export async function processEnrollmentDetails(formData: FormData) {
 
             // Cleanup filename
             const cleanName = resumeFile.name.replace(/[^a-zA-Z0-9.]/g, '_');
-            const fileName = `${session.user.id}-${Date.now()}-${cleanName}`;
+            const fileName = `${userId}-${Date.now()}-${cleanName}`;
 
             const uploadDir = join(process.cwd(), 'public', 'uploads', 'resumes');
             await mkdir(uploadDir, { recursive: true });
@@ -107,8 +118,7 @@ export async function processEnrollmentDetails(formData: FormData) {
             source ? `Source: ${source}` : null
         ].filter(Boolean).join(' | ');
 
-        const userId = session.user.id;
-        if (!userId) return { error: "User ID not found in session" };
+        if (!userId) return { error: "User ID could not be resolved" };
 
         // Update User mobile (if provided)
         if (phone) {
@@ -162,7 +172,7 @@ export async function processEnrollmentDetails(formData: FormData) {
         const payment = await prisma.payment.create({
             data: {
                 userId: userId,
-                amount: finalPrice, 
+                amount: 500, // Upfront deposit is always 500
                 currency: 'INR',
                 status: 'PENDING',
                 provider: 'RAZORPAY',
@@ -177,7 +187,7 @@ export async function processEnrollmentDetails(formData: FormData) {
             orderId: payment.id,
             amount: payment.amount,
             currency: payment.currency,
-            projectName: `Enrollment: ${track.title}`,
+            projectName: `${track.title} - ${isUpgrade ? "PAT-Verified" : "Standard"} (Commitment Deposit)`,
         };
 
     } catch (error: any) {
@@ -192,9 +202,6 @@ export async function processEnrollmentDetails(formData: FormData) {
 // STEP 4: VERIFY PAYMENT & ENROLL
 // -----------------------------------------------------------------------------
 export async function verifyPaymentAndEnroll(paymentId: string) {
-    const session = await auth();
-    if (!session?.user?.id) return { error: 'Not authenticated' };
-
     try {
         // 1. Update Payment Status (Mock Verification)
         const payment = await prisma.payment.update({
@@ -205,10 +212,10 @@ export async function verifyPaymentAndEnroll(paymentId: string) {
         if (!payment.trackId) {
             return { error: 'Invalid payment record' };
         }
-        const user = await prisma.user.findUnique({ where: { id: session.user.id } });
+        const user = await prisma.user.findUnique({ where: { id: payment.userId } });
         if (!user) return { error: 'User profile missing' };
 
-        const student = await prisma.student.findUnique({ where: { userId: session.user.id } });
+        const student = await prisma.student.findUnique({ where: { userId: payment.userId } });
         if (!student) return { error: 'Student profile missing' };
 
         // 2. Create or Update Enrollment linked to Track
@@ -237,9 +244,28 @@ export async function verifyPaymentAndEnroll(paymentId: string) {
             }
         });
 
-        // 3. Notify Admin of New Paid Enrollment
+        // 3. Notify Admin of New Paid Enrollment & Send Credentials to Student
         try {
             const track = await prisma.track.findUnique({ where: { id: payment.trackId } });
+            
+            // Generate a fresh password for the user and email it
+            const newGeneralPassword = Math.random().toString(36).slice(-8);
+            const lmsPassword = "LMS-" + Math.random().toString(36).substring(2, 8).toUpperCase();
+            const hashedPassword = await bcrypt.hash(newGeneralPassword, 10);
+            
+            await prisma.user.update({
+                where: { id: user.id },
+                data: { password: hashedPassword }
+            });
+
+            // Email LMS & Login Credentials to student
+            const { sendEnrollmentCredentials } = await import('@/lib/email');
+            await sendEnrollmentCredentials(
+                user.email,
+                user.name || 'Student',
+                lmsPassword,
+                newGeneralPassword
+            );
             
             const adminHtmlContent = `
             <!DOCTYPE html>
@@ -265,13 +291,6 @@ export async function verifyPaymentAndEnroll(paymentId: string) {
             </html>
             `;
 
-            await sendLMSCredentials( // Reusing the sender infrastructure for admin
-                'admin@skillcred.in',
-                'SkillCred Admin',
-                'Approval Required',
-                '' 
-            ); 
-            // Note: I should use sendEmail directly for more control
             const { sendEmail } = await import('@/lib/email');
             await sendEmail({
                 to: [{ email: 'admin@skillcred.in', name: 'SkillCred Admin' }],

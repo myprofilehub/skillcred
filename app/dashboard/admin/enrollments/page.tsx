@@ -8,11 +8,11 @@ export default async function AdminEnrollmentsPage() {
     return (
         <div className="space-y-8">
             <div>
-                <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-3">
+                <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-foreground dark:text-white flex items-center gap-3">
                     <GraduationCap className="w-8 h-8 text-cyan-400" />
                     Enrollments
                 </h1>
-                <p className="text-slate-400 mt-1">
+                <p className="text-muted-foreground dark:text-muted-foreground dark:text-slate-400 mt-1">
                     Manage paid student enrollments and assign mentors
                 </p>
             </div>

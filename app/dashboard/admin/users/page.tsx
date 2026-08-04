@@ -38,11 +38,11 @@ export default function AdminUsersPage() {
         <div className="space-y-8">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-white flex items-center gap-2">
+                    <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-foreground dark:text-white flex items-center gap-2">
                         <Users className="w-7 h-7 text-cyan-400" />
                         Platform Users
                     </h1>
-                    <p className="text-slate-400">View and search all registered users</p>
+                    <p className="text-muted-foreground dark:text-muted-foreground dark:text-slate-400">View and search all registered users</p>
                 </div>
 
                 <div className="flex gap-4 w-full md:w-auto">
@@ -50,16 +50,16 @@ export default function AdminUsersPage() {
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
                         <Input
                             placeholder="Search name or email..."
-                            className="bg-slate-900 border-cyan-500/20 text-white pl-10 placeholder:text-slate-500"
+                            className="bg-slate-900 border-cyan-500/20 text-foreground dark:text-foreground dark:text-white pl-10 placeholder:text-slate-500"
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                         />
                     </div>
                     <Select value={roleFilter} onValueChange={setRoleFilter}>
-                        <SelectTrigger className="w-[150px] bg-slate-900 border-cyan-500/20 text-white">
+                        <SelectTrigger className="w-[150px] bg-slate-900 border-cyan-500/20 text-foreground dark:text-foreground dark:text-white">
                             <SelectValue placeholder="Filter Role" />
                         </SelectTrigger>
-                        <SelectContent className="bg-slate-900 border-cyan-500/20 text-white">
+                        <SelectContent className="bg-slate-900 border-cyan-500/20 text-foreground dark:text-foreground dark:text-white">
                             <SelectItem value="ALL">All Roles</SelectItem>
                             <SelectItem value="STUDENT">Student</SelectItem>
                             <SelectItem value="MENTOR">Mentor</SelectItem>
@@ -83,7 +83,7 @@ export default function AdminUsersPage() {
                                 </div>
                             ) : (
                                 <div className="min-w-full">
-                                    <div className="grid grid-cols-12 gap-4 p-4 bg-slate-950/80 text-xs font-medium text-slate-400 border-b border-slate-800 uppercase tracking-wider">
+                                    <div className="grid grid-cols-12 gap-4 p-4 bg-slate-950/80 text-xs font-medium text-muted-foreground dark:text-muted-foreground dark:text-slate-400 border-b border-slate-800 uppercase tracking-wider">
                                         <div className="col-span-4">USER</div>
                                         <div className="col-span-2">ROLE</div>
                                         <div className="col-span-4">DETAILS</div>
@@ -93,7 +93,7 @@ export default function AdminUsersPage() {
                                         {users.map((user) => (
                                             <div key={user.id} className="grid grid-cols-12 gap-4 p-4 items-center hover:bg-cyan-900/10 transition-colors">
                                                 <div className="col-span-4 overflow-hidden">
-                                                    <div className="font-medium text-white truncate">{user.name || "Unnamed"}</div>
+                                                    <div className="font-medium text-foreground dark:text-foreground dark:text-white truncate">{user.name || "Unnamed"}</div>
                                                     <div className="text-sm text-slate-500 truncate font-mono text-xs">{user.email}</div>
                                                 </div>
                                                 <div className="col-span-2">
@@ -107,7 +107,7 @@ export default function AdminUsersPage() {
                                                         {user.role}
                                                     </Badge>
                                                 </div>
-                                                <div className="col-span-4 text-sm text-slate-400 truncate">
+                                                <div className="col-span-4 text-sm text-muted-foreground dark:text-muted-foreground dark:text-slate-400 truncate">
                                                     {user.role === "STUDENT" && (
                                                         <>
                                                             {user.studentProfile?.subscription === "PRO" && <Badge variant="outline" className="mr-2 border-cyan-500/20 text-cyan-400 text-[10px] h-5 bg-cyan-500/5">PAID</Badge>}

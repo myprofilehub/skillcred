@@ -58,7 +58,7 @@ export default async function FreeLibraryPage({
 
     if (error) {
         return (
-            <div className="min-h-screen bg-black text-white selection:bg-indigo-500/30">
+            <div className="min-h-screen bg-background dark:bg-background dark:bg-black text-foreground dark:text-foreground dark:text-white selection:bg-indigo-500/30">
                 <LandingNavbar />
                 <main className="pt-32 px-6 max-w-7xl mx-auto pb-20">
                     <h1 className="text-3xl font-bold font-heading mb-4">Course Library</h1>
@@ -79,14 +79,14 @@ export default async function FreeLibraryPage({
     }));
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f] text-white selection:bg-indigo-500/30">
+        <div className="min-h-screen bg-[#0f0f0f] text-foreground dark:text-foreground dark:text-white selection:bg-indigo-500/30">
             <LandingNavbar />
             
             <main className="pt-24 px-6 max-w-[1600px] mx-auto pb-20">
                 {/* Horizontal Category Pills */}
-                <div className="flex overflow-x-auto pb-4 gap-3 mb-6 border-b border-white/5 sticky top-16 z-20 bg-[#0f0f0f] pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                <div className="flex overflow-x-auto pb-4 gap-3 mb-6 border-b border-border dark:border-border dark:border-white/5 sticky top-16 z-20 bg-[#0f0f0f] pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                     <Link href="/library" className="shrink-0" scroll={false}>
-                        <Badge variant={selectedSlugs.length === 0 ? "default" : "outline"} className={`px-4 py-2 rounded-lg whitespace-nowrap text-sm cursor-pointer transition-colors ${selectedSlugs.length === 0 ? "bg-white text-black hover:bg-gray-200" : "bg-white/5 text-white/80 border-transparent hover:bg-white/10"}`}>
+                        <Badge variant={selectedSlugs.length === 0 ? "default" : "outline"} className={`px-4 py-2 rounded-lg whitespace-nowrap text-sm cursor-pointer transition-colors ${selectedSlugs.length === 0 ? "bg-white text-black hover:bg-gray-200" : "bg-white/5 text-foreground dark:text-foreground dark:text-white/80 border-transparent hover:bg-white/10"}`}>
                             All
                         </Badge>
                     </Link>
@@ -94,7 +94,7 @@ export default async function FreeLibraryPage({
                         const isSelected = selectedSlugs.includes(track.slug);
                         return (
                             <Link key={track.slug} href={`/library?tracks=${track.slug}`} className="shrink-0" scroll={false}>
-                                <Badge variant={isSelected ? "default" : "outline"} className={`px-4 py-2 rounded-lg whitespace-nowrap text-sm cursor-pointer transition-colors ${isSelected ? "bg-white text-black hover:bg-gray-200" : "bg-white/5 text-white/80 border-transparent hover:bg-white/10"}`}>
+                                <Badge variant={isSelected ? "default" : "outline"} className={`px-4 py-2 rounded-lg whitespace-nowrap text-sm cursor-pointer transition-colors ${isSelected ? "bg-white text-black hover:bg-gray-200" : "bg-white/5 text-foreground dark:text-foreground dark:text-white/80 border-transparent hover:bg-white/10"}`}>
                                     {track.title}
                                 </Badge>
                             </Link>
@@ -107,7 +107,7 @@ export default async function FreeLibraryPage({
                         <div className="w-24 h-24 rounded-full bg-white/5 flex items-center justify-center mb-6">
                             <Search className="w-10 h-10 text-muted-foreground/50" />
                         </div>
-                        <h3 className="text-2xl font-semibold mb-2 text-white">No Videos Found</h3>
+                        <h3 className="text-2xl font-semibold mb-2 text-foreground dark:text-foreground dark:text-white">No Videos Found</h3>
                         <p className="text-muted-foreground max-w-md mx-auto mb-8">
                             We couldn't find any pre-recorded masterclasses for the selected streams. Try clearing your filters.
                         </p>
@@ -125,8 +125,8 @@ export default async function FreeLibraryPage({
                                     <div className="group flex flex-col cursor-pointer text-left">
                                         <div className="aspect-video bg-[#272727] rounded-xl overflow-hidden relative mb-3 transition-transform duration-300 outline-none focus-visible:ring-2 focus-visible:ring-cyan-500">
                                             {/* Play Hover State */}
-                                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10">
-                                                <PlayCircle className="w-12 h-12 text-white drop-shadow-md" />
+                                            <div className="absolute inset-0 bg-muted dark:bg-background dark:bg-muted dark:bg-background dark:bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10">
+                                                <PlayCircle className="w-12 h-12 text-foreground dark:text-foreground dark:text-white drop-shadow-md" />
                                             </div>
                                             {/* Thumbnail Image or Fallback */}
                                             {getVideoThumbnail(recording.url) ? (
@@ -137,11 +137,11 @@ export default async function FreeLibraryPage({
                                                 />
                                             ) : (
                                                 <div className={`w-full h-full bg-gradient-to-br from-indigo-900/30 to-purple-900/10 flex items-center justify-center`}>
-                                                    <Film className="w-10 h-10 text-white/10" />
+                                                    <Film className="w-10 h-10 text-foreground dark:text-foreground dark:text-white/10" />
                                                 </div>
                                             )}
                                             {/* Badges/Duration at bottom right */}
-                                            <span className="absolute bottom-2 right-2 bg-black/80 backdrop-blur-md px-1.5 py-0.5 text-xs font-semibold text-white/90 rounded border border-white/10 z-20">
+                                            <span className="absolute bottom-2 right-2 bg-background/80 dark:bg-background dark:bg-background/80 dark:bg-background dark:bg-black/80 backdrop-blur-md px-1.5 py-0.5 text-xs font-semibold text-foreground dark:text-foreground dark:text-white/90 rounded border border-border dark:border-border dark:border-white/10 z-20">
                                                 Premium
                                             </span>
                                         </div>
@@ -151,10 +151,10 @@ export default async function FreeLibraryPage({
                                                 {recording.track.substring(0, 1)}
                                             </div>
                                             <div className="flex flex-col overflow-hidden">
-                                                <h4 className="font-semibold text-white group-hover:text-indigo-400 transition-colors line-clamp-2 leading-snug">
+                                                <h4 className="font-semibold text-foreground dark:text-foreground dark:text-white group-hover:text-indigo-400 transition-colors line-clamp-2 leading-snug">
                                                     {recording.title}
                                                 </h4>
-                                                <div className="text-[14px] text-[#aaaaaa] hover:text-white transition-colors mt-1 truncate">
+                                                <div className="text-[14px] text-[#aaaaaa] hover:text-foreground dark:text-foreground dark:text-white transition-colors mt-1 truncate">
                                                     SkillCred • {recording.track}
                                                 </div>
                                                 <div className="text-[14px] text-[#aaaaaa] flex items-center gap-1.5">
@@ -166,12 +166,12 @@ export default async function FreeLibraryPage({
                                         </div>
                                     </div>
                                 </DialogTrigger>
-                                <DialogContent className="max-w-4xl p-0 bg-black border-white/10 overflow-hidden sm:rounded-xl">
+                                <DialogContent className="max-w-4xl p-0 bg-background dark:bg-background dark:bg-black border-border dark:border-border dark:border-white/10 overflow-hidden sm:rounded-xl">
                                     <DialogTitle className="sr-only">{recording.title}</DialogTitle>
                                     <VideoPlayer url={recording.url} />
                                     {recording.description && (
-                                        <div className="p-6 pt-4 text-slate-300 text-sm">
-                                            <h3 className="text-white font-semibold text-lg mb-2">{recording.title}</h3>
+                                        <div className="p-6 pt-4 text-muted-foreground dark:text-muted-foreground dark:text-slate-300 text-sm">
+                                            <h3 className="text-foreground dark:text-foreground dark:text-white font-semibold text-lg mb-2">{recording.title}</h3>
                                             {recording.description}
                                         </div>
                                     )}

@@ -7,7 +7,7 @@ import { Briefcase, Search, Filter, CalendarCheck, FolderGit2 } from "lucide-rea
 
 export default function HowItWorksHR() {
     return (
-        <div className="min-h-screen bg-black text-white selection:bg-indigo-500/30">
+        <div className="min-h-screen bg-background dark:bg-background dark:bg-black text-foreground dark:text-foreground dark:text-white selection:bg-indigo-500/30">
             <LandingNavbar />
 
             <main className="pt-32 pb-16 px-6 max-w-7xl mx-auto">
@@ -27,35 +27,35 @@ export default function HowItWorksHR() {
                         pre-vetted engineering talent.
                     </p>
                     <div className="flex gap-4">
-                        <Button asChild size="lg" className="bg-cyan-600 hover:bg-cyan-700 text-white">
+                        <Button asChild size="lg" className="bg-cyan-600 hover:bg-cyan-700 text-foreground dark:text-foreground dark:text-white">
                             <Link href="/auth/signup?role=hr">Access HR Portal</Link>
                         </Button>
                     </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-8 mb-16">
-                    <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/50 transition-colors">
+                    <div className="p-8 rounded-2xl bg-white/5 border border-border dark:border-border dark:border-white/10 hover:border-cyan-500/50 transition-colors">
                         <Search className="w-10 h-10 text-cyan-400 mb-6" />
                         <h3 className="text-2xl font-bold mb-3">Verified Talent Database</h3>
                         <p className="text-muted-foreground text-lg">
                             Instead of browsing standard resumes, query our database of verified students. View exactly which industry projects they have successfully completed.
                         </p>
                     </div>
-                    <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/50 transition-colors">
+                    <div className="p-8 rounded-2xl bg-white/5 border border-border dark:border-border dark:border-white/10 hover:border-cyan-500/50 transition-colors">
                         <Filter className="w-10 h-10 text-cyan-400 mb-6" />
                         <h3 className="text-2xl font-bold mb-3">Skill-Based Filtering</h3>
                         <p className="text-muted-foreground text-lg">
                             Filter candidates not by keywords, but by demonstrated proficiency. Find developers who scored top marks on specific tech stacks (e.g. React, Node, Docker) in their vivas.
                         </p>
                     </div>
-                    <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/50 transition-colors">
+                    <div className="p-8 rounded-2xl bg-white/5 border border-border dark:border-border dark:border-white/10 hover:border-cyan-500/50 transition-colors">
                         <FolderGit2 className="w-10 h-10 text-cyan-400 mb-6" />
                         <h3 className="text-2xl font-bold mb-3">Deep Project Inspection</h3>
                         <p className="text-muted-foreground text-lg">
                             Click into any candidate to view their deployed applications, GitHub code, and crucially, the verbatim feedback left by the senior engineers who reviewed them.
                         </p>
                     </div>
-                    <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/50 transition-colors">
+                    <div className="p-8 rounded-2xl bg-white/5 border border-border dark:border-border dark:border-white/10 hover:border-cyan-500/50 transition-colors">
                         <CalendarCheck className="w-10 h-10 text-cyan-400 mb-6" />
                         <h3 className="text-2xl font-bold mb-3">Integrated Interview Scheduling</h3>
                         <p className="text-muted-foreground text-lg">

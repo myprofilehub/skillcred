@@ -59,30 +59,30 @@ export default function ResetPasswordPage() {
     };
 
     return (
-        <div className="min-h-screen bg-black flex items-center justify-center p-4">
+        <div className="min-h-screen bg-background dark:bg-background dark:bg-black flex items-center justify-center p-4">
             <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
 
-            <Card className="w-full max-w-md bg-slate-900 border-white/10 relative z-10">
+            <Card className="w-full max-w-md bg-slate-900 border-border dark:border-border dark:border-white/10 relative z-10">
                 <CardHeader className="space-y-1">
-                    <CardTitle className="text-2xl font-bold text-white flex items-center gap-2">
+                    <CardTitle className="text-2xl font-bold text-foreground dark:text-foreground dark:text-white flex items-center gap-2">
                         <Lock className="w-6 h-6 text-purple-500" />
                         Set New Password
                     </CardTitle>
-                    <CardDescription className="text-slate-400">
+                    <CardDescription className="text-muted-foreground dark:text-muted-foreground dark:text-slate-400">
                         For security reasons, you must set a new password for your LMS account to continue.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                         <div className="space-y-2">
-                            <label className="text-sm font-medium text-white">New Password</label>
+                            <label className="text-sm font-medium text-foreground dark:text-foreground dark:text-white">New Password</label>
                             <Input
                                 {...register("newPassword", {
                                     required: "Password is required",
                                     minLength: { value: 8, message: "Minimum 8 characters" }
                                 })}
                                 type="password"
-                                className="bg-black/50 border-white/10 text-white"
+                                className="bg-muted/50 dark:bg-background dark:bg-muted/50 dark:bg-background dark:bg-black/50 border-border dark:border-border dark:border-white/10 text-foreground dark:text-foreground dark:text-white"
                                 placeholder="Enter updated password"
                             />
                             {errors.newPassword && (
@@ -91,14 +91,14 @@ export default function ResetPasswordPage() {
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-medium text-white">Confirm Password</label>
+                            <label className="text-sm font-medium text-foreground dark:text-foreground dark:text-white">Confirm Password</label>
                             <Input
                                 {...register("confirmPassword", {
                                     required: "Please confirm password",
                                     validate: (val) => val === newPassword || "Passwords do not match"
                                 })}
                                 type="password"
-                                className="bg-black/50 border-white/10 text-white"
+                                className="bg-muted/50 dark:bg-background dark:bg-muted/50 dark:bg-background dark:bg-black/50 border-border dark:border-border dark:border-white/10 text-foreground dark:text-foreground dark:text-white"
                                 placeholder="Re-enter password"
                             />
                             {errors.confirmPassword && (
@@ -108,7 +108,7 @@ export default function ResetPasswordPage() {
 
                         <Button
                             type="submit"
-                            className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+                            className="w-full bg-purple-600 hover:bg-purple-700 text-foreground dark:text-foreground dark:text-white"
                             disabled={loading}
                         >
                             {loading ? (

@@ -54,7 +54,7 @@ export default function PatProcessPage() {
     ];
 
     return (
-        <div className="min-h-screen bg-black text-white selection:bg-indigo-500/30">
+        <div className="min-h-screen bg-background dark:bg-background dark:bg-black text-foreground dark:text-foreground dark:text-white selection:bg-indigo-500/30">
             <LandingNavbar />
 
             <main className="pt-32 pb-24">
@@ -82,17 +82,17 @@ export default function PatProcessPage() {
                                 <div key={index} className={`relative flex flex-col md:flex-row items-center gap-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
 
                                     {/* Timeline Node */}
-                                    <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-black border-2 border-slate-700 items-center justify-center z-10 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                                    <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-background dark:bg-background dark:bg-black border-2 border-slate-700 items-center justify-center z-10 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
                                         <step.icon className={`w-5 h-5 ${step.color}`} />
                                     </div>
 
                                     {/* Content Card */}
                                     <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pl-12 text-left md:text-left' : 'md:pr-12 text-left md:text-right'}`}>
-                                        <Card className="p-6 bg-white/5 border-white/10 hover:border-white/20 transition-colors group relative overflow-hidden">
+                                        <Card className="p-6 bg-white/5 border-border dark:border-border dark:border-white/10 hover:border-border dark:border-border dark:border-white/20 transition-colors group relative overflow-hidden">
                                             {/* Hover Glow */}
                                             <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                                            <div className={`text-6xl font-black text-white/5 absolute -top-4 ${index % 2 === 0 ? 'right-4' : 'left-4'}`}>
+                                            <div className={`text-6xl font-black text-foreground dark:text-foreground dark:text-white/5 absolute -top-4 ${index % 2 === 0 ? 'right-4' : 'left-4'}`}>
                                                 {step.num}
                                             </div>
 
@@ -114,12 +114,12 @@ export default function PatProcessPage() {
                     </div>
 
                     {/* Info Block */}
-                    <div className="mt-32 max-w-3xl mx-auto text-center border-t border-white/10 pt-16">
+                    <div className="mt-32 max-w-3xl mx-auto text-center border-t border-border dark:border-border dark:border-white/10 pt-16">
                         <h3 className="text-2xl font-bold mb-4">Mastery Through Iteration</h3>
-                        <p className="text-slate-400 mb-8">
+                        <p className="text-muted-foreground dark:text-muted-foreground dark:text-slate-400 mb-8">
                             The tech industry thrives on continuous improvement, and the PAT is designed to champion that mindset. Every piece of feedback from our expert mentors is a stepping stone. We work alongside you to refine your code, build your confidence, and ensure you emerge as an elite, production-ready software engineer.
                         </p>
-                        <Button asChild className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold hover:opacity-90 shadow-lg shadow-indigo-500/25">
+                        <Button asChild className="bg-gradient-to-r from-indigo-600 to-purple-600 text-foreground dark:text-foreground dark:text-white font-semibold hover:opacity-90 shadow-lg shadow-indigo-500/25">
                             <Link href="/enroll">
                                 Begin Your First Module
                             </Link>

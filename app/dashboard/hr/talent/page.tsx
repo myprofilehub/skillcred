@@ -203,7 +203,7 @@ export default async function TalentPoolPage() {
                                         </div>
                                     )}
 
-                                    <div className="flex gap-2 mt-5 pt-4 border-t border-white/10">
+                                    <div className="flex gap-2 mt-5 pt-4 border-t border-border dark:border-border dark:border-white/10">
                                         <Button variant="outline" size="sm" className="flex-1" asChild>
                                             <Link href={`/dashboard/hr/talent/${student.id}`}>
                                                 View Profile

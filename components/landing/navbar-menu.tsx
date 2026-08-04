@@ -13,53 +13,87 @@ import {
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger as DropdownTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
     Code2,
     BrainCircuit,
     Database,
-    Coffee,
     Shield,
     Cloud,
     Cpu,
     Layout,
-    GraduationCap,
-    Users,
     Building2,
-    Landmark,
-    BriefcaseBusiness as Briefcase,
-    ChevronDown,
     Search,
-    Calendar,
-    Award
+    Swords,
+    Lightbulb,
+    FileText,
+    User,
+    Handshake,
+    GraduationCap,
 } from "lucide-react"
 
-const syllabusItems = [
-    { title: "Full stack development", href: "/streams/full-stack-development", icon: Code2, color: "text-purple-400" },
-    { title: "AI & ML", href: "/streams/ai-ml", icon: BrainCircuit, color: "text-blue-400" },
-    { title: "Cybersecurity", href: "/streams/cybersecurity", icon: Shield, color: "text-green-400" },
-    { title: "Data Engineering", href: "/streams/data-engineering", icon: Database, color: "text-yellow-400" },
-    { title: "Devops & Cloud", href: "/streams/devops-cloud", icon: Cloud, color: "text-cyan-400" },
-    { title: "Mobile Development", href: "/streams/mobile-development", icon: Layout, color: "text-orange-400" },
-    { title: "IoT and Embedded", href: "/streams/iot-embedded", icon: Cpu, color: "text-red-400" },
-    { title: "Data Science & Analytics", href: "/streams/data-science", icon: Search, color: "text-indigo-400" },
+const programsData = [
+    {
+        title: "Product Engineering",
+        href: "/programs/standard",
+        duration: "8–10 Weeks",
+        color: "purple",
+        icon: BrainCircuit,
+        streams: [
+            { title: "Full Stack Development", href: "/streams/full-stack-development", icon: Code2 },
+            { title: "AI & ML Engineering", href: "/streams/ai-ml", icon: BrainCircuit },
+            { title: "Mobile Development", href: "/streams/mobile-development", icon: Layout },
+        ]
+    },
+    {
+        title: "Data & Platform Engineering",
+        href: "/programs/fast-track",
+        duration: "5–6 Weeks",
+        color: "blue",
+        icon: Database,
+        streams: [
+            { title: "DevOps & Cloud", href: "/streams/devops-cloud", icon: Cloud },
+            { title: "Data Engineering", href: "/streams/data-engineering", icon: Database },
+            { title: "Data Science & Analytics", href: "/streams/data-science", icon: Search },
+        ]
+    },
+    {
+        title: "Embedded & Security Engineering",
+        href: "/programs/capstone",
+        duration: "4–5 Weeks",
+        color: "green",
+        icon: Cpu,
+        streams: [
+            { title: "Cybersecurity", href: "/streams/cybersecurity", icon: Shield },
+            { title: "IoT & Embedded", href: "/streams/iot-embedded", icon: Cpu },
+        ]
+    },
 ]
 
-const programItems = [
-    { title: "Standard (8 Weeks)", href: "/programs/standard", icon: Calendar, color: "text-sky-400" },
-    { title: "Fast Track (4 Weeks)", href: "/programs/fast-track", icon: Calendar, color: "text-amber-400" },
-    { title: "Capstone Track (2 Weeks)", href: "/programs/capstone", icon: Award, color: "text-fuchsia-400" },
+const insightItems = [
+    { title: "Hiring Trends Report - 2026", href: "/hr-insights", icon: FileText, color: "text-indigo-400", description: "Hiring insights from 100+ tech companies." },
+    { title: "Founder's Story", href: "/founders-story", icon: User, color: "text-amber-400", description: "Why SkillCred exists — in the founder's own words." },
 ]
 
-const patItems = [
-    { title: "What is PAT?", href: "/pat/about", icon: Shield, color: "text-indigo-400" },
-    { title: "Certification Process", href: "/pat/process", icon: Award, color: "text-emerald-400" },
-    { title: "Evaluate Skills", href: "/pat/evaluate", icon: BrainCircuit, color: "text-rose-400" },
+const partnerItems = [
+    { title: "Institutions", href: "/institutions", icon: Building2, color: "text-violet-400", description: "Run live project cohorts and PAT defenses on your campus." },
 ]
+
+const colorMap: Record<string, string> = {
+    purple: "text-purple-400",
+    blue: "text-blue-400",
+    green: "text-green-400",
+}
+
+const bgColorMap: Record<string, string> = {
+    purple: "bg-purple-500/10",
+    blue: "bg-blue-500/10",
+    green: "bg-green-500/10",
+}
+
+const borderColorMap: Record<string, string> = {
+    purple: "border-purple-500/20",
+    blue: "border-blue-500/20",
+    green: "border-green-500/20",
+}
 
 
 export function LandingMenu() {
@@ -67,131 +101,133 @@ export function LandingMenu() {
         <NavigationMenu>
             <NavigationMenuList suppressHydrationWarning className="gap-2">
 
-                {/* 1. PROGRAMS */}
+                {/* 1. PROGRAMS — MEGA MENU */}
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger>Programs</NavigationMenuTrigger>
+                    <NavigationMenuTrigger>
+                        <GraduationCap className="h-4 w-4 text-indigo-400 mr-1.5" />
+                        Programs
+                    </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                        <ul className="grid w-[250px] gap-2 p-2">
-                            {programItems.map((item) => (
-                                <ListItem
-                                    key={item.title}
-                                    title={item.title}
-                                    href={item.href}
-                                    icon={item.icon}
-                                    iconColor={item.color}
-                                />
+                        <div className="grid w-[700px] grid-cols-3 gap-0 p-0">
+                            {programsData.map((program) => (
+                                <div 
+                                    key={program.title}
+                                    className={cn(
+                                        "p-4 border-r last:border-r-0 border-border",
+                                    )}
+                                >
+                                    {/* Program Header */}
+                                    <Link 
+                                        href={program.href}
+                                        className="group block mb-3"
+                                    >
+                                        <div className="flex items-center gap-2 mb-1">
+                                            <program.icon className={cn("h-4 w-4", colorMap[program.color])} />
+                                            <span className="text-sm font-bold text-foreground group-hover:underline">
+                                                {program.title}
+                                            </span>
+                                        </div>
+                                        <span className={cn("text-[11px] font-medium px-2 py-0.5 rounded-full", bgColorMap[program.color], colorMap[program.color])}>
+                                            {program.duration}
+                                        </span>
+                                    </Link>
+
+                                    {/* Divider */}
+                                    <div className={cn("h-px mb-3", borderColorMap[program.color])} style={{ backgroundColor: `var(--border)` }} />
+
+                                    {/* Streams */}
+                                    <ul className="space-y-1">
+                                        {program.streams.map((stream) => (
+                                            <li key={stream.title}>
+                                                <NavigationMenuLink asChild>
+                                                    <Link
+                                                        href={stream.href}
+                                                        className="flex items-center gap-2 rounded-md px-2 py-2 text-xs text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                                                    >
+                                                        <stream.icon className={cn("h-3.5 w-3.5", colorMap[program.color])} />
+                                                        {stream.title}
+                                                    </Link>
+                                                </NavigationMenuLink>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             ))}
-                        </ul>
-                    </NavigationMenuContent>
-                </NavigationMenuItem>
-
-
-                {/* 2. SYLLABUS */}
-                <NavigationMenuItem>
-                    <NavigationMenuTrigger>Syllabus</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                            {syllabusItems.map((item) => (
-                                <ListItem
-                                    key={item.title}
-                                    title={item.title}
-                                    href={item.href}
-                                    icon={item.icon}
-                                    iconColor={item.color}
-                                />
-                            ))}
-                        </ul>
-                    </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                {/* 3. PAT */}
-                <NavigationMenuItem>
-                    <NavigationMenuTrigger>PAT</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                        <ul className="grid w-[250px] gap-2 p-2">
-                            {patItems.map((item) => (
-                                <ListItem
-                                    key={item.title}
-                                    title={item.title}
-                                    href={item.href}
-                                    icon={item.icon}
-                                    iconColor={item.color}
-                                />
-                            ))}
-                        </ul>
-                    </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                {/* 3.5. RESOURCES (dropdown) */}
-                <NavigationMenuItem>
-                    <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                        <ul className="grid w-[220px] gap-2 p-2">
-                            <ListItem
-                                title="Masterclass"
-                                href="/library"
-                                icon={GraduationCap}
-                                iconColor="text-amber-400"
-                            />
-                            <ListItem
-                                title="Blog"
-                                href="/blog"
-                                icon={Coffee}
-                                iconColor="text-indigo-400"
-                            />
-                        </ul>
-                    </NavigationMenuContent>
-                </NavigationMenuItem>
-
-
-
-                {/* 4. CAREER */}
-                <NavigationMenuItem className="relative group/career">
-                    <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent text-white hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white font-bold outline-none cursor-pointer flex items-center")}>
-                        Career <ChevronDown className="relative top-[1px] ml-1 h-3 w-3 group-hover/career:rotate-180 transition-transform duration-200" />
-                    </NavigationMenuLink>
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover/career:opacity-100 group-hover/career:visible transition-all duration-200 ease-in-out z-50">
-                        <div className="w-[180px] bg-black/95 border border-white/10 rounded-md backdrop-blur-xl text-white p-1.5 shadow-2xl">
-                            <Link href="/apply-mentor" className="flex items-center w-full gap-2.5 font-medium hover:bg-white/10 cursor-pointer p-2.5 rounded-sm transition-colors text-sm">
-                                <Users className="h-4 w-4 text-emerald-400" />
-                                Apply as Mentor
-                            </Link>
-                            <Link href="/contact" className="flex items-center w-full gap-2.5 font-medium hover:bg-white/10 cursor-pointer p-2.5 rounded-sm transition-colors text-sm">
-                                <Coffee className="h-4 w-4 text-sky-400" />
-                                Contact Us
-                            </Link>
                         </div>
-                    </div>
+                    </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* 2. CODE ARENA */}
+                <NavigationMenuItem>
+                    <NavigationMenuLink asChild>
+                        <Link href="/code-arena" className={cn(navigationMenuTriggerStyle(), "gap-1.5")}>
+                            <Swords className="h-4 w-4 text-orange-400" />
+                            Code Arena
+                        </Link>
+                    </NavigationMenuLink>
+                </NavigationMenuItem>
+
+                {/* 3. INSIGHTS */}
+                <NavigationMenuItem>
+                    <NavigationMenuTrigger>
+                        <Lightbulb className="h-4 w-4 text-amber-400 mr-1.5" />
+                        Insights
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                        <ul className="grid w-[300px] gap-2 p-2">
+                            {insightItems.map((item) => (
+                                <li key={item.title}>
+                                    <NavigationMenuLink asChild>
+                                        <Link
+                                            href={item.href}
+                                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                        >
+                                            <div className="flex items-center gap-2 text-sm font-semibold leading-none text-foreground">
+                                                <item.icon className={cn("h-4 w-4", item.color)} />
+                                                {item.title}
+                                            </div>
+                                            <p className="line-clamp-2 text-xs leading-snug text-muted-foreground mt-1.5 ml-6">
+                                                {item.description}
+                                            </p>
+                                        </Link>
+                                    </NavigationMenuLink>
+                                </li>
+                            ))}
+                        </ul>
+                    </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* 4. PARTNER WITH US */}
+                <NavigationMenuItem>
+                    <NavigationMenuTrigger>
+                        <Handshake className="h-4 w-4 text-violet-400 mr-1.5" />
+                        Partner with Us
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                        <ul className="grid w-[300px] gap-2 p-2">
+                            {partnerItems.map((item) => (
+                                <li key={item.title}>
+                                    <NavigationMenuLink asChild>
+                                        <Link
+                                            href={item.href}
+                                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                        >
+                                            <div className="flex items-center gap-2 text-sm font-semibold leading-none text-foreground">
+                                                <item.icon className={cn("h-4 w-4", item.color)} />
+                                                {item.title}
+                                            </div>
+                                            <p className="line-clamp-2 text-xs leading-snug text-muted-foreground mt-1.5 ml-6">
+                                                {item.description}
+                                            </p>
+                                        </Link>
+                                    </NavigationMenuLink>
+                                </li>
+                            ))}
+                        </ul>
+                    </NavigationMenuContent>
                 </NavigationMenuItem>
 
             </NavigationMenuList>
         </NavigationMenu>
-    )
+    );
 }
-
-const ListItem = React.forwardRef<
-    React.ElementRef<"a">,
-    React.ComponentPropsWithoutRef<"a"> & { icon?: any, iconColor?: string }
->(({ className, title, children, icon: Icon, iconColor, ...props }, ref) => {
-    return (
-        <li>
-            <NavigationMenuLink asChild>
-                <Link
-                    href={props.href || "#"}
-                    ref={ref}
-                    className={cn(
-                        "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white",
-                        className
-                    )}
-                    {...props}
-                >
-                    <div className="flex items-center gap-2 text-sm font-medium leading-none text-white">
-                        {Icon && <Icon className={cn("h-4 w-4", iconColor || "text-muted-foreground")} />}
-                        {title}
-                    </div>
-                </Link>
-            </NavigationMenuLink>
-        </li>
-    )
-})
-ListItem.displayName = "ListItem"

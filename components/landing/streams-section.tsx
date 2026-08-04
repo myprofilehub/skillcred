@@ -122,7 +122,7 @@ export function StreamsSection() {
                                     <CardContent>
                                         <div className="flex flex-wrap gap-2 mb-4">
                                             {stream.skills.map(skill => (
-                                                <Badge key={skill} variant="secondary" className="text-xs bg-black/20 text-muted-foreground">
+                                                <Badge key={skill} variant="secondary" className="text-xs bg-muted dark:bg-background dark:bg-muted dark:bg-background dark:bg-black/20 text-muted-foreground">
                                                     {skill}
                                                 </Badge>
                                             ))}

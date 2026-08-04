@@ -1,125 +1,213 @@
-import { getPublicProjectCatalog } from "@/app/actions/curriculum-actions";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { User, Users, Trophy } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { User, Users, Trophy, GitBranch, Target, Layers, Blocks } from "lucide-react";
+import { RM_PBL_CURRICULUM } from "@/lib/curriculum-data";
 
 interface ProjectRoadmapProps {
     trackSlug: string;
     accentColor?: string; // e.g. "purple", "cyan", "orange"
+    showMiniProjects?: boolean;
 }
 
-const colorMap: Record<string, { border: string; badge: string; dot: string; gradient: string }> = {
-    purple: { border: "border-purple-500/50", badge: "border-purple-500/30 text-purple-400 bg-purple-500/10", dot: "bg-purple-500", gradient: "from-purple-500/50 to-pink-500/50" },
-    cyan: { border: "border-cyan-500/50", badge: "border-cyan-500/30 text-cyan-400 bg-cyan-500/10", dot: "bg-cyan-500", gradient: "from-cyan-500/50 to-blue-500/50" },
-    orange: { border: "border-orange-500/50", badge: "border-orange-500/30 text-orange-400 bg-orange-500/10", dot: "bg-orange-500", gradient: "from-orange-500/50 to-red-500/50" },
-    green: { border: "border-green-500/50", badge: "border-green-500/30 text-green-400 bg-green-500/10", dot: "bg-green-500", gradient: "from-green-500/50 to-emerald-500/50" },
-    blue: { border: "border-blue-500/50", badge: "border-blue-500/30 text-blue-400 bg-blue-500/10", dot: "bg-blue-500", gradient: "from-blue-500/50 to-indigo-500/50" },
-    red: { border: "border-red-500/50", badge: "border-red-500/30 text-red-400 bg-red-500/10", dot: "bg-red-500", gradient: "from-red-500/50 to-pink-500/50" },
-    yellow: { border: "border-yellow-500/50", badge: "border-yellow-500/30 text-yellow-400 bg-yellow-500/10", dot: "bg-yellow-500", gradient: "from-yellow-500/50 to-orange-500/50" },
-    pink: { border: "border-pink-500/50", badge: "border-pink-500/30 text-pink-400 bg-pink-500/10", dot: "bg-pink-500", gradient: "from-pink-500/50 to-rose-500/50" },
+const colorMap: Record<string, { border: string; badge: string; dot: string; gradient: string; text: string; bg: string }> = {
+    purple: { border: "border-purple-200 dark:border-purple-500/20", badge: "border-purple-200 text-purple-700 bg-purple-50 dark:border-purple-500/30 dark:bg-purple-500/10 dark:text-purple-400", dot: "bg-purple-500", gradient: "from-purple-300 to-pink-300", text: "text-purple-700 dark:text-purple-400", bg: "bg-purple-500/10" },
+    cyan: { border: "border-cyan-200 dark:border-cyan-500/20", badge: "border-cyan-200 text-cyan-700 bg-cyan-50 dark:border-cyan-500/30 dark:bg-cyan-500/10 dark:text-cyan-400", dot: "bg-cyan-500", gradient: "from-cyan-300 to-blue-300", text: "text-cyan-700 dark:text-cyan-400", bg: "bg-cyan-500/10" },
+    orange: { border: "border-orange-200 dark:border-orange-500/20", badge: "border-orange-200 text-orange-700 bg-orange-50 dark:border-orange-500/30 dark:bg-orange-500/10 dark:text-orange-400", dot: "bg-orange-500", gradient: "from-orange-300 to-red-300", text: "text-orange-700 dark:text-orange-400", bg: "bg-orange-500/10" },
+    green: { border: "border-green-200 dark:border-green-500/20", badge: "border-green-200 text-green-700 bg-green-50 dark:border-green-500/30 dark:bg-green-500/10 dark:text-green-400", dot: "bg-green-500", gradient: "from-green-300 to-emerald-300", text: "text-green-700 dark:text-green-400", bg: "bg-green-500/10" },
+    blue: { border: "border-blue-200 dark:border-blue-500/20", badge: "border-blue-200 text-blue-700 bg-blue-50 dark:border-blue-500/30 dark:bg-blue-500/10 dark:text-blue-400", dot: "bg-blue-500", gradient: "from-blue-300 to-indigo-300", text: "text-blue-700 dark:text-blue-400", bg: "bg-blue-500/10" },
+    red: { border: "border-red-200 dark:border-red-500/20", badge: "border-red-200 text-red-700 bg-red-50 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400", dot: "bg-red-500", gradient: "from-red-300 to-pink-300", text: "text-red-700 dark:text-red-400", bg: "bg-red-500/10" },
+    yellow: { border: "border-yellow-200 dark:border-yellow-500/20", badge: "border-yellow-200 text-yellow-700 bg-yellow-50 dark:border-yellow-500/30 dark:bg-yellow-500/10 dark:text-yellow-400", dot: "bg-yellow-500", gradient: "from-yellow-300 to-orange-300", text: "text-yellow-700 dark:text-yellow-400", bg: "bg-yellow-500/10" },
+    pink: { border: "border-pink-200 dark:border-pink-500/20", badge: "border-pink-200 text-pink-700 bg-pink-50 dark:border-pink-500/30 dark:bg-pink-500/10 dark:text-pink-400", dot: "bg-pink-500", gradient: "from-pink-300 to-rose-300", text: "text-pink-700 dark:text-pink-400", bg: "bg-pink-500/10" },
 };
 
-function getCategoryInfo(difficulty: number) {
-    switch (difficulty) {
-        case 3: return { label: "Solo Project", icon: User, color: "border-green-500" };
-        case 4: return { label: "Pair Project", icon: Users, color: "border-yellow-500" };
-        default: return { label: "Capstone", icon: Trophy, color: "border-red-500" };
+function getPhaseIcon(idx: number) {
+    switch (idx) {
+        case 0: return <User className="w-3.5 h-3.5 mr-1" />;
+        case 1: return <User className="w-3.5 h-3.5 mr-1" />;
+        case 2: return <Users className="w-3.5 h-3.5 mr-1" />;
+        case 3: return <Trophy className="w-3.5 h-3.5 mr-1" />;
+        default: return <Target className="w-3.5 h-3.5 mr-1" />;
     }
 }
 
-export async function ProjectRoadmap({ trackSlug, accentColor = "purple" }: ProjectRoadmapProps) {
-    const { projects } = await getPublicProjectCatalog(trackSlug);
-    const colors = colorMap[accentColor] || colorMap.purple;
-
-    if (!projects || projects.length === 0) {
+export function ProjectRoadmap({ trackSlug, accentColor = "purple", showMiniProjects = false }: ProjectRoadmapProps) {
+    const streamSlugToDbSlug: Record<string, string> = {
+        "full-stack-development": "full-stack-development",
+        "ai-ml": "ai-ml",
+        "cybersecurity": "cybersecurity",
+        "data-engineering": "data-engineering",
+        "devops-cloud": "devops-cloud",
+        "mobile-development": "mobile-development",
+        "iot-embedded": "iot-embedded",
+        "data-science": "data-science",
+    };
+    
+    const dbSlug = streamSlugToDbSlug[trackSlug] || trackSlug;
+    const curriculumData = RM_PBL_CURRICULUM[dbSlug];
+    
+    if (!curriculumData) {
         return null;
     }
 
-    const solo = projects.filter(p => p.difficulty === 3);
-    const pair = projects.filter(p => p.difficulty === 4);
-    const capstone = projects.filter(p => p.difficulty >= 5);
-
-    const allProjects = [
-        ...solo.map((p, i) => ({ ...p, idx: i + 1 })),
-        ...pair.map((p, i) => ({ ...p, idx: solo.length + i + 1 })),
-        ...capstone.map((p, i) => ({ ...p, idx: solo.length + pair.length + i + 1 })),
-    ];
+    const colors = colorMap[accentColor] || colorMap.purple;
 
     return (
-        <div className="w-full">
-            <div className="w-full">
-                <div className="text-center md:text-left mb-16">
-                    <h2 className="text-3xl font-bold font-heading mb-4">
-                        Project Roadmap ({projects.length} Projects)
-                    </h2>
-                    <p className="text-muted-foreground">
-                        From solo builds to team capstones — real-world projects that prove your skills
-                    </p>
-                    <div className="flex justify-center gap-6 mt-6 text-sm">
-                        <div className="flex items-center gap-2">
-                            <User className="w-4 h-4 text-green-400" />
-                            <span className="text-muted-foreground">{solo.length} Solo</span>
+        <Card className="bg-white border-slate-200 shadow-xl relative overflow-hidden text-slate-800 dark:bg-slate-900/80 dark:border-white/10 dark:text-slate-100">
+            <div className={`absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r ${colors.gradient}`} />
+            
+            <CardHeader className="border-b border-slate-150 dark:border-white/5 pb-5 bg-slate-50/50 dark:bg-white/[0.02]">
+                <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                        <div className={`w-10 h-10 rounded-xl ${colors.bg} border ${colors.border} flex items-center justify-center`}>
+                            <Target className={`w-5 h-5 ${colors.text}`} />
                         </div>
-                        <div className="flex items-center gap-2">
-                            <Users className="w-4 h-4 text-yellow-400" />
-                            <span className="text-muted-foreground">{pair.length} Pair</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <Trophy className="w-4 h-4 text-red-400" />
-                            <span className="text-muted-foreground">{capstone.length} Capstone</span>
+                        <div>
+                            <CardTitle className="text-lg font-bold text-slate-950 dark:text-white">
+                                Core 4-Project Spine
+                            </CardTitle>
+                            <CardDescription className="text-xs text-slate-500 dark:text-slate-400">
+                                Step-by-step development phases mirroring real assessment rounds
+                            </CardDescription>
                         </div>
                     </div>
+                    <Badge className={`${colors.badge} text-[10px] uppercase font-bold tracking-wider whitespace-nowrap`}>
+                        ★ Industry Mirrored
+                    </Badge>
                 </div>
+            </CardHeader>
 
-                <div className="space-y-8 relative">
-                    {/* Vertical Line */}
-                    <div className={`absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b ${colors.gradient} hidden md:block`} />
-
-                    {allProjects.map((project) => {
-                        const category = getCategoryInfo(project.difficulty);
-                        return (
-                            <div key={project.id} className="relative md:pl-24">
-                                <div className="hidden md:flex absolute left-4 -translate-x-1/2 top-6 w-8 h-8 rounded-full bg-background border-4 border-muted items-center justify-center z-10">
-                                    <div className={`w-2 h-2 rounded-full ${colors.dot}`} />
-                                </div>
-                                <Card className={`border-l-4 ${category.color} bg-white/5`}>
-                                    <CardContent className="p-6">
-                                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
-                                            <div className="flex items-center gap-2">
-                                                <Badge variant="outline" className="w-fit">
-                                                    Project {project.idx}
-                                                </Badge>
-                                                <Badge variant="outline" className={colors.badge}>
-                                                    <category.icon className="w-3 h-3 mr-1" />
-                                                    {category.label}
-                                                </Badge>
-                                            </div>
-                                        </div>
-                                        <h3 className="text-xl font-bold mb-2">{project.name}</h3>
-                                        {project.description && (
-                                            <p className="text-muted-foreground text-sm mb-3">{project.description}</p>
-                                        )}
-                                        {project.coreFeatures.length > 0 && (
-                                            <div className="flex flex-wrap gap-2 mt-2">
-                                                {project.coreFeatures.slice(0, 4).map((feat: string, i: number) => (
-                                                    <Badge key={i} variant="secondary" className="bg-secondary text-secondary-foreground text-xs">
-                                                        {feat}
-                                                    </Badge>
-                                                ))}
-                                            </div>
-                                        )}
-                                        {project.startupAngle && (
-                                            <p className="text-xs text-muted-foreground mt-3 italic">
-                                                💼 {project.startupAngle}
-                                            </p>
-                                        )}
-                                    </CardContent>
-                                </Card>
+            <CardContent className="p-6 space-y-4">
+                {curriculumData.spine.map((project, idx) => (
+                    <div 
+                        key={idx} 
+                        className={`border ${colors.border} rounded-xl bg-slate-50/30 hover:bg-slate-50 transition-all dark:bg-slate-950/40 dark:hover:bg-slate-950/80 p-5 shadow-sm space-y-3`}
+                    >
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/60 dark:border-white/5 pb-3">
+                            <div className="flex items-center gap-2.5 flex-wrap">
+                                <Badge variant="outline" className={`${colors.badge} text-xs px-2.5 py-0.5 font-bold`}>
+                                    {getPhaseIcon(idx)}
+                                    {project.checkpoint}
+                                </Badge>
+                                <span className="font-bold text-sm sm:text-base text-slate-950 dark:text-white">{project.phase}</span>
                             </div>
-                        );
-                    })}
+                            <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5 shrink-0">
+                                <GitBranch className="w-3.5 h-3.5 text-slate-400" />
+                                <span>Mirrors: {project.funnelStage}</span>
+                            </div>
+                        </div>
+                        
+                        <div className="space-y-1">
+                            <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block">Project Brief</span>
+                            <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed font-medium">
+                                {project.brief}
+                            </p>
+                        </div>
+                    </div>
+                ))}
+                
+                {showMiniProjects && (
+                    <div className="w-full pt-2">
+                        <Accordion type="single" collapsible className="w-full">
+                            <AccordionItem value="mini-projects" className="border-slate-200 dark:border-white/10 rounded-xl bg-slate-50 dark:bg-slate-900/50 shadow-sm px-5">
+                                <AccordionTrigger className="hover:no-underline py-3.5">
+                                    <div className="flex items-center gap-3 text-left">
+                                        <Layers className={`w-5 h-5 ${colors.text}`} />
+                                        <span className="font-semibold text-sm text-slate-900 dark:text-white">View {curriculumData.miniProjects.length} Add-On Mini-Projects</span>
+                                    </div>
+                                </AccordionTrigger>
+                                <AccordionContent>
+                                    <div className="grid md:grid-cols-2 gap-3.5 pt-3.5 pb-2 border-t border-slate-200 dark:border-white/10">
+                                        {curriculumData.miniProjects.map((mini, idx) => (
+                                            <div key={idx} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 p-3.5 rounded-xl shadow-sm flex gap-3">
+                                                <div className={`mt-0.5 w-6 h-6 rounded-md ${colors.badge} flex items-center justify-center shrink-0`}>
+                                                    <Blocks className={`w-3 h-3 ${colors.text}`} />
+                                                </div>
+                                                <div className="space-y-1">
+                                                    <h4 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">{mini.concept}</h4>
+                                                    <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">{mini.build}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
+                    </div>
+                )}
+            </CardContent>
+        </Card>
+    );
+}
+
+export function MiniProjectsCard({ trackSlug, accentColor = "purple" }: ProjectRoadmapProps) {
+    const streamSlugToDbSlug: Record<string, string> = {
+        "full-stack-development": "full-stack-development",
+        "ai-ml": "ai-ml",
+        "cybersecurity": "cybersecurity",
+        "data-engineering": "data-engineering",
+        "devops-cloud": "devops-cloud",
+        "mobile-development": "mobile-development",
+        "iot-embedded": "iot-embedded",
+        "data-science": "data-science",
+    };
+    
+    const dbSlug = streamSlugToDbSlug[trackSlug] || trackSlug;
+    const curriculumData = RM_PBL_CURRICULUM[dbSlug];
+    
+    if (!curriculumData || !curriculumData.miniProjects) {
+        return null;
+    }
+
+    const colors = colorMap[accentColor] || colorMap.purple;
+
+    return (
+        <Card className="bg-white border-slate-200 shadow-xl relative overflow-hidden text-slate-800 dark:bg-slate-900/80 dark:border-white/10 dark:text-slate-100">
+            <div className={`absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r ${colors.gradient}`} />
+            
+            <CardHeader className="border-b border-slate-150 dark:border-white/5 pb-5 bg-slate-50/50 dark:bg-white/[0.02]">
+                <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                        <div className={`w-10 h-10 rounded-xl ${colors.bg} border ${colors.border} flex items-center justify-center`}>
+                            <Layers className={`w-5 h-5 ${colors.text}`} />
+                        </div>
+                        <div>
+                            <CardTitle className="text-lg font-bold text-slate-950 dark:text-white">
+                                {curriculumData.miniProjects.length} Targeted Mini-Projects
+                            </CardTitle>
+                            <CardDescription className="text-xs text-slate-500 dark:text-slate-400">
+                                Hands-on skill builders covering practical tools & concepts
+                            </CardDescription>
+                        </div>
+                    </div>
+                    <Badge className={`${colors.badge} text-[10px] uppercase font-bold tracking-wider whitespace-nowrap`}>
+                        ★ Build & Verify
+                    </Badge>
                 </div>
-            </div>
-        </div>
+            </CardHeader>
+
+            <CardContent className="p-6">
+                <div className="grid sm:grid-cols-2 gap-3.5">
+                    {curriculumData.miniProjects.map((mini, idx) => (
+                        <div 
+                            key={idx} 
+                            className="p-3.5 rounded-xl border border-slate-200/80 bg-slate-50/30 hover:bg-slate-50 hover:border-slate-300 transition-all dark:border-white/5 dark:bg-slate-950/40 dark:hover:bg-slate-950/80 dark:hover:border-white/10 flex gap-3 items-start"
+                        >
+                            <div className={`mt-0.5 w-6 h-6 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center shrink-0`}>
+                                <span className={`text-[10px] font-bold ${colors.text}`}>{idx + 1}</span>
+                            </div>
+                            <div className="space-y-1 min-w-0">
+                                <h5 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white leading-tight truncate" title={mini.concept}>
+                                    {mini.concept}
+                                </h5>
+                                <p className="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-2 leading-relaxed">
+                                    {mini.build}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </CardContent>
+        </Card>
     );
 }

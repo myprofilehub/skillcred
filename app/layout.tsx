@@ -32,7 +32,7 @@ export default async function RootLayout({
   const session = await auth();
 
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <Script
           strategy="afterInteractive"
@@ -79,12 +79,11 @@ export default async function RootLayout({
         </noscript>
       </head>
       <body
-        className={`${inter.variable} ${outfit.variable} antialiased bg-background text-foreground`}
+        className={`${inter.variable} ${outfit.variable} antialiased bg-white text-slate-900`}
       >
         <AuthProvider session={session}>
-
           {children}
-          <Toaster position="top-right" theme="dark" richColors />
+          <Toaster position="top-right" richColors />
         </AuthProvider>
       </body>
     </html>

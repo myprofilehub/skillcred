@@ -103,8 +103,8 @@ export default async function RecordedContentPage() {
                                 const recordings = dbClassroom ? liveRecordingsMap.get(dbClassroom.id) || [] : [];
 
                                 return (
-                                    <Card key={course.id} className="bg-white/5 border-white/10 overflow-hidden">
-                                        <div className="p-4 border-b border-white/10 flex justify-between items-center bg-white/5">
+                                    <Card key={course.id} className="bg-white/5 border-border dark:border-border dark:border-white/10 overflow-hidden">
+                                        <div className="p-4 border-b border-border dark:border-border dark:border-white/10 flex justify-between items-center bg-white/5">
                                             <div>
                                                 <h3 className="font-semibold text-lg">{course.name}</h3>
                                                 <p className="text-xs text-muted-foreground">{course.section}</p>
@@ -170,7 +170,7 @@ export default async function RecordedContentPage() {
                             <Input
                                 type="search"
                                 placeholder="Search library..."
-                                className="pl-8 bg-white/5 border-white/10"
+                                className="pl-8 bg-white/5 border-border dark:border-border dark:border-white/10"
                             />
                         </div>
                         {/* Filter dropdown could go here */}
@@ -178,10 +178,10 @@ export default async function RecordedContentPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {Array.isArray(libraryRecordings) && libraryRecordings.map((rec: any) => (
-                            <Card key={rec.id} className="group border-white/10 bg-white/5 hover:border-primary/30 transition-colors">
-                                <div className="aspect-video bg-black/40 relative flex items-center justify-center">
-                                    <Film className="w-12 h-12 text-white/20 group-hover:text-primary transition-colors" />
-                                    <Badge className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm border-0">
+                            <Card key={rec.id} className="group border-border dark:border-border dark:border-white/10 bg-white/5 hover:border-primary/30 transition-colors">
+                                <div className="aspect-video bg-muted dark:bg-background dark:bg-muted dark:bg-background dark:bg-black/40 relative flex items-center justify-center">
+                                    <Film className="w-12 h-12 text-foreground dark:text-foreground dark:text-white/20 group-hover:text-primary transition-colors" />
+                                    <Badge className="absolute top-2 right-2 bg-muted/80 dark:bg-background dark:bg-muted/80 dark:bg-background dark:bg-black/60 backdrop-blur-sm border-0">
                                         {rec.track?.title || "General"}
                                     </Badge>
                                 </div>
@@ -205,7 +205,7 @@ export default async function RecordedContentPage() {
                             </Card>
                         ))}
                         {(!libraryRecordings || (Array.isArray(libraryRecordings) && libraryRecordings.length === 0)) && (
-                            <div className="col-span-full py-12 text-center text-muted-foreground border border-dashed border-white/10 rounded-lg">
+                            <div className="col-span-full py-12 text-center text-muted-foreground border border-dashed border-border dark:border-border dark:border-white/10 rounded-lg">
                                 <Film className="w-12 h-12 mx-auto mb-4 opacity-20" />
                                 <p>No pre-recorded lessons found.</p>
                                 <p className="text-sm">Upload a video to get started.</p>

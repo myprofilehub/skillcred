@@ -106,7 +106,7 @@ export default async function InterviewRequestsPage() {
                     </div>
                 </div>
                 {request.status === "ACCEPTED" && request.student?.user?.email && (
-                    <div className="mt-4 pt-4 border-t border-white/10">
+                    <div className="mt-4 pt-4 border-t border-border dark:border-border dark:border-white/10">
                         <Button size="sm" className="w-full bg-emerald-600 hover:bg-emerald-700">
                             Contact: {request.student.user.email}
                         </Button>

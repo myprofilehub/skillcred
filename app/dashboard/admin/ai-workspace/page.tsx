@@ -129,7 +129,7 @@ export default function AIWorkspacePage() {
                 <h1 className="text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-rose-400">
                     SkillCred AI Workspace
                 </h1>
-                <p className="text-slate-400 text-lg">
+                <p className="text-muted-foreground dark:text-muted-foreground dark:text-slate-400 text-lg">
                     Orchestrate high-end AI content generation across your platform.
                 </p>
             </div>
@@ -147,29 +147,29 @@ export default function AIWorkspacePage() {
                             </div>
                             <span className="text-xs font-bold uppercase tracking-wider text-orange-500/80">Premium Engine</span>
                         </div>
-                        <CardTitle className="text-2xl text-white">Video Pipeline</CardTitle>
-                        <CardDescription className="text-slate-400">
+                        <CardTitle className="text-2xl text-foreground dark:text-foreground dark:text-white">Video Pipeline</CardTitle>
+                        <CardDescription className="text-muted-foreground dark:text-muted-foreground dark:text-slate-400">
                             Generate 60-second cinematic promotional videos with AI narration.
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleGenerateVideo} className="space-y-4">
                             <div className="space-y-2">
-                                <Label htmlFor="topic" className="text-slate-300">Video Topic</Label>
+                                <Label htmlFor="topic" className="text-muted-foreground dark:text-muted-foreground dark:text-slate-300">Video Topic</Label>
                                 <Input 
                                     id="topic" 
                                     placeholder="e.g. Benefits of learning Cloud Computing..." 
-                                    className="bg-slate-950/50 border-slate-800 text-white focus:border-orange-500/50"
+                                    className="bg-slate-950/50 border-slate-800 text-foreground dark:text-foreground dark:text-white focus:border-orange-500/50"
                                     value={videoData.topic}
                                     onChange={(e) => setVideoData({...videoData, topic: e.target.value})}
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="style" className="text-slate-300">Visual Style</Label>
+                                <Label htmlFor="style" className="text-muted-foreground dark:text-muted-foreground dark:text-slate-300">Visual Style</Label>
                                 <Input 
                                     id="style" 
                                     placeholder="Cinematic, professional, tech-focused..." 
-                                    className="bg-slate-950/50 border-slate-800 text-white focus:border-orange-500/50"
+                                    className="bg-slate-950/50 border-slate-800 text-foreground dark:text-foreground dark:text-white focus:border-orange-500/50"
                                     value={videoData.style}
                                     onChange={(e) => setVideoData({...videoData, style: e.target.value})}
                                 />
@@ -177,7 +177,7 @@ export default function AIWorkspacePage() {
                             <Button 
                                 type="submit" 
                                 disabled={loading}
-                                className="w-full bg-gradient-to-r from-orange-600 to-rose-600 hover:from-orange-500 hover:to-rose-500 text-white font-bold py-6 rounded-xl shadow-lg shadow-orange-500/20"
+                                className="w-full bg-gradient-to-r from-orange-600 to-rose-600 hover:from-orange-500 hover:to-rose-500 text-foreground dark:text-foreground dark:text-white font-bold py-6 rounded-xl shadow-lg shadow-orange-500/20"
                             >
                                 {loading ? (
                                     <>
@@ -219,8 +219,8 @@ export default function AIWorkspacePage() {
                             </div>
                             <span className="text-xs font-bold uppercase tracking-wider text-purple-500/80">Content Engine</span>
                         </div>
-                        <CardTitle className="text-2xl text-white">Copywriter AI</CardTitle>
-                        <CardDescription className="text-slate-400">
+                        <CardTitle className="text-2xl text-foreground dark:text-foreground dark:text-white">Copywriter AI</CardTitle>
+                        <CardDescription className="text-muted-foreground dark:text-muted-foreground dark:text-slate-400">
                             Draft high-conversion social posts and blog content for SkillCred.
                         </CardDescription>
                     </CardHeader>
@@ -228,15 +228,15 @@ export default function AIWorkspacePage() {
                         <form onSubmit={handleGenerateText} className="space-y-4">
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label className="text-slate-300">Platform</Label>
+                                    <Label className="text-muted-foreground dark:text-muted-foreground dark:text-slate-300">Platform</Label>
                                     <Select 
                                         value={textData.platform} 
                                         onValueChange={(v) => setTextData({...textData, platform: v})}
                                     >
-                                        <SelectTrigger className="bg-slate-950/50 border-slate-800 text-white">
+                                        <SelectTrigger className="bg-slate-950/50 border-slate-800 text-foreground dark:text-foreground dark:text-white">
                                             <SelectValue />
                                         </SelectTrigger>
-                                        <SelectContent className="bg-slate-900 border-slate-800 text-white">
+                                        <SelectContent className="bg-slate-900 border-slate-800 text-foreground dark:text-foreground dark:text-white">
                                             {Object.keys(PLATFORM_GUIDELINES).map(p => (
                                                 <SelectItem key={p} value={p}>{p}</SelectItem>
                                             ))}
@@ -244,15 +244,15 @@ export default function AIWorkspacePage() {
                                     </Select>
                                 </div>
                                 <div className="space-y-2">
-                                    <Label className="text-slate-300">Content Type</Label>
+                                    <Label className="text-muted-foreground dark:text-muted-foreground dark:text-slate-300">Content Type</Label>
                                     <Select 
                                         value={textData.contentType} 
                                         onValueChange={(v) => setTextData({...textData, contentType: v})}
                                     >
-                                        <SelectTrigger className="bg-slate-950/50 border-slate-800 text-white">
+                                        <SelectTrigger className="bg-slate-950/50 border-slate-800 text-foreground dark:text-foreground dark:text-white">
                                             <SelectValue />
                                         </SelectTrigger>
-                                        <SelectContent className="bg-slate-900 border-slate-800 text-white">
+                                        <SelectContent className="bg-slate-900 border-slate-800 text-foreground dark:text-foreground dark:text-white">
                                             {CONTENT_TYPES.map(t => (
                                                 <SelectItem key={t.id} value={t.id}>{t.label}</SelectItem>
                                             ))}
@@ -262,15 +262,15 @@ export default function AIWorkspacePage() {
                             </div>
                             
                             <div className="space-y-2">
-                                <Label className="text-slate-300">Target Stream</Label>
+                                <Label className="text-muted-foreground dark:text-muted-foreground dark:text-slate-300">Target Stream</Label>
                                 <Select 
                                     value={textData.stream} 
                                     onValueChange={(v) => setTextData({...textData, stream: v})}
                                 >
-                                    <SelectTrigger className="bg-slate-950/50 border-slate-800 text-white">
+                                    <SelectTrigger className="bg-slate-950/50 border-slate-800 text-foreground dark:text-foreground dark:text-white">
                                         <SelectValue />
                                     </SelectTrigger>
-                                    <SelectContent className="bg-slate-900 border-slate-800 text-white">
+                                    <SelectContent className="bg-slate-900 border-slate-800 text-foreground dark:text-foreground dark:text-white">
                                         {SKILLCRED_STREAMS.map(s => (
                                             <SelectItem key={s.id} value={s.name}>{s.name}</SelectItem>
                                         ))}
@@ -279,11 +279,11 @@ export default function AIWorkspacePage() {
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="text-topic" className="text-slate-300">Topic / Key Message</Label>
+                                <Label htmlFor="text-topic" className="text-muted-foreground dark:text-muted-foreground dark:text-slate-300">Topic / Key Message</Label>
                                 <Input 
                                     id="text-topic" 
                                     placeholder="e.g. Why data engineering is the backbone of AI..." 
-                                    className="bg-slate-950/50 border-slate-800 text-white focus:border-purple-500/50"
+                                    className="bg-slate-950/50 border-slate-800 text-foreground dark:text-foreground dark:text-white focus:border-purple-500/50"
                                     value={textData.topic}
                                     onChange={(e) => setTextData({...textData, topic: e.target.value})}
                                 />
@@ -292,7 +292,7 @@ export default function AIWorkspacePage() {
                             <Button 
                                 type="submit" 
                                 disabled={textLoading}
-                                className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-6 rounded-xl shadow-lg shadow-purple-500/20"
+                                className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-foreground dark:text-foreground dark:text-white font-bold py-6 rounded-xl shadow-lg shadow-purple-500/20"
                             >
                                 {textLoading ? (
                                     <>
@@ -319,7 +319,7 @@ export default function AIWorkspacePage() {
                                     {textResult.map((text, i) => (
                                         <TabsContent key={i} value={`var-${i}`} className="mt-2">
                                             <div className="relative group/text">
-                                                <div className="bg-slate-950/80 border border-slate-800 rounded-lg p-4 text-sm text-slate-300 whitespace-pre-wrap leading-relaxed max-h-[300px] overflow-y-auto custom-scrollbar">
+                                                <div className="bg-slate-950/80 border border-slate-800 rounded-lg p-4 text-sm text-muted-foreground dark:text-muted-foreground dark:text-slate-300 whitespace-pre-wrap leading-relaxed max-h-[300px] overflow-y-auto custom-scrollbar">
                                                     {text}
                                                 </div>
                                                 <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover/text:opacity-100 transition-opacity">
@@ -348,34 +348,34 @@ export default function AIWorkspacePage() {
                             </div>
                             <span className="text-xs font-bold uppercase tracking-wider text-cyan-500/80">Art Engine</span>
                         </div>
-                        <CardTitle className="text-2xl text-white">Image Generation</CardTitle>
-                        <CardDescription className="text-slate-400">
+                        <CardTitle className="text-2xl text-foreground dark:text-foreground dark:text-white">Image Generation</CardTitle>
+                        <CardDescription className="text-muted-foreground dark:text-muted-foreground dark:text-slate-400">
                             Create stunning marketing visuals via Flux.1 / SDXL.
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleGenerateImage} className="space-y-4">
                             <div className="space-y-2">
-                                <Label htmlFor="img-prompt" className="text-slate-300">Prompt</Label>
+                                <Label htmlFor="img-prompt" className="text-muted-foreground dark:text-muted-foreground dark:text-slate-300">Prompt</Label>
                                 <Input 
                                     id="img-prompt" 
                                     placeholder="e.g. A futuristic workspace with holograms of code..." 
-                                    className="bg-slate-950/50 border-slate-800 text-white focus:border-cyan-500/50"
+                                    className="bg-slate-950/50 border-slate-800 text-foreground dark:text-foreground dark:text-white focus:border-cyan-500/50"
                                     value={imageData.prompt}
                                     onChange={(e) => setImageData({...imageData, prompt: e.target.value})}
                                 />
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label className="text-slate-300">Aspect Ratio</Label>
+                                    <Label className="text-muted-foreground dark:text-muted-foreground dark:text-slate-300">Aspect Ratio</Label>
                                     <Select 
                                         value={imageData.aspectRatio} 
                                         onValueChange={(v) => setImageData({...imageData, aspectRatio: v})}
                                     >
-                                        <SelectTrigger className="bg-slate-950/50 border-slate-800 text-white">
+                                        <SelectTrigger className="bg-slate-950/50 border-slate-800 text-foreground dark:text-foreground dark:text-white">
                                             <SelectValue />
                                         </SelectTrigger>
-                                        <SelectContent className="bg-slate-900 border-slate-800 text-white">
+                                        <SelectContent className="bg-slate-900 border-slate-800 text-foreground dark:text-foreground dark:text-white">
                                             <SelectItem value="1:1">1:1 Square</SelectItem>
                                             <SelectItem value="16:9">16:9 Cinema</SelectItem>
                                             <SelectItem value="9:16">9:16 Story</SelectItem>
@@ -384,15 +384,15 @@ export default function AIWorkspacePage() {
                                     </Select>
                                 </div>
                                 <div className="space-y-2">
-                                    <Label className="text-slate-300">Count</Label>
+                                    <Label className="text-muted-foreground dark:text-muted-foreground dark:text-slate-300">Count</Label>
                                     <Select 
                                         value={imageData.numberOfImages.toString()} 
                                         onValueChange={(v) => setImageData({...imageData, numberOfImages: parseInt(v)})}
                                     >
-                                        <SelectTrigger className="bg-slate-950/50 border-slate-800 text-white">
+                                        <SelectTrigger className="bg-slate-950/50 border-slate-800 text-foreground dark:text-foreground dark:text-white">
                                             <SelectValue />
                                         </SelectTrigger>
-                                        <SelectContent className="bg-slate-900 border-slate-800 text-white">
+                                        <SelectContent className="bg-slate-900 border-slate-800 text-foreground dark:text-foreground dark:text-white">
                                             <SelectItem value="1">1 Image</SelectItem>
                                             <SelectItem value="2">2 Images</SelectItem>
                                             <SelectItem value="4">4 Images</SelectItem>
@@ -404,7 +404,7 @@ export default function AIWorkspacePage() {
                             <Button 
                                 type="submit" 
                                 disabled={imageLoading}
-                                className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold py-6 rounded-xl shadow-lg shadow-cyan-500/20"
+                                className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-foreground dark:text-foreground dark:text-white font-bold py-6 rounded-xl shadow-lg shadow-cyan-500/20"
                             >
                                 {imageLoading ? (
                                     <>
@@ -429,7 +429,7 @@ export default function AIWorkspacePage() {
                                             alt="Generated" 
                                             className="object-cover w-full h-full" 
                                         />
-                                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                        <div className="absolute inset-0 bg-muted dark:bg-background dark:bg-muted dark:bg-background dark:bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                             <Button 
                                                 size="icon" 
                                                 variant="secondary" 
@@ -454,7 +454,7 @@ export default function AIWorkspacePage() {
                     <CardContent className="pt-6">
                         <div className="flex items-center justify-between mb-4">
                             <div>
-                                <h3 className="text-white font-bold">Engine Status</h3>
+                                <h3 className="text-foreground dark:text-foreground dark:text-white font-bold">Engine Status</h3>
                                 <p className="text-xs text-slate-500">System orchestration layer</p>
                             </div>
                             <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20">

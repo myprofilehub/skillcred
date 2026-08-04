@@ -24,7 +24,7 @@ export function ResumeScanner() {
     };
 
     return (
-        <section id="resume-scanner" className="py-24 px-6 border-b border-white/5 bg-black/50">
+        <section id="resume-scanner" className="py-24 px-6 border-b border-border dark:border-border dark:border-white/5 bg-muted/50 dark:bg-background dark:bg-muted/50 dark:bg-background dark:bg-black/50">
             <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-12 space-y-4">
                     <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
@@ -37,7 +37,7 @@ export function ResumeScanner() {
 
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                     {/* Left: Uploader */}
-                    <Card className="p-8 border-dashed border-2 border-white/20 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer group flex flex-col items-center justify-center min-h-[300px]" onClick={state === "idle" ? handleUpload : undefined}>
+                    <Card className="p-8 border-dashed border-2 border-border dark:border-border dark:border-white/20 bg-white/5 hover:bg-white/10 transition-colors cursor-pointer group flex flex-col items-center justify-center min-h-[300px]" onClick={state === "idle" ? handleUpload : undefined}>
                         {state === "idle" && (
                             <>
                                 <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
@@ -76,7 +76,7 @@ export function ResumeScanner() {
                     </Card>
 
                     {/* Right: Results Preview */}
-                    <Card className="relative overflow-hidden border-white/10 bg-black h-[300px]">
+                    <Card className="relative overflow-hidden border-border dark:border-border dark:border-white/10 bg-background dark:bg-background dark:bg-black h-[300px]">
                         {state !== "complete" ? (
                             <div className="absolute inset-0 flex items-center justify-center text-muted-foreground p-8 text-center bg-white/5">
                                 <FileText className="w-12 h-12 mb-4 opacity-50 mx-auto" />
@@ -114,13 +114,13 @@ export function ResumeScanner() {
 
                                 {/* Gate Overlay - Only if NOT logged in */}
                                 {!session && (
-                                    <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm p-6 text-center space-y-4 animate-in fade-in zoom-in duration-300">
+                                    <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-muted/80 dark:bg-background dark:bg-muted/80 dark:bg-background dark:bg-black/60 backdrop-blur-sm p-6 text-center space-y-4 animate-in fade-in zoom-in duration-300">
                                         <Lock className="w-10 h-10 text-emerald-400" />
                                         <h3 className="text-xl font-bold">Unlock Full Report</h3>
                                         <p className="text-sm text-muted-foreground">
                                             Your resume scored <strong>{score}/100</strong>. Sign up free to see exactly what to fix.
                                         </p>
-                                        <Button className="w-full bg-emerald-600 hover:bg-emerald-500 text-white" asChild>
+                                        <Button className="w-full bg-emerald-600 hover:bg-emerald-500 text-foreground dark:text-foreground dark:text-white" asChild>
                                             <Link href="/auth/signup?ref=resume_scanner">
                                                 Reveal My Issues
                                             </Link>

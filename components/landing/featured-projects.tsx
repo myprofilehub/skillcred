@@ -37,12 +37,12 @@ export async function FeaturedProjects() {
     if (!featured || featured.length === 0) return null;
 
     return (
-        <section className="py-12 px-6 bg-black relative overflow-hidden">
+        <section className="py-12 px-6 bg-background dark:bg-background dark:bg-black relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(99,102,241,0.05),transparent_60%)]" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
-                    <Badge variant="outline" className="border-white/20 text-white/80 px-4 py-1">
+                    <Badge variant="outline" className="border-border dark:border-border dark:border-white/20 text-foreground dark:text-foreground dark:text-white/80 px-4 py-1">
                         <Trophy className="w-3 h-3 mr-1" /> Capstone Projects
                     </Badge>
                     <h2 className="text-3xl md:text-5xl font-bold font-heading">
@@ -59,7 +59,7 @@ export async function FeaturedProjects() {
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {featured.map(({ track, project }) => {
                         const cardColors = trackColors[track.slug] || "from-slate-500/20 to-slate-600/20 border-slate-500/30";
-                        const badgeColor = trackBadge[track.slug] || "bg-slate-500/20 text-slate-400 border-slate-500/30";
+                        const badgeColor = trackBadge[track.slug] || "bg-slate-500/20 text-muted-foreground dark:text-muted-foreground dark:text-slate-400 border-slate-500/30";
                         const streamPath = slugToPath[track.slug] || track.slug;
 
                         return (
@@ -73,7 +73,7 @@ export async function FeaturedProjects() {
                                         <Badge variant="outline" className={`${badgeColor} w-fit mb-3 text-xs`}>
                                             {track.title}
                                         </Badge>
-                                        <h3 className="font-bold text-white text-lg mb-2 group-hover:text-indigo-300 transition-colors">
+                                        <h3 className="font-bold text-foreground dark:text-foreground dark:text-white text-lg mb-2 group-hover:text-indigo-300 transition-colors">
                                             {project.name}
                                         </h3>
                                         {project.description && (
@@ -81,7 +81,7 @@ export async function FeaturedProjects() {
                                                 {project.description}
                                             </p>
                                         )}
-                                        <div className="flex items-center text-sm text-muted-foreground group-hover:text-indigo-400 transition-colors mt-auto pt-2 border-t border-white/5">
+                                        <div className="flex items-center text-sm text-muted-foreground group-hover:text-indigo-400 transition-colors mt-auto pt-2 border-t border-border dark:border-border dark:border-white/5">
                                             View stream
                                             <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" />
                                         </div>

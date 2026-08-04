@@ -60,10 +60,10 @@ export function FeaturesSection() {
 
                     <div className="relative">
                         <div className="absolute -inset-4 bg-gradient-to-r from-primary to-accent opacity-20 blur-3xl rounded-full" />
-                        <div className="relative rounded-2xl border border-white/10 bg-card/50 backdrop-blur-xl p-8 shadow-2xl">
+                        <div className="relative rounded-2xl border border-border dark:border-border dark:border-white/10 bg-card/50 backdrop-blur-xl p-8 shadow-2xl">
                             {/* Mock UI for Features */}
                             <div className="space-y-4">
-                                <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                                <div className="flex items-center justify-between border-b border-border dark:border-border dark:border-white/10 pb-4">
                                     <div className="flex items-center gap-3">
                                         <div className="w-10 h-10 rounded-full bg-gray-700" />
                                         <div>
@@ -76,14 +76,14 @@ export function FeaturesSection() {
                                     </div>
                                 </div>
                                 <div className="space-y-3">
-                                    <div className="h-24 bg-black/20 rounded-lg p-4 border border-white/5">
+                                    <div className="h-24 bg-muted dark:bg-background dark:bg-muted dark:bg-background dark:bg-black/20 rounded-lg p-4 border border-border dark:border-border dark:border-white/5">
                                         <div className="flex items-center gap-2 mb-2">
                                             <FileCheck className="w-4 h-4 text-primary" />
                                             <span className="text-sm font-medium">E-Commerce Microservices</span>
                                         </div>
                                         <p className="text-xs text-muted-foreground">Successfully implemented order processing service with Kafka integration.</p>
                                     </div>
-                                    <div className="h-24 bg-black/20 rounded-lg p-4 border border-white/5">
+                                    <div className="h-24 bg-muted dark:bg-background dark:bg-muted dark:bg-background dark:bg-black/20 rounded-lg p-4 border border-border dark:border-border dark:border-white/5">
                                         <div className="flex items-center gap-2 mb-2">
                                             <FileCheck className="w-4 h-4 text-primary" />
                                             <span className="text-sm font-medium">AI Image Classifier</span>

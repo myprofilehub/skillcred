@@ -16,7 +16,7 @@ export default async function BlogListingPage() {
   const posts = await getBlogPosts();
 
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-indigo-500/30">
+    <div className="min-h-screen bg-background dark:bg-background dark:bg-black text-foreground dark:text-foreground dark:text-white selection:bg-indigo-500/30">
       <LandingNavbar />
 
       <main>
@@ -36,7 +36,7 @@ export default async function BlogListingPage() {
                 Project-Based Learning
               </span>
             </h1>
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-muted-foreground dark:text-muted-foreground dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
               Explore the 8 technical streams that power SkillCred&apos;s
               project-based curriculum. From fullstack web development to IoT
               systems — discover what you&apos;ll build, learn, and master.
@@ -75,7 +75,7 @@ export default async function BlogListingPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-black border-t border-white/10 py-12 px-6">
+      <footer className="bg-background dark:bg-background dark:bg-black border-t border-border dark:border-border dark:border-white/10 py-12 px-6">
         <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-8 mb-12">
           <div className="col-span-2 space-y-4">
             <div className="flex items-center gap-2">
@@ -93,7 +93,7 @@ export default async function BlogListingPage() {
               <li>
                 <Link
                   href="/"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-foreground dark:text-foreground dark:text-white transition-colors"
                 >
                   Home
                 </Link>
@@ -101,7 +101,7 @@ export default async function BlogListingPage() {
               <li>
                 <Link
                   href="/blog"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-foreground dark:text-foreground dark:text-white transition-colors"
                 >
                   Blog
                 </Link>
@@ -109,7 +109,7 @@ export default async function BlogListingPage() {
               <li>
                 <Link
                   href="/enroll"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-foreground dark:text-foreground dark:text-white transition-colors"
                 >
                   Enroll
                 </Link>
@@ -123,7 +123,7 @@ export default async function BlogListingPage() {
               <li>
                 <Link
                   href="/privacy-policy"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-foreground dark:text-foreground dark:text-white transition-colors"
                 >
                   Privacy Policy
                 </Link>
@@ -131,7 +131,7 @@ export default async function BlogListingPage() {
               <li>
                 <Link
                   href="#"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-foreground dark:text-foreground dark:text-white transition-colors"
                 >
                   Terms of Service
                 </Link>
@@ -140,7 +140,7 @@ export default async function BlogListingPage() {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+        <div className="max-w-7xl mx-auto pt-8 border-t border-border dark:border-border dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <div>© 2026 SkillCred Inc.</div>
           <div className="flex gap-4">
             <Link

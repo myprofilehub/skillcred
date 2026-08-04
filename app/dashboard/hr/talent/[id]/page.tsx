@@ -64,7 +64,7 @@ export default async function StudentProfilePage({ params }: PageProps) {
                     <div className="flex items-start gap-4">
                         <Avatar className="h-20 w-20">
                             <AvatarImage src={user.image || undefined} />
-                            <AvatarFallback className="bg-emerald-600 text-white text-2xl">
+                            <AvatarFallback className="bg-emerald-600 text-foreground dark:text-foreground dark:text-white text-2xl">
                                 {user.name?.charAt(0) || "S"}
                             </AvatarFallback>
                         </Avatar>

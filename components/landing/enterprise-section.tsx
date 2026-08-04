@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card";
 
 export function EnterpriseSection() {
     return (
-        <section id="enterprise" className="py-24 px-6 bg-black relative">
+        <section id="enterprise" className="py-24 px-6 bg-background dark:bg-background dark:bg-black relative">
             <div className="max-w-7xl mx-auto space-y-16">
                 <div className="text-center max-w-3xl mx-auto space-y-4">
                     <Badge variant="outline" className="border-indigo-500/30 text-indigo-400 px-4 py-1">
@@ -16,7 +16,7 @@ export function EnterpriseSection() {
                     </Badge>
                     <h2 className="text-3xl md:text-5xl font-bold font-heading">
                         Bridging the Gap Between <br />
-                        <span className="text-white">Academia</span> & <span className="text-white">Industry</span>
+                        <span className="text-foreground dark:text-foreground dark:text-white">Academia</span> & <span className="text-foreground dark:text-foreground dark:text-white">Industry</span>
                     </h2>
                     <p className="text-muted-foreground text-lg">
                         SkillCred provides the infrastructure for colleges to accredit skills and for companies to hire verified talent.
@@ -94,14 +94,14 @@ export function EnterpriseSection() {
                 </div>
 
                 {/* Trust Section */}
-                <div className="border-t border-white/10 pt-10 text-center">
+                <div className="border-t border-border dark:border-border dark:border-white/10 pt-10 text-center">
                     <p className="text-sm text-muted-foreground mb-6">Trusted by forward-thinking organizations</p>
                     <div className="flex flex-wrap justify-center gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
                         {/* Placeholder logos - using text for now */}
-                        <div className="text-xl font-bold text-white">TECHCORP</div>
-                        <div className="text-xl font-bold text-white">INNOVATE.AI</div>
-                        <div className="text-xl font-bold text-white">FUTURE SCHOOL</div>
-                        <div className="text-xl font-bold text-white">STARTUPINC</div>
+                        <div className="text-xl font-bold text-foreground dark:text-foreground dark:text-white">TECHCORP</div>
+                        <div className="text-xl font-bold text-foreground dark:text-foreground dark:text-white">INNOVATE.AI</div>
+                        <div className="text-xl font-bold text-foreground dark:text-foreground dark:text-white">FUTURE SCHOOL</div>
+                        <div className="text-xl font-bold text-foreground dark:text-foreground dark:text-white">STARTUPINC</div>
                     </div>
                 </div>
             </div>

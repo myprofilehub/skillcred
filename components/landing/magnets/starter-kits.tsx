@@ -39,7 +39,7 @@ export function StarterKits() {
     };
 
     return (
-        <section id="starter-kits" className="py-24 px-6 border-t border-white/5 relative bg-black/50">
+        <section id="starter-kits" className="py-24 px-6 border-t border-border dark:border-border dark:border-white/5 relative bg-muted/50 dark:bg-background dark:bg-muted/50 dark:bg-background dark:bg-black/50">
             <div className="max-w-6xl mx-auto mb-16 text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 font-heading">
                     Don&apos;t start from scratch.
@@ -51,7 +51,7 @@ export function StarterKits() {
 
             <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
                 {KITS.map((kit, i) => (
-                    <div key={i} className="group relative p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all hover:-translate-y-1">
+                    <div key={i} className="group relative p-6 rounded-2xl border border-border dark:border-border dark:border-white/10 bg-white/5 hover:bg-white/10 transition-all hover:-translate-y-1">
                         <div className={`w-12 h-12 rounded-lg ${kit.bg} flex items-center justify-center mb-6`}>
                             <kit.icon className={`w-6 h-6 ${kit.color}`} />
                         </div>
@@ -71,7 +71,7 @@ export function StarterKits() {
                         </div>
 
                         {/* Hover Overlay */}
-                        <div className={`absolute inset-0 bg-black/60 backdrop-blur-[2px] rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
+                        <div className={`absolute inset-0 bg-muted/80 dark:bg-background dark:bg-muted/80 dark:bg-background dark:bg-black/60 backdrop-blur-[2px] rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
                             {session ? (
                                 <Button className="gap-2 bg-white text-black hover:bg-white/90" onClick={() => handleDownload(kit.title)}>
                                     <Download className="w-4 h-4" /> Download Kit
@@ -90,7 +90,7 @@ export function StarterKits() {
 
             {!session && (
                 <div className="mt-12 text-center">
-                    <Button variant="outline" className="border-white/10" asChild>
+                    <Button variant="outline" className="border-border dark:border-border dark:border-white/10" asChild>
                         <Link href="/auth/signup">
                             View all 50+ Templates <ArrowRight className="ml-2 w-4 h-4" />
                         </Link>

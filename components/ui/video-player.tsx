@@ -9,7 +9,7 @@ export function VideoPlayer({ url }: VideoPlayerProps) {
 
     if (!details) {
         return (
-            <div className="w-full h-full min-h-[300px] flex items-center justify-center bg-[#1a1a1a] text-slate-400">
+            <div className="w-full h-full min-h-[300px] flex items-center justify-center bg-[#1a1a1a] text-muted-foreground dark:text-slate-400">
                 Invalid or missing video URL
             </div>
         );
@@ -17,7 +17,7 @@ export function VideoPlayer({ url }: VideoPlayerProps) {
 
     if (details.type === "html5") {
         return (
-            <div className="aspect-video w-full bg-black flex items-center justify-center">
+            <div className="aspect-video w-full bg-background dark:bg-black flex items-center justify-center">
                 <video 
                     src={details.embedUrl} 
                     controls 
@@ -33,7 +33,7 @@ export function VideoPlayer({ url }: VideoPlayerProps) {
 
     // Embed iFrame fallback for YouTube, Vimeo, Drive, Unknown embeds
     return (
-        <div className="aspect-video w-full bg-black">
+        <div className="aspect-video w-full bg-background dark:bg-black">
             <iframe 
                 src={details.embedUrl} 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

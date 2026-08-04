@@ -1,3 +1,6 @@
+import { StreamBottomCTA } from "@/components/public/stream-pricing-components";
+import { StreamHeroActionCard } from "@/components/public/stream-hero-action-card";
+import { StreamPortfolioPreview } from "@/components/public/stream-portfolio-preview";
 import { LandingNavbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
@@ -28,8 +31,8 @@ import {
     Award
 } from "lucide-react";
 import Link from "next/link";
-import { ProjectRoadmap } from "@/components/public/project-roadmap";
-import { CurriculumSyllabus } from "@/components/public/curriculum-syllabus";
+
+
 
 import { auth } from "@/auth";
 
@@ -65,7 +68,7 @@ export default async function DataScienceStreamPage() {
                             <CheckCircle2 className="w-4 h-4 text-rose-400" /> Live mentor support
                         </div>
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-rose-400" /> 5 real-world projects
+                            <CheckCircle2 className="w-4 h-4 text-rose-400" /> 4 real-world projects
                         </div>
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
                             <CheckCircle2 className="w-4 h-4 text-rose-400" /> Verified portfolio
@@ -75,17 +78,13 @@ export default async function DataScienceStreamPage() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button size="lg" className="text-lg px-8 h-14 bg-rose-600 hover:bg-rose-700 text-white shadow-lg shadow-rose-500/20" asChild>
-                            <Link href="/enroll">
-                                Start This Track <ArrowRight className="ml-2 w-5 h-5" />
-                            </Link>
-                        </Button>
-                        <Button size="lg" variant="outline" className="text-lg px-8 h-14 border-white/10 bg-white/5 hover:bg-white/10" asChild>
-                            <a href="/brochures/SkillCred_Data_Science_Analytics_Brochure.pdf" download>
-                                Download Syllabus <Download className="ml-2 w-5 h-5" />
-                            </a>
-                        </Button>
+                    <div className="w-full mt-12 text-left">
+                        <StreamHeroActionCard
+                            slug="data-science"
+                            accentColor="blue"
+                            trackName="Data Science Track"
+                                syllabusUrl="/brochures/SkillCred_Data_Science_Brochure.pdf"
+                        />
                     </div>
                 </div>
             </section>
@@ -156,15 +155,25 @@ export default async function DataScienceStreamPage() {
                 </div>
             </section>
 
-            {/* TOOLS & LEARNING FORMAT */}
-            <section className="py-20">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold font-heading mb-4">Tools & Technologies</h2>
-                        <p className="text-muted-foreground">Everything you need to master data science</p>
+            {/* LEARNING TOOLS & METHODOLOGY */}
+            <section className="py-24 bg-slate-50/40 dark:bg-slate-900/20 border-y border-slate-200 dark:border-white/5">
+                <div className="container mx-auto px-4 max-w-7xl">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-slate-950 dark:text-white">
+                            Learning Tools and Methodology
+                        </h2>
+                        <p className="text-muted-foreground text-base md:text-lg">
+                            Master an industry-standard technical stack through our hands-on engineering pedagogy and structured practice.
+                        </p>
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-8 mb-20">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+                        {/* Column 1: Tools */}
+                        <div className="p-8 rounded-3xl bg-background border border-slate-200 dark:border-white/10 shadow-sm flex flex-col">
+                            <h3 className="text-2xl font-bold font-heading mb-6 text-slate-900 dark:text-white">
+                                Tools You Will Master
+                            </h3>
+                            <div className="flex flex-wrap justify-center sm:justify-start gap-4">
                         {[
                             { name: "Python", sub: "Pandas, NumPy", color: "text-orange-400" },
                             { name: "SQL", sub: "MySQL / PostgreSQL", color: "text-orange-400" },
@@ -179,8 +188,14 @@ export default async function DataScienceStreamPage() {
                             </div>
                         ))}
                     </div>
+                        </div>
 
-                    <div className="grid md:grid-cols-3 gap-6">
+                        {/* Column 2: Methodology */}
+                        <div className="p-8 rounded-3xl bg-background border border-slate-200 dark:border-white/10 shadow-sm flex flex-col">
+                            <h3 className="text-2xl font-bold font-heading mb-6 text-slate-900 dark:text-white">
+                                How You Will Learn
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {[
                             { title: "Live Mentor Sessions", desc: "Project-led guidance", icon: Users },
                             { title: "Real Datasets", desc: "Work with messy, real data", icon: Database },
@@ -200,36 +215,50 @@ export default async function DataScienceStreamPage() {
                             </div>
                         ))}
                     </div>
-                </div>
-            </section>
-
-            {/* CURRICULUM & ROADMAP */}
-            <section className="py-20 bg-secondary/10">
-                <div className="container mx-auto px-4 max-w-7xl">
-                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-                        {/* LEFT PANEL: Curriculum by Program */}
-                        <div>
-                            <CurriculumSyllabus trackSlug="data-science" />
-                        </div>
-                        
-                        {/* RIGHT PANEL: Project Roadmap */}
-                        <div className="lg:border-l border-white/10 lg:pl-16">
-                            <ProjectRoadmap trackSlug="data-science" accentColor="orange" />
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* MENTOR & ASSESSMENT */}
-            <section className="py-20">
-                <div className="container mx-auto px-4">
-                    {/* Mentor Support Section */}
-                    <div className="mb-20">
-                        <h2 className="text-3xl font-bold font-heading mb-8 flex items-center gap-3">
-                            <MessageSquare className="w-8 h-8 text-primary" />
-                            Mentor Support & Verification
+            <StreamPortfolioPreview
+                variant="roadmap"
+            slug="data-science"
+            accentColor="blue"
+            skills={['SQL Skills', 'Power BI', 'Project Score &gt; 80%', 'Mentor Rating 5★']}
+            outcomes={['Data Analyst', 'Business Analyst', 'BI Analyst', 'Junior Data Scientist', 'Reporting Analyst']}
+            projects={[{'title': 'Predictive Analytics Model', 'desc': 'Customer churn predictor using XGBoost and served via Streamlit.', 'tech': ['Pandas', 'XGBoost', 'Streamlit', 'Python'], 'metrics': [{'name': 'ROC-AUC Score', 'score': 90}, {'name': 'Inference Latency', 'score': 93}], 'githubUrl': 'https://github.com/skillcred/predictive-analytics', 'liveUrl': 'https://predict.skillcred.in'}, {'title': 'Customer Segmentation Engine', 'desc': 'Clustering engine grouping users dynamically using K-Means and Scikit-learn.', 'tech': ['K-Means', 'Scikit-learn', 'Python', 'Tableau'], 'metrics': [{'name': 'Silhouette Score', 'score': 85}, {'name': 'Execution Time', 'score': 94}], 'githubUrl': 'https://github.com/skillcred/segmentation-engine', 'liveUrl': 'https://segment.skillcred.in'}]}
+            />
+
+            {/* SEPARATE PORTFOLIO OUTPUT SECTION */}
+            <StreamPortfolioPreview
+                variant="default"
+            slug="data-science"
+            accentColor="blue"
+            skills={['SQL Skills', 'Power BI', 'Project Score &gt; 80%', 'Mentor Rating 5★']}
+            outcomes={['Data Analyst', 'Business Analyst', 'BI Analyst', 'Junior Data Scientist', 'Reporting Analyst']}
+            projects={[{'title': 'Predictive Analytics Model', 'desc': 'Customer churn predictor using XGBoost and served via Streamlit.', 'tech': ['Pandas', 'XGBoost', 'Streamlit', 'Python'], 'metrics': [{'name': 'ROC-AUC Score', 'score': 90}, {'name': 'Inference Latency', 'score': 93}], 'githubUrl': 'https://github.com/skillcred/predictive-analytics', 'liveUrl': 'https://predict.skillcred.in'}, {'title': 'Customer Segmentation Engine', 'desc': 'Clustering engine grouping users dynamically using K-Means and Scikit-learn.', 'tech': ['K-Means', 'Scikit-learn', 'Python', 'Tableau'], 'metrics': [{'name': 'Silhouette Score', 'score': 85}, {'name': 'Execution Time', 'score': 94}], 'githubUrl': 'https://github.com/skillcred/segmentation-engine', 'liveUrl': 'https://segment.skillcred.in'}]}
+            />
+
+            {/* MENTOR SUPPORT & FAQS */}
+            <section className="py-24 bg-slate-50/50 dark:bg-slate-900/30 border-t border-slate-200 dark:border-white/5">
+                <div className="container mx-auto px-4 max-w-7xl">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-slate-950 dark:text-white">
+                            Mentor Support & Frequently Asked Questions
                         </h2>
-                        <div className="grid md:grid-cols-2 gap-8 items-center">
+                        <p className="text-muted-foreground text-base md:text-lg">
+                            Understand how working professionals review your code every week and get answers to common questions before starting your journey.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+                        {/* Column 1: Mentor Support & Verification */}
+                        <div className="p-8 md:p-10 rounded-3xl bg-background border border-slate-200 dark:border-white/10 shadow-sm">
+                            <h3 className="text-2xl font-bold font-heading mb-8 flex items-center gap-3 text-slate-900 dark:text-white">
+                                <MessageSquare className="w-7 h-7 text-blue-400 shrink-0" />
+                                <span>Mentor Support & Verification</span>
+                            </h3>
+                            <div className="space-y-8">
                             <div className="prose prose-invert">
                                 <p className="text-lg text-muted-foreground mb-6">
                                     Our mentors don't just teach — they verify your skills. Every project you build is reviewed, ensuring you meet industry standards before you get certified.
@@ -259,236 +288,14 @@ export default async function DataScienceStreamPage() {
                                 </CardContent>
                             </Card>
                         </div>
-                    </div>
-
-                    {/* PAT Section */}
-                    <div className="border border-white/10 rounded-3xl bg-secondary/5 overflow-hidden">
-                        <div className="p-8 md:p-12 border-b border-white/10 text-center">
-                            <Badge variant="outline" className="mb-4 border-yellow-500/50 text-yellow-500">PBL Model</Badge>
-                            <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4">
-                                Project-Based Assessment Test (PAT) Format
-                            </h2>
-                            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                                Assessment is based on how you build, improve, and explain projects — not on a single final exam.
-                            </p>
                         </div>
 
-                        <div className="p-8 md:p-12">
-                            <div className="grid md:grid-cols-12 gap-8">
-                                {/* Left: Marks Structure */}
-                                <div className="md:col-span-8 space-y-6">
-                                    <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                                        <ClipboardCheck className="w-6 h-6 text-yellow-500" />
-                                        Overall Structure (100 Marks)
-                                    </h3>
-
-                                    {/* 1. Project Completion */}
-                                    <Card className="bg-white/5 border-white/10">
-                                        <CardHeader>
-                                            <div className="flex justify-between items-start">
-                                                <div>
-                                                    <Badge variant="secondary" className="mb-2">40 Marks</Badge>
-                                                    <CardTitle className="text-lg">1. Project Completion & Quality</CardTitle>
-                                                </div>
-                                                <Layers className="w-5 h-5 text-muted-foreground" />
-                                            </div>
-                                        </CardHeader>
-                                        <CardContent>
-                                            <p className="text-sm text-muted-foreground mb-4">
-                                                Evaluated across best 3 projects. Mentor checks problem understanding, implementation, tools, and code quality.
-                                            </p>
-                                            <div className="grid grid-cols-2 gap-2 text-sm">
-                                                <div className="bg-black/20 p-2 rounded">Functionality: 5</div>
-                                                <div className="bg-black/20 p-2 rounded">Tool Usage: 3</div>
-                                                <div className="bg-black/20 p-2 rounded">Output Quality: 3</div>
-                                                <div className="bg-black/20 p-2 rounded">Docs: 2</div>
-                                            </div>
-                                        </CardContent>
-                                    </Card>
-
-                                    <div className="grid md:grid-cols-2 gap-6">
-                                        {/* 2. Milestone Reviews */}
-                                        <Card className="bg-white/5 border-white/10">
-                                            <CardHeader>
-                                                <div className="flex justify-between">
-                                                    <div>
-                                                        <Badge variant="secondary" className="mb-2">20 Marks</Badge>
-                                                        <CardTitle className="text-lg">2. Milestone Reviews</CardTitle>
-                                                    </div>
-                                                    <CheckCircle2 className="w-5 h-5 text-muted-foreground" />
-                                                </div>
-                                            </CardHeader>
-                                            <CardContent className="text-sm text-muted-foreground">
-                                                Points for regular updates (Design, Mid-build, Final) and fixing mentor feedback. Rewards consistency.
-                                            </CardContent>
-                                        </Card>
-
-                                        {/* 3. Real World Application */}
-                                        <Card className="bg-white/5 border-white/10">
-                                            <CardHeader>
-                                                <div className="flex justify-between">
-                                                    <div>
-                                                        <Badge variant="secondary" className="mb-2">15 Marks</Badge>
-                                                        <CardTitle className="text-lg">3. Business Value</CardTitle>
-                                                    </div>
-                                                    <Briefcase className="w-5 h-5 text-muted-foreground" />
-                                                </div>
-                                            </CardHeader>
-                                            <CardContent className="text-sm text-muted-foreground">
-                                                Must allow how the project solves a real problem and who uses it. (e.g., Insights, Risk Reduction, Automation).
-                                            </CardContent>
-                                        </Card>
-
-                                        {/* 4. Tool Proficiency */}
-                                        <Card className="bg-white/5 border-white/10">
-                                            <CardHeader>
-                                                <div className="flex justify-between">
-                                                    <div>
-                                                        <Badge variant="secondary" className="mb-2">15 Marks</Badge>
-                                                        <CardTitle className="text-lg">4. Tool Proficiency</CardTitle>
-                                                    </div>
-                                                    <Database className="w-5 h-5 text-muted-foreground" />
-                                                </div>
-                                            </CardHeader>
-                                            <CardContent className="text-sm text-muted-foreground">
-                                                Live check: Modify project, add a feature, or fix a bug on the spot to prove authenticity.
-                                            </CardContent>
-                                        </Card>
-
-                                        {/* 5. Viva */}
-                                        <Card className="bg-white/5 border-white/10">
-                                            <CardHeader>
-                                                <div className="flex justify-between">
-                                                    <div>
-                                                        <Badge variant="secondary" className="mb-2">10 Marks</Badge>
-                                                        <CardTitle className="text-lg">5. Final Defense</CardTitle>
-                                                    </div>
-                                                    <MessageSquare className="w-5 h-5 text-muted-foreground" />
-                                                </div>
-                                            </CardHeader>
-                                            <CardContent className="text-sm text-muted-foreground">
-                                                Explain approach, challenges faced, and lessons learned.
-                                            </CardContent>
-                                        </Card>
-                                    </div>
-                                </div>
-
-                                {/* Right: Rules & Criteria */}
-                                <div className="md:col-span-4 space-y-8">
-                                    {/* Pass Criteria */}
-                                    <div className="bg-green-500/10 border border-green-500/20 rounded-2xl p-6">
-                                        <h4 className="font-bold flex items-center gap-2 mb-4 text-green-400">
-                                            <Award className="w-5 h-5" /> Pass Criteria
-                                        </h4>
-                                        <ul className="space-y-3 text-sm">
-                                            <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 text-green-500" /> Minimum 60/100 Score</li>
-                                            <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 text-green-500" /> All 5 Projects Completed</li>
-                                            <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 text-green-500" /> Mentor Verification Done</li>
-                                            <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 text-green-500" /> No Plagiarism Found</li>
-                                        </ul>
-                                    </div>
-
-                                    {/* Plagiarism */}
-                                    <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-6">
-                                        <h4 className="font-bold flex items-center gap-2 mb-4 text-red-400">
-                                            <AlertTriangle className="w-5 h-5" /> Plagiarism Check
-                                        </h4>
-                                        <ul className="space-y-3 text-sm text-muted-foreground">
-                                            <li className="flex gap-2"><Lock className="w-4 h-4" /> Code similarity check</li>
-                                            <li className="flex gap-2"><Lock className="w-4 h-4" /> Git commit history audit</li>
-                                            <li className="flex gap-2"><Lock className="w-4 h-4" /> Oral questioning</li>
-                                            <li className="flex gap-2"><Lock className="w-4 h-4" /> Random live modification</li>
-                                        </ul>
-                                    </div>
-
-                                    {/* Certification Logic */}
-                                    <div className="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-6">
-                                        <h4 className="font-bold flex items-center gap-2 mb-4 text-blue-400">
-                                            <FileCheck className="w-5 h-5" /> Certification
-                                        </h4>
-                                        <p className="text-sm text-muted-foreground mb-4">
-                                            You only receive the <span className="text-white">SkillCred Project-Based Certificate</span> & Recommendation Letter if all criteria are met.
-                                        </p>
-                                        <Badge variant="outline" className="w-full justify-center">Mentor Rating ≥ 3.5/5 Req</Badge>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* OUTCOMES & PORTFOLIO */}
-            <section className="py-20 bg-gradient-to-br from-gray-900 to-black text-white">
-                <div className="container mx-auto px-4">
-                    <div className="grid md:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <h2 className="text-3xl font-bold mb-6">Certification & Portfolio</h2>
-                            <p className="text-gray-400 mb-8">
-                                Upon passing the assessment, you earn a SkillCred Verified Certificate and a portfolio that HRs can search.
-                            </p>
-
-                            <div className="space-y-6">
-                                <div className="flex gap-4">
-                                    <div className="p-3 rounded-lg bg-rose-500/20 text-rose-400 h-fit"><GraduationCap className="w-6 h-6" /></div>
-                                    <div>
-                                        <h4 className="font-bold">Verified Certificate</h4>
-                                        <p className="text-sm text-gray-400">Official proof of your skills.</p>
-                                    </div>
-                                </div>
-                                <div className="flex gap-4">
-                                    <div className="p-3 rounded-lg bg-orange-500/20 text-orange-400 h-fit"><Briefcase className="w-6 h-6" /></div>
-                                    <div>
-                                        <h4 className="font-bold">HR-Ready Portfolio</h4>
-                                        <p className="text-sm text-gray-400">Includes verified project links, mentor ratings, and assessment scores.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="mt-10">
-                                <h4 className="font-bold mb-4 text-lg">Career Outcomes</h4>
-                                <div className="flex flex-wrap gap-2">
-                                    {["Data Analyst", "Business Analyst", "BI Analyst", "Junior Data Scientist", "Reporting Analyst"].map(role => (
-                                        <Badge key={role} variant="outline" className="border-white/20 text-white hover:bg-white/10">{role}</Badge>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="relative">
-                            <div className="absolute inset-0 bg-gradient-to-r from-rose-500 to-orange-500 rounded-2xl opacity-20 blur-2xl" />
-                            <Card className="relative bg-black/80 border-white/10">
-                                <CardHeader>
-                                    <CardTitle className="flex justify-between items-center">
-                                        <span>HR Corner (Preview)</span>
-                                        <Badge className="bg-rose-600">Recruiter View</Badge>
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className="space-y-4">
-                                        <div className="text-sm text-gray-400">HR can filter students by:</div>
-                                        <div className="flex flex-wrap gap-2">
-                                            <Badge variant="secondary">SQL Skills</Badge>
-                                            <Badge variant="secondary">Power BI</Badge>
-                                            <Badge variant="secondary">Project Score &gt; 80%</Badge>
-                                            <Badge variant="secondary">Mentor Rating 5★</Badge>
-                                        </div>
-                                        <div className="h-32 bg-white/5 rounded-lg border border-dashed border-white/10 flex items-center justify-center text-gray-500 text-sm">
-                                            [Portfolio Preview Interface]
-                                        </div>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* FAQs & CTA */}
-            <section className="py-20">
-                <div className="container mx-auto px-4 max-w-3xl">
-                    <h2 className="text-3xl font-bold text-center mb-10">Frequently Asked Questions</h2>
-                    <div className="space-y-4 mb-20">
+                        {/* Column 2: Frequently Asked Questions */}
+                        <div className="p-8 md:p-10 rounded-3xl bg-background border border-slate-200 dark:border-white/10 shadow-sm">
+                            <h3 className="text-2xl font-bold font-heading mb-8 text-slate-900 dark:text-white">
+                                Frequently Asked Questions
+                            </h3>
+                            <div className="space-y-4">
                         {[
                             { q: "Is coding mandatory?", a: "No. Python basics are taught from scratch inside this track." },
                             { q: "Do I get real datasets?", a: "Yes, all projects use real or simulated industry data." },
@@ -503,27 +310,16 @@ export default async function DataScienceStreamPage() {
                             </Card>
                         ))}
                     </div>
-
-                    <div className="text-center bg-gradient-to-r from-rose-900/50 to-orange-900/50 p-12 rounded-3xl border border-white/10 relative overflow-hidden">
-                        <div className="relative z-10">
-                            <h2 className="text-4xl font-bold mb-4">Start Your Data Science Journey</h2>
-                            <p className="text-xl text-gray-300 mb-8">Build skills. Build projects. Build proof.</p>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <Link href="/enroll">
-                                    <Button size="lg" className="w-full sm:w-auto h-12 text-lg px-8 bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:opacity-90 shadow-lg shadow-indigo-500/25">
-                                        Enroll Now
-                                    </Button>
-                                </Link>
-                                <Button size="lg" variant="outline" className="w-full sm:w-auto h-12 text-lg px-8" asChild>
-                                    <a href="/brochures/SkillCred_Data_Science_Analytics_Brochure.pdf" download>
-                                        Download Brochure
-                                    </a>
-                                </Button>
-                            </div>
                         </div>
                     </div>
                 </div>
             </section>
+
+            <StreamBottomCTA
+                slug="data-science"
+                accentColor="blue"
+                bootcampName="Data Science"
+            />
 
             <Footer />
         </main>

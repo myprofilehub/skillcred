@@ -37,7 +37,7 @@ export default function UpgradePage() {
             <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
 
                 {/* Free Plan */}
-                <Card className="border-white/10 bg-gradient-to-br from-white/5 to-transparent relative overflow-hidden">
+                <Card className="border-border dark:border-border dark:border-white/10 bg-gradient-to-br from-white/5 to-transparent relative overflow-hidden">
                     <CardHeader className="text-center pb-2">
                         <CardTitle className="text-2xl">Free Tier</CardTitle>
                         <CardDescription>For self-paced learners</CardDescription>
@@ -72,7 +72,7 @@ export default function UpgradePage() {
 
                 {/* Pro Plan */}
                 <Card className="border-primary/50 bg-gradient-to-br from-indigo-950/30 to-purple-950/30 relative overflow-hidden shadow-2xl shadow-purple-500/10 scale-105 border-2">
-                    <div className="absolute top-0 right-0 bg-gradient-to-l from-indigo-600 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                    <div className="absolute top-0 right-0 bg-gradient-to-l from-indigo-600 to-purple-600 text-foreground dark:text-foreground dark:text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
                         RECOMMENDED
                     </div>
                     <CardHeader className="text-center pb-2">
@@ -106,10 +106,10 @@ export default function UpgradePage() {
             {/* Detailed Comparison Table */}
             <div className="mt-16 max-w-4xl mx-auto">
                 <h3 className="text-xl font-bold mb-6 text-center">Detailed Comparison</h3>
-                <div className="rounded-xl border border-white/10 bg-white/5 overflow-hidden">
+                <div className="rounded-xl border border-border dark:border-border dark:border-white/10 bg-white/5 overflow-hidden">
                     <table className="w-full text-left border-collapse">
                         <thead>
-                            <tr className="border-b border-white/10 bg-white/5">
+                            <tr className="border-b border-border dark:border-border dark:border-white/10 bg-white/5">
                                 <th className="p-4 pl-6 font-medium text-muted-foreground w-1/3">Feature</th>
                                 <th className="p-4 text-center font-bold w-1/4">Free</th>
                                 <th className="p-4 text-center font-bold w-1/4 bg-primary/5 text-primary">Pro</th>
@@ -117,7 +117,7 @@ export default function UpgradePage() {
                         </thead>
                         <tbody>
                             {features.map((feature, i) => (
-                                <tr key={i} className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors">
+                                <tr key={i} className="border-b border-border dark:border-border dark:border-white/5 last:border-0 hover:bg-white/5 transition-colors">
                                     <td className="p-4 pl-6 flex items-center gap-3">
                                         <feature.icon className="w-4 h-4 text-purple-400" />
                                         <span className="text-sm font-medium">{feature.name}</span>
@@ -129,7 +129,7 @@ export default function UpgradePage() {
                                             <div className="w-1.5 h-1.5 rounded-full bg-white/10 mx-auto" />
                                         )}
                                     </td>
-                                    <td className="p-4 text-center bg-primary/5 border-l border-white/5">
+                                    <td className="p-4 text-center bg-primary/5 border-l border-border dark:border-border dark:border-white/5">
                                         {feature.pro ? (
                                             <div className="flex justify-center">
                                                 <div className="bg-primary/20 p-1 rounded-full">

@@ -29,7 +29,7 @@ export function TestimonialsCTA() {
                             text: "I moved from IT support to Cybersecurity thanks to the hands-on labs and mentor guidance."
                         }
                     ].map((t, i) => (
-                        <Card key={i} className="bg-white/5 border-white/10 hover:bg-white/10 transition-colors">
+                        <Card key={i} className="bg-white/5 border-border dark:border-border dark:border-white/10 hover:bg-white/10 transition-colors">
                             <CardContent className="pt-6">
                                 <Quote className="h-8 w-8 text-primary/40 mb-4" />
                                 <p className="text-muted-foreground mb-6 italic">"{t.text}"</p>

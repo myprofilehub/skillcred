@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card";
 
 export function MentorshipSection() {
     return (
-        <section id="mentorship" className="py-24 px-6 bg-black relative overflow-hidden">
+        <section id="mentorship" className="py-24 px-6 bg-background dark:bg-background dark:bg-black relative overflow-hidden">
             {/* Background elements */}
             <div className="absolute top-0 right-0 w-1/2 h-full bg-emerald-500/5 blur-[120px] -z-10" />
 
@@ -40,12 +40,12 @@ export function MentorshipSection() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                        <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white" asChild>
+                        <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-foreground dark:text-foreground dark:text-white" asChild>
                             <Link href="/auth/signup?role=mentor">
                                 Become a Mentor <ArrowRight className="ml-2 w-4 h-4" />
                             </Link>
                         </Button>
-                        <Button size="lg" variant="outline" className="border-white/10 hover:bg-white/5" asChild>
+                        <Button size="lg" variant="outline" className="border-border dark:border-border dark:border-white/10 hover:bg-white/5" asChild>
                             <Link href="/#mentorship-model">
                                 View Earning Model
                             </Link>
@@ -55,15 +55,15 @@ export function MentorshipSection() {
 
                 {/* Dashboard Preview Card */}
                 <div className="relative">
-                    <Card className="bg-neutral-900 border-white/10 p-6 rounded-xl shadow-2xl relative z-10">
+                    <Card className="bg-neutral-900 border-border dark:border-border dark:border-white/10 p-6 rounded-xl shadow-2xl relative z-10">
                         {/* Fake Dashboard Header */}
-                        <div className="flex items-center justify-between mb-8 border-b border-white/5 pb-4">
+                        <div className="flex items-center justify-between mb-8 border-b border-border dark:border-border dark:border-white/5 pb-4">
                             <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
                                     <Users className="w-5 h-5" />
                                 </div>
                                 <div>
-                                    <h4 className="font-semibold text-white">Mentor Dashboard</h4>
+                                    <h4 className="font-semibold text-foreground dark:text-foreground dark:text-white">Mentor Dashboard</h4>
                                     <p className="text-xs text-muted-foreground">Overview</p>
                                 </div>
                             </div>
@@ -72,18 +72,18 @@ export function MentorshipSection() {
 
                         {/* Stats Grid */}
                         <div className="grid grid-cols-2 gap-4 mb-8">
-                            <div className="bg-black/40 p-4 rounded-lg border border-white/5">
+                            <div className="bg-muted dark:bg-background dark:bg-muted dark:bg-background dark:bg-black/40 p-4 rounded-lg border border-border dark:border-border dark:border-white/5">
                                 <div className="text-muted-foreground text-xs mb-1 flex items-center gap-1">
                                     <DollarSign className="w-3 h-3" /> Total Earnings
                                 </div>
-                                <div className="text-2xl font-bold text-white">$2,840.00</div>
+                                <div className="text-2xl font-bold text-foreground dark:text-foreground dark:text-white">$2,840.00</div>
                                 <div className="text-xs text-emerald-400 mt-1">+12% this month</div>
                             </div>
-                            <div className="bg-black/40 p-4 rounded-lg border border-white/5">
+                            <div className="bg-muted dark:bg-background dark:bg-muted dark:bg-background dark:bg-black/40 p-4 rounded-lg border border-border dark:border-border dark:border-white/5">
                                 <div className="text-muted-foreground text-xs mb-1 flex items-center gap-1">
                                     <Clock className="w-3 h-3" /> Hours Mentored
                                 </div>
-                                <div className="text-2xl font-bold text-white">42.5 hrs</div>
+                                <div className="text-2xl font-bold text-foreground dark:text-foreground dark:text-white">42.5 hrs</div>
                                 <div className="text-xs text-emerald-400 mt-1">Level 3 Mentor</div>
                             </div>
                         </div>
@@ -102,7 +102,7 @@ export function MentorshipSection() {
                                             {session.name.charAt(0)}
                                         </div>
                                         <div>
-                                            <div className="text-sm font-medium text-white">{session.topic}</div>
+                                            <div className="text-sm font-medium text-foreground dark:text-foreground dark:text-white">{session.topic}</div>
                                             <div className="text-xs text-muted-foreground">{session.name} • {session.time}</div>
                                         </div>
                                     </div>

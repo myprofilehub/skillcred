@@ -1,0 +1,402 @@
+[
+  {
+    "id": "fs-w1-a",
+    "title": "Auth in 60 Minutes",
+    "description": "Wire up JWT-based login and protected routes using Express + Postgres.",
+    "difficulty": "Warm-up",
+    "round": "A",
+    "stream": "fullstack",
+    "weekNumber": 1,
+    "tags": [
+      "Node.js",
+      "JWT",
+      "PostgreSQL",
+      "Express"
+    ],
+    "problemStatement": "Build a /register and /login endpoint. Return a signed JWT on success. Protect a /profile route that returns the logged-in user's data. No libraries like Passport — raw JWT signing only.",
+    "expectedOutput": "Working Postman collection or curl commands showing register → login → protected route flow.",
+    "skills": [
+      "REST API design",
+      "Token-based auth",
+      "SQL basics"
+    ]
+  },
+  {
+    "id": "ai-w1-a",
+    "title": "Classify in a CSV",
+    "description": "Build a text sentiment classifier from a provided CSV dataset using scikit-learn.",
+    "difficulty": "Warm-up",
+    "round": "A",
+    "stream": "aiml",
+    "weekNumber": 1,
+    "tags": [
+      "Python",
+      "scikit-learn",
+      "NLP",
+      "TF-IDF"
+    ],
+    "problemStatement": "Load the provided movie review CSV. Vectorise using TF-IDF. Train a Logistic Regression classifier. Report accuracy, precision, recall, and a confusion matrix on the test split.",
+    "expectedOutput": "Jupyter notebook with model evaluation and a function that takes any string and returns a sentiment label.",
+    "skills": [
+      "Feature engineering",
+      "Model evaluation",
+      "NLP pipeline"
+    ]
+  },
+  {
+    "id": "mob-w1-a",
+    "title": "State Without a Library",
+    "description": "Build a multi-step form in React Native using only useState and useReducer.",
+    "difficulty": "Warm-up",
+    "round": "A",
+    "stream": "mobile",
+    "weekNumber": 1,
+    "tags": [
+      "React Native",
+      "useState",
+      "useReducer",
+      "Forms"
+    ],
+    "problemStatement": "Create a 3-step onboarding flow: Name & Email → Profile details → Review & Submit. No form library. Validate each step before allowing progression. Show a summary screen on completion.",
+    "expectedOutput": "Expo Snack link or GitHub repo with working APK/simulator screenshot.",
+    "skills": [
+      "React Native state",
+      "Form validation",
+      "Navigation flow"
+    ]
+  },
+  {
+    "id": "fs-w1-b",
+    "title": "Rate-Limited API Gateway",
+    "description": "Build a reverse proxy with per-user rate limiting, request logging, and Redis-backed counters.",
+    "difficulty": "Arena",
+    "round": "B",
+    "stream": "fullstack",
+    "weekNumber": 1,
+    "tags": [
+      "Node.js",
+      "Redis",
+      "Proxy",
+      "Middleware"
+    ],
+    "problemStatement": "Build an Express middleware layer that sits in front of two mock services. Each API key gets 100 requests/hour. If exceeded, return 429. Log every request to Postgres with method, path, status, and latency. Redis must store counters with TTL.",
+    "expectedOutput": "GitHub repo with Docker Compose setup. Demo showing rate limit being hit and correct 429 response.",
+    "skills": [
+      "Redis TTL patterns",
+      "Middleware design",
+      "Docker Compose"
+    ]
+  },
+  {
+    "id": "ai-w1-b",
+    "title": "From Data to Decision",
+    "description": "Train, evaluate, and deploy a churn prediction model as a FastAPI endpoint.",
+    "difficulty": "Arena",
+    "round": "B",
+    "stream": "aiml",
+    "weekNumber": 1,
+    "tags": [
+      "Python",
+      "FastAPI",
+      "XGBoost",
+      "MLOps"
+    ],
+    "problemStatement": "Use the provided telecom churn dataset. Feature engineer, handle class imbalance (SMOTE is allowed), train XGBoost, and expose a /predict endpoint via FastAPI that accepts a JSON payload of customer features and returns churn probability + explanation (top 3 SHAP features).",
+    "expectedOutput": "FastAPI app runnable via uvicorn. /predict returns {churn_probability, top_features}.",
+    "skills": [
+      "Class imbalance handling",
+      "XGBoost tuning",
+      "FastAPI",
+      "SHAP"
+    ]
+  },
+  {
+    "id": "mob-w1-b",
+    "title": "Offline-First Notes App",
+    "description": "Build a note-taking app that works offline and syncs when back online using SQLite + Supabase.",
+    "difficulty": "Arena",
+    "round": "B",
+    "stream": "mobile",
+    "weekNumber": 1,
+    "tags": [
+      "React Native",
+      "SQLite",
+      "Supabase",
+      "Sync"
+    ],
+    "problemStatement": "Build a notes app with local SQLite storage. When network is available, sync unsynced notes to Supabase. Handle conflicts (last-write-wins). Show sync status per note (synced/pending/error).",
+    "expectedOutput": "GitHub repo. Show offline creation then online sync in a screen recording.",
+    "skills": [
+      "SQLite",
+      "Offline sync logic",
+      "Supabase Realtime"
+    ]
+  },
+  {
+    "id": "fs-w2-a",
+    "title": "Paginate Like a Pro",
+    "description": "Implement cursor-based pagination on a Node API serving 100K+ records.",
+    "difficulty": "Warm-up",
+    "round": "A",
+    "stream": "fullstack",
+    "weekNumber": 2,
+    "tags": [
+      "Node.js",
+      "PostgreSQL",
+      "Pagination",
+      "Performance"
+    ],
+    "problemStatement": "Given a seeded Postgres table of 100,000 products, build a /products endpoint with cursor-based (keyset) pagination. The cursor must be opaque (base64-encoded). Include total count, next cursor, and prev cursor in the response.",
+    "expectedOutput": "Postman collection showing forward and backward pagination. Query time must be under 20ms at any cursor position.",
+    "skills": [
+      "Keyset pagination",
+      "Query optimisation",
+      "API design"
+    ]
+  },
+  {
+    "id": "ai-w2-a",
+    "title": "Retrieval in 45 Minutes",
+    "description": "Build a semantic search over a small document set using sentence embeddings + cosine similarity.",
+    "difficulty": "Warm-up",
+    "round": "A",
+    "stream": "aiml",
+    "weekNumber": 2,
+    "tags": [
+      "Python",
+      "Sentence Transformers",
+      "FAISS",
+      "Semantic Search"
+    ],
+    "problemStatement": "Given 200 Wikipedia article chunks, embed them with sentence-transformers/all-MiniLM-L6-v2 and index in FAISS. Build a search function that returns the top 5 most relevant chunks for a query. No OpenAI API allowed.",
+    "expectedOutput": "Python script or notebook. search(\"What is quantum entanglement?\") returns 5 ranked passages.",
+    "skills": [
+      "Embedding models",
+      "Vector similarity",
+      "FAISS indexing"
+    ]
+  },
+  {
+    "id": "mob-w2-a",
+    "title": "Custom Animated Tab Bar",
+    "description": "Build a custom bottom tab bar with spring animations and an active indicator.",
+    "difficulty": "Warm-up",
+    "round": "A",
+    "stream": "mobile",
+    "weekNumber": 2,
+    "tags": [
+      "React Native",
+      "Reanimated",
+      "Gestures",
+      "UI"
+    ],
+    "problemStatement": "Implement a custom bottom navigation with 4 tabs. The active tab indicator must animate with a spring physics curve (Reanimated 2). Long-pressing a tab should show a haptic feedback pulse. No third-party nav UI libraries.",
+    "expectedOutput": "Expo Snack or GitHub repo with a 10-second screen recording showing animations.",
+    "skills": [
+      "Reanimated 2",
+      "Layout animation",
+      "Haptics"
+    ]
+  },
+  {
+    "id": "fs-w2-b",
+    "title": "Real-Time Collaborative Doc",
+    "description": "Build a collaborative text editor where two users see each other's cursor in real time.",
+    "difficulty": "Arena",
+    "round": "B",
+    "stream": "fullstack",
+    "weekNumber": 2,
+    "tags": [
+      "Next.js",
+      "Yjs",
+      "WebSocket",
+      "CRDT"
+    ],
+    "problemStatement": "Build a shared text editor using Yjs CRDT + WebSocket provider. Multiple browser tabs should reflect text changes with < 100ms latency. Show live cursors with usernames. Persist document state to Redis.",
+    "expectedOutput": "Deployed URL or Docker Compose setup. Screen recording of two tabs editing simultaneously.",
+    "skills": [
+      "CRDTs",
+      "WebSocket server",
+      "Operational transforms"
+    ]
+  },
+  {
+    "id": "ai-w2-b",
+    "title": "Build Your Own RAG",
+    "description": "Implement a Retrieval-Augmented Generation pipeline from scratch — no LangChain.",
+    "difficulty": "Arena",
+    "round": "B",
+    "stream": "aiml",
+    "weekNumber": 2,
+    "tags": [
+      "Python",
+      "RAG",
+      "Gemini API",
+      "Vector DB"
+    ],
+    "problemStatement": "Chunk, embed, and store 10 research papers in a vector database (Chroma or FAISS). On query, retrieve top-k chunks and pass them as context to Gemini Flash. The system must cite which paper each answer came from. No LangChain or LlamaIndex.",
+    "expectedOutput": "CLI or API. query(\"What is the main finding of paper X?\") returns answer + citation(s).",
+    "skills": [
+      "RAG architecture",
+      "Chunking strategy",
+      "Gemini API",
+      "Citation extraction"
+    ]
+  },
+  {
+    "id": "mob-w2-b",
+    "title": "Camera to Cloud",
+    "description": "Build a photo capture app that uploads to Supabase Storage with a thumbnail pipeline.",
+    "difficulty": "Arena",
+    "round": "B",
+    "stream": "mobile",
+    "weekNumber": 2,
+    "tags": [
+      "React Native",
+      "Camera",
+      "Supabase Storage",
+      "Image Compression"
+    ],
+    "problemStatement": "Build an app that captures photos, compresses them client-side (max 500KB), uploads to Supabase Storage, and generates a 200px thumbnail. Show upload progress. Display a gallery of all uploaded photos with lazy loading.",
+    "expectedOutput": "GitHub repo + screen recording of capture → compress → upload → gallery flow.",
+    "skills": [
+      "Camera API",
+      "Image manipulation",
+      "Supabase Storage",
+      "Lazy loading"
+    ]
+  },
+  {
+    "id": "fs-w3-a",
+    "title": "Webhook Reliability",
+    "description": "Build a webhook delivery system with retries, exponential backoff, and delivery logs.",
+    "difficulty": "Warm-up",
+    "round": "A",
+    "stream": "fullstack",
+    "weekNumber": 3,
+    "tags": [
+      "Node.js",
+      "Bull Queue",
+      "Redis",
+      "Webhooks"
+    ],
+    "problemStatement": "Build a system that receives events and fans them out to registered webhook URLs. Failed deliveries must retry 3 times with exponential backoff (1s, 4s, 16s). Log every attempt (URL, status, latency, body) to Postgres.",
+    "expectedOutput": "GitHub repo. Demo showing a failing endpoint causing retries, then succeeding on attempt 3.",
+    "skills": [
+      "Queue patterns",
+      "Retry logic",
+      "Event fan-out"
+    ]
+  },
+  {
+    "id": "ai-w3-a",
+    "title": "Fine-tune a Classifier",
+    "description": "Fine-tune a DistilBERT model on a provided 500-sample dataset.",
+    "difficulty": "Warm-up",
+    "round": "A",
+    "stream": "aiml",
+    "weekNumber": 3,
+    "tags": [
+      "Python",
+      "HuggingFace",
+      "DistilBERT",
+      "Fine-tuning"
+    ],
+    "problemStatement": "Given 500 labelled customer support tickets (5 categories), fine-tune distilbert-base-uncased for classification. Must reach >85% validation accuracy. Use HuggingFace Trainer API. Export the model for inference.",
+    "expectedOutput": "Notebook with training curves + final eval metrics. Inference function loadable from saved model directory.",
+    "skills": [
+      "Transfer learning",
+      "HuggingFace Trainer",
+      "Evaluation metrics"
+    ]
+  },
+  {
+    "id": "mob-w3-a",
+    "title": "Push Notifications That Work",
+    "description": "Integrate Expo push notifications with a Node backend that sends targeted messages.",
+    "difficulty": "Warm-up",
+    "round": "A",
+    "stream": "mobile",
+    "weekNumber": 3,
+    "tags": [
+      "React Native",
+      "Expo Notifications",
+      "Node.js",
+      "Push"
+    ],
+    "problemStatement": "Register device tokens on app launch, store in Postgres via a Node API. Build a /notify endpoint that accepts a user ID and message, then sends a push notification to all devices registered to that user. Handle token expiry.",
+    "expectedOutput": "GitHub repo for both app and server. Demo video showing notification delivered to a physical device.",
+    "skills": [
+      "Expo push tokens",
+      "Push notification API",
+      "Token management"
+    ]
+  },
+  {
+    "id": "fs-w3-b",
+    "title": "Multi-Tenant SaaS Foundation",
+    "description": "Design and build the data isolation layer for a multi-tenant application.",
+    "difficulty": "Arena",
+    "round": "B",
+    "stream": "fullstack",
+    "weekNumber": 3,
+    "tags": [
+      "Node.js",
+      "PostgreSQL",
+      "Row Level Security",
+      "Multi-Tenancy"
+    ],
+    "problemStatement": "Implement tenant isolation using Postgres Row-Level Security (RLS). Each tenant's data must be invisible to others without application-level filtering. Build middleware that sets the tenant context from the JWT claim. Include a test that proves cross-tenant data leakage is impossible.",
+    "expectedOutput": "GitHub repo with RLS policies, middleware, and a test suite that fails if isolation breaks.",
+    "skills": [
+      "Row Level Security",
+      "JWT claims",
+      "Security testing"
+    ]
+  },
+  {
+    "id": "ai-w3-b",
+    "title": "Agent With Memory",
+    "description": "Build a task-executing AI agent with tool use and persistent conversation memory.",
+    "difficulty": "Arena",
+    "round": "B",
+    "stream": "aiml",
+    "weekNumber": 3,
+    "tags": [
+      "Python",
+      "Gemini API",
+      "Tool Use",
+      "Function Calling"
+    ],
+    "problemStatement": "Build an agent that can: search Wikipedia, perform arithmetic, and read/write a key-value memory store. The agent must decide which tool to call based on the user query. Conversation history must persist across sessions in a JSON file. No LangChain.",
+    "expectedOutput": "CLI agent. Must correctly answer a multi-step question that requires at least 2 tool calls.",
+    "skills": [
+      "Function calling",
+      "Tool orchestration",
+      "Conversation state"
+    ]
+  },
+  {
+    "id": "mob-w3-b",
+    "title": "Maps & Geofencing",
+    "description": "Build a location-aware app with live tracking, geofencing alerts, and a heat map.",
+    "difficulty": "Arena",
+    "round": "B",
+    "stream": "mobile",
+    "weekNumber": 3,
+    "tags": [
+      "React Native",
+      "MapLibre",
+      "Geolocation",
+      "Background Tasks"
+    ],
+    "problemStatement": "Build an app that tracks the user's location in the background (15s intervals), draws the path on a map, and triggers a local notification when they enter or exit a defined geofence radius. Show a heat map of the path density over time.",
+    "expectedOutput": "GitHub repo + 30-second screen recording showing path tracking and geofence alert trigger.",
+    "skills": [
+      "Background location",
+      "Geofence logic",
+      "Map rendering",
+      "Local notifications"
+    ]
+  }
+]

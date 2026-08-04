@@ -58,8 +58,8 @@ export default async function AssessmentPage() {
         <div className="space-y-8">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold font-heading text-white">Project-Based Assessment Test (PAT)</h1>
-                    <p className="text-slate-400">The final step to earning your verification and recommendation.</p>
+                    <h1 className="text-3xl font-bold font-heading text-foreground dark:text-foreground dark:text-white">Project-Based Assessment Test (PAT)</h1>
+                    <p className="text-muted-foreground dark:text-muted-foreground dark:text-slate-400">The final step to earning your verification and recommendation.</p>
                 </div>
                 {unlocked ? (
                     <Badge className="bg-green-500/20 text-green-400 border border-green-500/30 px-4 py-2 text-sm gap-2">
@@ -76,11 +76,11 @@ export default async function AssessmentPage() {
             <div className="grid md:grid-cols-2 gap-8">
                 <Card className={`bg-slate-900 ${unlocked ? 'border-green-500/30 shadow-[0_0_20px_rgba(34,197,94,0.1)]' : 'border-slate-800'}`}>
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2 text-white">
+                        <CardTitle className="flex items-center gap-2 text-foreground dark:text-foreground dark:text-white">
                             {unlocked ? <Unlock className="w-5 h-5 text-green-500" /> : <Lock className="w-5 h-5 text-red-500" />}
                             Unlock Requirements
                         </CardTitle>
-                        <CardDescription className="text-slate-400">You must meet all criteria to start the assessment.</CardDescription>
+                        <CardDescription className="text-muted-foreground dark:text-muted-foreground dark:text-slate-400">You must meet all criteria to start the assessment.</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         {[
@@ -117,8 +117,8 @@ export default async function AssessmentPage() {
 
                 <Card className="bg-gradient-to-br from-indigo-900/20 to-purple-900/10 border-slate-800">
                     <CardHeader>
-                        <CardTitle className="text-white">Assessment Structure</CardTitle>
-                        <CardDescription className="text-slate-400">What to expect in the 100-mark evaluation.</CardDescription>
+                        <CardTitle className="text-foreground dark:text-foreground dark:text-white">Assessment Structure</CardTitle>
+                        <CardDescription className="text-muted-foreground dark:text-muted-foreground dark:text-slate-400">What to expect in the 100-mark evaluation.</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="grid grid-cols-2 gap-4">
@@ -130,8 +130,8 @@ export default async function AssessmentPage() {
                             ].map((item, i) => (
                                 <div key={i} className="flex flex-col items-center justify-center p-6 rounded-lg bg-slate-900/50 border border-slate-800/50 text-center hover:border-indigo-500/30 transition-colors">
                                     <item.icon className="w-8 h-8 mb-3 text-indigo-400" />
-                                    <div className="font-bold text-2xl text-white mb-1">{item.marks}</div>
-                                    <div className="text-xs text-slate-400 font-medium uppercase tracking-wider">{item.title}</div>
+                                    <div className="font-bold text-2xl text-foreground dark:text-foreground dark:text-white mb-1">{item.marks}</div>
+                                    <div className="text-xs text-muted-foreground dark:text-muted-foreground dark:text-slate-400 font-medium uppercase tracking-wider">{item.title}</div>
                                 </div>
                             ))}
                         </div>
@@ -142,8 +142,8 @@ export default async function AssessmentPage() {
             {/* ACTION AREA */}
             <Card className="border-slate-800 bg-slate-900">
                 <CardHeader>
-                    <CardTitle className="text-white">Ready to Start?</CardTitle>
-                    <CardDescription className="text-slate-400">
+                    <CardTitle className="text-foreground dark:text-foreground dark:text-white">Ready to Start?</CardTitle>
+                    <CardDescription className="text-muted-foreground dark:text-muted-foreground dark:text-slate-400">
                         {unlocked
                             ? "You are eligible. Schedule your live assessment slot now."
                             : "Complete the remaining requirements to unlock this section."}
@@ -151,7 +151,7 @@ export default async function AssessmentPage() {
                 </CardHeader>
                 <CardFooter>
                     {unlocked ? (
-                        <Button size="lg" className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold">
+                        <Button size="lg" className="w-full bg-green-600 hover:bg-green-700 text-foreground dark:text-foreground dark:text-white font-semibold">
                             Book Assessment Slot
                         </Button>
                     ) : (

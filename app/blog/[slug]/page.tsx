@@ -56,7 +56,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     GRADIENT_MAP[post.coverColor || "indigo"] || GRADIENT_MAP.indigo;
 
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-indigo-500/30">
+    <div className="min-h-screen bg-background dark:bg-background dark:bg-black text-foreground dark:text-foreground dark:text-white selection:bg-indigo-500/30">
       <LandingNavbar />
 
       <main>
@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             {/* Back link */}
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors mb-8"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground dark:text-muted-foreground dark:text-gray-400 hover:text-foreground dark:text-foreground dark:text-white transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to all articles
@@ -80,7 +80,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             {post.stream && (
               <div className="mb-4">
                 <span
-                  className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${gradient} text-white shadow-lg`}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${gradient} text-foreground dark:text-foreground dark:text-white shadow-lg`}
                 >
                   <span className="opacity-80">
                     Stream {String(post.stream).padStart(2, "0")}
@@ -98,7 +98,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             {/* Subtitle */}
             {post.subtitle && (
-              <p className="text-xl text-gray-400 mb-6">{post.subtitle}</p>
+              <p className="text-xl text-muted-foreground dark:text-muted-foreground dark:text-gray-400 mb-6">{post.subtitle}</p>
             )}
 
             {/* Meta */}
@@ -121,7 +121,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               </div>
               {post.author?.name && (
                 <span>
-                  by <span className="text-gray-300">{post.author.name}</span>
+                  by <span className="text-muted-foreground dark:text-muted-foreground dark:text-gray-300">{post.author.name}</span>
                 </span>
               )}
             </div>
@@ -131,7 +131,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               {post.tags.map((tag: string) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 rounded-full text-xs bg-white/5 text-gray-300 border border-white/10"
+                  className="px-3 py-1 rounded-full text-xs bg-white/5 text-muted-foreground dark:text-muted-foreground dark:text-gray-300 border border-border dark:border-border dark:border-white/10"
                 >
                   {tag}
                 </span>
@@ -150,19 +150,19 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div
             className="prose prose-invert prose-lg max-w-none
               prose-headings:font-bold prose-headings:tracking-tight
-              prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-white
+              prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-foreground dark:text-foreground dark:text-white
               prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-gray-200
-              prose-p:text-gray-300 prose-p:leading-relaxed
+              prose-p:text-muted-foreground dark:text-muted-foreground dark:text-gray-300 prose-p:leading-relaxed
               prose-a:text-indigo-400 prose-a:no-underline hover:prose-a:text-indigo-300
-              prose-strong:text-white
-              prose-li:text-gray-300
+              prose-strong:text-foreground dark:text-foreground dark:text-white
+              prose-li:text-muted-foreground dark:text-muted-foreground dark:text-gray-300
               prose-code:text-indigo-300 prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
-              prose-pre:bg-white/5 prose-pre:border prose-pre:border-white/10
+              prose-pre:bg-white/5 prose-pre:border prose-pre:border-border dark:border-border dark:border-white/10
               prose-table:border-collapse
-              prose-th:bg-white/5 prose-th:text-white prose-th:px-4 prose-th:py-3 prose-th:text-left prose-th:border prose-th:border-white/10
-              prose-td:px-4 prose-td:py-3 prose-td:border prose-td:border-white/10 prose-td:text-gray-300
+              prose-th:bg-white/5 prose-th:text-foreground dark:text-foreground dark:text-white prose-th:px-4 prose-th:py-3 prose-th:text-left prose-th:border prose-th:border-border dark:border-border dark:border-white/10
+              prose-td:px-4 prose-td:py-3 prose-td:border prose-td:border-border dark:border-border dark:border-white/10 prose-td:text-muted-foreground dark:text-muted-foreground dark:text-gray-300
               prose-blockquote:border-indigo-500 prose-blockquote:bg-indigo-500/5 prose-blockquote:rounded-r-lg prose-blockquote:py-1
-              prose-hr:border-white/10
+              prose-hr:border-border dark:border-border dark:border-white/10
             "
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
@@ -170,7 +170,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         {/* Bottom nav */}
         <div className="max-w-3xl mx-auto px-6 pb-16">
-          <div className="border-t border-white/10 pt-8">
+          <div className="border-t border-border dark:border-border dark:border-white/10 pt-8">
             <Link
               href="/blog"
               className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors font-medium"
@@ -183,7 +183,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       </main>
 
       {/* Footer */}
-      <footer className="bg-black border-t border-white/10 py-12 px-6">
+      <footer className="bg-background dark:bg-background dark:bg-black border-t border-border dark:border-border dark:border-white/10 py-12 px-6">
         <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-8 mb-12">
           <div className="col-span-2 space-y-4">
             <div className="flex items-center gap-2">
@@ -199,14 +199,14 @@ export default async function BlogPostPage({ params }: PageProps) {
             <h4 className="font-bold mb-4">Platform</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link href="/" className="hover:text-white transition-colors">
+                <Link href="/" className="hover:text-foreground dark:text-foreground dark:text-white transition-colors">
                   Home
                 </Link>
               </li>
               <li>
                 <Link
                   href="/blog"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-foreground dark:text-foreground dark:text-white transition-colors"
                 >
                   Blog
                 </Link>
@@ -214,7 +214,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               <li>
                 <Link
                   href="/enroll"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-foreground dark:text-foreground dark:text-white transition-colors"
                 >
                   Enroll
                 </Link>
@@ -226,12 +226,12 @@ export default async function BlogPostPage({ params }: PageProps) {
             <h4 className="font-bold mb-4">Legal</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link href="/privacy-policy" className="hover:text-white transition-colors">
+                <Link href="/privacy-policy" className="hover:text-foreground dark:text-foreground dark:text-white transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white transition-colors">
+                <Link href="#" className="hover:text-foreground dark:text-foreground dark:text-white transition-colors">
                   Terms of Service
                 </Link>
               </li>
@@ -239,7 +239,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+        <div className="max-w-7xl mx-auto pt-8 border-t border-border dark:border-border dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <div>© 2026 SkillCred Inc.</div>
           <div className="flex gap-4">
             <Link href="#" className="hover:text-indigo-400 transition-colors">

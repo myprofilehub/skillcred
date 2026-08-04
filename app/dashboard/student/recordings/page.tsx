@@ -47,7 +47,7 @@ export default async function StudentRecordingsPage() {
             ) : (
                 <div className="grid gap-4">
                     {live.map((recording: any) => (
-                        <Card key={recording.id} className="border-white/10 bg-white/5 hover:border-red-500/30 transition-colors">
+                        <Card key={recording.id} className="border-border dark:border-border dark:border-white/10 bg-white/5 hover:border-red-500/30 transition-colors">
                             <CardContent className="p-4">
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-4">

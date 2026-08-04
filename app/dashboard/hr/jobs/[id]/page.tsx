@@ -150,7 +150,7 @@ export default async function JobDetailPage({ params }: PageProps) {
                                         <div className="flex items-start gap-4">
                                             <Avatar className="h-12 w-12">
                                                 <AvatarImage src={user.image || undefined} />
-                                                <AvatarFallback className="bg-emerald-600 text-white">
+                                                <AvatarFallback className="bg-emerald-600 text-foreground dark:text-foreground dark:text-white">
                                                     {user.name?.charAt(0) || "S"}
                                                 </AvatarFallback>
                                             </Avatar>

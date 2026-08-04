@@ -28,10 +28,10 @@ export default function MentorshipPage() {
 
             <div className="grid lg:grid-cols-3 gap-8">
                 {/* LEFT: Mentor Profile */}
-                <Card className="lg:col-span-1 border-white/10 h-fit">
+                <Card className="lg:col-span-1 border-border dark:border-border dark:border-white/10 h-fit">
                     <CardHeader className="text-center pb-2">
                         <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 p-[2px] mb-4">
-                            <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
+                            <div className="w-full h-full rounded-full bg-background dark:bg-background dark:bg-black flex items-center justify-center">
                                 <UserCircle className="w-16 h-16 text-muted-foreground" />
                             </div>
                         </div>
@@ -61,7 +61,7 @@ export default function MentorshipPage() {
                 {/* CENTRE: Tabs (Chat, Sessions, Feedback) */}
                 <div className="lg:col-span-2 space-y-6">
                     <Tabs defaultValue="chat" className="space-y-6">
-                        <TabsList className="bg-secondary/20 p-1 border border-white/5 w-full justify-start">
+                        <TabsList className="bg-secondary/20 p-1 border border-border dark:border-border dark:border-white/5 w-full justify-start">
                             <TabsTrigger value="chat">Chat</TabsTrigger>
                             <TabsTrigger value="sessions">Sessions</TabsTrigger>
                             <TabsTrigger value="recommendation">Recommendation</TabsTrigger>
@@ -69,8 +69,8 @@ export default function MentorshipPage() {
 
                         {/* CHAT TAB */}
                         <TabsContent value="chat">
-                            <Card className="h-[500px] flex flex-col border-white/10">
-                                <CardHeader className="border-b border-white/5 py-3">
+                            <Card className="h-[500px] flex flex-col border-border dark:border-border dark:border-white/10">
+                                <CardHeader className="border-b border-border dark:border-border dark:border-white/5 py-3">
                                     <div className="flex items-center gap-2">
                                         <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                                         <span className="font-semibold text-sm">Live Chat</span>
@@ -97,10 +97,10 @@ export default function MentorshipPage() {
                                         </div>
                                     </div>
                                 </CardContent>
-                                <div className="p-4 border-t border-white/5">
+                                <div className="p-4 border-t border-border dark:border-border dark:border-white/5">
                                     <div className="flex gap-2">
                                         <input
-                                            className="flex-1 bg-background border border-white/10 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-primary/50"
+                                            className="flex-1 bg-background border border-border dark:border-border dark:border-white/10 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-primary/50"
                                             placeholder="Type a message..."
                                         />
                                         <Button size="icon"><Send className="w-4 h-4" /></Button>
@@ -111,7 +111,7 @@ export default function MentorshipPage() {
 
                         {/* SESSIONS TAB */}
                         <TabsContent value="sessions" className="space-y-4">
-                            <Card className="border-white/10">
+                            <Card className="border-border dark:border-border dark:border-white/10">
                                 <CardHeader>
                                     <CardTitle>Upcoming Sessions</CardTitle>
                                 </CardHeader>
@@ -132,7 +132,7 @@ export default function MentorshipPage() {
                                         <Button variant="outline" className="border-green-500/30 hover:bg-green-500/10 text-green-400">Join Link</Button>
                                     </div>
 
-                                    <div className="flex items-center justify-between p-4 rounded-lg bg-secondary/10 border border-white/5 opacity-75">
+                                    <div className="flex items-center justify-between p-4 rounded-lg bg-secondary/10 border border-border dark:border-border dark:border-white/5 opacity-75">
                                         <div className="flex items-center gap-4">
                                             <div className="p-3 bg-secondary/20 rounded-full text-muted-foreground">
                                                 <CheckCircle2 className="w-6 h-6" />
@@ -153,7 +153,7 @@ export default function MentorshipPage() {
 
                         {/* RECOMMENDATION TAB */}
                         <TabsContent value="recommendation">
-                            <Card className="border-white/10">
+                            <Card className="border-border dark:border-border dark:border-white/10">
                                 <CardHeader>
                                     <CardTitle>Recommendation Letter Status</CardTitle>
                                     <CardDescription>Unlock your official recommendation letter by completing requirements.</CardDescription>
@@ -169,12 +169,12 @@ export default function MentorshipPage() {
 
                                     <div className="grid sm:grid-cols-2 gap-4">
                                         {[
-                                            { label: "5/5 Projects Verified", done: false, status: "2/5 Done" },
+                                            { label: "4/4 Projects Verified", done: false, status: "2/4 Done" },
                                             { label: "Attendance > 80%", done: true, status: "92%" },
                                             { label: "Assessment Passed", done: false, status: "Pending" },
                                             { label: "Mentor Approval", done: true, status: "Approved" }
                                         ].map((req, i) => (
-                                            <div key={i} className={`p-4 rounded-lg border ${req.done ? 'bg-green-500/10 border-green-500/20' : 'bg-secondary/10 border-white/5'}`}>
+                                            <div key={i} className={`p-4 rounded-lg border ${req.done ? 'bg-green-500/10 border-green-500/20' : 'bg-secondary/10 border-border dark:border-border dark:border-white/5'}`}>
                                                 <div className="flex items-center justify-between mb-2">
                                                     {req.done ? <CheckCircle2 className="w-5 h-5 text-green-400" /> : <Clock className="w-5 h-5 text-muted-foreground" />}
                                                     <span className={`text-xs ${req.done ? 'text-green-400' : 'text-muted-foreground'}`}>{req.status}</span>

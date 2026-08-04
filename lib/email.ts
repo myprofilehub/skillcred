@@ -45,11 +45,11 @@ export async function sendEmail({ to, subject, htmlContent }: EmailParams) {
     }
 }
 
-export async function sendLMSCredentials(
+export async function sendEnrollmentCredentials(
     personalEmail: string,
     name: string,
-    lmsEmail: string,
-    tempPass: string
+    lmsPassword: string,
+    generalPassword: string
 ) {
     const htmlContent = `
     <!DOCTYPE html>
@@ -57,22 +57,29 @@ export async function sendLMSCredentials(
     <body style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
         <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
             <div style="text-align: center; margin-bottom: 20px;">
-                <h1 style="color: #4f46e5;">Welcome to SkillCred LMS</h1>
+                <h1 style="color: #4f46e5;">Welcome to SkillCred!</h1>
             </div>
             
             <p>Hi ${name},</p>
             
-            <p>Your enrollment was successful! We have generated your official credentials to access the Learning Management System (LMS).</p>
+            <p>Your enrollment was successful! We have generated your credentials for both your General Dashboard and the Learning Management System (LMS).</p>
             
             <div style="background-color: #f3f4f6; padding: 15px; border-radius: 5px; margin: 20px 0;">
-                <p style="margin: 5px 0;"><strong>LMS Email:</strong> ${lmsEmail}</p>
-                <p style="margin: 5px 0;"><strong>Temporary Password:</strong> ${tempPass}</p>
+                <h3 style="margin-top: 0; color: #4f46e5;">1. LMS Credentials (For Course Content)</h3>
+                <p style="margin: 5px 0;"><strong>LMS Email:</strong> ${personalEmail}</p>
+                <p style="margin: 5px 0;"><strong>LMS Password:</strong> ${lmsPassword}</p>
+                <p style="margin: 5px 0; font-size: 12px; color: #666;"><em>Note: The LMS password is fixed and cannot be changed.</em></p>
+            </div>
+
+            <div style="background-color: #f3f4f6; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                <h3 style="margin-top: 0; color: #4f46e5;">2. General Login (For Profile & Dashboard)</h3>
+                <p style="margin: 5px 0;"><strong>Login Email:</strong> ${personalEmail}</p>
+                <p style="margin: 5px 0;"><strong>Temporary Password:</strong> ${generalPassword}</p>
+                <p style="margin: 5px 0; font-size: 12px; color: #666;"><em>Note: You can change this password anytime in your Profile Settings.</em></p>
             </div>
             
-            <p>Please log in immediately. You will be required to change your password upon your first login.</p>
-            
             <div style="text-align: center; margin-top: 30px;">
-                <a href="${process.env.NEXTAUTH_URL}/auth/lms" style="background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">Login to LMS</a>
+                <a href="${process.env.NEXTAUTH_URL}/login" style="background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">Go to Dashboard</a>
             </div>
             
             <p style="margin-top: 30px; font-size: 12px; color: #888;">If you did not request this, please ignore this email.</p>
@@ -83,7 +90,7 @@ export async function sendLMSCredentials(
 
     return sendEmail({
         to: [{ email: personalEmail, name }],
-        subject: "Your SkillCred LMS Credentials",
+        subject: "Your SkillCred Enrollment & Credentials",
         htmlContent
     });
 }

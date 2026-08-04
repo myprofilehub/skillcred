@@ -48,7 +48,7 @@ function SignupForm() {
     };
 
     return (
-        <Card className="border-white/10 bg-black/50 backdrop-blur-xl">
+        <Card className="border-border dark:border-border dark:border-white/10 bg-muted/50 dark:bg-background dark:bg-muted/50 dark:bg-background dark:bg-black/50 backdrop-blur-xl">
             <CardHeader className="space-y-1 flex flex-col items-center">
                 <div className="mb-4">
                     <Logo width={150} height={40} />
@@ -62,32 +62,32 @@ function SignupForm() {
                 <form action={handleSubmit} className="space-y-4">
                     <div className="space-y-2">
                         <Label htmlFor="name">Full Name</Label>
-                        <Input id="name" name="name" placeholder="John Doe" required className="bg-white/5 border-white/10" />
+                        <Input id="name" name="name" placeholder="John Doe" required className="bg-white/5 border-border dark:border-border dark:border-white/10" />
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
                             <Label htmlFor="username">Username</Label>
-                            <Input id="username" name="username" placeholder="johndoe123" required className="bg-white/10 border-white/20 text-white" />
+                            <Input id="username" name="username" placeholder="johndoe123" required className="bg-white/10 border-border dark:border-border dark:border-white/20 text-foreground dark:text-foreground dark:text-white" />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="email">Email</Label>
-                            <Input id="email" name="email" type="email" placeholder="john@example.com" required className="bg-white/10 border-white/20 text-white" />
+                            <Input id="email" name="email" type="email" placeholder="john@example.com" required className="bg-white/10 border-border dark:border-border dark:border-white/20 text-foreground dark:text-foreground dark:text-white" />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="mobile">Mobile</Label>
-                            <Input id="mobile" name="mobile" placeholder="+91 98765..." className="bg-white/5 border-white/10" />
+                            <Input id="mobile" name="mobile" placeholder="+91 98765..." className="bg-white/5 border-border dark:border-border dark:border-white/10" />
                         </div>
                     </div>
 
                     <div className="space-y-2">
                         <Label htmlFor="password">Password</Label>
-                        <Input id="password" name="password" type="password" required className="bg-white/5 border-white/10" />
+                        <Input id="password" name="password" type="password" required className="bg-white/5 border-border dark:border-border dark:border-white/10" />
                     </div>
 
                     <div className="space-y-2">
                         <Label htmlFor="confirmPassword">Confirm Password</Label>
-                        <Input id="confirmPassword" name="confirmPassword" type="password" required className="bg-white/5 border-white/10" />
+                        <Input id="confirmPassword" name="confirmPassword" type="password" required className="bg-white/5 border-border dark:border-border dark:border-white/10" />
                     </div>
 
                     {error && (
@@ -96,7 +96,7 @@ function SignupForm() {
                         </div>
                     )}
 
-                    <Button type="submit" className="w-full" disabled={isPending}>
+                    <Button type="submit" className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold tracking-wide transition-colors shadow-md shadow-orange-500/20 border-none" disabled={isPending}>
                         {isPending ? <Loader2 className="mr-2 w-4 h-4 animate-spin" /> : null}
                         Create Account
                     </Button>

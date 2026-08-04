@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function AboutPage() {
     return (
-        <div className="min-h-screen bg-black text-white selection:bg-indigo-500/30">
+        <div className="min-h-screen bg-background dark:bg-background dark:bg-black text-foreground dark:text-foreground dark:text-white selection:bg-indigo-500/30">
             <LandingNavbar />
 
             <main className="pt-32 pb-24">
@@ -33,19 +33,19 @@ export default function AboutPage() {
                     <div className="grid md:grid-cols-2 gap-12 items-center mb-24">
                         <div className="space-y-6">
                             <h2 className="text-3xl font-bold">The Problem We Are Solving</h2>
-                            <div className="space-y-4 text-slate-400">
+                            <div className="space-y-4 text-muted-foreground dark:text-muted-foreground dark:text-slate-400">
                                 <p>
                                     Every year, millions of students graduate with computer science degrees, yet companies struggle to find job-ready talent. Traditional education focuses on theory, while industry demands practical, production-ready skills.
                                 </p>
                                 <p>
                                     At the same time, recruiters spend countless hours filtering through padded resumes and conducting generic technical interviews that fail to evaluate true engineering potential.
                                 </p>
-                                <p className="font-medium text-white">
+                                <p className="font-medium text-foreground dark:text-foreground dark:text-white">
                                     SkillCred was born to fix this broken system.
                                 </p>
                             </div>
                         </div>
-                        <div className="bg-gradient-to-br from-indigo-900/20 to-black border border-white/10 rounded-2xl p-8 relative overflow-hidden h-full flex flex-col justify-center">
+                        <div className="bg-gradient-to-br from-indigo-900/20 to-black border border-border dark:border-border dark:border-white/10 rounded-2xl p-8 relative overflow-hidden h-full flex flex-col justify-center">
                             <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl" />
                             <div className="relative z-10 space-y-8">
                                 <div className="flex items-start gap-4">
@@ -77,20 +77,20 @@ export default function AboutPage() {
                             <p className="text-muted-foreground max-w-2xl mx-auto">The principles that guide our platform and community.</p>
                         </div>
                         <div className="grid md:grid-cols-3 gap-6">
-                            <div className="p-6 bg-white/5 border border-white/10 rounded-xl space-y-4">
+                            <div className="p-6 bg-white/5 border border-border dark:border-border dark:border-white/10 rounded-xl space-y-4">
                                 <Rocket className="w-8 h-8 text-indigo-400" />
                                 <h3 className="text-xl font-bold">Practical Over Theoretical</h3>
-                                <p className="text-sm text-slate-400">We believe you learn to code by coding. Our curriculum is 100% project-based, simulating real-world engineering environments.</p>
+                                <p className="text-sm text-muted-foreground dark:text-muted-foreground dark:text-slate-400">We believe you learn to code by coding. Our curriculum is 100% project-based, simulating real-world engineering environments.</p>
                             </div>
-                            <div className="p-6 bg-white/5 border border-white/10 rounded-xl space-y-4">
+                            <div className="p-6 bg-white/5 border border-border dark:border-border dark:border-white/10 rounded-xl space-y-4">
                                 <ShieldCheck className="w-8 h-8 text-emerald-400" />
                                 <h3 className="text-xl font-bold">Trust Through Verification</h3>
-                                <p className="text-sm text-slate-400">Every project submission is code-reviewed by a senior mentor. Our PAT certification is an objective measure of true capability.</p>
+                                <p className="text-sm text-muted-foreground dark:text-muted-foreground dark:text-slate-400">Every project submission is code-reviewed by a senior mentor. Our PAT certification is an objective measure of true capability.</p>
                             </div>
-                            <div className="p-6 bg-white/5 border border-white/10 rounded-xl space-y-4">
+                            <div className="p-6 bg-white/5 border border-border dark:border-border dark:border-white/10 rounded-xl space-y-4">
                                 <Users className="w-8 h-8 text-blue-400" />
                                 <h3 className="text-xl font-bold">Community Driven</h3>
-                                <p className="text-sm text-slate-400">We connect aspiring developers with industry veterans, creating a feedback loop that accelerates growth for everyone.</p>
+                                <p className="text-sm text-muted-foreground dark:text-muted-foreground dark:text-slate-400">We connect aspiring developers with industry veterans, creating a feedback loop that accelerates growth for everyone.</p>
                             </div>
                         </div>
                     </div>
@@ -102,10 +102,10 @@ export default function AboutPage() {
                             Whether you're looking to launch your career, find top talent, or mentor the next generation.
                         </p>
                         <div className="flex flex-wrap justify-center gap-4">
-                            <Link href="/enroll" className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-all shadow-lg shadow-indigo-500/25">
+                            <Link href="/enroll" className="bg-gradient-to-r from-indigo-600 to-purple-600 text-foreground dark:text-foreground dark:text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-all shadow-lg shadow-indigo-500/25">
                                 Start Learning
                             </Link>
-                            <Link href="/contact" className="bg-transparent border border-white/20 px-8 py-3 rounded-lg font-semibold hover:bg-white/5 transition-colors">
+                            <Link href="/contact" className="bg-transparent border border-border dark:border-border dark:border-white/20 px-8 py-3 rounded-lg font-semibold hover:bg-white/5 transition-colors">
                                 Partner With Us
                             </Link>
                         </div>
@@ -114,7 +114,7 @@ export default function AboutPage() {
             </main>
 
             {/* Footer */}
-            <footer className="bg-black border-t border-white/10 py-12 px-6">
+            <footer className="bg-background dark:bg-background dark:bg-black border-t border-border dark:border-border dark:border-white/10 py-12 px-6">
                 <div className="max-w-7xl mx-auto pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-2">
                         <Logo width={100} height={30} />

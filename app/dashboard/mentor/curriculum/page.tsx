@@ -11,8 +11,8 @@ export default async function MentorCurriculumPage() {
     return (
         <div className="space-y-6">
             <div>
-                <h1 className="text-3xl font-bold tracking-tight text-white">Project Catalog</h1>
-                <p className="text-slate-400">View and manage projects for your stream.</p>
+                <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-foreground dark:text-white">Project Catalog</h1>
+                <p className="text-muted-foreground dark:text-muted-foreground dark:text-slate-400">View and manage projects for your stream.</p>
             </div>
             <Separator className="bg-slate-800" />
 

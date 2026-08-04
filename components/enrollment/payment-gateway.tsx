@@ -90,27 +90,27 @@ export function PaymentGateway({ order, onSuccess, loading }: { order: any, onSu
 
     return (
         <div className="space-y-6">
-            <div className="p-6 border border-dashed border-slate-700 rounded-lg bg-slate-900/50 text-center space-y-4">
-                <div className="mx-auto w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center">
-                    <CreditCard className="w-6 h-6 text-blue-400" />
+            <div className="p-6 border border-dashed border-slate-200 rounded-2xl bg-slate-50 text-center space-y-4">
+                <div className="mx-auto w-12 h-12 bg-amber-50 border border-amber-200 rounded-full flex items-center justify-center">
+                    <CreditCard className="w-6 h-6 text-amber-500" />
                 </div>
                 <div>
-                    <h3 className="text-lg font-medium text-white">Razorpay Checkout</h3>
-                    <p className="text-sm text-slate-400">Cards, UPI, Netbanking & Wallets</p>
+                    <h3 className="text-lg font-black text-slate-900">Razorpay Checkout</h3>
+                    <p className="text-sm text-slate-500">Cards, UPI, Netbanking & Wallets</p>
                 </div>
 
                 <div className="pt-4 space-y-2">
                     <Button
                         onClick={handlePayment}
                         disabled={loading || isPaymentLoading}
-                        className="w-full bg-[#3399cc] hover:bg-[#2b88b6] text-white font-bold h-12 transition-all shadow-[0_0_15px_rgba(51,153,204,0.4)]"
+                        className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-black h-14 rounded-xl transition-all shadow-lg shadow-orange-500/25"
                     >
                         {loading || isPaymentLoading ? <Loader2 className="animate-spin mr-2" /> : "Pay ₹" + order.amount}
                     </Button>
                 </div>
             </div>
 
-            <div className="text-center text-xs text-slate-600">
+            <div className="text-center text-xs text-slate-500">
                 <p>Secured by Razorpay. Your payment details are encrypted.</p>
             </div>
         </div>

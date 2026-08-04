@@ -38,7 +38,7 @@ const iconMap: Record<string, any> = {
 
 export function LandingInterestForm({ recordings = [], tracks }: { recordings?: Recording[], tracks?: any }) {
     return (
-        <section id="interest-form" className="py-12 bg-black border-y border-white/5 relative overflow-hidden">
+        <section id="interest-form" className="py-12 bg-background dark:bg-background dark:bg-black border-y border-border dark:border-border dark:border-white/5 relative overflow-hidden">
             {/* Background elements */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none" />
             
@@ -67,7 +67,7 @@ export function LandingInterestForm({ recordings = [], tracks }: { recordings?: 
                 </div>
 
                 {recordings.length === 0 ? (
-                    <div className="text-center py-20 border border-white/10 rounded-2xl bg-white/5">
+                    <div className="text-center py-20 border border-border dark:border-border dark:border-white/10 rounded-2xl bg-white/5">
                         <Video className="w-12 h-12 mx-auto mb-4 text-muted-foreground opacity-50" />
                         <h3 className="text-xl font-bold mb-2">No videos available yet</h3>
                         <p className="text-muted-foreground">Check back soon for free masterclasses.</p>
@@ -85,9 +85,9 @@ export function LandingInterestForm({ recordings = [], tracks }: { recordings?: 
                             return (
                                 <Dialog key={recording.id}>
                                     <DialogTrigger asChild>
-                                        <div className="group flex flex-col h-full bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/[0.08] hover:border-indigo-500/50 transition-all duration-300 cursor-pointer text-left outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
+                                        <div className="group flex flex-col h-full bg-white/5 border border-border dark:border-border dark:border-white/10 rounded-2xl overflow-hidden hover:bg-white/[0.08] hover:border-indigo-500/50 transition-all duration-300 cursor-pointer text-left outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
                                             {/* Video Thumbnail Placeholder or Image */}
-                                            <div className="aspect-video bg-gradient-to-br from-indigo-950 to-black relative flex items-center justify-center border-b border-white/10 overflow-hidden">
+                                            <div className="aspect-video bg-gradient-to-br from-indigo-950 to-black relative flex items-center justify-center border-b border-border dark:border-border dark:border-white/10 overflow-hidden">
                                                 {getVideoThumbnail(recording.url) && (
                                                     <img 
                                                         src={getVideoThumbnail(recording.url)!} 
@@ -102,7 +102,7 @@ export function LandingInterestForm({ recordings = [], tracks }: { recordings?: 
                                                     <Play className="w-6 h-6 text-indigo-300 ml-1" />
                                                 </div>
                                                 
-                                                <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-md px-2 py-1 rounded text-xs font-medium border border-white/10 flex items-center gap-1.5 z-20">
+                                                <div className="absolute bottom-3 right-3 bg-background/80 dark:bg-background dark:bg-background/80 dark:bg-background dark:bg-black/80 backdrop-blur-md px-2 py-1 rounded text-xs font-medium border border-border dark:border-border dark:border-white/10 flex items-center gap-1.5 z-20">
                                                     <Icon className="w-3 h-3 text-indigo-400" />
                                                     {trackTitle}
                                                 </div>
@@ -118,7 +118,7 @@ export function LandingInterestForm({ recordings = [], tracks }: { recordings?: 
                                                         {recording.description}
                                                     </p>
                                                 )}
-                                                <div className="flex items-center justify-between text-xs text-muted-foreground mt-auto pt-4 border-t border-white/5">
+                                                <div className="flex items-center justify-between text-xs text-muted-foreground mt-auto pt-4 border-t border-border dark:border-border dark:border-white/5">
                                                     <span>
                                                         Added {formatDistanceToNow(new Date(recording.createdAt), { addSuffix: true })}
                                                     </span>
@@ -129,12 +129,12 @@ export function LandingInterestForm({ recordings = [], tracks }: { recordings?: 
                                             </div>
                                         </div>
                                     </DialogTrigger>
-                                    <DialogContent className="max-w-4xl p-0 bg-black border-white/10 overflow-hidden sm:rounded-xl">
+                                    <DialogContent className="max-w-4xl p-0 bg-background dark:bg-background dark:bg-black border-border dark:border-border dark:border-white/10 overflow-hidden sm:rounded-xl">
                                         <DialogTitle className="sr-only">{recording.title}</DialogTitle>
                                         <VideoPlayer url={recording.url} />
                                         {recording.description && (
-                                            <div className="p-6 pt-4 text-slate-300 text-sm">
-                                                <h3 className="text-white font-semibold text-lg mb-2">{recording.title}</h3>
+                                            <div className="p-6 pt-4 text-muted-foreground dark:text-muted-foreground dark:text-slate-300 text-sm">
+                                                <h3 className="text-foreground dark:text-foreground dark:text-white font-semibold text-lg mb-2">{recording.title}</h3>
                                                 {recording.description}
                                             </div>
                                         )}

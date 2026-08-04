@@ -64,18 +64,18 @@ export default function InvestorPostsPage() {
         <div className="space-y-8">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-white">My Posts</h1>
+                    <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-foreground dark:text-white">My Posts</h1>
                     <p className="text-neutral-400">Manage your calls for startups and requirements</p>
                 </div>
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
                     <DialogTrigger asChild>
-                        <Button className="gap-2 bg-amber-600 hover:bg-amber-700 text-white shadow-lg shadow-amber-500/20">
+                        <Button className="gap-2 bg-amber-600 hover:bg-amber-700 text-foreground dark:text-foreground dark:text-white shadow-lg shadow-amber-500/20">
                             <PlusCircle className="w-4 h-4" /> Create New Post
                         </Button>
                     </DialogTrigger>
-                    <DialogContent className="bg-neutral-900 border-amber-500/20 text-white">
+                    <DialogContent className="bg-neutral-900 border-amber-500/20 text-foreground dark:text-foreground dark:text-white">
                         <DialogHeader>
-                            <DialogTitle className="text-white">Create New Requirement</DialogTitle>
+                            <DialogTitle className="text-foreground dark:text-foreground dark:text-white">Create New Requirement</DialogTitle>
                             <DialogDescription className="text-neutral-400">Post a call for startups or investment opportunities</DialogDescription>
                         </DialogHeader>
                         <div className="space-y-4 py-4">
@@ -85,7 +85,7 @@ export default function InvestorPostsPage() {
                                     placeholder="e.g. Seed Funding for AI Startups"
                                     value={formData.title}
                                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                                    className="bg-neutral-800 border-amber-500/20 text-white placeholder:text-neutral-500"
+                                    className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white placeholder:text-neutral-500"
                                 />
                             </div>
                             <div className="space-y-2">
@@ -94,7 +94,7 @@ export default function InvestorPostsPage() {
                                     value={formData.type}
                                     onValueChange={(val) => setFormData({ ...formData, type: val })}
                                 >
-                                    <SelectTrigger className="bg-neutral-800 border-amber-500/20 text-white">
+                                    <SelectTrigger className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white">
                                         <SelectValue />
                                     </SelectTrigger>
                                     <SelectContent className="bg-neutral-800 border-amber-500/20">
@@ -112,7 +112,7 @@ export default function InvestorPostsPage() {
                                     value={formData.description}
                                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                     rows={4}
-                                    className="bg-neutral-800 border-amber-500/20 text-white placeholder:text-neutral-500"
+                                    className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white placeholder:text-neutral-500"
                                 />
                             </div>
                             <div className="space-y-2">
@@ -121,10 +121,10 @@ export default function InvestorPostsPage() {
                                     type="date"
                                     value={formData.deadline}
                                     onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
-                                    className="bg-neutral-800 border-amber-500/20 text-white"
+                                    className="bg-neutral-800 border-amber-500/20 text-foreground dark:text-foreground dark:text-white"
                                 />
                             </div>
-                            <Button className="w-full bg-amber-600 hover:bg-amber-700 text-white" onClick={handleCreate} disabled={isCreating}>
+                            <Button className="w-full bg-amber-600 hover:bg-amber-700 text-foreground dark:text-foreground dark:text-white" onClick={handleCreate} disabled={isCreating}>
                                 {isCreating ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
                                 Publish Post
                             </Button>
@@ -150,7 +150,7 @@ export default function InvestorPostsPage() {
                                             <Badge className="bg-amber-500/15 text-amber-400 border-amber-500/20 text-xs">
                                                 {post.type}
                                             </Badge>
-                                            <CardTitle className="pt-2 text-white">{post.title}</CardTitle>
+                                            <CardTitle className="pt-2 text-foreground dark:text-foreground dark:text-white">{post.title}</CardTitle>
                                         </div>
                                     </div>
                                     <CardDescription className="text-neutral-500">

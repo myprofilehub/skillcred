@@ -10,6 +10,7 @@ import { revalidatePath } from "next/cache";
 export async function getStreams() {
     try {
         const activeSlugs = [
+            'full-stack',
             'full-stack-development',
             'ai-ml',
             'cybersecurity',
@@ -59,8 +60,9 @@ export async function enrollInStream(trackSlug: string) {
         }
 
         // 1. Get the Track and its Default Mentor
+        const dbSlug = trackSlug === 'full-stack-development' ? 'full-stack' : trackSlug;
         const track = await prisma.track.findUnique({
-            where: { slug: trackSlug },
+            where: { slug: dbSlug },
             include: { defaultMentor: true }
         });
 

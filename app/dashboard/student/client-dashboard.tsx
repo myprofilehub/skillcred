@@ -96,14 +96,14 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
                 </div>
                 {!isEnrolled && (
                     <Link href="/enroll">
-                        <Button size="lg" className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold shadow-lg shadow-purple-500/20 animate-pulse">
+                        <Button size="lg" className="bg-gradient-to-r from-purple-600 to-pink-600 text-foreground dark:text-foreground dark:text-white font-bold shadow-lg shadow-purple-500/20 animate-pulse">
                             <BookOpen className="w-4 h-4 mr-2" /> Start Your Application
                         </Button>
                     </Link>
                 )}
                 {isEnrolled && upNext?.meetLink && (
                     <Link href={upNext.meetLink} target="_blank">
-                        <Button className="bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg shadow-green-500/20 gap-2">
+                        <Button className="bg-gradient-to-r from-green-500 to-emerald-600 text-foreground dark:text-foreground dark:text-white shadow-lg shadow-green-500/20 gap-2">
                             <Video className="w-4 h-4" /> Join Next Class
                         </Button>
                     </Link>
@@ -118,8 +118,8 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
                     </div>
                     <CardContent className="p-8 relative z-10">
                         <div className="max-w-2xl">
-                            <h2 className="text-2xl font-bold text-white mb-2">Unlock Your Full Potential</h2>
-                            <p className="text-slate-300 mb-6 text-lg">
+                            <h2 className="text-2xl font-bold text-foreground dark:text-foreground dark:text-white mb-2">Unlock Your Full Potential</h2>
+                            <p className="text-muted-foreground dark:text-muted-foreground dark:text-slate-300 mb-6 text-lg">
                                 You are currently on the <span className="text-purple-400 font-semibold">Free Tier</span>.
                                 Enroll in a specialized track to get assigned to a batch, start working on live projects, and earn verified credentials.
                             </p>
@@ -130,7 +130,7 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
                                     </Button>
                                 </Link>
                                 <Link href="/#streams">
-                                    <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/10 h-12">
+                                    <Button variant="outline" size="lg" className="border-border dark:border-border dark:border-white/20 text-foreground dark:text-foreground dark:text-white hover:bg-white/10 h-12">
                                         View Streams
                                     </Button>
                                 </Link>
@@ -262,7 +262,7 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
             {/* Two Column Layout */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Pending Assignments List */}
-                <Card className="lg:col-span-2 border-white/10 bg-white/5">
+                <Card className="lg:col-span-2 border-border dark:border-border dark:border-white/10 bg-white/5">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <AlertCircle className="w-5 h-5 text-orange-500" /> Action Required
@@ -275,7 +275,7 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
                                 {pendingAssignments.map((assignment) => (
                                     <div
                                         key={assignment.id}
-                                        className="flex items-center justify-between p-3 rounded-lg bg-background/50 border border-white/5 hover:border-white/10 transition-colors"
+                                        className="flex items-center justify-between p-3 rounded-lg bg-background/50 border border-border dark:border-border dark:border-white/5 hover:border-border dark:border-border dark:border-white/10 transition-colors"
                                     >
                                         <div className="flex items-center gap-3">
                                             <div className="w-2 h-2 rounded-full bg-orange-500" />
@@ -307,7 +307,7 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
                 </Card>
 
                 {/* Recent Recordings */}
-                <Card className="border-white/10 bg-white/5">
+                <Card className="border-border dark:border-border dark:border-white/10 bg-white/5">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Video className="w-5 h-5 text-red-500" /> Recent Recordings
@@ -319,7 +319,7 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
                             <div className="space-y-3">
                                 {recentRecordings.map((recording) => (
                                     <Link key={recording.id} href={recording.url} target="_blank">
-                                        <div className="flex items-center gap-3 p-3 rounded-lg bg-background/50 border border-white/5 hover:border-red-500/30 hover:bg-red-500/5 transition-colors cursor-pointer">
+                                        <div className="flex items-center gap-3 p-3 rounded-lg bg-background/50 border border-border dark:border-border dark:border-white/5 hover:border-red-500/30 hover:bg-red-500/5 transition-colors cursor-pointer">
                                             <div className="w-10 h-10 rounded bg-red-500/10 flex items-center justify-center">
                                                 <PlayCircle className="w-5 h-5 text-red-500" />
                                             </div>
@@ -333,7 +333,7 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
                                     </Link>
                                 ))}
                                 <Link href="/dashboard/student/recordings">
-                                    <Button variant="ghost" className="w-full text-sm text-muted-foreground hover:text-white">
+                                    <Button variant="ghost" className="w-full text-sm text-muted-foreground hover:text-foreground dark:text-foreground dark:text-white">
                                         View All Recordings <ArrowRight className="w-4 h-4 ml-2" />
                                     </Button>
                                 </Link>
@@ -350,7 +350,7 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
 
             {/* Attendance by Class */}
             {attendanceStats.length > 0 && (
-                <Card className="border-white/10 bg-white/5">
+                <Card className="border-border dark:border-border dark:border-white/10 bg-white/5">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <FileText className="w-5 h-5 text-green-500" /> Attendance by Class
@@ -360,7 +360,7 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
                     <CardContent>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {attendanceStats.map((stat, i) => (
-                                <div key={i} className="p-4 rounded-lg bg-background/50 border border-white/5">
+                                <div key={i} className="p-4 rounded-lg bg-background/50 border border-border dark:border-border dark:border-white/5">
                                     <div className="flex justify-between items-center mb-2">
                                         <span className="font-medium text-sm truncate">{stat.classroomName}</span>
                                         <Badge

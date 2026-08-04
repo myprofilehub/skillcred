@@ -10,7 +10,7 @@ export default async function InvestorDashboard() {
 
     if (error || !investor) {
         return (
-            <div className="flex flex-col items-center justify-center h-full space-y-4 text-white">
+            <div className="flex flex-col items-center justify-center h-full space-y-4 text-foreground dark:text-foreground dark:text-white">
                 <h1 className="text-2xl font-bold">Access Denied</h1>
                 <p className="text-neutral-400">You need an investor profile to view this page.</p>
                 <Button className="bg-amber-600 hover:bg-amber-700" asChild><Link href="/onboarding/investor">Create Profile</Link></Button>
@@ -26,11 +26,11 @@ export default async function InvestorDashboard() {
         <div className="space-y-8">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-white">Dashboard</h1>
+                    <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-foreground dark:text-white">Dashboard</h1>
                     <p className="text-neutral-400">Welcome back, <span className="text-amber-400 font-medium">{investor.company}</span></p>
                 </div>
                 <div className="flex gap-2">
-                    <Button className="bg-amber-600 hover:bg-amber-700 text-white shadow-lg shadow-amber-500/20" asChild>
+                    <Button className="bg-amber-600 hover:bg-amber-700 text-foreground dark:text-foreground dark:text-white shadow-lg shadow-amber-500/20" asChild>
                         <Link href="/dashboard/investor/posts">
                             <PlusCircle className="mr-2 h-4 w-4" /> New Post
                         </Link>
@@ -48,7 +48,7 @@ export default async function InvestorDashboard() {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold text-white">{pendingPitches}</div>
+                        <div className="text-3xl font-bold text-foreground dark:text-foreground dark:text-white">{pendingPitches}</div>
                         <Link href="/dashboard/investor/pitches" className="text-xs text-amber-400 hover:underline flex items-center gap-1 mt-1">
                             View all <ArrowRight className="w-3 h-3" />
                         </Link>
@@ -62,7 +62,7 @@ export default async function InvestorDashboard() {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold text-white">{activePosts}</div>
+                        <div className="text-3xl font-bold text-foreground dark:text-foreground dark:text-white">{activePosts}</div>
                         <Link href="/dashboard/investor/posts" className="text-xs text-amber-400 hover:underline flex items-center gap-1 mt-1">
                             Manage <ArrowRight className="w-3 h-3" />
                         </Link>
@@ -76,7 +76,7 @@ export default async function InvestorDashboard() {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold text-white">{upcomingWorkshops}</div>
+                        <div className="text-3xl font-bold text-foreground dark:text-foreground dark:text-white">{upcomingWorkshops}</div>
                         <Link href="/dashboard/investor/workshops" className="text-xs text-amber-400 hover:underline flex items-center gap-1 mt-1">
                             Schedule <ArrowRight className="w-3 h-3" />
                         </Link>
@@ -88,7 +88,7 @@ export default async function InvestorDashboard() {
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
                 <Card className="col-span-4 bg-neutral-900/80 border-amber-500/10 backdrop-blur-sm">
                     <CardHeader>
-                        <CardTitle className="text-white flex items-center gap-2">
+                        <CardTitle className="text-foreground dark:text-foreground dark:text-white flex items-center gap-2">
                             <Sparkles className="w-5 h-5 text-amber-400" />
                             Recent Pitch Requests
                         </CardTitle>
@@ -101,7 +101,7 @@ export default async function InvestorDashboard() {
                                 investor.pitchRequests.slice(0, 5).map((pitch: any) => (
                                     <div key={pitch.id} className="flex items-center justify-between border-b border-neutral-800 pb-4 last:border-0 last:pb-0">
                                         <div className="space-y-1">
-                                            <p className="text-sm font-medium leading-none text-white">{pitch.showcase.title}</p>
+                                            <p className="text-sm font-medium leading-none text-foreground dark:text-foreground dark:text-white">{pitch.showcase.title}</p>
                                             <p className="text-xs text-neutral-400">
                                                 By {pitch.student.user.name} • {format(new Date(pitch.createdAt), "MMM d, yyyy")}
                                             </p>
@@ -127,7 +127,7 @@ export default async function InvestorDashboard() {
                 {/* Workshops */}
                 <Card className="col-span-3 bg-neutral-900/80 border-amber-500/10 backdrop-blur-sm">
                     <CardHeader>
-                        <CardTitle className="text-white flex items-center gap-2">
+                        <CardTitle className="text-foreground dark:text-foreground dark:text-white flex items-center gap-2">
                             <Calendar className="w-5 h-5 text-amber-400" />
                             Upcoming Workshops
                         </CardTitle>
@@ -140,7 +140,7 @@ export default async function InvestorDashboard() {
                                 investor.workshops.slice(0, 3).map((workshop: any) => (
                                     <div key={workshop.id} className="flex items-center justify-between border-b border-neutral-800 pb-4 last:border-0 last:pb-0">
                                         <div className="space-y-1">
-                                            <p className="text-sm font-medium leading-none text-white">{workshop.title}</p>
+                                            <p className="text-sm font-medium leading-none text-foreground dark:text-foreground dark:text-white">{workshop.title}</p>
                                             <p className="text-xs text-neutral-400">
                                                 {format(new Date(workshop.date), "MMM d, h:mm a")}
                                             </p>

@@ -1,3 +1,6 @@
+import { StreamBottomCTA } from "@/components/public/stream-pricing-components";
+import { StreamHeroActionCard } from "@/components/public/stream-hero-action-card";
+import { StreamPortfolioPreview } from "@/components/public/stream-portfolio-preview";
 import { LandingNavbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
@@ -26,8 +29,8 @@ import {
     Award
 } from "lucide-react";
 import Link from "next/link";
-import { ProjectRoadmap } from "@/components/public/project-roadmap";
-import { CurriculumSyllabus } from "@/components/public/curriculum-syllabus";
+
+
 
 import { auth } from "@/auth";
 
@@ -63,7 +66,7 @@ export default async function DevopsCloudPage() {
                             <CheckCircle2 className="w-4 h-4 text-cyan-400" /> Live mentor support
                         </div>
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
-                            <CheckCircle2 className="w-4 h-4 text-cyan-400" /> 5 real-world projects
+                            <CheckCircle2 className="w-4 h-4 text-cyan-400" /> 4 real-world projects
                         </div>
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm">
                             <CheckCircle2 className="w-4 h-4 text-cyan-400" /> Verified portfolio
@@ -76,17 +79,13 @@ export default async function DevopsCloudPage() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button size="lg" className="text-lg px-8 h-14 bg-cyan-600 hover:bg-cyan-700 text-white shadow-lg shadow-cyan-500/20" asChild>
-                            <Link href="/enroll">
-                                Start This Track <ArrowRight className="ml-2 w-5 h-5" />
-                            </Link>
-                        </Button>
-                        <Button size="lg" variant="outline" className="text-lg px-8 h-14 border-white/10 bg-white/5 hover:bg-white/10" asChild>
-                            <a href="/brochures/SkillCred_DevOps_Cloud_Brochure.pdf" download>
-                                Download Syllabus <Download className="ml-2 w-5 h-5" />
-                            </a>
-                        </Button>
+                    <div className="w-full mt-12 text-left">
+                        <StreamHeroActionCard
+                            slug="devops-cloud"
+                            accentColor="blue"
+                            trackName="DevOps & Cloud Track"
+                                syllabusUrl="/brochures/SkillCred_Devops_Cloud_Brochure.pdf"
+                        />
                     </div>
                 </div>
             </section>
@@ -151,15 +150,25 @@ export default async function DevopsCloudPage() {
                 </div>
             </section>
 
-            {/* TOOLS & LEARNING FORMAT */}
-            <section className="py-20">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold font-heading mb-4">Tools You Will Master</h2>
-                        <p className="text-muted-foreground">The standard toolset for modern DevOps engineers</p>
+            {/* LEARNING TOOLS & METHODOLOGY */}
+            <section className="py-24 bg-slate-50/40 dark:bg-slate-900/20 border-y border-slate-200 dark:border-white/5">
+                <div className="container mx-auto px-4 max-w-7xl">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-slate-950 dark:text-white">
+                            Learning Tools and Methodology
+                        </h2>
+                        <p className="text-muted-foreground text-base md:text-lg">
+                            Master an industry-standard technical stack through our hands-on engineering pedagogy and structured practice.
+                        </p>
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-6 mb-20 max-w-5xl mx-auto">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+                        {/* Column 1: Tools */}
+                        <div className="p-8 rounded-3xl bg-background border border-slate-200 dark:border-white/10 shadow-sm flex flex-col">
+                            <h3 className="text-2xl font-bold font-heading mb-6 text-slate-900 dark:text-white">
+                                Tools You Will Master
+                            </h3>
+                            <div className="flex flex-wrap justify-center sm:justify-start gap-4">
                         {[
                             { name: "AWS / Azure / GCP", sub: "Cloud Providers", color: "text-orange-400" },
                             { name: "Linux / Ubuntu", sub: "OS Essentials", color: "text-yellow-400" },
@@ -176,11 +185,14 @@ export default async function DevopsCloudPage() {
                             </div>
                         ))}
                     </div>
+                        </div>
 
-                    <div className="text-center mb-10">
-                        <h3 className="text-2xl font-bold mb-8">How You Will Learn</h3>
-                    </div>
-                    <div className="grid md:grid-cols-3 gap-6">
+                        {/* Column 2: Methodology */}
+                        <div className="p-8 rounded-3xl bg-background border border-slate-200 dark:border-white/10 shadow-sm flex flex-col">
+                            <h3 className="text-2xl font-bold font-heading mb-6 text-slate-900 dark:text-white">
+                                How You Will Learn
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {[
                             { title: "Live Mentor Sessions", desc: "Project-led guidance", icon: Briefcase },
                             { title: "Hands-on Cloud", desc: "Work with real environments", icon: Cloud },
@@ -200,36 +212,50 @@ export default async function DevopsCloudPage() {
                             </div>
                         ))}
                     </div>
-                </div>
-            </section>
-
-            {/* CURRICULUM & ROADMAP */}
-            <section className="py-20 bg-secondary/10">
-                <div className="container mx-auto px-4 max-w-7xl">
-                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-                        {/* LEFT PANEL: Curriculum by Program */}
-                        <div>
-                            <CurriculumSyllabus trackSlug="devops-cloud" />
-                        </div>
-                        
-                        {/* RIGHT PANEL: Project Roadmap */}
-                        <div className="lg:border-l border-white/10 lg:pl-16">
-                            <ProjectRoadmap trackSlug="devops-cloud" accentColor="blue" />
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* MENTOR & ASSESSMENT (PAT) */}
-            <section className="py-20">
-                <div className="container mx-auto px-4">
-                    {/* Mentor Support Section */}
-                    <div className="mb-20">
-                        <h2 className="text-3xl font-bold font-heading mb-8 flex items-center gap-3">
-                            <MessageSquare className="w-8 h-8 text-cyan-400" />
-                            Mentor Support & Verification
+            <StreamPortfolioPreview
+                variant="roadmap"
+            slug="devops-cloud"
+            accentColor="blue"
+            skills={['AWS/Azure', 'Docker', 'CI/CD', 'Infrastructure as Code']}
+            outcomes={['Cloud Engineer', 'DevOps Engineer', 'Site Reliability Engineer (SRE)', 'Cloud Support Engineer', 'Platform Engineer']}
+            projects={[{'title': 'Multi-Region K8s Cluster', 'desc': 'Highly available Kubernetes infrastructure deployed using Terraform and ArgoCD.', 'tech': ['Terraform', 'Kubernetes', 'ArgoCD', 'AWS EKS'], 'metrics': [{'name': 'Infrastructure Drift', 'score': 96}, {'name': 'Uptime SLAs', 'score': 99}], 'githubUrl': 'https://github.com/skillcred/k8s-infra', 'liveUrl': 'https://k8s.skillcred.in'}, {'title': 'CI/CD Deployment Pipeline', 'desc': 'Automated deployments built with GitHub Actions, Docker, and Prometheus metrics.', 'tech': ['GitHub Actions', 'Docker', 'Prometheus', 'Grafana'], 'metrics': [{'name': 'Deploy Time', 'score': 92}, {'name': 'Alert Latency', 'score': 95}], 'githubUrl': 'https://github.com/skillcred/cicd-pipeline', 'liveUrl': 'https://cicd.skillcred.in'}]}
+            />
+
+            {/* SEPARATE PORTFOLIO OUTPUT SECTION */}
+            <StreamPortfolioPreview
+                variant="default"
+            slug="devops-cloud"
+            accentColor="blue"
+            skills={['AWS/Azure', 'Docker', 'CI/CD', 'Infrastructure as Code']}
+            outcomes={['Cloud Engineer', 'DevOps Engineer', 'Site Reliability Engineer (SRE)', 'Cloud Support Engineer', 'Platform Engineer']}
+            projects={[{'title': 'Multi-Region K8s Cluster', 'desc': 'Highly available Kubernetes infrastructure deployed using Terraform and ArgoCD.', 'tech': ['Terraform', 'Kubernetes', 'ArgoCD', 'AWS EKS'], 'metrics': [{'name': 'Infrastructure Drift', 'score': 96}, {'name': 'Uptime SLAs', 'score': 99}], 'githubUrl': 'https://github.com/skillcred/k8s-infra', 'liveUrl': 'https://k8s.skillcred.in'}, {'title': 'CI/CD Deployment Pipeline', 'desc': 'Automated deployments built with GitHub Actions, Docker, and Prometheus metrics.', 'tech': ['GitHub Actions', 'Docker', 'Prometheus', 'Grafana'], 'metrics': [{'name': 'Deploy Time', 'score': 92}, {'name': 'Alert Latency', 'score': 95}], 'githubUrl': 'https://github.com/skillcred/cicd-pipeline', 'liveUrl': 'https://cicd.skillcred.in'}]}
+            />
+
+            {/* MENTOR SUPPORT & FAQS */}
+            <section className="py-24 bg-slate-50/50 dark:bg-slate-900/30 border-t border-slate-200 dark:border-white/5">
+                <div className="container mx-auto px-4 max-w-7xl">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4 text-slate-950 dark:text-white">
+                            Mentor Support & Frequently Asked Questions
                         </h2>
-                        <div className="grid md:grid-cols-2 gap-8 items-center">
+                        <p className="text-muted-foreground text-base md:text-lg">
+                            Understand how working professionals review your code every week and get answers to common questions before starting your journey.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+                        {/* Column 1: Mentor Support & Verification */}
+                        <div className="p-8 md:p-10 rounded-3xl bg-background border border-slate-200 dark:border-white/10 shadow-sm">
+                            <h3 className="text-2xl font-bold font-heading mb-8 flex items-center gap-3 text-slate-900 dark:text-white">
+                                <MessageSquare className="w-7 h-7 text-cyan-400 shrink-0" />
+                                <span>Mentor Support & Verification</span>
+                            </h3>
+                            <div className="space-y-8">
                             <div className="prose prose-invert">
                                 <p className="text-lg text-muted-foreground mb-6">
                                     Our mentors don't just teach — they verify your skills. Every project you build is reviewed, ensuring you meet industry standards before you get certified.
@@ -260,229 +286,14 @@ export default async function DevopsCloudPage() {
                                 </CardContent>
                             </Card>
                         </div>
-                    </div>
-
-                    {/* PAT Section */}
-                    <div className="border border-white/10 rounded-3xl bg-secondary/5 overflow-hidden">
-                        <div className="p-8 md:p-12 border-b border-white/10 text-center">
-                            <Badge variant="outline" className="mb-4 border-yellow-500/50 text-yellow-500">PBL Model</Badge>
-                            <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4">
-                                Project-Based Assessment Test (PAT) Format
-                            </h2>
-                            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                                Assessment is based on how you build, improve, and explain projects — not on a single final exam.
-                            </p>
                         </div>
 
-                        <div className="p-8 md:p-12">
-                            <div className="grid md:grid-cols-12 gap-8">
-                                {/* Left: Marks Structure */}
-                                <div className="md:col-span-8 space-y-6">
-                                    <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                                        <ClipboardCheck className="w-6 h-6 text-yellow-500" />
-                                        Overall Structure (100 Marks)
-                                    </h3>
-
-                                    {/* 1. Project Completion */}
-                                    <Card className="bg-white/5 border-white/10">
-                                        <CardHeader>
-                                            <div className="flex justify-between items-start">
-                                                <div>
-                                                    <Badge variant="secondary" className="mb-2">40 Marks</Badge>
-                                                    <CardTitle className="text-lg">1. Project Completion & Quality</CardTitle>
-                                                </div>
-                                                <Layers className="w-5 h-5 text-muted-foreground" />
-                                            </div>
-                                        </CardHeader>
-                                        <CardContent>
-                                            <p className="text-sm text-muted-foreground mb-4">
-                                                Evaluated across best 3 projects. Mentor checks problem understanding, implementation, tools, and code quality.
-                                            </p>
-                                            <div className="grid grid-cols-2 gap-2 text-sm">
-                                                <div className="bg-black/20 p-2 rounded">Functionality: 5</div>
-                                                <div className="bg-black/20 p-2 rounded">Tool Usage: 3</div>
-                                                <div className="bg-black/20 p-2 rounded">Output Quality: 3</div>
-                                                <div className="bg-black/20 p-2 rounded">Docs: 2</div>
-                                            </div>
-                                        </CardContent>
-                                    </Card>
-
-                                    <div className="grid md:grid-cols-2 gap-6">
-                                        {/* 2. Milestone Reviews */}
-                                        <Card className="bg-white/5 border-white/10">
-                                            <CardHeader>
-                                                <div className="flex justify-between">
-                                                    <div>
-                                                        <Badge variant="secondary" className="mb-2">20 Marks</Badge>
-                                                        <CardTitle className="text-lg">2. Milestone Reviews</CardTitle>
-                                                    </div>
-                                                    <CheckCircle2 className="w-5 h-5 text-muted-foreground" />
-                                                </div>
-                                            </CardHeader>
-                                            <CardContent className="text-sm text-muted-foreground">
-                                                Points for regular updates (Design, Mid-build, Final) and fixing mentor feedback. Rewards consistency.
-                                            </CardContent>
-                                        </Card>
-
-                                        {/* 3. Real World Application */}
-                                        <Card className="bg-white/5 border-white/10">
-                                            <CardHeader>
-                                                <div className="flex justify-between">
-                                                    <div>
-                                                        <Badge variant="secondary" className="mb-2">15 Marks</Badge>
-                                                        <CardTitle className="text-lg">3. Business Value</CardTitle>
-                                                    </div>
-                                                    <Briefcase className="w-5 h-5 text-muted-foreground" />
-                                                </div>
-                                            </CardHeader>
-                                            <CardContent className="text-sm text-muted-foreground">
-                                                Must allow how the project solves a real problem and who uses it. (e.g., Insights, Risk Reduction, Mobile Development).
-                                            </CardContent>
-                                        </Card>
-
-                                        {/* 4. Tool Proficiency */}
-                                        <Card className="bg-white/5 border-white/10">
-                                            <CardHeader>
-                                                <div className="flex justify-between">
-                                                    <div>
-                                                        <Badge variant="secondary" className="mb-2">15 Marks</Badge>
-                                                        <CardTitle className="text-lg">4. Tool Proficiency</CardTitle>
-                                                    </div>
-                                                    <Database className="w-5 h-5 text-muted-foreground" />
-                                                </div>
-                                            </CardHeader>
-                                            <CardContent className="text-sm text-muted-foreground">
-                                                Live check: Modify project, add a feature, or fix a bug on the spot to prove authenticity.
-                                            </CardContent>
-                                        </Card>
-
-                                        {/* 5. Viva */}
-                                        <Card className="bg-white/5 border-white/10">
-                                            <CardHeader>
-                                                <div className="flex justify-between">
-                                                    <div>
-                                                        <Badge variant="secondary" className="mb-2">10 Marks</Badge>
-                                                        <CardTitle className="text-lg">5. Final Defense</CardTitle>
-                                                    </div>
-                                                    <MessageSquare className="w-5 h-5 text-muted-foreground" />
-                                                </div>
-                                            </CardHeader>
-                                            <CardContent className="text-sm text-muted-foreground">
-                                                Explain approach, challenges faced, and lessons learned.
-                                            </CardContent>
-                                        </Card>
-                                    </div>
-                                </div>
-
-                                {/* Right: Rules & Criteria */}
-                                <div className="md:col-span-4 space-y-8">
-                                    {/* Pass Criteria */}
-                                    <div className="bg-green-500/10 border border-green-500/20 rounded-2xl p-6">
-                                        <h4 className="font-bold flex items-center gap-2 mb-4 text-green-400">
-                                            <Award className="w-5 h-5" /> Pass Criteria
-                                        </h4>
-                                        <ul className="space-y-3 text-sm">
-                                            <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 text-green-500" /> Minimum 60/100 Score</li>
-                                            <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 text-green-500" /> All 5 Projects Completed</li>
-                                            <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 text-green-500" /> Mentor Verification Done</li>
-                                            <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 text-green-500" /> No Plagiarism Found</li>
-                                        </ul>
-                                    </div>
-
-                                    {/* Plagiarism */}
-                                    <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-6">
-                                        <h4 className="font-bold flex items-center gap-2 mb-4 text-red-400">
-                                            <AlertTriangle className="w-5 h-5" /> Plagiarism Check
-                                        </h4>
-                                        <ul className="space-y-3 text-sm text-muted-foreground">
-                                            <li className="flex gap-2"><Lock className="w-4 h-4" /> Code similarity check</li>
-                                            <li className="flex gap-2"><Lock className="w-4 h-4" /> Git commit history audit</li>
-                                            <li className="flex gap-2"><Lock className="w-4 h-4" /> Oral questioning</li>
-                                            <li className="flex gap-2"><Lock className="w-4 h-4" /> Random live modification</li>
-                                        </ul>
-                                    </div>
-
-                                    {/* Certification Logic */}
-                                    <div className="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-6">
-                                        <h4 className="font-bold flex items-center gap-2 mb-4 text-blue-400">
-                                            <FileCheck className="w-5 h-5" /> Certification
-                                        </h4>
-                                        <p className="text-sm text-muted-foreground mb-4">
-                                            You only receive the <span className="text-white">SkillCred Project-Based Certificate</span> & Recommendation Letter if all criteria are met.
-                                        </p>
-                                        <Badge variant="outline" className="w-full justify-center">Mentor Rating ≥ 3.5/5 Req</Badge>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* OUTCOMES & PORTFOLIO */}
-            <section className="py-20 bg-gradient-to-br from-gray-900 to-black text-white">
-                <div className="container mx-auto px-4">
-                    <div className="grid md:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <h2 className="text-3xl font-bold mb-6">Your Portfolio Output</h2>
-                            <p className="text-gray-400 mb-8">
-                                Your portfolio will show deployed URLs, cloud resources, Docker images, CI/CD pipelines, architecture diagrams, mentor verification, and assessment scores.
-                            </p>
-
-                            <div className="space-y-6">
-                                <div className="flex gap-4">
-                                    <div className="p-3 rounded-lg bg-cyan-500/20 text-cyan-400 h-fit"><GraduationCap className="w-6 h-6" /></div>
-                                    <div>
-                                        <h4 className="font-bold">HR-Ready Profile</h4>
-                                        <p className="text-sm text-gray-400">Recruiters can filter candidates based on these specific skills.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="mt-10">
-                                <h4 className="font-bold mb-4 text-lg">Career Outcomes</h4>
-                                <div className="flex flex-wrap gap-2">
-                                    {["Cloud Engineer", "DevOps Engineer", "Site Reliability Engineer (SRE)", "Cloud Support Engineer", "Platform Engineer"].map(role => (
-                                        <Badge key={role} variant="outline" className="border-white/20 text-white hover:bg-white/10">{role}</Badge>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="relative">
-                            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl opacity-20 blur-2xl" />
-                            <Card className="relative bg-black/80 border-white/10">
-                                <CardHeader>
-                                    <CardTitle className="flex justify-between items-center">
-                                        <span>HR Corner (Preview)</span>
-                                        <Badge className="bg-cyan-600">Recruiter View</Badge>
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className="space-y-4">
-                                        <div className="text-sm text-gray-400">HR can filter by:</div>
-                                        <div className="flex flex-wrap gap-2">
-                                            <Badge variant="secondary">AWS/Azure</Badge>
-                                            <Badge variant="secondary">Docker</Badge>
-                                            <Badge variant="secondary">CI/CD</Badge>
-                                            <Badge variant="secondary">Infrastructure as Code</Badge>
-                                        </div>
-                                        <div className="h-32 bg-white/5 rounded-lg border border-dashed border-white/10 flex items-center justify-center text-gray-500 text-sm">
-                                            [Portfolio Preview Interface]
-                                        </div>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* FAQs & CTA */}
-            <section className="py-20">
-                <div className="container mx-auto px-4 max-w-3xl">
-                    <h2 className="text-3xl font-bold text-center mb-10">Frequently Asked Questions</h2>
-                    <div className="space-y-4 mb-20">
+                        {/* Column 2: Frequently Asked Questions */}
+                        <div className="p-8 md:p-10 rounded-3xl bg-background border border-slate-200 dark:border-white/10 shadow-sm">
+                            <h3 className="text-2xl font-bold font-heading mb-8 text-slate-900 dark:text-white">
+                                Frequently Asked Questions
+                            </h3>
+                            <div className="space-y-4">
                         {[
                             { q: "Do I need cloud experience to start?", a: "No, beginners are guided from scratch." },
                             { q: "Do I need to buy AWS / Azure credits?", a: "Optional — free tiers are used during projects." },
@@ -497,27 +308,16 @@ export default async function DevopsCloudPage() {
                             </Card>
                         ))}
                     </div>
-
-                    <div className="text-center bg-gradient-to-r from-cyan-900/50 to-blue-900/50 p-12 rounded-3xl border border-white/10 relative overflow-hidden">
-                        <div className="relative z-10">
-                            <h2 className="text-4xl font-bold mb-4">Start Your Devops & Cloud Journey</h2>
-                            <p className="text-xl text-gray-300 mb-8">Build skills. Build projects. Build proof.</p>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <Link href="/enroll">
-                                    <Button size="lg" className="w-full sm:w-auto h-12 text-lg px-8 bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:opacity-90 shadow-lg shadow-indigo-500/25">
-                                        Enroll Now
-                                    </Button>
-                                </Link>
-                                <Button size="lg" variant="outline" className="w-full sm:w-auto h-12 text-lg px-8" asChild>
-                                    <a href="/brochures/SkillCred_DevOps_Cloud_Brochure.pdf" download>
-                                        Download Brochure
-                                    </a>
-                                </Button>
-                            </div>
                         </div>
                     </div>
                 </div>
             </section>
+
+            <StreamBottomCTA
+                slug="devops-cloud"
+                accentColor="cyan"
+                bootcampName="DevOps & Cloud Engineering"
+            />
 
             <Footer />
         </main>

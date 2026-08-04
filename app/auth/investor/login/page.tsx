@@ -38,7 +38,7 @@ function InvestorSignInContent() {
                 </span>
             </Link>
 
-            <Card className="w-full max-w-md border-white/10 glass-card relative z-10 border-amber-500/20">
+            <Card className="w-full max-w-md border-border dark:border-border dark:border-white/10 glass-card relative z-10 border-amber-500/20">
                 <CardHeader className="text-center space-y-2">
                     <div className="mx-auto w-12 h-12 bg-amber-500/10 rounded-full flex items-center justify-center mb-2">
                         <Building2 className="w-6 h-6 text-amber-500" />

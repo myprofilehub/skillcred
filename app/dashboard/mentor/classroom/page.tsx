@@ -55,7 +55,7 @@ export default async function ClassroomPage() {
                         const { googleLogin } = await import("@/actions/login");
                         await googleLogin("/dashboard/mentor/classroom", session?.user?.email || undefined);
                     }}>
-                        <Button variant="default" className="bg-blue-600 hover:bg-blue-700 text-white border-0 gap-2">
+                        <Button variant="default" className="bg-blue-600 hover:bg-blue-700 text-foreground dark:text-foreground dark:text-white border-0 gap-2">
                             <School className="w-4 h-4" />
                             Connect Google Account
                         </Button>

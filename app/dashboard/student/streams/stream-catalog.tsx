@@ -78,7 +78,7 @@ export default function StreamCatalog({ streams, enrollments }: { streams: Track
                 const isEnrolled = enrolledTrackIds.has(stream.id);
 
                 return (
-                    <Card key={stream.id} className={`flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg ${isEnrolled ? "border-primary/50 bg-primary/5" : "border-white/10 bg-white/5"}`}>
+                    <Card key={stream.id} className={`flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg ${isEnrolled ? "border-primary/50 bg-primary/5" : "border-border dark:border-border dark:border-white/10 bg-white/5"}`}>
                         <CardHeader className="pb-4">
                             <div className="flex justify-between items-start mb-2">
                                 <div className={`p-3 rounded-xl ${isEnrolled ? "bg-primary/20 text-primary" : "bg-white/10 text-muted-foreground"}`}>
@@ -100,7 +100,7 @@ export default function StreamCatalog({ streams, enrollments }: { streams: Track
                             {/* Mentor Info */}
                             {stream.defaultMentor && (
                                 <div className="flex items-center gap-2 text-xs text-muted-foreground bg-white/5 p-2 rounded-lg">
-                                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-[10px] text-white font-bold">
+                                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-[10px] text-foreground dark:text-foreground dark:text-white font-bold">
                                         {stream.defaultMentor.user.name?.[0] || "M"}
                                     </div>
                                     <span>Lead Mentor: <span className="text-foreground font-medium">{stream.defaultMentor.user.name}</span></span>
@@ -115,7 +115,7 @@ export default function StreamCatalog({ streams, enrollments }: { streams: Track
                                 </div>
                                 <div className="flex items-center gap-1">
                                     <Server className="w-3 h-3" />
-                                    <span>5 Projects</span>
+                                    <span>4 Projects</span>
                                 </div>
                             </div>
                         </CardContent>

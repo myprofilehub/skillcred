@@ -43,7 +43,7 @@ export default async function StudentClassroomPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {classrooms.map((classroom: any) => (
-                    <Card key={classroom.id} className="border-white/10 bg-white/5 hover:border-primary/30 transition-colors group">
+                    <Card key={classroom.id} className="border-border dark:border-border dark:border-white/10 bg-white/5 hover:border-primary/30 transition-colors group">
                         <CardHeader className="pb-3">
                             <div className="flex justify-between items-start">
                                 <div className="p-2 bg-primary/10 rounded-lg">
@@ -87,7 +87,7 @@ export default async function StudentClassroomPage() {
                 ))}
 
                 {classrooms.length === 0 && !error && (
-                    <div className="col-span-full py-12 text-center text-muted-foreground bg-white/5 rounded-lg border border-dashed border-white/10">
+                    <div className="col-span-full py-12 text-center text-muted-foreground bg-white/5 rounded-lg border border-dashed border-border dark:border-border dark:border-white/10">
                         <BookOpen className="w-12 h-12 mx-auto mb-4 opacity-50" />
                         <h3 className="text-lg font-medium">No Enrolled Classrooms</h3>
                         <p>You haven't joined any Google Classrooms yet.</p>

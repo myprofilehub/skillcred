@@ -7,7 +7,7 @@ import { Building2, Activity, Shield, Database, LineChart } from "lucide-react";
 
 export default function HowItWorksInvestors() {
     return (
-        <div className="min-h-screen bg-black text-white selection:bg-indigo-500/30">
+        <div className="min-h-screen bg-background dark:bg-background dark:bg-black text-foreground dark:text-foreground dark:text-white selection:bg-indigo-500/30">
             <LandingNavbar />
 
             <main className="pt-32 pb-16 px-6 max-w-7xl mx-auto">
@@ -27,35 +27,35 @@ export default function HowItWorksInvestors() {
                         growth, and business intelligence.
                     </p>
                     <div className="flex gap-4">
-                        <Button asChild size="lg" className="bg-violet-600 hover:bg-violet-700 text-white">
+                        <Button asChild size="lg" className="bg-violet-600 hover:bg-violet-700 text-foreground dark:text-foreground dark:text-white">
                             <Link href="/auth/investor/login">Investor Login</Link>
                         </Button>
                     </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-8 mb-16">
-                    <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-violet-500/50 transition-colors">
+                    <div className="p-8 rounded-2xl bg-white/5 border border-border dark:border-border dark:border-white/10 hover:border-violet-500/50 transition-colors">
                         <Activity className="w-10 h-10 text-violet-400 mb-6" />
                         <h3 className="text-2xl font-bold mb-3">Live Platform Metrics</h3>
                         <p className="text-muted-foreground text-lg">
                             Observe real-time volume of active students across all 8 streams, registered mentors conducting vivas, and hiring actions by HR partners.
                         </p>
                     </div>
-                    <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-violet-500/50 transition-colors">
+                    <div className="p-8 rounded-2xl bg-white/5 border border-border dark:border-border dark:border-white/10 hover:border-violet-500/50 transition-colors">
                         <LineChart className="w-10 h-10 text-violet-400 mb-6" />
                         <h3 className="text-2xl font-bold mb-3">Financial Dashboard</h3>
                         <p className="text-muted-foreground text-lg">
                             View anonymized Monthly Recurring Revenue (MRR) across subscription tiers, B2B enterprise sales pipelines, and active mentor payout ledgers.
                         </p>
                     </div>
-                    <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-violet-500/50 transition-colors">
+                    <div className="p-8 rounded-2xl bg-white/5 border border-border dark:border-border dark:border-white/10 hover:border-violet-500/50 transition-colors">
                         <Database className="w-10 h-10 text-violet-400 mb-6" />
                         <h3 className="text-2xl font-bold mb-3">Engagement & Retention Data</h3>
                         <p className="text-muted-foreground text-lg">
                             Analyze cohort survival curves, project completion rates, and average time-to-hire statistics validating the core marketplace value proposition.
                         </p>
                     </div>
-                    <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-violet-500/50 transition-colors">
+                    <div className="p-8 rounded-2xl bg-white/5 border border-border dark:border-border dark:border-white/10 hover:border-violet-500/50 transition-colors">
                         <Shield className="w-10 h-10 text-violet-400 mb-6" />
                         <h3 className="text-2xl font-bold mb-3">Secure Data Room</h3>
                         <p className="text-muted-foreground text-lg">

@@ -2,81 +2,78 @@
 
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowRight, Terminal } from "lucide-react";
+import { ArrowRight, CheckCircle2, Award, Briefcase, GraduationCap } from "lucide-react";
 import Link from "next/link";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { StreamLeadForm } from "@/components/public/stream-lead-form";
 
 export function HeroSection() {
     return (
-        <section className="relative pt-32 pb-12 overflow-hidden">
-            {/* Background gradients */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full z-0 opacity-40 pointer-events-none">
-                <div className="absolute top-20 left-1/4 w-96 h-96 bg-indigo-500 rounded-full mix-blend-screen filter blur-[120px] animate-blob" />
-                <div className="absolute top-40 right-1/4 w-96 h-96 bg-blue-400 rounded-full mix-blend-screen filter blur-[120px] animate-blob animation-delay-2000" />
-                <div className="absolute top-10 left-1/2 w-72 h-72 bg-violet-500 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-4000" />
-            </div>
+        <section className="relative pt-32 pb-20 overflow-hidden bg-white">
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    
+                    {/* Left Column: Copy & CTA */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="text-left"
+                    >
+                        <Badge variant="outline" className="mb-6 px-4 py-1.5 rounded-full border-amber-200 text-amber-700 bg-amber-50 font-medium">
+                            <Award className="w-4 h-4 mr-2 inline" />
+                            Premium Mentorship & Certification
+                        </Badge>
+                        <h1 className="text-5xl md:text-6xl font-bold font-heading tracking-tight mb-6 text-slate-900 leading-[1.1]">
+                            Learn by Building. <br />
+                            <span className="text-amber-500">Master the Craft of Engineering.</span>
+                        </h1>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                >
+                        <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-lg leading-relaxed">
+                            Stop building basic tutorials. Engineer production-grade microservices, deploy live applications, and get headhunted by top tech companies.
+                        </p>
 
-                    <h1 className="text-5xl md:text-7xl font-bold font-heading tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-200">
-                        SkillCred <br />
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-blue-400 to-cyan-300">Learn. Build. Verify. Get Hired.</span>
-                    </h1>
-
-                    <p className="max-w-2xl mx-auto text-xl text-muted-foreground mb-10">
-                        A platform where students across all streams work on live mentor-supported projects,
-                        build verified portfolios, take assessment tests, and get discovered by top HRs.
-                    </p>
-
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <Button size="lg" className="h-14 px-10 text-xl bg-gradient-to-r from-purple-600 to-pink-600 border-none hover:opacity-90 shadow-[0_0_20px_rgba(168,85,247,0.5)] text-white font-extrabold tracking-tight transition-all duration-300 hover:scale-105 active:scale-95" asChild>
-                            <Link href="/enroll">
-                                Enroll Now
-                            </Link>
-                        </Button>
-                        <Button size="lg" variant="outline" className="h-12 px-8 text-lg" asChild>
-                            <Link href="/library">
-                                Explore Masterclass
-                            </Link>
-                        </Button>
-                    </div>
-                </motion.div>
-
-                {/* Code/Terminal Visual decorative */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.2 }}
-                    className="mt-20 mx-auto max-w-4xl"
-                >
-                    <div className="rounded-xl border border-white/10 bg-black/50 backdrop-blur-xl shadow-2xl overflow-hidden text-left">
-                        <div className="flex items-center gap-2 p-4 border-b border-white/10 bg-white/5">
-                            <div className="flex gap-2">
-                                <div className="w-3 h-3 rounded-full bg-red-500/50" />
-                                <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-                                <div className="w-3 h-3 rounded-full bg-green-500/50" />
-                            </div>
-                            <div className="ml-4 text-xs text-muted-foreground font-mono">skill_verification.py</div>
+                        <div className="flex flex-col sm:flex-row items-center gap-4">
+                            <Button size="lg" className="h-14 px-8 text-lg bg-amber-500 hover:bg-amber-600 text-white font-black tracking-wide w-full sm:w-auto shadow-lg shadow-amber-500/20" asChild>
+                                <Link href="/enroll">
+                                    Lock in Your Seat <ArrowRight className="ml-2 w-5 h-5" />
+                                </Link>
+                            </Button>
+                            <Button size="lg" variant="outline" className="h-14 px-8 text-lg border-slate-200 text-slate-900 hover:bg-slate-50 w-full sm:w-auto font-bold" asChild>
+                                <Link href="/hr-insights">
+                                    See Hiring Trends
+                                </Link>
+                            </Button>
                         </div>
-                        <div className="p-6 font-mono text-sm text-gray-300 overflow-x-auto">
-                            <div><span className="text-purple-400">class</span> <span className="text-yellow-300">StudentProfile</span>:</div>
-                            <div className="pl-4"><span className="text-blue-400">def</span> <span className="text-blue-300">__init__</span>(self, name, streams):</div>
-                            <div className="pl-8">self.name = name</div>
-                            <div className="pl-8">self.streams = streams</div>
-                            <div className="pl-8">self.projects = []</div>
-                            <br />
-                            <div className="pl-4"><span className="text-blue-400">def</span> <span className="text-blue-300">verify_project</span>(self, project, mentor):</div>
-                            <div className="pl-8"><span className="text-purple-400">if</span> mentor.approve(project):</div>
-                            <div className="pl-12">self.verified = <span className="text-blue-400">True</span></div>
-                            <div className="pl-12">self.unlock_assessment()</div>
-                            <div className="pl-12"><span className="text-green-400">print</span>(<span className="text-orange-300">"Portfolio Updated!"</span>)</div>
+                    </motion.div>
+
+                    {/* Right Column: Request Callback Form */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.7, delay: 0.2 }}
+                        className="relative hidden lg:block"
+                    >
+                        {/* Decorative background element */}
+                        <div className="absolute -inset-4 bg-amber-50 rounded-[2rem] transform -rotate-3 z-0" />
+                        
+                        <div className="relative z-10 flex flex-col gap-4">
+                            <Card className="border-amber-100 shadow-xl shadow-slate-200/50 bg-white p-6 sm:p-8 rounded-3xl">
+                                <CardHeader className="p-0 mb-6">
+                                    <Badge className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100 border-none font-bold w-fit mb-4">
+                                        <CheckCircle2 className="w-3 h-3 mr-1 inline" /> Free Career Consultation
+                                    </Badge>
+                                    <CardTitle className="text-3xl text-slate-900 font-black tracking-tight">Speak to an Advisor</CardTitle>
+                                    <p className="text-sm text-slate-500 mt-2 font-medium">Not sure if this is the right fit? Drop your details and we'll call you back within 24 hours to discuss your goals.</p>
+                                </CardHeader>
+                                <CardContent className="p-0">
+                                    <StreamLeadForm trackName="General Landing Page" accentColor="orange" variant="borderless" />
+                                </CardContent>
+                            </Card>
                         </div>
-                    </div>
-                </motion.div>
+                    </motion.div>
+                </div>
             </div>
         </section>
     );
