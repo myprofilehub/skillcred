@@ -34,6 +34,9 @@ export default function ContactPage() {
         setError(result.error)
       } else {
         setIsSuccess(true)
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'conversion', { 'send_to': 'AW-18351240110/nkIlCIC7vNwcEK7nxq5E' })
+        }
       }
     } catch (err) {
       setError('Something went wrong. Please try again.')

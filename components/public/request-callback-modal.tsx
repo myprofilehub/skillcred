@@ -48,6 +48,9 @@ export function RequestCallbackModal({
                 setStatus("error");
             } else {
                 setStatus("success");
+                if (typeof window !== 'undefined' && (window as any).gtag) {
+                    (window as any).gtag('event', 'conversion', { 'send_to': 'AW-18351240110/nkIlCIC7vNwcEK7nxq5E' });
+                }
             }
         } catch (err) {
             setErrorMessage("Failed to submit request. Please try again.");
