@@ -36,7 +36,7 @@ export async function submitQuery(prevState: any, formData: FormData) {
                 "api-key": brevoApiKey,
             },
             body: JSON.stringify({
-                sender: { name: "SkillCred Contact Form", email: "noreply@skillcred.com" }, // Ideally a verified sender in Brevo
+                sender: { name: "SkillCred Contact Form", email: "admin@skillcred.in" }, // Verified sender in Brevo
                 to: [{ email: "admin@skillcred.com", name: "SkillCred Admin" }], // Assuming admin's email
                 replyTo: { email: validatedData.email, name: validatedData.name },
                 subject: `New Landing Page Query: ${validatedData.inquiryType}`,

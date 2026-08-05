@@ -59,7 +59,7 @@ export async function submitArenaSolution(formData: FormData) {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        sender: { name: "Code Arena", email: "no-reply@skillcred.in" },
+        sender: { name: "Code Arena", email: "admin@skillcred.in" },
         to: [{ email: "ganesan.m@skillcred.in", name: "Ganesan" }],
         subject: `Arena Solution Submitted: ${challengeTitle}`,
         htmlContent: `

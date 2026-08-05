@@ -44,7 +44,7 @@ export async function submitLead(formData: FormData) {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        sender: { name: "SkillCred Leads", email: "no-reply@skillcred.in" },
+        sender: { name: "SkillCred Leads", email: "admin@skillcred.in" },
         to: [{ email: "ganesan.m@skillcred.in", name: "Ganesan" }],
         subject: `New Lead: ${track}`,
         htmlContent: `
