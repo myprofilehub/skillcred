@@ -10,7 +10,7 @@ export default function ThankYouPage() {
         // Fire Google Ads Conversion Event
         if (typeof window !== 'undefined' && (window as any).gtag) {
             (window as any).gtag('event', 'conversion', {
-                'send_to': 'G-4KBMF9RCY4/lead_conversion', // Optional: We would replace 'lead_conversion' with the actual Ads Conversion Label if provided
+                'send_to': 'AW-18351240110/lead_conversion', // Replace 'lead_conversion' with your actual Google Ads conversion label when available
                 'value': 1.0,
                 'currency': 'INR'
             });
