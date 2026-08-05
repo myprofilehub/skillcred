@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Download, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Download, CheckCircle2, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StreamLeadForm } from "./stream-lead-form";
 import { STREAM_PRICING_DATA } from "@/components/public/stream-pricing-components";
@@ -62,52 +62,24 @@ export function StreamHeroActionCard({ slug, accentColor, trackName, syllabusUrl
         <div className="w-full grid md:grid-cols-[1.5fr_1fr] gap-6 mt-12 text-left">
             {/* Left Block: Pricing Card */}
             <div className={`bg-white dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200 dark:border-white/10 ${styles.borderLeft} rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-xl dark:shadow-2xl relative overflow-hidden`}>
-                <div className="relative z-10">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
+                <div className="relative z-10 flex-1 flex flex-col justify-center mb-6">
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
                         {title}
                     </h2>
-                    <div className="grid grid-cols-2 gap-4 mb-4">
-                        {/* Standalone Pricing */}
-                        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-slate-800 flex flex-col">
-                            <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider mb-2">Standalone Cohort</p>
-                            <div className="flex items-baseline gap-2 flex-wrap mb-4">
-                                <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                                    ₹{data.pilotBase.toLocaleString('en-IN')}
-                                </span>
-                                
-                            </div>
-                            <div className="mt-auto pt-3 border-t border-slate-200 dark:border-slate-700/50">
-                                <ul className="space-y-2 text-[11px] sm:text-xs text-slate-600 dark:text-slate-300">
-                                    <li className="flex items-start gap-1.5"><CheckCircle2 className={`w-3.5 h-3.5 ${styles.text} shrink-0 mt-0.5`} /> Live Mentor Support</li>
-                                    <li className="flex items-start gap-1.5"><CheckCircle2 className={`w-3.5 h-3.5 ${styles.text} shrink-0 mt-0.5`} /> 4 Verified Projects</li>
-                                    <li className="flex items-start gap-1.5"><CheckCircle2 className={`w-3.5 h-3.5 ${styles.text} shrink-0 mt-0.5`} /> Recruiter Portfolio</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        {/* Bundle Pricing */}
-                        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-slate-800 relative overflow-hidden flex flex-col">
-                            <div className="absolute top-0 right-0 bg-emerald-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-bl-lg uppercase tracking-wider z-10">Recommended</div>
-                            <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider mb-2">Cohort + PAT</p>
-                            <div className="flex items-baseline gap-2 flex-wrap mb-4 relative z-10">
-                                <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                                    ₹{data.pilotTotal.toLocaleString('en-IN')}
-                                </span>
-                                
-                            </div>
-                            <div className="mt-auto pt-3 border-t border-slate-200 dark:border-slate-700/50 relative z-10">
-                                <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2">PAT Advantages:</p>
-                                <ul className="space-y-2 text-[11px] sm:text-xs text-slate-600 dark:text-slate-300">
-                                    <li className="flex items-start gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Mentor Verified Project Defense</li>
-                                    <li className="flex items-start gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Custom designed Portfolio</li>
-                                    <li className="flex items-start gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" /> Mentor Signed Recommendation Letter</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div className="flex items-center gap-2 mb-2">
+                        <ShieldCheck className={`w-5 h-5 ${styles.text}`} />
+                        <span className="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Cohort + PAT Bundle</span>
                     </div>
-                    <p className={`text-sm font-medium mb-6 ${styles.text} flex items-center gap-1.5`}>
-                        Special Pilot Pricing
-                    </p>
+                    <h3 className="text-4xl font-black text-slate-900 dark:text-white mb-2 tracking-tight">
+                        ₹{data.pilotTotal.toLocaleString('en-IN')}
+                    </h3>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm mb-6">Program Pricing (Pilot Cohort)</p>
+                    <ul className="space-y-3.5 text-sm text-slate-600 dark:text-slate-300 mb-2">
+                        <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" /> <span>Includes Live Mentor Support</span></li>
+                        <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" /> <span>Every project mentor-verified before certification</span></li>
+                        <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" /> <span>100% Online Format</span></li>
+                        <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" /> <span>Portfolio review and interview preparation.</span></li>
+                    </ul>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 relative z-10 mt-2">

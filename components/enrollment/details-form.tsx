@@ -340,57 +340,27 @@ export function DetailsForm({ onSubmit, loading, initialEmail, initialName }: { 
                         {/* Pricing Tier Selection */}
                         <div className="space-y-4 pt-6">
                             <Label className="text-sm font-bold uppercase tracking-widest text-slate-500">2. Select Credential Type</Label>
-                            <div className="grid md:grid-cols-2 gap-4">
-                                {/* Standard Card */}
-                                <div 
-                                    onClick={() => setProgramDuration('standard')}
-                                    className={cn(
-                                        "cursor-pointer rounded-3xl p-6 border-2 transition-all relative bg-white",
-                                        programDuration === 'standard' 
-                                            ? "border-emerald-500 bg-emerald-50" 
-                                            : "border-slate-200 hover:border-emerald-500/30"
-                                    )}
-                                >
-                                    <div className="flex justify-between items-start mb-4">
-                                        <div>
-                                            <h4 className="font-black text-xl mb-1 text-slate-900">Standard</h4>
-                                            <p className="text-xs text-slate-500">Foundation Training</p>
-                                        </div>
-                                        <div className={cn("w-6 h-6 rounded-full border-2 flex items-center justify-center", programDuration === 'standard' ? "border-emerald-500 bg-emerald-500" : "border-slate-300")}>
-                                            {programDuration === 'standard' && <CheckCircle2 className="w-4 h-4 text-white" />}
-                                        </div>
-                                    </div>
-                                    <ul className="space-y-2.5 text-sm text-slate-600 mb-6">
-                                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> Live Mentorship</li>
-                                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> Project Building</li>
-                                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> Lifetime LMS Access</li>
-                                    </ul>
-                                </div>
-
-                                {/* PAT-Verified Card */}
+                            <div className="grid grid-cols-1 gap-4">
+                                {/* PAT-Verified Card (Standalone temporarily removed) */}
                                 <div 
                                     onClick={() => setProgramDuration('pat-verified')}
-                                    className={cn(
-                                        "cursor-pointer rounded-3xl p-6 border-2 transition-all relative overflow-hidden bg-white",
-                                        programDuration === 'pat-verified' 
-                                            ? "border-amber-500 bg-amber-50 shadow-[0_0_30px_rgba(245,158,11,0.1)]" 
-                                            : "border-slate-200 hover:border-amber-500/30"
-                                    )}
+                                    className="cursor-pointer rounded-3xl p-6 border-2 border-amber-500 bg-amber-50 shadow-[0_0_30px_rgba(245,158,11,0.1)] relative overflow-hidden"
                                 >
                                     <div className="absolute top-0 right-0 bg-amber-500 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-bl-xl">
-                                        Recommended
+                                        Included Program Tier
                                     </div>
                                     <div className="flex justify-between items-start mb-4">
                                         <div>
-                                            <h4 className="font-black text-xl mb-1 text-amber-600">PAT-Verified</h4>
-                                            <p className="text-xs text-slate-500">Portfolio + Live Defense</p>
+                                            <h4 className="font-black text-xl mb-1 text-amber-600">PAT-Verified Program</h4>
+                                            <p className="text-xs text-slate-500">Full Mentorship, Portfolio & Live Defense</p>
                                         </div>
-                                        <div className={cn("w-6 h-6 rounded-full border-2 flex items-center justify-center", programDuration === 'pat-verified' ? "border-amber-500 bg-amber-500" : "border-slate-300")}>
-                                            {programDuration === 'pat-verified' && <CheckCircle2 className="w-4 h-4 text-white" />}
+                                        <div className="w-6 h-6 rounded-full border-2 border-amber-500 bg-amber-500 flex items-center justify-center">
+                                            <CheckCircle2 className="w-4 h-4 text-white" />
                                         </div>
                                     </div>
-                                    <ul className="space-y-2.5 text-sm text-slate-600 mb-6">
-                                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-amber-500" /> Everything in Standard</li>
+                                    <ul className="grid sm:grid-cols-2 gap-2.5 text-sm text-slate-600 mb-2">
+                                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-amber-500" /> Live Mentorship & Projects</li>
+                                        <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-amber-500" /> Lifetime LMS Access</li>
                                         <li className="flex items-center gap-2 text-slate-900 font-medium"><ShieldCheck className="w-4 h-4 text-amber-500" /> Live Project Defense (PAT)</li>
                                         <li className="flex items-center gap-2 text-slate-900 font-medium"><Briefcase className="w-4 h-4 text-amber-500" /> HR Fast-Track Public Profile</li>
                                     </ul>
