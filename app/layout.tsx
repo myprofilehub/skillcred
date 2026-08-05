@@ -35,6 +35,16 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <Script
+          id="gtag-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+            `,
+          }}
+        />
+        <Script
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-4KBMF9RCY4"
         />

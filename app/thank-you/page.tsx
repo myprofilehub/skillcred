@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button";
 export default function ThankYouPage() {
     useEffect(() => {
         // Fire Google Ads Conversion Event
-        if (typeof window !== 'undefined' && (window as any).gtag) {
+        if (typeof window !== 'undefined' && (window as any).gtag && process.env.NEXT_PUBLIC_GADS_CONVERSION_LABEL) {
             (window as any).gtag('event', 'conversion', {
-                'send_to': 'AW-18351240110/lead_conversion', // Replace 'lead_conversion' with your actual Google Ads conversion label when available
+                'send_to': `AW-18351240110/${process.env.NEXT_PUBLIC_GADS_CONVERSION_LABEL}`,
                 'value': 1.0,
                 'currency': 'INR'
             });
