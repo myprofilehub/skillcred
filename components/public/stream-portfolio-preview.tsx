@@ -24,6 +24,7 @@ interface StreamPortfolioPreviewProps {
   outcomes: string[];
   projects: ProjectMock[];
   variant?: "roadmap" | "default";
+  children?: React.ReactNode;
 }
 
 const accentColors = {
@@ -65,7 +66,7 @@ const accentColors = {
   }
 };
 
-export function StreamPortfolioPreview({ slug, accentColor, skills, outcomes, projects, variant = "default" }: StreamPortfolioPreviewProps) {
+export function StreamPortfolioPreview({ slug, accentColor, skills, outcomes, projects, variant = "default", children }: StreamPortfolioPreviewProps) {
   const styles = accentColors[accentColor] || accentColors.orange;
   const [activeProject, setActiveProject] = useState(0);
 
@@ -149,7 +150,10 @@ export function StreamPortfolioPreview({ slug, accentColor, skills, outcomes, pr
           {/* Right Column - Mini Projects OR Premium Recruiter View Mockup */}
           <div className={variant === "roadmap" ? "lg:col-span-6" : "lg:col-span-7"}>
             {variant === "roadmap" ? (
-              <MiniProjectsCard trackSlug={slug} accentColor={accentColor} />
+              <div className="flex flex-col gap-8 h-full">
+                <MiniProjectsCard trackSlug={slug} accentColor={accentColor} />
+                {children && <div className="mt-auto">{children}</div>}
+              </div>
             ) : (
               <Card className="bg-white border-slate-200 shadow-2xl relative overflow-hidden text-slate-800 dark:bg-slate-900/80 dark:border-white/5 dark:text-slate-100">
               <div className={`absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r ${styles.btn.replace("bg-", "from-").replace("hover:bg-", "to-")}`} />

@@ -1,5 +1,9 @@
 import { LpHeroForm } from "@/components/public/lp-hero-form";
+import { LpFreeSessionForm } from "@/components/public/lp-free-session-form";
+import { LpCurriculumForm } from "@/components/public/lp-curriculum-form";
+import { FloatingCta } from "@/components/public/floating-cta";
 import { StreamPortfolioPreview } from "@/components/public/stream-portfolio-preview";
+import Image from "next/image";
 import { LpNavbar } from "@/components/landing/lp-navbar";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
@@ -96,8 +100,35 @@ export default async function AIMLPage() {
                         </div>
                     </div>
 
-                    <div className="w-full mt-12 text-left">
-                        <LpHeroForm trackName="AI & ML Engineering Track" accentColor="purple" />
+                    <div className="w-full mt-12 grid md:grid-cols-2 gap-8 text-left max-w-5xl mx-auto">
+                        {/* Free Session Card */}
+                        <div className="bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden flex flex-col justify-center">
+                            <h3 className="text-2xl font-bold font-heading mb-2 text-slate-900 dark:text-white">Free Live Session</h3>
+                            <p className="text-slate-500 dark:text-slate-400 text-sm mb-4">Build a RAG system in 90 minutes — and debug it like an engineer</p>
+                            <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 mb-6 font-medium">
+                                <span className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 px-2 py-1 rounded">Monday 17 August</span>
+                                <span>· 7:00 PM IST · 90 minutes</span>
+                            </div>
+                            <LpFreeSessionForm trackName="AI & ML Engineering Track" accentColor="purple" />
+                        </div>
+
+                        {/* Program Pricing Card */}
+                        <div className="bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden flex flex-col justify-center text-slate-900 dark:text-white">
+                            <h3 className="text-2xl font-bold font-heading mb-2">Program details</h3>
+                            <p className="text-slate-500 dark:text-slate-400 text-sm mb-6">Complete the full 7-8 week curriculum, build verified projects, and earn your certification.</p>
+                            <h3 className="text-4xl font-black mb-2 tracking-tight">₹9,999</h3>
+                            <p className="text-slate-500 dark:text-slate-400 text-sm mb-6">Founding Cohort · 100% Online</p>
+                            
+                            <ul className="space-y-4 text-sm text-slate-700 dark:text-slate-300 mb-8">
+                                <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" /> <span>Includes Live Mentor Support</span></li>
+                                <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" /> <span>Every project mentor-verified before certification</span></li>
+                                <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-orange-500 shrink-0" /> <span>Portfolio review and interview preparation.</span></li>
+                            </ul>
+                            
+                            <div className="mt-auto">
+                                <LpCurriculumForm trackName="AI & ML Engineering Track" accentColor="orange" buttonText="Download curriculum" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -143,10 +174,9 @@ export default async function AIMLPage() {
                             <ul className="space-y-4">
                                 {[
                                     "College students (any stream)",
-                                    "Beginners in AI & ML",
-                                    "Coding enthusiasts with interest in algorithms",
                                     "Career switchers aiming for AI/ML roles",
-                                    "Professionals seeking AI upskilling"
+                                    "Professionals seeking AI upskilling",
+                                    "Note: Must be comfortable with basic programming"
                                 ].map((item, i) => (
                                     <li key={i} className="flex items-center gap-3">
                                         <CheckCircle2 className="w-5 h-5 text-purple-400 shrink-0" />
@@ -236,7 +266,8 @@ export default async function AIMLPage() {
             skills={['Python', 'Machine Learning', 'NLP', 'AI Deployment']}
             outcomes={['Machine Learning Engineer', 'AI Engineer', 'NLP Engineer', 'Data Scientist', 'AI Support Specialist']}
             projects={[{'title': 'Sentiment Analysis Pipeline', 'desc': 'FastAPI pipeline serving a text classification model built with scikit-learn.', 'tech': ['Python', 'scikit-learn', 'FastAPI', 'Docker'], 'metrics': [{'name': 'F1 Score', 'score': 89}, {'name': 'Latency (ms)', 'score': 94}], 'githubUrl': 'https://github.com/skillcred/sentiment-pipeline', 'liveUrl': 'https://sentiment.skillcred.in'}, {'title': 'Image Classifier (CNN)', 'desc': 'PyTorch CNN trained on CIFAR-10, optimized with learning rate scheduling.', 'tech': ['Python', 'PyTorch', 'Docker', 'AWS EC2'], 'metrics': [{'name': 'Accuracy', 'score': 87}, {'name': 'Training Time', 'score': 90}], 'githubUrl': 'https://github.com/skillcred/image-classifier', 'liveUrl': 'https://classifier.skillcred.in'}]}
-            />
+            >
+            </StreamPortfolioPreview>
 
             {/* SEPARATE PORTFOLIO OUTPUT SECTION */}
             <StreamPortfolioPreview
@@ -247,6 +278,29 @@ export default async function AIMLPage() {
             outcomes={['Machine Learning Engineer', 'AI Engineer', 'NLP Engineer', 'Data Scientist', 'AI Support Specialist']}
             projects={[{'title': 'Sentiment Analysis Pipeline', 'desc': 'FastAPI pipeline serving a text classification model built with scikit-learn.', 'tech': ['Python', 'scikit-learn', 'FastAPI', 'Docker'], 'metrics': [{'name': 'F1 Score', 'score': 89}, {'name': 'Latency (ms)', 'score': 94}], 'githubUrl': 'https://github.com/skillcred/sentiment-pipeline', 'liveUrl': 'https://sentiment.skillcred.in'}, {'title': 'Image Classifier (CNN)', 'desc': 'PyTorch CNN trained on CIFAR-10, optimized with learning rate scheduling.', 'tech': ['Python', 'PyTorch', 'Docker', 'AWS EC2'], 'metrics': [{'name': 'Accuracy', 'score': 87}, {'name': 'Training Time', 'score': 90}], 'githubUrl': 'https://github.com/skillcred/image-classifier', 'liveUrl': 'https://classifier.skillcred.in'}]}
             />
+
+            {/* NAMED MENTORS */}
+            <section className="py-24 bg-background">
+                <div className="container mx-auto px-4 max-w-5xl">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4">Meet Your Mentors</h2>
+                        <p className="text-muted-foreground">Working professionals who will review your code and guide your projects.</p>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {/* Mentor Card */}
+                        <div className="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 rounded-3xl p-6 flex items-start gap-6">
+                            <Image src="/images/mentors/ganesan.jpg" alt="Ganesan M" width={100} height={100} className="rounded-2xl object-cover" />
+                            <div>
+                                <h3 className="text-xl font-bold font-heading">Ganesan M</h3>
+                                <p className="text-purple-600 dark:text-purple-400 text-sm font-semibold mb-2">Senior Technical Instructor (AI & Python)</p>
+                                <p className="text-slate-500 dark:text-slate-400 text-sm">Co-Founder, Skillcred</p>
+                            </div>
+                        </div>
+                        {/* Additional mentors can go here */}
+                    </div>
+                </div>
+            </section>
+
 
             {/* MENTOR SUPPORT & FAQS */}
             <section className="py-24 bg-slate-50/50 dark:bg-slate-900/30 border-t border-slate-200 dark:border-white/5">
@@ -310,7 +364,7 @@ export default async function AIMLPage() {
                             { q: "Do I need prior Python experience?", a: "No — Python basics are included in the track." },
                             { q: "Are projects real-world?", a: "Yes, each project replicates real industry problems." },
                             { q: "Is deployment included?", a: "Yes, models are deployed via Streamlit / Flask for live testing." },
-                            { q: "Will I be job-ready?", a: "The track covers building, evaluating, and deploying AI systems." },
+                            { q: "Will I be job-ready?", a: "We don't promise placement. You finish with four mentor-verified projects, a scored assessment, and a portfolio recruiters can audit." },
                         ].map((faq, i) => (
                             <Card key={i} className="hover:bg-accent/5 transition-colors">
                                 <CardHeader>
@@ -327,16 +381,28 @@ export default async function AIMLPage() {
 
             
             <section className="py-20 bg-slate-50 dark:bg-slate-900/50">
-                <div className="container mx-auto px-4 text-center mb-12">
+                <div className="container mx-auto px-4 text-center max-w-4xl mb-12">
                     <h2 className="text-3xl md:text-4xl font-bold font-heading mb-4">Ready to start?</h2>
-                    <p className="text-slate-500 max-w-2xl mx-auto">Get the curriculum and see if the AI & ML Engineering Track is right for you.</p>
-                </div>
-                <div className="w-full text-left">
-                    <LpHeroForm trackName="AI & ML Engineering Track" accentColor="purple" />
+                    <p className="text-slate-500 max-w-2xl mx-auto mb-12">Get the curriculum and see if the AI & ML Engineering Track is right for you.</p>
+                    <div className="grid md:grid-cols-2 gap-8 text-left">
+                        {/* Repeated Free Session */}
+                        <div className="bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden flex flex-col justify-center">
+                            <h3 className="text-2xl font-bold font-heading mb-2">Free Live Session</h3>
+                            <p className="text-slate-500 dark:text-slate-400 text-sm mb-4">Build a RAG system in 90 minutes — and debug it like an engineer</p>
+                            <LpFreeSessionForm trackName="AI & ML Engineering Track" accentColor="purple" />
+                        </div>
+                        {/* Curriculum Download */}
+                        <div className="bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden flex flex-col justify-center text-slate-900 dark:text-white">
+                            <h3 className="text-2xl font-bold font-heading mb-2">Download Curriculum</h3>
+                            <p className="text-slate-500 dark:text-slate-400 text-sm mb-6">Get the complete syllabus, weekly milestones, and project details delivered to your inbox.</p>
+                            <LpCurriculumForm trackName="AI & ML Engineering Track" accentColor="orange" />
+                        </div>
+                    </div>
                 </div>
             </section>
 
 
+            <FloatingCta trackName="AI & ML Engineering Track" accentColor="orange" />
             <Footer />
         </main>
     );

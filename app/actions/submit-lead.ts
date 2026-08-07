@@ -8,8 +8,8 @@ export async function submitLead(formData: FormData) {
   const phone = formData.get("phone") as string;
   const track = formData.get("track") as string;
 
-  if (!name || !email || !phone) {
-    return { error: "All fields are required" };
+  if (!email) {
+    return { error: "Email is required" };
   }
 
   const apiKey = process.env.BREVO_API_KEY;
@@ -24,10 +24,10 @@ export async function submitLead(formData: FormData) {
   try {
     await prisma.lead.create({
       data: {
-        name,
+        name: name || "",
         email,
-        phone,
-        track,
+        phone: phone || "",
+        track: track || "",
       },
     });
   } catch (dbError) {
@@ -61,6 +61,37 @@ export async function submitLead(formData: FormData) {
       const text = await res.text();
       console.error("Brevo API error:", text);
       return { error: "Failed to send lead notification." };
+    }
+
+    // Send curriculum email to student if requested
+    if (track.includes("Curriculum Download") && email) {
+      const studentRes = await fetch("https://api.brevo.com/v3/smtp/email", {
+        method: "POST",
+        headers: {
+          "accept": "application/json",
+          "api-key": apiKey,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          sender: { name: "SkillCred", email: "admin@skillcred.in" },
+          to: [{ email: email, name: name || "Student" }],
+          subject: `Your SkillCred Curriculum is Here!`,
+          htmlContent: `
+            <h3>Hi there!</h3>
+            <p>Thank you for your interest in the AI & ML Engineering Track.</p>
+            <p>You can download the full curriculum using the link below:</p>
+            <br/>
+            <p><a href="https://skillcred.in/SkillCred_AI_ML_Track_Curriculum.pdf" style="background-color: #9333ea; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">Download Curriculum (PDF)</a></p>
+            <br/>
+            <p>Best,<br/>The SkillCred Team</p>
+          `,
+        }),
+      });
+
+      if (!studentRes.ok) {
+        console.error("Failed to send curriculum email to student:", await studentRes.text());
+        // We do not return an error to the user here since the admin notification succeeded
+      }
     }
 
     return { success: true };
