@@ -8,15 +8,20 @@ import { Button } from "@/components/ui/button";
 export default function ThankYouPage() {
     useEffect(() => {
         // Fire Google Ads Conversion Event for Callback/Lead Form Submit
-        if (typeof window !== 'undefined' && (window as any).gtag) {
-            const conversionTarget = process.env.NEXT_PUBLIC_GADS_CONVERSION_LABEL 
-                ? `AW-18351240110/${process.env.NEXT_PUBLIC_GADS_CONVERSION_LABEL}` 
-                : 'AW-18351240110/nkIlCIC7vNwcEK7nxq5E';
-            (window as any).gtag('event', 'conversion', {
-                'send_to': conversionTarget,
-                'value': 1.0,
-                'currency': 'INR'
-            });
+        if (typeof window !== 'undefined') {
+            if ((window as any).gtag) {
+                const conversionTarget = process.env.NEXT_PUBLIC_GADS_CONVERSION_LABEL 
+                    ? `AW-18351240110/${process.env.NEXT_PUBLIC_GADS_CONVERSION_LABEL}` 
+                    : 'AW-18351240110/nkIlCIC7vNwcEK7nxq5E';
+                (window as any).gtag('event', 'conversion', {
+                    'send_to': conversionTarget,
+                    'value': 1.0,
+                    'currency': 'INR'
+                });
+            }
+            if ((window as any).fbq) {
+                (window as any).fbq('track', 'Lead');
+            }
         }
     }, []);
 

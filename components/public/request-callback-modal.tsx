@@ -48,8 +48,13 @@ export function RequestCallbackModal({
                 setStatus("error");
             } else {
                 setStatus("success");
-                if (typeof window !== 'undefined' && (window as any).gtag) {
-                    (window as any).gtag('event', 'conversion', { 'send_to': 'AW-18351240110/nkIlCIC7vNwcEK7nxq5E' });
+                if (typeof window !== 'undefined') {
+                    if ((window as any).gtag) {
+                        (window as any).gtag('event', 'conversion', { 'send_to': 'AW-18351240110/nkIlCIC7vNwcEK7nxq5E' });
+                    }
+                    if ((window as any).fbq) {
+                        (window as any).fbq('track', 'Lead');
+                    }
                 }
             }
         } catch (err) {
