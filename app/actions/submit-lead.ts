@@ -102,8 +102,8 @@ export async function submitLead(formData: FormData) {
       }
     }
 
-    // Send Free Live Session confirmation email to student if requested
-    if (track.includes("Free Session Registration") && email) {
+    // Send Free Live Session confirmation email to student if requested (also triggers for Request a Callback forms on the Landing Page)
+    if ((track.includes("Free Session Registration") || track.includes("Landing Page:")) && email) {
       const sessionRes = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: {
