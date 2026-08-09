@@ -56,7 +56,7 @@ export function LpCurriculumForm({ trackName, accentColor = "purple", buttonText
                 
                 // Open the curriculum PDF
                 window.open('/SkillCred_AI_ML_Track_Curriculum.pdf', '_blank');
-                router.push("/thank-you");
+                router.push(`/thank-you?returnTo=${encodeURIComponent(window.location.pathname)}`);
             } else {
                 toast.error(res.error || "Failed to request curriculum.");
                 setIsLoading(false);

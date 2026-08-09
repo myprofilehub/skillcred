@@ -87,7 +87,7 @@ export function LpHeroForm({ trackName, accentColor = "orange", formOnly = false
                         (window as any).fbq('track', 'Lead');
                     }
                 }
-                router.push("/thank-you");
+                router.push(`/thank-you?returnTo=${encodeURIComponent(window.location.pathname)}`);
             } else {
                 toast.error(res.error || "Failed to submit request.");
                 setIsLoading(false);

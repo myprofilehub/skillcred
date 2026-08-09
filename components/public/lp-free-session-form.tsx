@@ -53,7 +53,7 @@ export function LpFreeSessionForm({ trackName, accentColor = "purple" }: { track
                         (window as any).fbq('trackCustom', 'FreeSessionRegister');
                     }
                 }
-                router.push("/thank-you");
+                router.push(`/thank-you?returnTo=${encodeURIComponent(window.location.pathname)}`);
             } else {
                 toast.error(res.error || "Failed to register.");
                 setIsLoading(false);
