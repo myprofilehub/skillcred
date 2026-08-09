@@ -73,7 +73,7 @@ export async function submitLead(formData: FormData) {
           "content-type": "application/json",
         },
         body: JSON.stringify({
-          sender: { name: "Ganesan M", email: "ganesan.m@skillcred.in" },
+          sender: { name: "Ganesan M", email: "admin@skillcred.in" },
           to: [{ email: email, name: name || "Student" }],
           subject: `Free live AI/ML Webinar on 17 August — book your seat`,
           htmlContent: `
@@ -112,7 +112,7 @@ export async function submitLead(formData: FormData) {
           "content-type": "application/json",
         },
         body: JSON.stringify({
-          sender: { name: "Ganesan M", email: "ganesan.m@skillcred.in" },
+          sender: { name: "Ganesan M", email: "admin@skillcred.in" },
           to: [{ email: email, name: name || "Student" }],
           subject: `AI/ML Webinar Seat Confirmation — RAG build session on 17 August, 7 PM IST.`,
           htmlContent: `
