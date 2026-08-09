@@ -91,7 +91,7 @@ export async function submitLead(formData: FormData) {
             <p>Questions before booking? Reply here or WhatsApp: <a href="https://skillcred.in/whatsapp">https://skillcred.in/whatsapp</a></p>
             <br/>
             <p>Best Regards,</p>
-            <p><strong>The SkillCred Team</strong> | <a href="https://www.skillcred.in">www.skillcred.in</a></p>
+            <p><strong>Skillcred Team</strong> | <a href="https://www.skillcred.in">www.skillcred.in</a></p>
           `,
         }),
       });
@@ -131,7 +131,7 @@ export async function submitLead(formData: FormData) {
             <p>Questions before booking? Reply here or WhatsApp: <a href="https://skillcred.in/whatsapp">skillcred.in/whatsapp</a></p>
             <br/>
             <p>Best Regards,</p>
-            <p><strong>The SkillCred Team</strong> | <a href="https://www.skillcred.in">www.skillcred.in</a></p>
+            <p><strong>Skillcred Team</strong> | <a href="https://www.skillcred.in">www.skillcred.in</a></p>
           `,
         }),
       });
