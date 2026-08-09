@@ -73,17 +73,25 @@ export async function submitLead(formData: FormData) {
           "content-type": "application/json",
         },
         body: JSON.stringify({
-          sender: { name: "SkillCred", email: "admin@skillcred.in" },
+          sender: { name: "Ganesan M", email: "ganesan.m@skillcred.in" },
           to: [{ email: email, name: name || "Student" }],
-          subject: `Your SkillCred Curriculum is Here!`,
+          subject: `Free live AI/ML Webinar on 17 August — book your seat`,
           htmlContent: `
-            <h3>Hi there!</h3>
-            <p>Thank you for your interest in the AI & ML Engineering Track.</p>
-            <p>You can download the full curriculum using the link below:</p>
+            <p>Hi ${name || "there"},</p>
             <br/>
-            <p><a href="https://skillcred.in/SkillCred_AI_ML_Track_Curriculum.pdf" style="background-color: #9333ea; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">Download Curriculum (PDF)</a></p>
+            <p>Thanks for downloading the AI/ML curriculum.</p>
             <br/>
-            <p>Best,<br/>The SkillCred Team</p>
+            <p><a href="https://skillcred.in/SkillCred_AI_ML_Track_Curriculum.pdf" style="background-color: #f97316; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">Download Curriculum (PDF)</a></p>
+            <br/>
+            <p>If you're still weighing it up, the fastest way to decide is to watch us teach. Free live build on 17 August, 7 PM IST — Build a RAG System in 90 Minutes. You write the code and leave with a working pipeline.</p>
+            <br/>
+            <p>We keep the room small, so seats go through a quick 15-minute call.</p>
+            <br/>
+            <p>Book: <a href="https://calendly.com/admin-skillcred/seat-confirmation">https://calendly.com/admin-skillcred/seat-confirmation</a></p>
+            <p>Questions before booking? Reply here or WhatsApp: <a href="https://skillcred.in/whatsapp">https://skillcred.in/whatsapp</a></p>
+            <br/>
+            <p>Best Regards,</p>
+            <p><strong>Ganesan M</strong> | Co-Founder & CTO | <a href="https://www.skillcred.in">www.skillcred.in</a></p>
           `,
         }),
       });
