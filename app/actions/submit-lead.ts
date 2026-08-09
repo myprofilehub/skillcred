@@ -94,6 +94,45 @@ export async function submitLead(formData: FormData) {
       }
     }
 
+    // Send Free Live Session confirmation email to student if requested
+    if (track.includes("Free Session Registration") && email) {
+      const sessionRes = await fetch("https://api.brevo.com/v3/smtp/email", {
+        method: "POST",
+        headers: {
+          "accept": "application/json",
+          "api-key": apiKey,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          sender: { name: "Ganesan M", email: "ganesan.m@skillcred.in" },
+          to: [{ email: email, name: name || "Student" }],
+          subject: `AI/ML Webinar Seat Confirmation — RAG build session on 17 August, 7 PM IST.`,
+          htmlContent: `
+            <p>Hi ${name || "there"},</p>
+            <br/>
+            <p>Thanks for registering interest in the RAG build session on 17 August, 7 PM IST.</p>
+            <br/>
+            <p>Next step is a 15-minute call to confirm your seat. Book here:</p>
+            <br/>
+            <p><a href="https://calendly.com/admin-skillcred/seat-confirmation">https://calendly.com/admin-skillcred/seat-confirmation</a></p>
+            <br/>
+            <p>On the call we'll cover your Python setup, send you the pre-work, and talk through whether the AI/ML cohort starting 1 September is a fit. We'll be direct with you either way.</p>
+            <br/>
+            <p>One note: this is a hands-on session. You'll be writing code for most of the 90 minutes and leaving with something that runs. Arriving with your environment ready makes that possible.</p>
+            <br/>
+            <p>Questions before booking? Reply here or WhatsApp: <a href="https://skillcred.in/whatsapp">skillcred.in/whatsapp</a></p>
+            <br/>
+            <p>Best Regards,</p>
+            <p><strong>Ganesan M</strong> | Co Founder & CTO | <a href="https://www.skillcred.in">www.skillcred.in</a></p>
+          `,
+        }),
+      });
+
+      if (!sessionRes.ok) {
+        console.error("Failed to send live session email to student:", await sessionRes.text());
+      }
+    }
+
     return { success: true };
   } catch (error) {
     console.error("Error submitting lead:", error);
