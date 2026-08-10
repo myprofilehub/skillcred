@@ -94,15 +94,22 @@ export default function AssessmentClient() {
     }
   }, [token]);
 
-  // Section 2 Timer
+  // Section 2 Timer — only runs when on Section 2
   useEffect(() => {
-    if (timeLeftS2 > 0) {
+    if (status === "STAGE_1_PASSED" && timeLeftS2 > 0) {
       const timer = setTimeout(() => setTimeLeftS2(prev => prev - 1), 1000);
       return () => clearTimeout(timer);
+    } else if (status === "STAGE_1_PASSED" && timeLeftS2 === 0) {
+      submitSection2();
     }
-  }, [timeLeftS2]);
+  }, [status, timeLeftS2]);
 
   const submitSection1 = async () => {
+    if (!noticePeriod || !currentCTC || !expectedCTC || !yearsSales || !voiceTamilUrl || !voiceEnglishUrl) {
+      toast.error("Please complete all fields and recordings.");
+      return;
+    }
+    
     setSubmitting(true);
     const res = await fetch("/api/apply/counselor", {
       method: "POST",
@@ -116,7 +123,9 @@ export default function AssessmentClient() {
       })
     });
     const data = await res.json();
-    if (data.success) toast.success("Section 1 Saved");
+    if (data.success) {
+      setStatus(data.status);
+    }
     setSubmitting(false);
   };
 
@@ -134,7 +143,9 @@ export default function AssessmentClient() {
       })
     });
     const data = await res.json();
-    if (data.success) toast.success("Section 2 Saved");
+    if (data.success) {
+      setStatus(data.status);
+    }
     setSubmitting(false);
   };
 
@@ -157,20 +168,28 @@ export default function AssessmentClient() {
       })
     });
     const data = await res.json();
-    if (data.success) toast.success("Assessment Complete!");
+    if (data.success) {
+      setStatus(data.status);
+    }
     setSubmitting(false);
   };
 
   if (loading) return <div className="text-center p-12">Loading...</div>;
   if (status === "INVALID" || status === "ERROR") return <div className="text-center p-12 text-red-500">Invalid or expired assessment link.</div>;
 
-  return (
-    <div className="space-y-12 pb-24">
-      {/* SECTION 1 */}
+  // SECTION 1: Knockouts & Voice
+  if (status === "PENDING") {
+    return (
       <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-white/10 p-8">
         <h1 className="text-3xl font-bold mb-6">Career Counselor Assessment</h1>
         <div className="space-y-4 text-lg text-slate-700 dark:text-slate-300">
           <p>Welcome. This asynchronous assessment consists of 3 sections.</p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li><strong>Expected Total Time:</strong> ~45 minutes.</li>
+            <li><strong>Video & Audio Required:</strong> You will need a working microphone and camera.</li>
+            <li><strong>Timed Answers:</strong> Sections 2 and 3 have strict timers and auto-submit.</li>
+          </ul>
+          <p className="mt-8">We review all submissions within 48 hours.</p>
         </div>
         <div className="mt-8">
           <h2 className="text-xl font-bold mb-4">Section 1: Knockouts & Voice</h2>
@@ -219,8 +238,26 @@ export default function AssessmentClient() {
           </Button>
         </div>
       </div>
+    );
+  }
 
-      {/* SECTION 2 */}
+  // AUTO-FAIL Screen
+  if (status === "STAGE_1_FAILED") {
+    return (
+      <div className="max-w-2xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-white/10 p-12 text-center">
+        <XCircle className="w-16 h-16 text-red-500 mx-auto mb-6" />
+        <h2 className="text-2xl font-bold mb-4">Thank you for your time</h2>
+        <p className="text-slate-600 dark:text-slate-400">
+          Based on the initial criteria submitted, we won&apos;t be able to move forward with your application at this time. We are specifically looking for candidates matching certain location, timeline, and expectation criteria for this cohort. We wish you the best in your job search!
+        </p>
+        <p className="mt-8 text-sm text-slate-500 font-medium">Ganesan M | Co-Founder & CTO</p>
+      </div>
+    );
+  }
+
+  // SECTION 2: Written Scenarios
+  if (status === "STAGE_1_PASSED") {
+    return (
       <div className="max-w-4xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-white/10 p-8">
         <div className="flex justify-between items-center mb-6 pb-4 border-b">
           <h1 className="text-2xl font-bold">Section 2: Written Scenarios</h1>
@@ -241,7 +278,7 @@ export default function AssessmentClient() {
         
         <div className="space-y-8">
           <div>
-            <h3 className="font-semibold mb-2">1. A final-year student from a tier-3 college replied: "fees ah?"</h3>
+            <h3 className="font-semibold mb-2">1. A final-year student from a tier-3 college replied: &quot;fees ah?&quot;</h3>
             <Textarea value={writtenQ1} onChange={e => setWrittenQ1(e.target.value)} placeholder="Type your WhatsApp reply..." />
           </div>
           <div>
@@ -249,7 +286,7 @@ export default function AssessmentClient() {
             <Textarea value={writtenQ2} onChange={e => setWrittenQ2(e.target.value)} placeholder="Type your WhatsApp reply..." />
           </div>
           <div>
-            <h3 className="font-semibold mb-2">3. A parent calling on behalf of their daughter, asking "placement guarantee irukka?"</h3>
+            <h3 className="font-semibold mb-2">3. A parent calling on behalf of their daughter, asking &quot;placement guarantee irukka?&quot;</h3>
             <Textarea value={writtenQ3} onChange={e => setWrittenQ3(e.target.value)} placeholder="Type your WhatsApp reply..." />
           </div>
           
@@ -273,7 +310,7 @@ export default function AssessmentClient() {
                       <td className="px-4 py-3 font-medium text-slate-900 dark:text-white">{lead.name} ({lead.age})</td>
                       <td className="px-4 py-3">{lead.bg}</td>
                       <td className="px-4 py-3">{lead.source}</td>
-                      <td className="px-4 py-3 italic">"{lead.note}"</td>
+                      <td className="px-4 py-3 italic">&quot;{lead.note}&quot;</td>
                       <td className="px-4 py-2">
                         <select
                           className="w-full px-2 py-1.5 text-sm rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
@@ -303,8 +340,12 @@ export default function AssessmentClient() {
           {submitting ? "Submitting..." : "Submit Section 2"}
         </Button>
       </div>
+    );
+  }
 
-      {/* SECTION 3 */}
+  // SECTION 3: Video Objections
+  if (status === "STAGE_2_COMPLETED") {
+    return (
       <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-white/10 p-8">
         <h1 className="text-2xl font-bold mb-2">Section 3: Video Objections</h1>
         <p className="mb-8 text-slate-600 dark:text-slate-400">
@@ -366,7 +407,22 @@ export default function AssessmentClient() {
           </Button>
         )}
       </div>
+    );
+  }
 
-    </div>
-  );
+  // COMPLETION Screen
+  if (status === "STAGE_3_COMPLETED") {
+    return (
+      <div className="max-w-2xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-white/10 p-12 text-center">
+        <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-6" />
+        <h2 className="text-3xl font-bold mb-4">Assessment Complete</h2>
+        <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+          Thank you for completing the comprehensive assessment. We are a small founding team and you will matter here. Ganesan will personally review every submission. We will get back to you within 48 hours.
+        </p>
+        <p className="mt-8 text-sm text-slate-500 font-medium">Ganesan M | Co-Founder & CTO</p>
+      </div>
+    );
+  }
+
+  return null;
 }
