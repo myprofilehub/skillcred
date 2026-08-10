@@ -234,9 +234,9 @@ export default function AssessmentClient() {
             <h3 className="font-semibold flex items-center"><FileText className="w-5 h-5 mr-2" /> Preparation Material</h3>
             <p className="text-sm mt-1 opacity-90">Please download and review our program guide before answering the following questions.</p>
           </div>
-          <Button variant="outline" className="bg-white hover:bg-slate-100 text-blue-900">
+          <a href="/SkillCred_AI_ML_Track_Curriculum.pdf" download className="inline-flex items-center px-4 py-2 rounded-md border border-slate-200 bg-white hover:bg-slate-100 text-blue-900 text-sm font-medium transition-colors">
             <Download className="w-4 h-4 mr-2" /> Download Guide (PDF)
-          </Button>
+          </a>
         </div>
         
         <div className="space-y-8">

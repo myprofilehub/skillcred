@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Loader2, Mic, Video as VideoIcon } from "lucide-react";
 import { toast } from "sonner";
@@ -27,56 +27,25 @@ export function AssessmentMediaRecorder({
   const [isRecording, setIsRecording] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [timeLeft, setTimeLeft] = useState(maxDurationSeconds);
-  const [delayLeft, setDelayLeft] = useState(autoStartDelaySeconds);
   const [isFinished, setIsFinished] = useState(false);
+  const [mediaReady, setMediaReady] = useState(false);
+  const [mediaError, setMediaError] = useState<string | null>(null);
   
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<BlobPart[]>([]);
   const streamRef = useRef<MediaStream | null>(null);
 
+  // Cleanup stream on unmount
   useEffect(() => {
-    // Request permissions on mount to ensure readiness
-    const initMedia = async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          audio: true,
-          video: isVideo
-        });
-        streamRef.current = stream;
-        
-        if (isVideo && videoRef.current) {
-          videoRef.current.srcObject = stream;
-        }
-      } catch (err: any) {
-        if (err.name === 'NotFoundError') {
-          toast.error("Camera or microphone not found. Please connect a device.");
-        } else {
-          toast.error("Microphone/Camera permissions denied. Please enable them.");
-        }
-        console.error(err);
-      }
-    };
-
-    initMedia();
-
     return () => {
-      // Cleanup stream on unmount
       if (streamRef.current) {
         streamRef.current.getTracks().forEach(track => track.stop());
       }
     };
-  }, [isVideo]);
+  }, []);
 
-  useEffect(() => {
-    if (delayLeft > 0) {
-      const timer = setTimeout(() => setDelayLeft(prev => prev - 1), 1000);
-      return () => clearTimeout(timer);
-    } else if (delayLeft === 0 && !isRecording && !isFinished && !isUploading) {
-      startRecording();
-    }
-  }, [delayLeft, isRecording, isFinished, isUploading]);
-
+  // Recording countdown timer
   useEffect(() => {
     if (isRecording && timeLeft > 0) {
       const timer = setTimeout(() => setTimeLeft(prev => prev - 1), 1000);
@@ -86,9 +55,48 @@ export function AssessmentMediaRecorder({
     }
   }, [isRecording, timeLeft]);
 
+  const initMedia = useCallback(async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: isVideo
+      });
+      streamRef.current = stream;
+      
+      if (isVideo && videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+      setMediaReady(true);
+      setMediaError(null);
+      return true;
+    } catch (err: any) {
+      if (err.name === 'NotFoundError') {
+        setMediaError("Camera or microphone not found. Please connect a device and try again.");
+        toast.error("Camera or microphone not found. Please connect a device.");
+      } else if (err.name === 'NotAllowedError') {
+        setMediaError("Permission denied. Please allow camera/microphone access and try again.");
+        toast.error("Microphone/Camera permissions denied. Please enable them.");
+      } else {
+        setMediaError("Could not access media devices. Please check your browser settings.");
+        toast.error("Could not access media devices.");
+      }
+      console.error(err);
+      return false;
+    }
+  }, [isVideo]);
+
+  const handleStartRecording = async () => {
+    if (!mediaReady) {
+      const success = await initMedia();
+      if (!success) return;
+    }
+
+    startRecording();
+  };
+
   const startRecording = () => {
     if (!streamRef.current) {
-      toast.error("Media stream not available.");
+      toast.error("Media stream not available. Click 'Start Recording' to try again.");
       return;
     }
 
@@ -106,6 +114,13 @@ export function AssessmentMediaRecorder({
     mediaRecorder.onstop = async () => {
       setIsRecording(false);
       setIsUploading(true);
+      
+      // Stop the stream tracks after recording
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current = null;
+        setMediaReady(false);
+      }
       
       const blob = new Blob(chunksRef.current, {
         type: isVideo ? 'video/webm' : 'audio/webm'
@@ -159,7 +174,7 @@ export function AssessmentMediaRecorder({
     <div className="space-y-4 border border-slate-200 dark:border-white/10 rounded-xl p-4 bg-slate-50 dark:bg-white/5">
       {label && <h4 className="font-semibold text-slate-900 dark:text-white">{label}</h4>}
       
-      {isVideo && (
+      {isVideo && mediaReady && (
         <div className="aspect-video bg-black rounded-lg overflow-hidden relative">
           <video
             ref={videoRef}
@@ -177,6 +192,12 @@ export function AssessmentMediaRecorder({
         </div>
       )}
 
+      {mediaError && (
+        <div className="p-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg text-sm">
+          {mediaError}
+        </div>
+      )}
+
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           {isVideo ? (
@@ -185,21 +206,19 @@ export function AssessmentMediaRecorder({
             <Mic className="w-5 h-5 text-slate-500" />
           )}
           <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
-            {delayLeft > 0 ? (
-              `Recording starts in ${delayLeft}s...`
-            ) : isRecording ? (
+            {isRecording ? (
               `Recording... ${timeLeft}s remaining`
             ) : isUploading ? (
               "Uploading..."
             ) : (
-              "Ready to record"
+              "Click to start recording"
             )}
           </span>
         </div>
 
-        {delayLeft === 0 && !isRecording && !isUploading && autoStartDelaySeconds === 0 && (
-          <Button onClick={startRecording} className="bg-blue-600 hover:bg-blue-700">
-            Start Recording
+        {!isRecording && !isUploading && (
+          <Button onClick={handleStartRecording} className="bg-blue-600 hover:bg-blue-700">
+            {mediaError ? "Retry" : "Start Recording"}
           </Button>
         )}
 
