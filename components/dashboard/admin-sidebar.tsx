@@ -15,6 +15,7 @@ import {
     Video,
     FileText,
     Image as ImageIcon,
+    ClipboardCheck,
 } from "lucide-react";
 
 const sidebarItems = [
@@ -57,6 +58,11 @@ const sidebarItems = [
         title: "Mentor Apps",
         href: "/dashboard/admin/mentor-applications",
         icon: Users,
+    },
+    {
+        title: "Counselor Review",
+        href: "/admin/counselor-review",
+        icon: ClipboardCheck,
     },
 ];
 
