@@ -12,13 +12,21 @@ export default function CreativeGallery() {
   const [filter, setFilter] = useState<'all' | 'video' | 'image'>('all');
 
   useEffect(() => {
-    fetch(`${AI_ENGINE_URL}/api/gallery`)
-      .then(res => res.json())
-      .then(data => {
+    const fetchGallery = async () => {
+      try {
+        const res = await fetch(`${AI_ENGINE_URL}/api/gallery`);
+        if (!res.ok) throw new Error("Failed to fetch");
+        const data = await res.json();
         if (data.success) setItems(data.items);
-      })
-      .catch(err => console.error("Gallery Sync Error:", err))
-      .finally(() => setLoading(false));
+      } catch (err) {
+        // Use console.warn instead of console.error to avoid triggering Next.js dev overlay
+        console.warn("Gallery Sync Offline. AI Engine might not be running.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchGallery();
   }, []);
 
   const filteredItems = items.filter(item => 
