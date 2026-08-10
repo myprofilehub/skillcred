@@ -94,15 +94,21 @@ export default function AssessmentClient() {
     }
   }, [token]);
 
-  // Section 2 Timer — only runs when on Section 2
+  // Section 2 Timer — only ticks when on Section 2
+  const isSection2Active = status === "STAGE_1_PASSED";
+  
   useEffect(() => {
-    if (status === "STAGE_1_PASSED" && timeLeftS2 > 0) {
-      const timer = setTimeout(() => setTimeLeftS2(prev => prev - 1), 1000);
-      return () => clearTimeout(timer);
-    } else if (status === "STAGE_1_PASSED" && timeLeftS2 === 0) {
+    if (!isSection2Active || timeLeftS2 <= 0) return;
+    const timer = setTimeout(() => setTimeLeftS2(prev => prev - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [isSection2Active, timeLeftS2]);
+
+  // Auto-submit Section 2 when timer runs out
+  useEffect(() => {
+    if (isSection2Active && timeLeftS2 === 0) {
       submitSection2();
     }
-  }, [status, timeLeftS2]);
+  }, [isSection2Active, timeLeftS2]);
 
   const submitSection1 = async () => {
     if (!noticePeriod || !currentCTC || !expectedCTC || !yearsSales || !voiceTamilUrl || !voiceEnglishUrl) {
