@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { CheckCircle2, XCircle, Download, FileText } from "lucide-react";
+import { CheckCircle2, XCircle, Download, FileText, Clock, BookOpen } from "lucide-react";
 
 const mockLeads = [
   { id: 1, name: "Arun K.", age: 21, bg: "B.Tech IT (2024)", source: "Instagram Ad", note: "fees ah?" },
@@ -57,6 +57,8 @@ export default function AssessmentClient() {
   const [triageInsight, setTriageInsight] = useState("");
   const [triageData, setTriageData] = useState<Record<string, string>>({});
   const [timeLeftS2, setTimeLeftS2] = useState(25 * 60);
+  const [prepTimeLeft, setPrepTimeLeft] = useState(15 * 60);
+  const [prepDone, setPrepDone] = useState(false);
 
   // Section 3 State
   const [currentObjection, setCurrentObjection] = useState(0);
@@ -94,21 +96,38 @@ export default function AssessmentClient() {
     }
   }, [token]);
 
-  // Section 2 Timer — only ticks when on Section 2
+  // Prep Timer — 15 minutes to read the PDF before Section 2 begins
   const isSection2Active = status === "STAGE_1_PASSED";
-  
+  const isPrepActive = isSection2Active && !prepDone;
+
   useEffect(() => {
-    if (!isSection2Active || timeLeftS2 <= 0) return;
+    if (!isPrepActive || prepTimeLeft <= 0) return;
+    const timer = setTimeout(() => setPrepTimeLeft(prev => prev - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [isPrepActive, prepTimeLeft]);
+
+  // Auto-end prep when timer runs out
+  useEffect(() => {
+    if (isPrepActive && prepTimeLeft === 0) {
+      setPrepDone(true);
+    }
+  }, [isPrepActive, prepTimeLeft]);
+
+  // Section 2 Answer Timer — only ticks after prep is done
+  const isAnsweringS2 = isSection2Active && prepDone;
+
+  useEffect(() => {
+    if (!isAnsweringS2 || timeLeftS2 <= 0) return;
     const timer = setTimeout(() => setTimeLeftS2(prev => prev - 1), 1000);
     return () => clearTimeout(timer);
-  }, [isSection2Active, timeLeftS2]);
+  }, [isAnsweringS2, timeLeftS2]);
 
-  // Auto-submit Section 2 when timer runs out
+  // Auto-submit Section 2 when answer timer runs out
   useEffect(() => {
-    if (isSection2Active && timeLeftS2 === 0) {
+    if (isAnsweringS2 && timeLeftS2 === 0) {
       submitSection2();
     }
-  }, [isSection2Active, timeLeftS2]);
+  }, [isAnsweringS2, timeLeftS2]);
 
   const submitSection1 = async () => {
     if (!noticePeriod || !currentCTC || !expectedCTC || !yearsSales || !voiceTamilUrl || !voiceEnglishUrl) {
@@ -261,8 +280,54 @@ export default function AssessmentClient() {
     );
   }
 
-  // SECTION 2: Written Scenarios
-  if (status === "STAGE_1_PASSED") {
+  // PREP SCREEN: 15 minutes to study the material
+  if (status === "STAGE_1_PASSED" && !prepDone) {
+    return (
+      <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-white/10 p-8">
+        <div className="text-center mb-8">
+          <BookOpen className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+          <h1 className="text-3xl font-bold mb-2">Preparation Time</h1>
+          <p className="text-slate-600 dark:text-slate-400 text-lg">Section 1 submitted successfully! Before we begin the written scenarios, take some time to study our program.</p>
+        </div>
+
+        <div className="flex items-center justify-center mb-8">
+          <div className="bg-slate-100 dark:bg-slate-800 px-8 py-4 rounded-2xl text-center">
+            <Clock className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+            <div className="text-4xl font-mono font-bold text-slate-900 dark:text-white">
+              {Math.floor(prepTimeLeft / 60)}:{(prepTimeLeft % 60).toString().padStart(2, '0')}
+            </div>
+            <p className="text-sm text-slate-500 mt-1">Prep time remaining</p>
+          </div>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-900/20 text-blue-900 dark:text-blue-100 p-6 rounded-xl mb-8">
+          <h3 className="font-semibold flex items-center text-lg mb-3"><FileText className="w-5 h-5 mr-2" /> What to study</h3>
+          <ul className="space-y-2 text-sm">
+            <li>• Download and read our AI/ML Track Curriculum thoroughly</li>
+            <li>• Understand the program pricing, duration, and key features</li>
+            <li>• Note the selling points you would use with different personas</li>
+            <li>• Think about how you would handle common objections</li>
+          </ul>
+          <div className="mt-4">
+            <a href="/SkillCred_AI_ML_Track_Curriculum.pdf" download className="inline-flex items-center px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors">
+              <Download className="w-4 h-4 mr-2" /> Download Program Guide (PDF)
+            </a>
+          </div>
+        </div>
+
+        <div className="bg-amber-50 dark:bg-amber-900/20 text-amber-900 dark:text-amber-100 p-4 rounded-lg mb-8 text-sm">
+          <strong>What&apos;s next:</strong> Once you click &quot;Begin Section 2&quot; (or when prep time expires), you will have <strong>25 minutes</strong> to answer 3 written scenario questions and analyze a lead triage table. The timer cannot be paused.
+        </div>
+
+        <Button onClick={() => setPrepDone(true)} className="w-full text-lg py-6">
+          I&apos;m Ready — Begin Section 2
+        </Button>
+      </div>
+    );
+  }
+
+  // SECTION 2: Written Scenarios (25 min timer)
+  if (status === "STAGE_1_PASSED" && prepDone) {
     return (
       <div className="max-w-4xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-white/10 p-8">
         <div className="flex justify-between items-center mb-6 pb-4 border-b">
