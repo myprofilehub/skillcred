@@ -6,18 +6,16 @@ export default function InvestorDashboardLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="flex h-screen overflow-hidden bg-neutral-950">
+        <div className="flex h-screen overflow-hidden bg-slate-50">
             <InvestorSidebar />
-            <main className="flex-1 overflow-y-auto p-8 bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
-                <div className="relative">
-                    {/* Subtle ambient background blobs */}
-                    <div className="fixed top-0 right-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-10">
-                        <div className="absolute top-20 right-1/4 w-96 h-96 bg-amber-500 rounded-full filter blur-[150px]" />
-                        <div className="absolute bottom-20 left-1/4 w-72 h-72 bg-purple-500 rounded-full filter blur-[120px]" />
-                    </div>
-                    <div className="relative z-10">
-                        {children}
-                    </div>
+            <main className="flex-1 overflow-y-auto p-8 bg-slate-50 text-slate-900 relative">
+                <div className="absolute inset-0 z-0">
+                    {/* Subtle grid and amber glow */}
+                    <div className="absolute h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+                    <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-amber-500 opacity-10 blur-[100px]"></div>
+                </div>
+                <div className="relative z-10">
+                    {children}
                 </div>
             </main>
         </div>

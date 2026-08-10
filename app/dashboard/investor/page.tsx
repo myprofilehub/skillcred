@@ -10,10 +10,10 @@ export default async function InvestorDashboard() {
 
     if (error || !investor) {
         return (
-            <div className="flex flex-col items-center justify-center h-full space-y-4 text-foreground dark:text-foreground dark:text-white">
+            <div className="flex flex-col items-center justify-center h-full space-y-4 text-slate-900">
                 <h1 className="text-2xl font-bold">Access Denied</h1>
-                <p className="text-neutral-400">You need an investor profile to view this page.</p>
-                <Button className="bg-amber-600 hover:bg-amber-700" asChild><Link href="/onboarding/investor">Create Profile</Link></Button>
+                <p className="text-slate-500">You need an investor profile to view this page.</p>
+                <Button className="bg-amber-600 hover:bg-amber-700 text-white" asChild><Link href="/onboarding/investor">Create Profile</Link></Button>
             </div>
         );
     }
@@ -26,11 +26,11 @@ export default async function InvestorDashboard() {
         <div className="space-y-8">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-foreground dark:text-white">Dashboard</h1>
-                    <p className="text-neutral-400">Welcome back, <span className="text-amber-400 font-medium">{investor.company}</span></p>
+                    <h1 className="text-3xl font-bold tracking-tight text-slate-900">Dashboard</h1>
+                    <p className="text-slate-500">Welcome back, <span className="text-amber-600 font-medium">{investor.company}</span></p>
                 </div>
                 <div className="flex gap-2">
-                    <Button className="bg-amber-600 hover:bg-amber-700 text-foreground dark:text-foreground dark:text-white shadow-lg shadow-amber-500/20" asChild>
+                    <Button className="bg-amber-600 hover:bg-amber-700 text-white shadow-md shadow-amber-500/20" asChild>
                         <Link href="/dashboard/investor/posts">
                             <PlusCircle className="mr-2 h-4 w-4" /> New Post
                         </Link>
@@ -40,44 +40,44 @@ export default async function InvestorDashboard() {
 
             {/* Stats */}
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <Card className="bg-neutral-900/80 border-amber-500/10 backdrop-blur-sm">
+                <Card className="bg-white shadow-sm border-slate-200">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium text-neutral-300">Pending Pitches</CardTitle>
-                        <div className="w-8 h-8 rounded-full bg-amber-500/10 flex items-center justify-center">
-                            <MessageSquare className="h-4 w-4 text-amber-400" />
+                        <CardTitle className="text-sm font-medium text-slate-500">Pending Pitches</CardTitle>
+                        <div className="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center">
+                            <MessageSquare className="h-4 w-4 text-amber-500" />
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold text-foreground dark:text-foreground dark:text-white">{pendingPitches}</div>
-                        <Link href="/dashboard/investor/pitches" className="text-xs text-amber-400 hover:underline flex items-center gap-1 mt-1">
+                        <div className="text-3xl font-bold text-slate-900">{pendingPitches}</div>
+                        <Link href="/dashboard/investor/pitches" className="text-xs text-amber-600 hover:underline flex items-center gap-1 mt-1">
                             View all <ArrowRight className="w-3 h-3" />
                         </Link>
                     </CardContent>
                 </Card>
-                <Card className="bg-neutral-900/80 border-amber-500/10 backdrop-blur-sm">
+                <Card className="bg-white shadow-sm border-slate-200">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium text-neutral-300">Active Posts</CardTitle>
-                        <div className="w-8 h-8 rounded-full bg-amber-500/10 flex items-center justify-center">
-                            <TrendingUp className="h-4 w-4 text-amber-400" />
+                        <CardTitle className="text-sm font-medium text-slate-500">Active Posts</CardTitle>
+                        <div className="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center">
+                            <TrendingUp className="h-4 w-4 text-amber-500" />
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold text-foreground dark:text-foreground dark:text-white">{activePosts}</div>
-                        <Link href="/dashboard/investor/posts" className="text-xs text-amber-400 hover:underline flex items-center gap-1 mt-1">
+                        <div className="text-3xl font-bold text-slate-900">{activePosts}</div>
+                        <Link href="/dashboard/investor/posts" className="text-xs text-amber-600 hover:underline flex items-center gap-1 mt-1">
                             Manage <ArrowRight className="w-3 h-3" />
                         </Link>
                     </CardContent>
                 </Card>
-                <Card className="bg-neutral-900/80 border-amber-500/10 backdrop-blur-sm">
+                <Card className="bg-white shadow-sm border-slate-200">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium text-neutral-300">Upcoming Workshops</CardTitle>
-                        <div className="w-8 h-8 rounded-full bg-amber-500/10 flex items-center justify-center">
-                            <Calendar className="h-4 w-4 text-amber-400" />
+                        <CardTitle className="text-sm font-medium text-slate-500">Upcoming Workshops</CardTitle>
+                        <div className="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center">
+                            <Calendar className="h-4 w-4 text-amber-500" />
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold text-foreground dark:text-foreground dark:text-white">{upcomingWorkshops}</div>
-                        <Link href="/dashboard/investor/workshops" className="text-xs text-amber-400 hover:underline flex items-center gap-1 mt-1">
+                        <div className="text-3xl font-bold text-slate-900">{upcomingWorkshops}</div>
+                        <Link href="/dashboard/investor/workshops" className="text-xs text-amber-600 hover:underline flex items-center gap-1 mt-1">
                             Schedule <ArrowRight className="w-3 h-3" />
                         </Link>
                     </CardContent>
@@ -86,34 +86,34 @@ export default async function InvestorDashboard() {
 
             {/* Recent Pitches & Workshops */}
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-                <Card className="col-span-4 bg-neutral-900/80 border-amber-500/10 backdrop-blur-sm">
+                <Card className="col-span-4 bg-white shadow-sm border-slate-200">
                     <CardHeader>
-                        <CardTitle className="text-foreground dark:text-foreground dark:text-white flex items-center gap-2">
-                            <Sparkles className="w-5 h-5 text-amber-400" />
+                        <CardTitle className="text-slate-900 flex items-center gap-2">
+                            <Sparkles className="w-5 h-5 text-amber-500" />
                             Recent Pitch Requests
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-4">
                             {investor.pitchRequests.length === 0 ? (
-                                <p className="text-neutral-500 text-sm">No pitches received yet.</p>
+                                <p className="text-slate-500 text-sm">No pitches received yet.</p>
                             ) : (
                                 investor.pitchRequests.slice(0, 5).map((pitch: any) => (
-                                    <div key={pitch.id} className="flex items-center justify-between border-b border-neutral-800 pb-4 last:border-0 last:pb-0">
+                                    <div key={pitch.id} className="flex items-center justify-between border-b border-slate-100 pb-4 last:border-0 last:pb-0">
                                         <div className="space-y-1">
-                                            <p className="text-sm font-medium leading-none text-foreground dark:text-foreground dark:text-white">{pitch.showcase.title}</p>
-                                            <p className="text-xs text-neutral-400">
+                                            <p className="text-sm font-medium leading-none text-slate-900">{pitch.showcase.title}</p>
+                                            <p className="text-xs text-slate-500">
                                                 By {pitch.student.user.name} • {format(new Date(pitch.createdAt), "MMM d, yyyy")}
                                             </p>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <span className={`text-xs px-2 py-1 rounded-full font-medium ${pitch.status === "PENDING" ? "bg-amber-500/15 text-amber-400" :
-                                                pitch.status === "ACCEPTED" || pitch.status === "SCHEDULED" ? "bg-emerald-500/15 text-emerald-400" :
-                                                    "bg-neutral-800 text-neutral-400"
+                                            <span className={`text-xs px-2 py-1 rounded-full font-medium ${pitch.status === "PENDING" ? "bg-amber-100 text-amber-700" :
+                                                pitch.status === "ACCEPTED" || pitch.status === "SCHEDULED" ? "bg-emerald-100 text-emerald-700" :
+                                                    "bg-slate-100 text-slate-500"
                                                 }`}>
                                                 {pitch.status}
                                             </span>
-                                            <Button variant="ghost" size="sm" className="text-amber-400 hover:text-amber-300 hover:bg-amber-500/10" asChild>
+                                            <Button variant="ghost" size="sm" className="text-amber-600 hover:text-amber-700 hover:bg-amber-50" asChild>
                                                 <Link href="/dashboard/investor/pitches">View</Link>
                                             </Button>
                                         </div>
@@ -125,30 +125,30 @@ export default async function InvestorDashboard() {
                 </Card>
 
                 {/* Workshops */}
-                <Card className="col-span-3 bg-neutral-900/80 border-amber-500/10 backdrop-blur-sm">
+                <Card className="col-span-3 bg-white shadow-sm border-slate-200">
                     <CardHeader>
-                        <CardTitle className="text-foreground dark:text-foreground dark:text-white flex items-center gap-2">
-                            <Calendar className="w-5 h-5 text-amber-400" />
+                        <CardTitle className="text-slate-900 flex items-center gap-2">
+                            <Calendar className="w-5 h-5 text-amber-500" />
                             Upcoming Workshops
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-4">
                             {investor.workshops.length === 0 ? (
-                                <p className="text-neutral-500 text-sm">No workshops scheduled.</p>
+                                <p className="text-slate-500 text-sm">No workshops scheduled.</p>
                             ) : (
                                 investor.workshops.slice(0, 3).map((workshop: any) => (
-                                    <div key={workshop.id} className="flex items-center justify-between border-b border-neutral-800 pb-4 last:border-0 last:pb-0">
+                                    <div key={workshop.id} className="flex items-center justify-between border-b border-slate-100 pb-4 last:border-0 last:pb-0">
                                         <div className="space-y-1">
-                                            <p className="text-sm font-medium leading-none text-foreground dark:text-foreground dark:text-white">{workshop.title}</p>
-                                            <p className="text-xs text-neutral-400">
+                                            <p className="text-sm font-medium leading-none text-slate-900">{workshop.title}</p>
+                                            <p className="text-xs text-slate-500">
                                                 {format(new Date(workshop.date), "MMM d, h:mm a")}
                                             </p>
                                         </div>
                                     </div>
                                 ))
                             )}
-                            <Button variant="outline" className="w-full mt-4 border-amber-500/20 text-amber-400 hover:bg-amber-500/10 hover:text-amber-300" asChild>
+                            <Button variant="outline" className="w-full mt-4 border-slate-200 text-slate-700 hover:bg-amber-50 hover:text-amber-600 hover:border-amber-300" asChild>
                                 <Link href="/dashboard/investor/workshops">Manage Workshops</Link>
                             </Button>
                         </div>
