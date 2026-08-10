@@ -150,15 +150,15 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
               )}
               <div className="text-sm space-y-2">
                 <div className="bg-slate-100 dark:bg-slate-800 p-3 rounded">
-                  <p className="font-semibold mb-1">Q1: fees ah?</p>
+                  <p className="font-semibold mb-1">Q1: Student Inquiry about Fees</p>
                   <p>{a.writtenQ1}</p>
                 </div>
                 <div className="bg-slate-100 dark:bg-slate-800 p-3 rounded">
-                  <p className="font-semibold mb-1">Q2: Worth it at his age?</p>
+                  <p className="font-semibold mb-1">Q2: Working Professional Inquiry on AI/ML</p>
                   <p>{a.writtenQ2}</p>
                 </div>
                 <div className="bg-slate-100 dark:bg-slate-800 p-3 rounded">
-                  <p className="font-semibold mb-1">Q3: Placement guarantee irukka?</p>
+                  <p className="font-semibold mb-1">Q3: Parent Inquiry on Placement Guarantee</p>
                   <p className={a.guaranteeFlag ? "text-red-600 font-medium" : ""}>{a.writtenQ3}</p>
                 </div>
               </div>
