@@ -2,13 +2,24 @@
 
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
+import { prisma } from "@/lib/db";
 
-export async function login(formData: FormData) {
+export async function login(formData: FormData, isAdminLogin: boolean = false) {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const callbackUrl = formData.get("callbackUrl") as string;
 
     try {
+        const user = await prisma.user.findFirst({ where: { OR: [{ email }, { lmsEmail: email }] } });
+        
+        if (isAdminLogin && user?.role !== "ADMIN") {
+            return { error: "Unauthorized access" };
+        }
+        
+        if (!isAdminLogin && user?.role === "ADMIN") {
+            return { error: "Admins must use the admin portal to login." };
+        }
+
         await signIn("credentials", {
             email,
             password,

@@ -8,7 +8,7 @@ export const authConfig = {
             const isLoggedIn = !!auth?.user;
             const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
             const isOnLandingHome = nextUrl.pathname.startsWith('/landing/home');
-            const isAuthPage = nextUrl.pathname.startsWith('/auth') && !nextUrl.pathname.startsWith('/api/auth');
+            const isAuthPage = (nextUrl.pathname.startsWith('/auth') && !nextUrl.pathname.startsWith('/api/auth')) || nextUrl.pathname === '/admin/login';
 
             // Helper to check for public domains (Free Tier)
             const isFreeUser = (user: any) => {
