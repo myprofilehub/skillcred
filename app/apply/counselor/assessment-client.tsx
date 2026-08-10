@@ -21,6 +21,16 @@ const mockLeads = [
   { id: 8, name: "Anitha J.", age: 26, bg: "TCS Manual Tester", source: "LinkedIn", note: "Looking for upskilling" },
   { id: 9, name: "Manoj D.", age: 21, bg: "B.C.A (2024)", source: "Instagram Ad", note: "Plz call me" },
   { id: 10, name: "Swathi N.", age: 29, bg: "Career Gap (4 Yrs)", source: "Facebook Ad", note: "Will companies hire me?" },
+  { id: 11, name: "Gokul R.", age: 22, bg: "B.E ECE (2023)", source: "LinkedIn", note: "Want to learn Data Science" },
+  { id: 12, name: "Lakshmi M.", age: 25, bg: "B.Sc Maths (2020)", source: "Google Search", note: "What is the duration?" },
+  { id: 13, name: "Vijay S.", age: 27, bg: "Sales Exec (3 Yrs)", source: "Instagram Ad", note: "Can I do this part-time?" },
+  { id: 14, name: "Nandhini P.", age: 20, bg: "B.Tech IT (2025)", source: "Facebook Ad", note: "Internship available?" },
+  { id: 15, name: "Surya K.", age: 24, bg: "B.Com (2022)", source: "Google Search", note: "Is coding required?" },
+  { id: 16, name: "Aisha T.", age: 23, bg: "B.E CSE (2022)", source: "Instagram Ad", note: "Need EMI options" },
+  { id: 17, name: "Pratap V.", age: 26, bg: "Civil Engineer", source: "LinkedIn", note: "Future scope in AI?" },
+  { id: 18, name: "Kavya J.", age: 22, bg: "B.B.A (2023)", source: "Facebook Ad", note: "Any demo classes?" },
+  { id: 19, name: "Dinesh B.", age: 28, bg: "Freelancer", source: "Google Search", note: "Can I get a job abroad?" },
+  { id: 20, name: "Sneha R.", age: 21, bg: "B.Tech EEE (2024)", source: "Instagram Ad", note: "Syllabus pdf send" },
 ];
 
 export default function AssessmentClient() {
