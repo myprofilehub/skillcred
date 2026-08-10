@@ -810,3 +810,56 @@ model Lead {
   track     String
   createdAt DateTime @default(now())
 }
+
+enum CounselorStatus {
+  PENDING
+  STAGE_1_FAILED
+  STAGE_1_PASSED
+  STAGE_2_COMPLETED
+  STAGE_3_COMPLETED
+}
+
+model CounselorAssessment {
+  id              String         @id @default(cuid())
+  token           String         @unique
+  expiresAt       DateTime
+  status          CounselorStatus @default(PENDING)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  // Section 1
+  noticePeriod    String?
+  currentCTC      String?
+  expectedCTC     String?
+  chennaiOnsite   Boolean?
+  yearsSales      String?
+  voiceTamilUrl   String?
+  voiceEnglishUrl String?
+
+  // Section 2
+  writtenQ1       String?
+  writtenQ2       String?
+  writtenQ3       String?
+  triageData      Json?
+  triageInsight   String?
+
+  // Section 3
+  objection1Url   String?
+  objection2Url   String?
+  objection3Url   String?
+  objection4Url   String?
+  objection5Url   String?
+  objection6Url   String?
+
+  // Scoring
+  triageScore     Float?
+  guaranteeFlag   Boolean?
+  adminNotes      String?
+  voiceScore      Int?
+  objection1Score Int?
+  objection2Score Int?
+  objection3Score Int?
+  objection4Score Int?
+  objection5Score Int?
+  objection6Score Int?
+}
