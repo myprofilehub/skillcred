@@ -146,7 +146,7 @@ export function EnrollmentsList({
                                 {awaitingApproval.map((enrollment) => (
                                     <div
                                         key={enrollment.id}
-                                        className="flex items-center justify-between p-4 rounded-lg bg-slate-800/50 border border-border dark:border-border dark:border-white/5"
+                                        className="flex items-center justify-between p-4 rounded-lg bg-slate-100/50 border border-border dark:border-border dark:border-white/5"
                                     >
                                         <div className="space-y-1">
                                             <p className="text-sm font-medium text-foreground dark:text-foreground dark:text-slate-900">
@@ -204,7 +204,7 @@ export function EnrollmentsList({
                                     {trackEnrollments.map((enrollment) => (
                                         <div
                                             key={enrollment.id}
-                                            className="flex items-center justify-between p-4 rounded-lg bg-slate-800/50 border border-border dark:border-border dark:border-white/5"
+                                            className="flex items-center justify-between p-4 rounded-lg bg-slate-100/50 border border-border dark:border-border dark:border-white/5"
                                         >
                                             <div className="space-y-1">
                                                 <p className="text-sm font-medium text-foreground dark:text-foreground dark:text-slate-900">
@@ -233,7 +233,7 @@ export function EnrollmentsList({
                                                         }))
                                                     }
                                                 >
-                                                    <SelectTrigger className="w-[200px] bg-slate-800 border-border dark:border-border dark:border-white/10 text-foreground dark:text-foreground dark:text-slate-900">
+                                                    <SelectTrigger className="w-[200px] bg-slate-100 border-border dark:border-border dark:border-white/10 text-foreground dark:text-foreground dark:text-slate-900">
                                                         <SelectValue placeholder="Select Mentor" />
                                                     </SelectTrigger>
                                                     <SelectContent className="bg-white border-border dark:border-border dark:border-white/10">
@@ -279,7 +279,7 @@ export function EnrollmentsList({
                                 {assigned.map((enrollment) => (
                                     <div
                                         key={enrollment.id}
-                                        className="flex items-center justify-between p-4 rounded-lg bg-slate-800/50 border border-border dark:border-border dark:border-white/5"
+                                        className="flex items-center justify-between p-4 rounded-lg bg-slate-100/50 border border-border dark:border-border dark:border-white/5"
                                     >
                                         <div className="space-y-1">
                                             <p className="text-sm font-medium text-foreground dark:text-foreground dark:text-slate-900">
@@ -290,7 +290,7 @@ export function EnrollmentsList({
                                             </p>
                                         </div>
                                         <div className="flex items-center gap-4">
-                                            <Badge className="bg-slate-800 text-muted-foreground dark:text-muted-foreground dark:text-slate-300 border-border dark:border-border dark:border-white/10">
+                                            <Badge className="bg-slate-100 text-muted-foreground dark:text-muted-foreground dark:text-slate-300 border-border dark:border-border dark:border-white/10">
                                                 {enrollment.track.title}
                                             </Badge>
                                             <Badge className="bg-green-500/10 text-green-400 border-green-500/20">

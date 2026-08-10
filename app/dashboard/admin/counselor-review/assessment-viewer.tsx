@@ -43,7 +43,7 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
   return (
     <div className="space-y-6">
       {/* Selector */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="bg-white dark:bg-white border border-slate-200 dark:border-slate-200 rounded-xl p-6 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex-1">
           <label className="text-sm font-medium mb-2 block text-slate-700 dark:text-slate-300">
             Select Candidate to Review
@@ -69,7 +69,7 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
 
       {/* Selected Assessment Details */}
       {a && (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-8 shadow-sm">
+        <div className="bg-white dark:bg-white border border-slate-200 dark:border-slate-200 rounded-xl p-8 shadow-sm">
           
           {a.cumulativeScore !== null && (
             <div className="mb-8 p-6 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-xl">
@@ -83,7 +83,7 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
             </div>
           )}
 
-          <div className="flex justify-between items-start mb-6 pb-6 border-b border-slate-100 dark:border-slate-800">
+          <div className="flex justify-between items-start mb-6 pb-6 border-b border-slate-100 dark:border-slate-200">
             <div>
               <h2 className="text-xl font-bold mb-1">
                 {a.candidateName ? a.candidateName : `Token: ${a.token.substring(0, 8)}...`}
@@ -110,7 +110,7 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             {/* Voice Answers */}
-            <div className="space-y-4 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg">
+            <div className="space-y-4 bg-slate-50 dark:bg-slate-100/50 p-4 rounded-lg">
               <div className="flex justify-between items-center">
                 <h3 className="font-semibold text-lg">Voice Answers</h3>
                 {a.voiceScore !== null && (
@@ -128,18 +128,18 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
                 <p className="text-sm font-medium mb-2">Tamil (Introduce yourself)</p>
                 {a.voiceTamilUrl ? (
                   <audio controls src={a.voiceTamilUrl} className="w-full" />
-                ) : <p className="text-sm text-slate-400">No recording</p>}
+                ) : <p className="text-sm text-slate-500">No recording</p>}
               </div>
               <div>
                 <p className="text-sm font-medium mb-2">English (Why join us)</p>
                 {a.voiceEnglishUrl ? (
                   <audio controls src={a.voiceEnglishUrl} className="w-full" />
-                ) : <p className="text-sm text-slate-400">No recording</p>}
+                ) : <p className="text-sm text-slate-500">No recording</p>}
               </div>
               
               {a.voiceFeedback && (
                 <div className="pt-2">
-                  <p className="text-sm text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 p-2 border border-slate-200 dark:border-slate-700 rounded">
+                  <p className="text-sm text-slate-700 dark:text-slate-300 bg-white dark:bg-white p-2 border border-slate-200 dark:border-slate-300 rounded">
                     <span className="font-semibold text-xs text-slate-500 uppercase block mb-1">AI Feedback</span>
                     {a.voiceFeedback}
                   </p>
@@ -168,29 +168,29 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
                 </div>
               )}
               <div className="text-sm space-y-2">
-                <div className="bg-slate-100 dark:bg-slate-800 p-3 rounded">
+                <div className="bg-slate-100 dark:bg-slate-100 p-3 rounded">
                   <p className="font-semibold mb-1">Q1: Student Inquiry about Fees</p>
                   <p>{a.writtenQ1}</p>
                 </div>
-                <div className="bg-slate-100 dark:bg-slate-800 p-3 rounded">
+                <div className="bg-slate-100 dark:bg-slate-100 p-3 rounded">
                   <p className="font-semibold mb-1">Q2: Working Professional Inquiry on AI/ML</p>
                   <p>{a.writtenQ2}</p>
                 </div>
-                <div className="bg-slate-100 dark:bg-slate-800 p-3 rounded">
+                <div className="bg-slate-100 dark:bg-slate-100 p-3 rounded">
                   <p className="font-semibold mb-1">Q3: Parent Inquiry on Placement Guarantee</p>
                   <p className={a.guaranteeFlag ? "text-red-600 font-medium" : ""}>{a.writtenQ3}</p>
                 </div>
               </div>
 
               {a.triageScore !== null && (
-                <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800">
+                <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-200">
                   <div className="flex justify-between items-center mb-2">
                     <h3 className="font-semibold text-md text-slate-800 dark:text-slate-200">AI Triage Analysis</h3>
                     <div className="px-2 py-1 bg-slate-200 dark:bg-slate-700 rounded text-xs font-bold">
                       Score: {a.triageScore}/10
                     </div>
                   </div>
-                  <p className="text-sm text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-900 p-3 rounded border border-slate-100 dark:border-slate-800">
+                  <p className="text-sm text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-white p-3 rounded border border-slate-100 dark:border-slate-200">
                     {a.triageFeedback}
                   </p>
                 </div>
@@ -210,7 +210,7 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
                 { url: a.objection5Url, score: a.objection5Score, label: "Obj 5: Recognised certificate?" },
                 { url: a.objection6Url, score: a.objection6Score, label: "Obj 6: Trust a new company?" }
               ].map((obj, idx) => (
-                <div key={idx} className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg">
+                <div key={idx} className="bg-slate-50 dark:bg-slate-100/50 p-4 rounded-lg">
                   <div className="flex justify-between items-start mb-2">
                     <p className="text-sm font-medium">{obj.label}</p>
                     {obj.score !== null && (
@@ -226,7 +226,7 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
                   )}
                   {obj.score === null && (
                     <div className="mt-3">
-                      <label className="text-xs font-medium text-slate-400">Manual Score</label>
+                      <label className="text-xs font-medium text-slate-500">Manual Score</label>
                       <input type="range" min="1" max="5" defaultValue="3" className="w-full mt-1 opacity-50" />
                     </div>
                   )}
@@ -236,10 +236,10 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
           </div>
           
           {/* Final Notes */}
-          <div className="mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
+          <div className="mt-8 pt-8 border-t border-slate-100 dark:border-slate-200">
             <h3 className="font-semibold text-lg mb-4">Reviewer Notes</h3>
             <textarea 
-              className="w-full p-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow" 
+              className="w-full p-4 rounded-lg border border-slate-200 dark:border-slate-300 bg-white dark:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow" 
               rows={4} 
               defaultValue={a.adminNotes || ""}
               onBlur={handleNotesChange}

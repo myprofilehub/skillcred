@@ -83,12 +83,12 @@ export function RecordingsList({ initialRecordings, tracks }: { initialRecording
                 <div></div>
                 <Dialog open={isUploadOpen} onOpenChange={setIsUploadOpen}>
                     <DialogTrigger asChild>
-                        <Button className="bg-cyan-600 hover:bg-cyan-500 text-foreground dark:text-foreground dark:text-white gap-2 font-semibold">
+                        <Button className="bg-cyan-600 hover:bg-cyan-500 text-foreground dark:text-foreground dark:text-slate-900 gap-2 font-semibold">
                             <Plus className="w-4 h-4" />
                             Upload Video
                         </Button>
                     </DialogTrigger>
-                    <DialogContent className="bg-slate-900 border-border dark:border-border dark:border-white/10 text-foreground dark:text-foreground dark:text-white sm:max-w-[425px]">
+                    <DialogContent className="bg-white border-border dark:border-border dark:border-white/10 text-foreground dark:text-foreground dark:text-slate-900 sm:max-w-[425px]">
                         <DialogHeader>
                             <DialogTitle>Upload Pre-Recorded Video</DialogTitle>
                         </DialogHeader>
@@ -100,7 +100,7 @@ export function RecordingsList({ initialRecordings, tracks }: { initialRecording
                                     placeholder="e.g. Intro to Node.js"
                                     value={formData.title}
                                     onChange={e => setFormData({...formData, title: e.target.value})}
-                                    className="bg-slate-800 border-border dark:border-border dark:border-white/10"
+                                    className="bg-slate-100 border-border dark:border-border dark:border-white/10"
                                     required
                                 />
                             </div>
@@ -111,7 +111,7 @@ export function RecordingsList({ initialRecordings, tracks }: { initialRecording
                                     placeholder="https://..."
                                     value={formData.url}
                                     onChange={e => setFormData({...formData, url: e.target.value})}
-                                    className="bg-slate-800 border-border dark:border-border dark:border-white/10"
+                                    className="bg-slate-100 border-border dark:border-border dark:border-white/10"
                                     required
                                 />
                             </div>
@@ -121,12 +121,12 @@ export function RecordingsList({ initialRecordings, tracks }: { initialRecording
                                     value={formData.trackId} 
                                     onValueChange={v => setFormData({...formData, trackId: v})}
                                 >
-                                    <SelectTrigger className="bg-slate-800 border-border dark:border-border dark:border-white/10">
+                                    <SelectTrigger className="bg-slate-100 border-border dark:border-border dark:border-white/10">
                                         <SelectValue placeholder="Choose a track..." />
                                     </SelectTrigger>
-                                    <SelectContent className="bg-slate-900 border-border dark:border-border dark:border-white/10">
+                                    <SelectContent className="bg-white border-border dark:border-border dark:border-white/10">
                                         {tracks.map(t => (
-                                            <SelectItem key={t.id} value={t.id} className="text-foreground dark:text-foreground dark:text-white hover:bg-slate-800 focus:bg-slate-800">
+                                            <SelectItem key={t.id} value={t.id} className="text-foreground dark:text-foreground dark:text-slate-900 hover:bg-slate-100 focus:bg-slate-100">
                                                 {t.title}
                                             </SelectItem>
                                         ))}
@@ -140,7 +140,7 @@ export function RecordingsList({ initialRecordings, tracks }: { initialRecording
                                     placeholder="Brief summary of the video..."
                                     value={formData.description}
                                     onChange={e => setFormData({...formData, description: e.target.value})}
-                                    className="w-full h-24 bg-slate-800 border border-border dark:border-border dark:border-white/10 rounded-md p-3 text-sm focus:outline-none focus:ring-1 focus:ring-cyan-500 text-foreground dark:text-foreground dark:text-white"
+                                    className="w-full h-24 bg-slate-100 border border-border dark:border-border dark:border-white/10 rounded-md p-3 text-sm focus:outline-none focus:ring-1 focus:ring-cyan-500 text-foreground dark:text-foreground dark:text-slate-900"
                                 />
                             </div>
                             <div className="flex items-center gap-2 pt-2">
@@ -155,10 +155,10 @@ export function RecordingsList({ initialRecordings, tracks }: { initialRecording
                                 </Label>
                             </div>
                             <div className="pt-4 flex justify-end gap-3">
-                                <Button type="button" variant="ghost" onClick={() => setIsUploadOpen(false)} className="hover:bg-slate-800 hover:text-foreground dark:text-foreground dark:text-white">
+                                <Button type="button" variant="ghost" onClick={() => setIsUploadOpen(false)} className="hover:bg-slate-100 hover:text-foreground dark:text-foreground dark:text-slate-900">
                                     Cancel
                                 </Button>
-                                <Button type="submit" disabled={isSubmitting} className="bg-cyan-600 hover:bg-cyan-500 text-foreground dark:text-foreground dark:text-white">
+                                <Button type="submit" disabled={isSubmitting} className="bg-cyan-600 hover:bg-cyan-500 text-foreground dark:text-foreground dark:text-slate-900">
                                     {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
                                     {isSubmitting ? "Uploading..." : "Save Video"}
                                 </Button>
@@ -168,27 +168,27 @@ export function RecordingsList({ initialRecordings, tracks }: { initialRecording
                 </Dialog>
             </div>
 
-            <Card className="bg-slate-900/60 border-cyan-500/20">
+            <Card className="bg-white border-cyan-500/20">
                 <CardHeader className="border-b border-border dark:border-border dark:border-white/5 pb-4">
-                    <CardTitle className="text-xl font-semibold text-foreground dark:text-foreground dark:text-white">All Recordings</CardTitle>
+                    <CardTitle className="text-xl font-semibold text-foreground dark:text-foreground dark:text-slate-900">All Recordings</CardTitle>
                 </CardHeader>
                 <CardContent className="p-0">
                     {recordings.length === 0 ? (
-                        <div className="p-12 text-center flex flex-col items-center justify-center text-muted-foreground dark:text-muted-foreground dark:text-slate-400">
+                        <div className="p-12 text-center flex flex-col items-center justify-center text-muted-foreground dark:text-muted-foreground dark:text-slate-500">
                             <Video className="w-12 h-12 mb-3 opacity-20" />
                             <p>No video recordings found.</p>
                         </div>
                     ) : (
                         <div className="divide-y text-sm divide-white/5">
                             {recordings.map((rec) => (
-                                <div key={rec.id} className="p-4 flex items-center justify-between hover:bg-slate-800/50 transition-colors">
+                                <div key={rec.id} className="p-4 flex items-center justify-between hover:bg-slate-100/50 transition-colors">
                                     <div className="flex items-center gap-4 flex-1">
                                         <div className={`p-2 rounded-lg ${rec.type === 'PRE_RECORDED' ? 'bg-cyan-500/10 text-cyan-400' : 'bg-rose-500/10 text-rose-400'}`}>
                                             <Video className="w-5 h-5" />
                                         </div>
                                         <div>
-                                            <h4 className="font-medium text-foreground dark:text-foreground dark:text-white mb-1 line-clamp-1">{rec.title}</h4>
-                                            <div className="flex items-center gap-3 text-xs text-muted-foreground dark:text-muted-foreground dark:text-slate-400">
+                                            <h4 className="font-medium text-foreground dark:text-foreground dark:text-slate-900 mb-1 line-clamp-1">{rec.title}</h4>
+                                            <div className="flex items-center gap-3 text-xs text-muted-foreground dark:text-muted-foreground dark:text-slate-500">
                                                 <Badge variant="outline" className="bg-muted dark:bg-background dark:bg-muted dark:bg-background dark:bg-black/20 border-border dark:border-border dark:border-white/10 font-normal">
                                                     {rec.type === 'PRE_RECORDED' ? 'Library Upload' : 'Live Class'}
                                                 </Badge>
@@ -200,7 +200,7 @@ export function RecordingsList({ initialRecordings, tracks }: { initialRecording
                                     
                                     <div className="flex items-center gap-2">
                                         <a href={rec.url} target="_blank" rel="noopener noreferrer">
-                                            <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground dark:text-muted-foreground dark:text-slate-400 hover:text-foreground dark:text-foreground dark:text-white hover:bg-white/10" title="Watch Video">
+                                            <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground dark:text-muted-foreground dark:text-slate-500 hover:text-foreground dark:text-foreground dark:text-slate-900 hover:bg-white/10" title="Watch Video">
                                                 <LinkIcon className="w-4 h-4" />
                                             </Button>
                                         </a>

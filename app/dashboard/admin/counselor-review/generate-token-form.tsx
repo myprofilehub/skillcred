@@ -54,7 +54,7 @@ export function GenerateTokenForm() {
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm mb-12">
+    <div className="bg-white dark:bg-white border border-slate-200 dark:border-slate-200 rounded-xl p-6 shadow-sm mb-12">
       <h2 className="text-xl font-bold mb-4 flex items-center">
         <Link className="w-5 h-5 mr-2 text-blue-600" />
         Generate Assessment Link
@@ -90,7 +90,7 @@ export function GenerateTokenForm() {
           <div className="truncate w-full font-mono text-sm text-green-800 dark:text-green-300">
             {generatedUrl}
           </div>
-          <Button onClick={copyToClipboard} variant="outline" size="sm" className="shrink-0 bg-white dark:bg-slate-800">
+          <Button onClick={copyToClipboard} variant="outline" size="sm" className="shrink-0 bg-white dark:bg-slate-100">
             <Copy className="w-4 h-4 mr-2" /> Copy Link
           </Button>
         </div>
