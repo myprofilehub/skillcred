@@ -51,6 +51,19 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
       {/* Selected Assessment Details */}
       {a && (
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-8 shadow-sm">
+          
+          {a.cumulativeScore !== null && (
+            <div className="mb-8 p-6 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-xl">
+              <div className="flex items-center gap-4 mb-3">
+                <div className={`text-2xl font-bold px-4 py-2 rounded-lg ${a.cumulativeScore >= 80 ? 'bg-green-100 text-green-700' : a.cumulativeScore < 50 ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700'}`}>
+                  {a.cumulativeScore}/100
+                </div>
+                <h3 className="text-xl font-bold text-indigo-900 dark:text-indigo-100">Cumulative AI Verdict</h3>
+              </div>
+              <p className="text-slate-700 dark:text-slate-300 font-medium">{a.cumulativeFeedback}</p>
+            </div>
+          )}
+
           <div className="flex justify-between items-start mb-6 pb-6 border-b border-slate-100 dark:border-slate-800">
             <div>
               <h2 className="text-xl font-bold mb-1">
@@ -79,7 +92,19 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             {/* Voice Answers */}
             <div className="space-y-4 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg">
-              <h3 className="font-semibold text-lg">Voice Answers</h3>
+              <div className="flex justify-between items-center">
+                <h3 className="font-semibold text-lg">Voice Answers</h3>
+                {a.voiceScore !== null && (
+                  <div className={`px-2 py-1 rounded-full text-xs font-bold ${
+                    a.voiceScore >= 4 ? 'bg-green-100 text-green-700' :
+                    a.voiceScore <= 2 ? 'bg-red-100 text-red-700' :
+                    'bg-amber-100 text-amber-700'
+                  }`}>
+                    AI Score: {a.voiceScore}/5
+                  </div>
+                )}
+              </div>
+              
               <div>
                 <p className="text-sm font-medium mb-2">Tamil (Introduce yourself)</p>
                 {a.voiceTamilUrl ? (
@@ -92,13 +117,18 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
                   <audio controls src={a.voiceEnglishUrl} className="w-full" />
                 ) : <p className="text-sm text-slate-400">No recording</p>}
               </div>
-              <div className="pt-2">
-                <label className="text-sm font-medium">Fluency Score (1-5)</label>
-                <input type="range" min="1" max="5" defaultValue="3" className="w-full mt-2" />
-              </div>
+              
+              {a.voiceFeedback && (
+                <div className="pt-2">
+                  <p className="text-sm text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 p-2 border border-slate-200 dark:border-slate-700 rounded">
+                    <span className="font-semibold text-xs text-slate-500 uppercase block mb-1">AI Feedback</span>
+                    {a.voiceFeedback}
+                  </p>
+                </div>
+              )}
             </div>
 
-            {/* Written Answers */}
+            {/* Written Answers & Triage */}
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <h3 className="font-semibold text-lg">Written Answers</h3>
@@ -114,7 +144,7 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
               </div>
               {a.empathyFeedback && (
                 <div className="bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-200 p-3 rounded-lg text-sm border border-blue-100 dark:border-blue-800">
-                  <span className="font-semibold">AI Insight: </span>
+                  <span className="font-semibold">AI Empathy Insight: </span>
                   {a.empathyFeedback}
                 </div>
               )}
@@ -132,6 +162,20 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
                   <p className={a.guaranteeFlag ? "text-red-600 font-medium" : ""}>{a.writtenQ3}</p>
                 </div>
               </div>
+
+              {a.triageScore !== null && (
+                <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800">
+                  <div className="flex justify-between items-center mb-2">
+                    <h3 className="font-semibold text-md text-slate-800 dark:text-slate-200">AI Triage Analysis</h3>
+                    <div className="px-2 py-1 bg-slate-200 dark:bg-slate-700 rounded text-xs font-bold">
+                      Score: {a.triageScore}/10
+                    </div>
+                  </div>
+                  <p className="text-sm text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-900 p-3 rounded border border-slate-100 dark:border-slate-800">
+                    {a.triageFeedback}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
 
@@ -140,24 +184,33 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
             <h3 className="font-semibold text-lg mb-4">Objection Handling Videos</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { url: a.objection1Url, label: "Obj 1: Guarantee a job?" },
-                { url: a.objection2Url, label: "Obj 2: ₹9,999 is too much" },
-                { url: a.objection3Url, label: "Obj 3: No coding background" },
-                { url: a.objection4Url, label: "Obj 4: Discuss with parents" },
-                { url: a.objection5Url, label: "Obj 5: Recognised certificate?" },
-                { url: a.objection6Url, label: "Obj 6: Trust a new company?" }
+                { url: a.objection1Url, score: a.objection1Score, label: "Obj 1: Guarantee a job?" },
+                { url: a.objection2Url, score: a.objection2Score, label: "Obj 2: ₹9,999 is too much" },
+                { url: a.objection3Url, score: a.objection3Score, label: "Obj 3: No coding background" },
+                { url: a.objection4Url, score: a.objection4Score, label: "Obj 4: Discuss with parents" },
+                { url: a.objection5Url, score: a.objection5Score, label: "Obj 5: Recognised certificate?" },
+                { url: a.objection6Url, score: a.objection6Score, label: "Obj 6: Trust a new company?" }
               ].map((obj, idx) => (
                 <div key={idx} className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg">
-                  <p className="text-sm font-medium mb-2">{obj.label}</p>
+                  <div className="flex justify-between items-start mb-2">
+                    <p className="text-sm font-medium">{obj.label}</p>
+                    {obj.score !== null && (
+                      <span className="text-xs font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded">
+                        {obj.score}/5
+                      </span>
+                    )}
+                  </div>
                   {obj.url ? (
                     <video controls src={obj.url} className="w-full rounded bg-black aspect-video object-cover" />
                   ) : (
                     <div className="aspect-video bg-slate-200 dark:bg-slate-700 rounded flex items-center justify-center text-sm text-slate-500">No video</div>
                   )}
-                  <div className="mt-3">
-                    <label className="text-xs font-medium">Score (1-5)</label>
-                    <input type="range" min="1" max="5" defaultValue="3" className="w-full mt-1" />
-                  </div>
+                  {obj.score === null && (
+                    <div className="mt-3">
+                      <label className="text-xs font-medium text-slate-400">Manual Score</label>
+                      <input type="range" min="1" max="5" defaultValue="3" className="w-full mt-1 opacity-50" />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

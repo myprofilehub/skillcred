@@ -867,4 +867,11 @@ model CounselorAssessment {
   objection4Score Int?
   objection5Score Int?
   objection6Score Int?
+
+  // AI Feedback
+  voiceFeedback      String?
+  triageFeedback     String?
+  videoFeedback      String?
+  cumulativeScore    Int?
+  cumulativeFeedback String?
 }
