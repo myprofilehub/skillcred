@@ -264,6 +264,7 @@ export default function AssessmentClient() {
                     <th className="px-4 py-3">Background</th>
                     <th className="px-4 py-3">Source</th>
                     <th className="px-4 py-3">Initial Note</th>
+                    <th className="px-4 py-3">Your Priority</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -273,6 +274,20 @@ export default function AssessmentClient() {
                       <td className="px-4 py-3">{lead.bg}</td>
                       <td className="px-4 py-3">{lead.source}</td>
                       <td className="px-4 py-3 italic">"{lead.note}"</td>
+                      <td className="px-4 py-2">
+                        <select
+                          className="w-full px-2 py-1.5 text-sm rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                          value={triageData[lead.id] || ""}
+                          onChange={e => setTriageData(prev => ({ ...prev, [lead.id]: e.target.value }))}
+                        >
+                          <option value="">--</option>
+                          <option value="1-hot">1 – Hot (Call Now)</option>
+                          <option value="2-warm">2 – Warm (Call Today)</option>
+                          <option value="3-nurture">3 – Nurture (Follow-up)</option>
+                          <option value="4-cold">4 – Cold (Low Priority)</option>
+                          <option value="5-disqualify">5 – Disqualify</option>
+                        </select>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
