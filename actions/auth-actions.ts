@@ -16,6 +16,14 @@ export async function login(formData: FormData) {
     const callbackUrl = formData.get("callbackUrl") as string;
 
     try {
+        const userCheck = await prisma.user.findUnique({
+            where: { email }
+        });
+
+        if (userCheck && userCheck.role === "ADMIN") {
+            return { error: "Admins must use the admin portal to login." };
+        }
+
         await signIn("credentials", {
             email,
             password,
