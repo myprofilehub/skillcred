@@ -62,7 +62,7 @@ const sidebarItems = [
     },
     {
         title: "Counselor Review",
-        href: "/admin/counselor-review",
+        href: "/dashboard/admin/counselor-review",
         icon: ClipboardCheck,
     },
 ];
