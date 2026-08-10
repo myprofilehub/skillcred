@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CounselorAssessment } from "@prisma/client";
+import { saveAdminNotes } from "@/actions/admin-actions";
+import { toast } from "sonner";
 
 interface AssessmentViewerProps {
   assessments: CounselorAssessment[];
@@ -13,6 +15,7 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
   const [selectedId, setSelectedId] = useState<string>(
     assessments.length > 0 ? assessments[0].id : ""
   );
+  const [isPending, startTransition] = useTransition();
 
   if (assessments.length === 0) {
     return <div className="text-slate-500">No assessments found.</div>;
@@ -20,6 +23,22 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
 
   const selectedAssessment = assessments.find(a => a.id === selectedId) || assessments[0];
   const a = selectedAssessment;
+
+  const handleNotesChange = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+    const newNotes = e.target.value;
+    if (newNotes === a.adminNotes) return; // don't save if unchanged
+
+    startTransition(async () => {
+      const res = await saveAdminNotes(a.id, newNotes);
+      if (res.success) {
+        toast.success("Notes saved successfully");
+        // Opt: we'd ideally mutate the state here if we wanted it perfectly in sync, 
+        // but since we get data via server components, it's mostly fine for this view.
+      } else {
+        toast.error("Failed to save notes");
+      }
+    });
+  };
 
   return (
     <div className="space-y-6">
@@ -74,7 +93,7 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
               )}
               <div className="flex space-x-2">
                 <Badge variant={a.status === "STAGE_3_COMPLETED" ? "default" : "secondary"}>
-                  {a.status}
+                  {a.status.replace(/_/g, " ")}
                 </Badge>
                 {a.guaranteeFlag && (
                   <Badge variant="destructive">Guarantee Flag: HIT</Badge>
@@ -220,10 +239,12 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
           <div className="mt-8 pt-8 border-t border-slate-100 dark:border-slate-800">
             <h3 className="font-semibold text-lg mb-4">Reviewer Notes</h3>
             <textarea 
-              className="w-full p-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900" 
+              className="w-full p-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow" 
               rows={4} 
               defaultValue={a.adminNotes || ""}
-              placeholder="Enter final notes and observations..."
+              onBlur={handleNotesChange}
+              disabled={isPending}
+              placeholder="Enter final notes and observations... (auto-saves when you click outside)"
             />
           </div>
         </div>
