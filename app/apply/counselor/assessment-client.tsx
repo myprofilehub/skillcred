@@ -8,7 +8,20 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { CheckCircle2, XCircle } from "lucide-react";
+import { CheckCircle2, XCircle, Download, FileText } from "lucide-react";
+
+const mockLeads = [
+  { id: 1, name: "Arun K.", age: 21, bg: "B.Tech IT (2024)", source: "Instagram Ad", note: "fees ah?" },
+  { id: 2, name: "Priya S.", age: 24, bg: "B.Com (2021) - Non IT", source: "Facebook", note: "Need placement guarantee" },
+  { id: 3, name: "Rahul M.", age: 28, bg: "BPO Support (3 Yrs)", source: "Google Search", note: "Is AI good for my age?" },
+  { id: 4, name: "Divya R.", age: 22, bg: "B.E CSE (2023)", source: "Instagram Ad", note: "Can I get syllabus?" },
+  { id: 5, name: "Sanjay V.", age: 19, bg: "12th Pass", source: "Facebook Ad", note: "Timepass enquiry" },
+  { id: 6, name: "Meera T.", age: 25, bg: "M.Sc Physics", source: "Google Search", note: "Want to switch to IT" },
+  { id: 7, name: "Karthik P.", age: 23, bg: "B.Tech Mech (2022)", source: "Instagram Ad", note: "Too expensive" },
+  { id: 8, name: "Anitha J.", age: 26, bg: "TCS Manual Tester", source: "LinkedIn", note: "Looking for upskilling" },
+  { id: 9, name: "Manoj D.", age: 21, bg: "B.C.A (2024)", source: "Instagram Ad", note: "Plz call me" },
+  { id: 10, name: "Swathi N.", age: 29, bg: "Career Gap (4 Yrs)", source: "Facebook Ad", note: "Will companies hire me?" },
+];
 
 export default function AssessmentClient() {
   const searchParams = useSearchParams();
@@ -32,7 +45,6 @@ export default function AssessmentClient() {
   const [writtenQ2, setWrittenQ2] = useState("");
   const [writtenQ3, setWrittenQ3] = useState("");
   const [triageInsight, setTriageInsight] = useState("");
-  // Simple triage data (20 rows) - initializing with dummy data for UI brevity
   const [triageData, setTriageData] = useState<Record<string, string>>({});
   const [timeLeftS2, setTimeLeftS2] = useState(25 * 60);
 
@@ -74,20 +86,13 @@ export default function AssessmentClient() {
 
   // Section 2 Timer
   useEffect(() => {
-    if (status === "STAGE_1_PASSED" && timeLeftS2 > 0) {
+    if (timeLeftS2 > 0) {
       const timer = setTimeout(() => setTimeLeftS2(prev => prev - 1), 1000);
       return () => clearTimeout(timer);
-    } else if (status === "STAGE_1_PASSED" && timeLeftS2 === 0) {
-      submitSection2();
     }
-  }, [status, timeLeftS2]);
+  }, [timeLeftS2]);
 
   const submitSection1 = async () => {
-    if (!noticePeriod || !currentCTC || !expectedCTC || !yearsSales || !voiceTamilUrl || !voiceEnglishUrl) {
-      toast.error("Please complete all fields and recordings.");
-      return;
-    }
-    
     setSubmitting(true);
     const res = await fetch("/api/apply/counselor", {
       method: "POST",
@@ -101,9 +106,7 @@ export default function AssessmentClient() {
       })
     });
     const data = await res.json();
-    if (data.success) {
-      setStatus(data.status);
-    }
+    if (data.success) toast.success("Section 1 Saved");
     setSubmitting(false);
   };
 
@@ -121,9 +124,7 @@ export default function AssessmentClient() {
       })
     });
     const data = await res.json();
-    if (data.success) {
-      setStatus(data.status);
-    }
+    if (data.success) toast.success("Section 2 Saved");
     setSubmitting(false);
   };
 
@@ -146,27 +147,20 @@ export default function AssessmentClient() {
       })
     });
     const data = await res.json();
-    if (data.success) {
-      setStatus(data.status);
-    }
+    if (data.success) toast.success("Assessment Complete!");
     setSubmitting(false);
   };
 
   if (loading) return <div className="text-center p-12">Loading...</div>;
   if (status === "INVALID" || status === "ERROR") return <div className="text-center p-12 text-red-500">Invalid or expired assessment link.</div>;
 
-  if (status === "PENDING") {
-    return (
+  return (
+    <div className="space-y-12 pb-24">
+      {/* SECTION 1 */}
       <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-white/10 p-8">
         <h1 className="text-3xl font-bold mb-6">Career Counselor Assessment</h1>
         <div className="space-y-4 text-lg text-slate-700 dark:text-slate-300">
           <p>Welcome. This asynchronous assessment consists of 3 sections.</p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li><strong>Expected Total Time:</strong> ~45 minutes.</li>
-            <li><strong>Video & Audio Required:</strong> You will need a working microphone and camera.</li>
-            <li><strong>Timed Answers:</strong> Sections 2 and 3 have strict timers and auto-submit.</li>
-          </ul>
-          <p className="mt-8">We review all submissions within 48 hours.</p>
         </div>
         <div className="mt-8">
           <h2 className="text-xl font-bold mb-4">Section 1: Knockouts & Voice</h2>
@@ -215,30 +209,24 @@ export default function AssessmentClient() {
           </Button>
         </div>
       </div>
-    );
-  }
 
-  if (status === "STAGE_1_FAILED") {
-    return (
-      <div className="max-w-2xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-white/10 p-12 text-center">
-        <XCircle className="w-16 h-16 text-red-500 mx-auto mb-6" />
-        <h2 className="text-2xl font-bold mb-4">Thank you for your time</h2>
-        <p className="text-slate-600 dark:text-slate-400">
-          Based on the initial criteria submitted, we won't be able to move forward with your application at this time. We are specifically looking for candidates matching certain location, timeline, and expectation criteria for this cohort. We wish you the best in your job search!
-        </p>
-        <p className="mt-8 text-sm text-slate-500 font-medium">Ganesan M | Co-Founder & CTO</p>
-      </div>
-    );
-  }
-
-  if (status === "STAGE_1_PASSED") {
-    return (
+      {/* SECTION 2 */}
       <div className="max-w-4xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-white/10 p-8">
         <div className="flex justify-between items-center mb-6 pb-4 border-b">
           <h1 className="text-2xl font-bold">Section 2: Written Scenarios</h1>
           <div className="text-red-500 font-mono text-xl font-bold">
             {Math.floor(timeLeftS2 / 60)}:{(timeLeftS2 % 60).toString().padStart(2, '0')}
           </div>
+        </div>
+
+        <div className="bg-blue-50 dark:bg-blue-900/20 text-blue-900 dark:text-blue-100 p-4 rounded-lg mb-8 flex items-center justify-between">
+          <div>
+            <h3 className="font-semibold flex items-center"><FileText className="w-5 h-5 mr-2" /> Preparation Material</h3>
+            <p className="text-sm mt-1 opacity-90">Please download and review our program guide before answering the following questions.</p>
+          </div>
+          <Button variant="outline" className="bg-white hover:bg-slate-100 text-blue-900">
+            <Download className="w-4 h-4 mr-2" /> Download Guide (PDF)
+          </Button>
         </div>
         
         <div className="space-y-8">
@@ -256,9 +244,33 @@ export default function AssessmentClient() {
           </div>
           
           <div className="pt-6 border-t">
-            <h3 className="font-semibold mb-2">Triage Table Analysis</h3>
-            <p className="text-sm text-slate-500 mb-4">Based on the 20 leads provided (simplified for this UI), what does the list tell you about our ad targeting?</p>
-            <Textarea value={triageInsight} onChange={e => setTriageInsight(e.target.value)} placeholder="Your insight on ad targeting..." className="h-32" />
+            <h3 className="font-semibold mb-4">Triage Table Analysis</h3>
+            
+            <div className="overflow-x-auto border rounded-lg mb-4">
+              <table className="w-full text-sm text-left text-slate-500">
+                <thead className="text-xs text-slate-700 uppercase bg-slate-50 dark:bg-slate-800 dark:text-slate-300">
+                  <tr>
+                    <th className="px-4 py-3">Lead Name</th>
+                    <th className="px-4 py-3">Background</th>
+                    <th className="px-4 py-3">Source</th>
+                    <th className="px-4 py-3">Initial Note</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {mockLeads.map((lead) => (
+                    <tr key={lead.id} className="border-b dark:border-slate-700 bg-white dark:bg-slate-900">
+                      <td className="px-4 py-3 font-medium text-slate-900 dark:text-white">{lead.name} ({lead.age})</td>
+                      <td className="px-4 py-3">{lead.bg}</td>
+                      <td className="px-4 py-3">{lead.source}</td>
+                      <td className="px-4 py-3 italic">"{lead.note}"</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <p className="text-sm text-slate-500 mb-4 font-medium">Based on the recent leads table above, what does this list tell you about our ad targeting, and how would you prioritize calling them?</p>
+            <Textarea value={triageInsight} onChange={e => setTriageInsight(e.target.value)} placeholder="Your insight on ad targeting and prioritization..." className="h-32" />
           </div>
         </div>
 
@@ -266,65 +278,70 @@ export default function AssessmentClient() {
           {submitting ? "Submitting..." : "Submit Section 2"}
         </Button>
       </div>
-    );
-  }
 
-  if (status === "STAGE_2_COMPLETED") {
-    return (
+      {/* SECTION 3 */}
       <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-white/10 p-8">
-        <h1 className="text-2xl font-bold mb-6">Section 3: Video Objections</h1>
+        <h1 className="text-2xl font-bold mb-2">Section 3: Video Objections</h1>
         <p className="mb-8 text-slate-600 dark:text-slate-400">
-          You will face 6 common objections. For each, you will have 20 seconds to read the objection, followed by 90 seconds of mandatory auto-recording. There are no re-records.
+          You will face 6 common objections in sequence. The active objection is highlighted below. Once you finish recording one, the next will unlock.
         </p>
 
-        {currentObjection < 6 ? (
-          <div className="space-y-6">
-            <div className="p-6 bg-blue-50 dark:bg-blue-900/20 text-blue-900 dark:text-blue-100 rounded-xl text-center text-xl font-medium">
-              Objection {currentObjection + 1}: {objections[currentObjection]}
-            </div>
+        <div className="space-y-4">
+          {objections.map((objectionText, idx) => {
+            const isActive = idx === currentObjection;
+            const isCompleted = idx < currentObjection;
             
-            <AssessmentMediaRecorder 
-              key={currentObjection}
-              token={token!} 
-              type={`video_obj${currentObjection + 1}`} 
-              isVideo={true} 
-              maxDurationSeconds={90} 
-              autoStartDelaySeconds={20}
-              onUploadComplete={(url) => {
-                setObjectionUrls(prev => ({ ...prev, [currentObjection]: url }));
-                if (currentObjection === 5) {
-                  // Wait state before submit
-                } else {
-                  setCurrentObjection(c => c + 1);
-                }
-              }}
-            />
-            
-            {currentObjection === 5 && objectionUrls[5] && (
-              <Button onClick={submitSection3} disabled={submitting} className="w-full mt-4">
-                {submitting ? "Submitting Final..." : "Complete Assessment"}
-              </Button>
-            )}
-          </div>
-        ) : (
-          <div className="text-center p-8">Processing...</div>
+            return (
+              <div 
+                key={idx} 
+                className={`p-6 rounded-xl border-2 transition-all duration-300 ${
+                  isActive ? "border-blue-500 bg-blue-50/50 dark:bg-blue-900/10 shadow-md" : 
+                  isCompleted ? "border-green-200 bg-green-50/50 dark:border-green-900/30 dark:bg-green-900/10 opacity-75" : 
+                  "border-slate-100 bg-slate-50 dark:border-slate-800 dark:bg-slate-900 opacity-50"
+                }`}
+              >
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className={`text-lg font-semibold ${isActive ? "text-blue-700 dark:text-blue-300" : isCompleted ? "text-green-700 dark:text-green-400" : "text-slate-500"}`}>
+                    Objection {idx + 1} of 6
+                  </h3>
+                  {isCompleted && <CheckCircle2 className="w-5 h-5 text-green-500" />}
+                </div>
+                
+                <div className="text-xl font-medium text-slate-800 dark:text-slate-200 mb-6">
+                  {objectionText}
+                </div>
+
+                {isActive && (
+                  <AssessmentMediaRecorder 
+                    token={token!} 
+                    type={`video_obj${idx + 1}`} 
+                    isVideo={true} 
+                    maxDurationSeconds={90} 
+                    autoStartDelaySeconds={20}
+                    onUploadComplete={(url) => {
+                      setObjectionUrls(prev => ({ ...prev, [idx]: url }));
+                      if (idx < 5) {
+                        setCurrentObjection(c => c + 1);
+                      }
+                    }}
+                  />
+                )}
+                
+                {isCompleted && (
+                  <div className="text-sm text-green-600 font-medium">Recording saved successfully.</div>
+                )}
+              </div>
+            )
+          })}
+        </div>
+
+        {currentObjection === 5 && objectionUrls[5] && (
+          <Button onClick={submitSection3} disabled={submitting} className="w-full mt-8 bg-green-600 hover:bg-green-700">
+            {submitting ? "Submitting Final..." : "Complete Assessment"}
+          </Button>
         )}
       </div>
-    );
-  }
 
-  if (status === "STAGE_3_COMPLETED") {
-    return (
-      <div className="max-w-2xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-white/10 p-12 text-center">
-        <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-6" />
-        <h2 className="text-3xl font-bold mb-4">Assessment Complete</h2>
-        <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
-          Thank you for completing the comprehensive assessment. We are a small founding team and you will matter here. Ganesan will personally review every submission. We will get back to you within 48 hours.
-        </p>
-        <p className="mt-8 text-sm text-slate-500 font-medium">Ganesan M | Co-Founder & CTO</p>
-      </div>
-    );
-  }
-
-  return null;
+    </div>
+  );
 }

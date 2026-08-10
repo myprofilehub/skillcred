@@ -48,8 +48,12 @@ export function AssessmentMediaRecorder({
         if (isVideo && videoRef.current) {
           videoRef.current.srcObject = stream;
         }
-      } catch (err) {
-        toast.error("Microphone/Camera permissions denied. Please enable them.");
+      } catch (err: any) {
+        if (err.name === 'NotFoundError') {
+          toast.error("Camera or microphone not found. Please connect a device.");
+        } else {
+          toast.error("Microphone/Camera permissions denied. Please enable them.");
+        }
         console.error(err);
       }
     };
