@@ -76,10 +76,10 @@ export function AdminSidebar() {
             <div className="flex h-16 items-center px-6 border-b border-slate-100">
                 <Link href="/dashboard/admin" className="flex items-center gap-2 font-bold text-xl text-slate-900">
                     <div className="flex items-center justify-center">
-                        <Image src="/logo.png" alt="SkillCred Logo" width={32} height={32} className="object-contain" />
+                        <img src="/logo.png" alt="SkillCred Logo" width={32} height={32} className="object-contain" />
                     </div>
                     <span className="tracking-tight">
-                        Skill<span className="text-amber-500">Cred</span>
+                        Skill<span className="text-indigo-500">Cred</span>
                     </span>
                 </Link>
             </div>
@@ -99,11 +99,11 @@ export function AdminSidebar() {
                             className={cn(
                                 "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
                                 isActive
-                                    ? "bg-amber-50 text-amber-700 border border-amber-200 shadow-sm"
-                                    : "text-slate-600 hover:text-amber-700 hover:bg-amber-50 border border-transparent"
+                                    ? "bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-sm"
+                                    : "text-slate-600 hover:text-indigo-700 hover:bg-indigo-50 border border-transparent"
                             )}
                         >
-                            <item.icon className={cn("w-5 h-5", isActive ? "text-amber-600" : "")} />
+                            <item.icon className={cn("w-5 h-5", isActive ? "text-indigo-600" : "")} />
                             {item.title}
                         </Link>
                     );

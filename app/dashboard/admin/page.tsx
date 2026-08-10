@@ -16,7 +16,7 @@ export default async function AdminDashboardPage() {
                     <p className="text-slate-500">System overview and controls</p>
                 </div>
                 <div className="flex gap-2">
-                    <Button className="bg-amber-500 hover:bg-amber-600 text-white shadow-lg shadow-amber-500/20 border border-amber-500/20" asChild>
+                    <Button className="bg-indigo-500 hover:bg-indigo-600 text-white shadow-lg shadow-indigo-500/20 border border-indigo-500/20" asChild>
                         <Link href="/dashboard/admin/credentials">
                             <KeyRound className="mr-2 h-4 w-4" /> Issue Credentials
                         </Link>
@@ -29,8 +29,8 @@ export default async function AdminDashboardPage() {
                 <Card className="bg-white border-slate-200 shadow-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium text-slate-600">Active Streams</CardTitle>
-                        <div className="w-8 h-8 rounded-md bg-amber-50 border border-amber-200 flex items-center justify-center">
-                            <Layout className="h-4 w-4 text-amber-500" />
+                        <div className="w-8 h-8 rounded-md bg-indigo-50 border border-indigo-200 flex items-center justify-center">
+                            <Layout className="h-4 w-4 text-indigo-500" />
                         </div>
                     </CardHeader>
                     <CardContent>
@@ -42,8 +42,8 @@ export default async function AdminDashboardPage() {
                 <Card className="bg-white border-slate-200 shadow-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium text-slate-600">Active Students</CardTitle>
-                        <div className="w-8 h-8 rounded-md bg-amber-50 border border-amber-200 flex items-center justify-center">
-                            <GraduationCap className="h-4 w-4 text-amber-500" />
+                        <div className="w-8 h-8 rounded-md bg-indigo-50 border border-indigo-200 flex items-center justify-center">
+                            <GraduationCap className="h-4 w-4 text-indigo-500" />
                         </div>
                     </CardHeader>
                     <CardContent>
@@ -55,8 +55,8 @@ export default async function AdminDashboardPage() {
                 <Card className="bg-white border-slate-200 shadow-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium text-slate-600">Total Projects</CardTitle>
-                        <div className="w-8 h-8 rounded-md bg-amber-50 border border-amber-200 flex items-center justify-center">
-                            <FolderGit2 className="h-4 w-4 text-amber-500" />
+                        <div className="w-8 h-8 rounded-md bg-indigo-50 border border-indigo-200 flex items-center justify-center">
+                            <FolderGit2 className="h-4 w-4 text-indigo-500" />
                         </div>
                     </CardHeader>
                     <CardContent>
@@ -68,8 +68,8 @@ export default async function AdminDashboardPage() {
                 <Card className="bg-white border-slate-200 shadow-sm">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium text-slate-600">LMS Courses</CardTitle>
-                        <div className="w-8 h-8 rounded-md bg-amber-50 border border-amber-200 flex items-center justify-center">
-                            <BookOpen className="h-4 w-4 text-amber-500" />
+                        <div className="w-8 h-8 rounded-md bg-indigo-50 border border-indigo-200 flex items-center justify-center">
+                            <BookOpen className="h-4 w-4 text-indigo-500" />
                         </div>
                     </CardHeader>
                     <CardContent>
@@ -80,16 +80,16 @@ export default async function AdminDashboardPage() {
 
                 {/* AI Entry Point */}
                 <Link href="/dashboard/admin/ai-workspace" className="block h-full">
-                    <Card className="bg-white border-orange-200 shadow-sm group hover:border-orange-400 transition-all cursor-pointer overflow-hidden relative h-full">
-                        <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <Card className="bg-white border-indigo-200 shadow-sm group hover:border-indigo-400 transition-all cursor-pointer overflow-hidden relative h-full">
+                        <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-sm font-medium text-orange-600">AI Content Engine</CardTitle>
-                            <div className="w-8 h-8 rounded-md bg-orange-50 border border-orange-200 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <Sparkles className="h-4 w-4 text-orange-500" />
+                            <CardTitle className="text-sm font-medium text-indigo-600">AI Content Engine</CardTitle>
+                            <div className="w-8 h-8 rounded-md bg-indigo-50 border border-indigo-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <Sparkles className="h-4 w-4 text-indigo-500" />
                             </div>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold text-slate-900 group-hover:text-orange-700 transition-colors">SkillCred AI</div>
+                            <div className="text-2xl font-bold text-slate-900 group-hover:text-indigo-700 transition-colors">SkillCred AI</div>
                             <p className="text-xs text-slate-500 mt-1 flex items-center gap-1">
                                 Launch workspace <ArrowRight className="w-3 h-3" />
                             </p>
@@ -102,7 +102,7 @@ export default async function AdminDashboardPage() {
             <Card className="bg-white border-slate-200 shadow-sm">
                 <CardHeader>
                     <CardTitle className="text-slate-900 flex items-center gap-2">
-                        <Sparkles className="w-5 h-5 text-amber-500" />
+                        <Sparkles className="w-5 h-5 text-indigo-500" />
                         Recent System Activity
                     </CardTitle>
                 </CardHeader>
@@ -131,7 +131,7 @@ export default async function AdminDashboardPage() {
                                 </div>
                             ))
                         )}
-                        <Button variant="outline" className="w-full mt-4 border-amber-200 text-amber-600 hover:bg-amber-50 hover:text-amber-700" asChild>
+                        <Button variant="outline" className="w-full mt-4 border-indigo-200 text-indigo-600 hover:bg-indigo-50 hover:text-indigo-700" asChild>
                             <Link href="/dashboard/admin/credentials">Manage Credentials</Link>
                         </Button>
                     </div>

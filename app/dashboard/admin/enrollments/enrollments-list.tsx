@@ -108,13 +108,13 @@ export function EnrollmentsList({
                         <div className="text-3xl font-bold text-foreground dark:text-foreground dark:text-white font-mono">{enrollments.length}</div>
                     </CardContent>
                 </Card>
-                <Card className="bg-slate-900/60 border-amber-500/20">
+                <Card className="bg-slate-900/60 border-indigo-500/20">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground dark:text-muted-foreground dark:text-slate-300">Awaiting Assignment</CardTitle>
-                        <AlertCircle className="h-4 w-4 text-amber-400" />
+                        <AlertCircle className="h-4 w-4 text-indigo-400" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold text-amber-400 font-mono">{unassigned.length}</div>
+                        <div className="text-3xl font-bold text-indigo-400 font-mono">{unassigned.length}</div>
                     </CardContent>
                 </Card>
                 <Card className="bg-slate-900/60 border-green-500/20">
@@ -182,19 +182,19 @@ export function EnrollmentsList({
             {/* Unassigned Students (grouped by stream) */}
             {Object.keys(unassignedByTrack).length > 0 && (
                 <div className="space-y-4">
-                    <h2 className="text-lg font-semibold text-amber-400 flex items-center gap-2">
+                    <h2 className="text-lg font-semibold text-indigo-400 flex items-center gap-2">
                         <AlertCircle className="w-5 h-5" />
                         Students Awaiting Mentor Assignment
                     </h2>
 
                     {Object.entries(unassignedByTrack).map(([trackTitle, trackEnrollments]) => (
-                        <Card key={trackTitle} className="bg-slate-900/60 border-amber-500/20 backdrop-blur-sm">
+                        <Card key={trackTitle} className="bg-slate-900/60 border-indigo-500/20 backdrop-blur-sm">
                             <CardHeader className="pb-3 border-b border-border dark:border-border dark:border-white/5">
                                 <div className="flex items-center justify-between">
                                     <CardTitle className="text-foreground dark:text-foreground dark:text-white flex items-center gap-2">
                                         {trackTitle}
                                     </CardTitle>
-                                    <Badge variant="outline" className="bg-amber-500/10 text-amber-400 border-amber-500/30">
+                                    <Badge variant="outline" className="bg-indigo-500/10 text-indigo-400 border-indigo-500/30">
                                         {trackEnrollments.length} student{trackEnrollments.length > 1 ? "s" : ""}
                                     </Badge>
                                 </div>
