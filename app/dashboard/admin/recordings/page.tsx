@@ -15,11 +15,11 @@ export default async function AdminRecordingsPage() {
     return (
         <div className="space-y-8">
             <div>
-                <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-foreground dark:text-white flex items-center gap-3">
+                <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-foreground dark:text-slate-900 flex items-center gap-3">
                     <Video className="w-8 h-8 text-cyan-400" />
                     Video Library
                 </h1>
-                <p className="text-muted-foreground dark:text-muted-foreground dark:text-slate-400 mt-1">
+                <p className="text-muted-foreground dark:text-muted-foreground dark:text-slate-500 mt-1">
                     Manage pre-recorded masterclasses and live session recordings
                 </p>
             </div>

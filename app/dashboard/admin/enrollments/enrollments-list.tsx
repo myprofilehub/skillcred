@@ -99,16 +99,16 @@ export function EnrollmentsList({
         <div className="space-y-8">
             {/* Summary Cards */}
             <div className="grid gap-4 md:grid-cols-3">
-                <Card className="bg-slate-900/60 border-cyan-500/20">
+                <Card className="bg-white border-cyan-500/20">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground dark:text-muted-foreground dark:text-slate-300">Total Enrollments</CardTitle>
                         <Users className="h-4 w-4 text-cyan-400" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold text-foreground dark:text-foreground dark:text-white font-mono">{enrollments.length}</div>
+                        <div className="text-3xl font-bold text-foreground dark:text-foreground dark:text-slate-900 font-mono">{enrollments.length}</div>
                     </CardContent>
                 </Card>
-                <Card className="bg-slate-900/60 border-amber-500/20">
+                <Card className="bg-white border-amber-500/20">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground dark:text-muted-foreground dark:text-slate-300">Awaiting Assignment</CardTitle>
                         <AlertCircle className="h-4 w-4 text-amber-400" />
@@ -117,7 +117,7 @@ export function EnrollmentsList({
                         <div className="text-3xl font-bold text-amber-400 font-mono">{unassigned.length}</div>
                     </CardContent>
                 </Card>
-                <Card className="bg-slate-900/60 border-green-500/20">
+                <Card className="bg-white border-green-500/20">
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground dark:text-muted-foreground dark:text-slate-300">Assigned</CardTitle>
                         <CheckCircle2 className="h-4 w-4 text-green-400" />
@@ -135,9 +135,9 @@ export function EnrollmentsList({
                         <AlertCircle className="w-5 h-5" />
                         Students Awaiting LMS Access Approval
                     </h2>
-                    <Card className="bg-slate-900/60 border-cyan-500/20 backdrop-blur-sm">
+                    <Card className="bg-white border-cyan-500/20 backdrop-blur-sm">
                         <CardHeader className="pb-3 border-b border-border dark:border-border dark:border-white/5">
-                            <CardDescription className="text-muted-foreground dark:text-muted-foreground dark:text-slate-400">
+                            <CardDescription className="text-muted-foreground dark:text-muted-foreground dark:text-slate-500">
                                 These students have completed payment. Approve them to generate LMS credentials and send them the welcome email.
                             </CardDescription>
                         </CardHeader>
@@ -149,10 +149,10 @@ export function EnrollmentsList({
                                         className="flex items-center justify-between p-4 rounded-lg bg-slate-800/50 border border-border dark:border-border dark:border-white/5"
                                     >
                                         <div className="space-y-1">
-                                            <p className="text-sm font-medium text-foreground dark:text-foreground dark:text-white">
+                                            <p className="text-sm font-medium text-foreground dark:text-foreground dark:text-slate-900">
                                                 {enrollment.student.user.name || "Unnamed Student"}
                                             </p>
-                                            <p className="text-xs text-muted-foreground dark:text-muted-foreground dark:text-slate-400 font-mono">
+                                            <p className="text-xs text-muted-foreground dark:text-muted-foreground dark:text-slate-500 font-mono">
                                                 {enrollment.student.user.email}
                                             </p>
                                             <Badge variant="outline" className="mt-1 bg-cyan-500/10 text-cyan-400 border-cyan-500/20">
@@ -162,7 +162,7 @@ export function EnrollmentsList({
                                         <Button
                                             onClick={() => handleApprove(enrollment.id)}
                                             disabled={approvingId === enrollment.id}
-                                            className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-foreground dark:text-foreground dark:text-white font-bold"
+                                            className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-foreground dark:text-foreground dark:text-slate-900 font-bold"
                                         >
                                             {approvingId === enrollment.id ? (
                                                 <Loader2 className="w-4 h-4 animate-spin mr-2" />
@@ -188,10 +188,10 @@ export function EnrollmentsList({
                     </h2>
 
                     {Object.entries(unassignedByTrack).map(([trackTitle, trackEnrollments]) => (
-                        <Card key={trackTitle} className="bg-slate-900/60 border-amber-500/20 backdrop-blur-sm">
+                        <Card key={trackTitle} className="bg-white border-amber-500/20 backdrop-blur-sm">
                             <CardHeader className="pb-3 border-b border-border dark:border-border dark:border-white/5">
                                 <div className="flex items-center justify-between">
-                                    <CardTitle className="text-foreground dark:text-foreground dark:text-white flex items-center gap-2">
+                                    <CardTitle className="text-foreground dark:text-foreground dark:text-slate-900 flex items-center gap-2">
                                         {trackTitle}
                                     </CardTitle>
                                     <Badge variant="outline" className="bg-amber-500/10 text-amber-400 border-amber-500/30">
@@ -207,10 +207,10 @@ export function EnrollmentsList({
                                             className="flex items-center justify-between p-4 rounded-lg bg-slate-800/50 border border-border dark:border-border dark:border-white/5"
                                         >
                                             <div className="space-y-1">
-                                                <p className="text-sm font-medium text-foreground dark:text-foreground dark:text-white">
+                                                <p className="text-sm font-medium text-foreground dark:text-foreground dark:text-slate-900">
                                                     {enrollment.student.user.name || "Unnamed"}
                                                 </p>
-                                                <p className="text-xs text-muted-foreground dark:text-muted-foreground dark:text-slate-400 font-mono">
+                                                <p className="text-xs text-muted-foreground dark:text-muted-foreground dark:text-slate-500 font-mono">
                                                     {enrollment.student.user.email}
                                                 </p>
                                                 {enrollment.student.user.lmsEmail && (
@@ -233,12 +233,12 @@ export function EnrollmentsList({
                                                         }))
                                                     }
                                                 >
-                                                    <SelectTrigger className="w-[200px] bg-slate-800 border-border dark:border-border dark:border-white/10 text-foreground dark:text-foreground dark:text-white">
+                                                    <SelectTrigger className="w-[200px] bg-slate-800 border-border dark:border-border dark:border-white/10 text-foreground dark:text-foreground dark:text-slate-900">
                                                         <SelectValue placeholder="Select Mentor" />
                                                     </SelectTrigger>
-                                                    <SelectContent className="bg-slate-900 border-border dark:border-border dark:border-white/10">
+                                                    <SelectContent className="bg-white border-border dark:border-border dark:border-white/10">
                                                         {mentors.map((m) => (
-                                                            <SelectItem key={m.id} value={m.id} className="text-foreground dark:text-foreground dark:text-white focus:bg-cyan-500/20 focus:text-cyan-300">
+                                                            <SelectItem key={m.id} value={m.id} className="text-foreground dark:text-foreground dark:text-slate-900 focus:bg-cyan-500/20 focus:text-cyan-300">
                                                                 {m.user.name || m.user.email}
                                                             </SelectItem>
                                                         ))}
@@ -248,7 +248,7 @@ export function EnrollmentsList({
                                                     size="sm"
                                                     onClick={() => handleAssign(enrollment.id)}
                                                     disabled={assigningId === enrollment.id || !selectedMentors[enrollment.id]}
-                                                    className="bg-cyan-600 hover:bg-cyan-700 text-foreground dark:text-foreground dark:text-white"
+                                                    className="bg-cyan-600 hover:bg-cyan-700 text-foreground dark:text-foreground dark:text-slate-900"
                                                 >
                                                     {assigningId === enrollment.id ? (
                                                         <Loader2 className="w-4 h-4 animate-spin" />
@@ -273,7 +273,7 @@ export function EnrollmentsList({
                         <UserCheck className="w-5 h-5" />
                         Assigned Students
                     </h2>
-                    <Card className="bg-slate-900/60 border-green-500/20 backdrop-blur-sm">
+                    <Card className="bg-white border-green-500/20 backdrop-blur-sm">
                         <CardContent className="pt-6">
                             <div className="space-y-3">
                                 {assigned.map((enrollment) => (
@@ -282,10 +282,10 @@ export function EnrollmentsList({
                                         className="flex items-center justify-between p-4 rounded-lg bg-slate-800/50 border border-border dark:border-border dark:border-white/5"
                                     >
                                         <div className="space-y-1">
-                                            <p className="text-sm font-medium text-foreground dark:text-foreground dark:text-white">
+                                            <p className="text-sm font-medium text-foreground dark:text-foreground dark:text-slate-900">
                                                 {enrollment.student.user.name || "Unnamed"}
                                             </p>
-                                            <p className="text-xs text-muted-foreground dark:text-muted-foreground dark:text-slate-400 font-mono">
+                                            <p className="text-xs text-muted-foreground dark:text-muted-foreground dark:text-slate-500 font-mono">
                                                 {enrollment.student.user.email}
                                             </p>
                                         </div>
@@ -311,8 +311,8 @@ export function EnrollmentsList({
             )}
 
             {enrollments.length === 0 && (
-                <Card className="bg-slate-900/60 border-border dark:border-border dark:border-white/10">
-                    <CardContent className="flex flex-col items-center justify-center py-16 text-muted-foreground dark:text-muted-foreground dark:text-slate-400">
+                <Card className="bg-white border-border dark:border-border dark:border-white/10">
+                    <CardContent className="flex flex-col items-center justify-center py-16 text-muted-foreground dark:text-muted-foreground dark:text-slate-500">
                         <Users className="w-12 h-12 mb-4 text-slate-600" />
                         <p className="text-lg font-medium">No paid enrollments yet</p>
                         <p className="text-sm text-slate-500">Students will appear here after completing payment</p>
