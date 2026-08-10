@@ -112,25 +112,25 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
 
             {/* Enrollment Call to Action (Only for Free/Non-Enrolled Users) */}
             {!isEnrolled && (
-                <Card className="border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-black overflow-hidden relative">
+                <Card className="border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 overflow-hidden relative shadow-sm">
                     <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-                        <GraduationCap className="w-64 h-64 text-purple-500" />
+                        <GraduationCap className="w-64 h-64 text-amber-500" />
                     </div>
                     <CardContent className="p-8 relative z-10">
                         <div className="max-w-2xl">
-                            <h2 className="text-2xl font-bold text-foreground dark:text-foreground dark:text-white mb-2">Unlock Your Full Potential</h2>
-                            <p className="text-muted-foreground dark:text-muted-foreground dark:text-slate-300 mb-6 text-lg">
-                                You are currently on the <span className="text-purple-400 font-semibold">Free Tier</span>.
+                            <h2 className="text-2xl font-bold text-slate-900 mb-2">Unlock Your Full Potential</h2>
+                            <p className="text-slate-600 mb-6 text-lg">
+                                You are currently on the <span className="text-amber-600 font-semibold">Free Tier</span>.
                                 Enroll in a specialized track to get assigned to a batch, start working on live projects, and earn verified credentials.
                             </p>
                             <div className="flex gap-4">
                                 <Link href="/enroll">
-                                    <Button size="lg" className="bg-white text-purple-900 hover:bg-slate-100 font-bold h-12 px-8">
+                                    <Button size="lg" className="bg-amber-500 text-white hover:bg-amber-600 font-bold h-12 px-8">
                                         Enroll Now <ArrowRight className="ml-2 w-5 h-5" />
                                     </Button>
                                 </Link>
                                 <Link href="/#streams">
-                                    <Button variant="outline" size="lg" className="border-border dark:border-border dark:border-white/20 text-foreground dark:text-foreground dark:text-white hover:bg-white/10 h-12">
+                                    <Button variant="outline" size="lg" className="border-slate-200 text-slate-900 hover:bg-slate-100 h-12">
                                         View Streams
                                     </Button>
                                 </Link>
@@ -173,45 +173,45 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {/* Active Track */}
-                <Card className="bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border-indigo-500/20">
+                <Card className="bg-white border-slate-200 shadow-sm">
                     <CardHeader className="pb-2">
-                        <CardTitle className="text-sm font-medium text-muted-foreground flex items-center justify-between">
+                        <CardTitle className="text-sm font-medium text-slate-500 flex items-center justify-between">
                             Active Track
-                            <BookOpen className="w-4 h-4 text-indigo-400" />
+                            <BookOpen className="w-4 h-4 text-amber-500" />
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-xl font-bold mb-1 truncate" title={activeProject || activeTrack}>
+                        <div className="text-xl font-bold mb-1 truncate text-slate-900" title={activeProject || activeTrack}>
                             {activeProject || activeTrack}
                         </div>
                         {activeBatch && (
-                            <Badge variant="secondary" className="mb-3 text-xs bg-indigo-500/20 text-indigo-300">
+                            <Badge variant="secondary" className="mb-3 text-xs bg-amber-50 text-amber-700">
                                 {activeBatch}
                             </Badge>
                         )}
                         <div className="space-y-1">
-                            <div className="flex justify-between text-xs">
+                            <div className="flex justify-between text-xs text-slate-600">
                                 <span>Progress</span>
                                 <span>{trackProgress}%</span>
                             </div>
-                            <Progress value={trackProgress} className="h-2 bg-indigo-500/20" />
+                            <Progress value={trackProgress} className="h-2 bg-amber-100" />
                         </div>
                     </CardContent>
                 </Card>
 
                 {/* Enrolled Classes */}
-                <Card className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border-blue-500/20">
+                <Card className="bg-white border-slate-200 shadow-sm">
                     <CardHeader className="pb-2">
-                        <CardTitle className="text-sm font-medium text-muted-foreground flex items-center justify-between">
+                        <CardTitle className="text-sm font-medium text-slate-500 flex items-center justify-between">
                             My Classes
-                            <GraduationCap className="w-4 h-4 text-blue-400" />
+                            <GraduationCap className="w-4 h-4 text-amber-500" />
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold mb-1">{classroomsCount}</div>
-                        <p className="text-xs text-muted-foreground">Active Enrollments</p>
+                        <div className="text-3xl font-bold mb-1 text-slate-900">{classroomsCount}</div>
+                        <p className="text-xs text-slate-500">Active Enrollments</p>
                         <Link href="/dashboard/student/classroom">
-                            <Button variant="link" className="p-0 h-auto text-xs text-blue-400 mt-2">
+                            <Button variant="link" className="p-0 h-auto text-xs text-amber-600 mt-2">
                                 View All <ArrowRight className="w-3 h-3 ml-1" />
                             </Button>
                         </Link>
@@ -219,20 +219,20 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
                 </Card>
 
                 {/* Attendance */}
-                <Card className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 border-green-500/20">
+                <Card className="bg-white border-slate-200 shadow-sm">
                     <CardHeader className="pb-2">
-                        <CardTitle className="text-sm font-medium text-muted-foreground flex items-center justify-between">
+                        <CardTitle className="text-sm font-medium text-slate-500 flex items-center justify-between">
                             Attendance
-                            <Users className="w-4 h-4 text-green-400" />
+                            <Users className="w-4 h-4 text-amber-500" />
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold mb-1">
+                        <div className="text-3xl font-bold mb-1 text-slate-900">
                             {overallAttendance !== null ? `${overallAttendance}%` : "N/A"}
                         </div>
-                        <p className="text-xs text-muted-foreground">Overall Average</p>
+                        <p className="text-xs text-slate-500">Overall Average</p>
                         <Link href="/dashboard/student/progress">
-                            <Button variant="link" className="p-0 h-auto text-xs text-green-400 mt-2">
+                            <Button variant="link" className="p-0 h-auto text-xs text-amber-600 mt-2">
                                 View Details <ArrowRight className="w-3 h-3 ml-1" />
                             </Button>
                         </Link>
@@ -240,18 +240,18 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
                 </Card>
 
                 {/* Pending Assignments */}
-                <Card className="bg-gradient-to-br from-orange-500/10 to-yellow-500/10 border-orange-500/20">
+                <Card className="bg-white border-slate-200 shadow-sm">
                     <CardHeader className="pb-2">
-                        <CardTitle className="text-sm font-medium text-muted-foreground flex items-center justify-between">
+                        <CardTitle className="text-sm font-medium text-slate-500 flex items-center justify-between">
                             Pending Tasks
-                            <AlertCircle className="w-4 h-4 text-orange-400" />
+                            <AlertCircle className="w-4 h-4 text-amber-500" />
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold mb-1">{pendingAssignments.length}</div>
-                        <p className="text-xs text-muted-foreground">Assignments Due</p>
+                        <div className="text-3xl font-bold mb-1 text-slate-900">{pendingAssignments.length}</div>
+                        <p className="text-xs text-slate-500">Assignments Due</p>
                         <Link href="/dashboard/student/assignments">
-                            <Button variant="link" className="p-0 h-auto text-xs text-orange-400 mt-2">
+                            <Button variant="link" className="p-0 h-auto text-xs text-amber-600 mt-2">
                                 View All <ArrowRight className="w-3 h-3 ml-1" />
                             </Button>
                         </Link>
@@ -262,12 +262,12 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
             {/* Two Column Layout */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Pending Assignments List */}
-                <Card className="lg:col-span-2 border-border dark:border-border dark:border-white/10 bg-white/5">
+                <Card className="lg:col-span-2 border-slate-200 bg-white shadow-sm">
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                            <AlertCircle className="w-5 h-5 text-orange-500" /> Action Required
+                        <CardTitle className="flex items-center gap-2 text-slate-900">
+                            <AlertCircle className="w-5 h-5 text-amber-500" /> Action Required
                         </CardTitle>
-                        <CardDescription>Upcoming deadlines and pending submissions</CardDescription>
+                        <CardDescription className="text-slate-500">Upcoming deadlines and pending submissions</CardDescription>
                     </CardHeader>
                     <CardContent>
                         {pendingAssignments.length > 0 ? (
@@ -275,22 +275,22 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
                                 {pendingAssignments.map((assignment) => (
                                     <div
                                         key={assignment.id}
-                                        className="flex items-center justify-between p-3 rounded-lg bg-background/50 border border-border dark:border-border dark:border-white/5 hover:border-border dark:border-border dark:border-white/10 transition-colors"
+                                        className="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-slate-100 hover:border-slate-200 transition-colors"
                                     >
                                         <div className="flex items-center gap-3">
-                                            <div className="w-2 h-2 rounded-full bg-orange-500" />
+                                            <div className="w-2 h-2 rounded-full bg-amber-500" />
                                             <div>
-                                                <span className="font-medium text-sm">{assignment.title}</span>
-                                                <p className="text-xs text-muted-foreground">{assignment.courseName}</p>
+                                                <span className="font-medium text-sm text-slate-900">{assignment.title}</span>
+                                                <p className="text-xs text-slate-500">{assignment.courseName}</p>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-4">
                                             {assignment.dueDate && (
-                                                <span className="text-sm text-muted-foreground">
+                                                <span className="text-sm text-slate-500">
                                                     {new Date(assignment.dueDate).toLocaleDateString()}
                                                 </span>
                                             )}
-                                            <Badge variant="outline" className="text-xs">
+                                            <Badge variant="outline" className="text-xs border-slate-200 text-slate-600">
                                                 {assignment.state === "NEW" ? "Not Started" : assignment.state}
                                             </Badge>
                                         </div>
@@ -298,7 +298,7 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
                                 ))}
                             </div>
                         ) : (
-                            <div className="text-center py-8 text-muted-foreground">
+                            <div className="text-center py-8 text-slate-400">
                                 <CheckCircle2 className="w-12 h-12 mx-auto mb-3 opacity-20" />
                                 <p>All caught up! No pending assignments.</p>
                             </div>
@@ -307,25 +307,25 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
                 </Card>
 
                 {/* Recent Recordings */}
-                <Card className="border-border dark:border-border dark:border-white/10 bg-white/5">
+                <Card className="border-slate-200 bg-white shadow-sm">
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                            <Video className="w-5 h-5 text-red-500" /> Recent Recordings
+                        <CardTitle className="flex items-center gap-2 text-slate-900">
+                            <Video className="w-5 h-5 text-amber-500" /> Recent Recordings
                         </CardTitle>
-                        <CardDescription>Catch up on missed classes</CardDescription>
+                        <CardDescription className="text-slate-500">Catch up on missed classes</CardDescription>
                     </CardHeader>
                     <CardContent>
                         {recentRecordings.length > 0 ? (
                             <div className="space-y-3">
                                 {recentRecordings.map((recording) => (
                                     <Link key={recording.id} href={recording.url} target="_blank">
-                                        <div className="flex items-center gap-3 p-3 rounded-lg bg-background/50 border border-border dark:border-border dark:border-white/5 hover:border-red-500/30 hover:bg-red-500/5 transition-colors cursor-pointer">
-                                            <div className="w-10 h-10 rounded bg-red-500/10 flex items-center justify-center">
-                                                <PlayCircle className="w-5 h-5 text-red-500" />
+                                        <div className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 border border-slate-100 hover:border-amber-200 hover:bg-amber-50 transition-colors cursor-pointer">
+                                            <div className="w-10 h-10 rounded bg-amber-100 flex items-center justify-center">
+                                                <PlayCircle className="w-5 h-5 text-amber-500" />
                                             </div>
                                             <div className="flex-1 min-w-0">
-                                                <p className="font-medium text-sm truncate">{recording.title}</p>
-                                                <p className="text-xs text-muted-foreground">
+                                                <p className="font-medium text-sm truncate text-slate-900">{recording.title}</p>
+                                                <p className="text-xs text-slate-500">
                                                     {new Date(recording.createdAt).toLocaleDateString()}
                                                 </p>
                                             </div>
@@ -333,13 +333,13 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
                                     </Link>
                                 ))}
                                 <Link href="/dashboard/student/recordings">
-                                    <Button variant="ghost" className="w-full text-sm text-muted-foreground hover:text-foreground dark:text-foreground dark:text-white">
+                                    <Button variant="ghost" className="w-full text-sm text-slate-500 hover:text-slate-900">
                                         View All Recordings <ArrowRight className="w-4 h-4 ml-2" />
                                     </Button>
                                 </Link>
                             </div>
                         ) : (
-                            <div className="text-center py-8 text-muted-foreground">
+                            <div className="text-center py-8 text-slate-400">
                                 <Video className="w-12 h-12 mx-auto mb-3 opacity-20" />
                                 <p className="text-sm">No recordings available yet.</p>
                             </div>
@@ -350,19 +350,19 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
 
             {/* Attendance by Class */}
             {attendanceStats.length > 0 && (
-                <Card className="border-border dark:border-border dark:border-white/10 bg-white/5">
+                <Card className="border-slate-200 bg-white shadow-sm">
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
+                        <CardTitle className="flex items-center gap-2 text-slate-900">
                             <FileText className="w-5 h-5 text-green-500" /> Attendance by Class
                         </CardTitle>
-                        <CardDescription>Your attendance record across all classes</CardDescription>
+                        <CardDescription className="text-slate-500">Your attendance record across all classes</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {attendanceStats.map((stat, i) => (
-                                <div key={i} className="p-4 rounded-lg bg-background/50 border border-border dark:border-border dark:border-white/5">
+                                <div key={i} className="p-4 rounded-lg bg-slate-50 border border-slate-100">
                                     <div className="flex justify-between items-center mb-2">
-                                        <span className="font-medium text-sm truncate">{stat.classroomName}</span>
+                                        <span className="font-medium text-sm truncate text-slate-900">{stat.classroomName}</span>
                                         <Badge
                                             variant={stat.percentage >= 75 ? "default" : "destructive"}
                                             className="text-xs"
@@ -374,7 +374,7 @@ export default function StudentDashboard({ user, dashboardData, studentProfile }
                                         value={stat.percentage}
                                         className={`h-2 ${stat.percentage >= 75 ? "bg-green-500/20" : "bg-red-500/20"}`}
                                     />
-                                    <p className="text-xs text-muted-foreground mt-2">
+                                    <p className="text-xs text-slate-500 mt-2">
                                         {stat.present} / {stat.total} sessions attended
                                     </p>
                                 </div>

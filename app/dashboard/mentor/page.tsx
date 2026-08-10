@@ -27,10 +27,10 @@ export default async function MentorDashboardPage() {
         <div className="space-y-8">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight">Command Center</h1>
-                    <p className="text-muted-foreground">Welcome back, {user.name}. Here is what's happening today.</p>
+                    <h1 className="text-3xl font-bold tracking-tight text-slate-900">Command Center</h1>
+                    <p className="text-slate-500">Welcome back, {user.name}. Here is what's happening today.</p>
                 </div>
-                <div className="text-sm text-muted-foreground bg-muted/50 px-3 py-1 rounded-full border">
+                <div className="text-sm text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
                     {new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}
                 </div>
             </div>
@@ -61,15 +61,15 @@ export default async function MentorDashboardPage() {
 
             {/* Quick Actions */}
             <div className="space-y-4">
-                <h2 className="text-lg font-semibold tracking-tight">Quick Actions</h2>
+                <h2 className="text-lg font-semibold tracking-tight text-slate-900">Quick Actions</h2>
                 <QuickActionsGrid />
             </div>
 
             {/* Main Content Area */}
             <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                    <h2 className="text-lg font-semibold tracking-tight">Active Classrooms</h2>
-                    <Button variant="ghost" className="text-primary" asChild>
+                    <h2 className="text-lg font-semibold tracking-tight text-slate-900">Active Classrooms</h2>
+                    <Button variant="ghost" className="text-amber-600 hover:text-amber-700 hover:bg-amber-50" asChild>
                         <span />
                     </Button>
                 </div>

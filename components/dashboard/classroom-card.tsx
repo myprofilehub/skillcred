@@ -60,18 +60,18 @@ export function ClassroomCard({ course, studentCount = 0, onSyncAttendance, onSc
 
     return (
         <Card
-            className="hover:shadow-lg transition-all duration-300 border-l-4 border-l-primary group cursor-pointer relative"
+            className="hover:shadow-lg transition-all duration-300 border-l-4 border-l-amber-500 bg-white shadow-sm group cursor-pointer relative"
             onClick={handleCardClick}
         >
             <CardHeader className="pb-2">
                 <div className="flex justify-between items-start">
                     <div>
-                        <CardTitle className="line-clamp-1 text-lg group-hover:text-primary transition-colors">
+                        <CardTitle className="line-clamp-1 text-lg text-slate-900 group-hover:text-amber-600 transition-colors">
                             <Link href={targetUrl}>
                                 {course.name}
                             </Link>
                         </CardTitle>
-                        <CardDescription className="line-clamp-1">
+                        <CardDescription className="line-clamp-1 text-slate-500">
                             {course.section || course.descriptionHeading || "No section"}
                         </CardDescription>
                     </div>
@@ -81,28 +81,28 @@ export function ClassroomCard({ course, studentCount = 0, onSyncAttendance, onSc
                                 <MoreVertical className="h-4 w-4" />
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="bg-slate-900 border-slate-700 min-w-[180px]">
+                        <DropdownMenuContent align="end" className="bg-white border-slate-200 min-w-[180px] shadow-lg">
                             <DropdownMenuItem
                                 onClick={() => onScheduleClass?.(course.id)}
-                                className="text-slate-100 focus:bg-purple-600 focus:text-white cursor-pointer"
+                                className="text-slate-700 focus:bg-amber-100 focus:text-amber-900 cursor-pointer"
                             >
                                 <Calendar className="mr-2 h-4 w-4" /> Schedule Class
                             </DropdownMenuItem>
                             <DropdownMenuItem
                                 onClick={() => onSyncAttendance?.(course.id)}
-                                className="text-slate-100 focus:bg-purple-600 focus:text-white cursor-pointer"
+                                className="text-slate-700 focus:bg-amber-100 focus:text-amber-900 cursor-pointer"
                             >
                                 <Users className="mr-2 h-4 w-4" /> Sync Attendance
                             </DropdownMenuItem>
-                            <DropdownMenuItem asChild className="text-slate-100 focus:bg-purple-600 focus:text-white cursor-pointer">
+                            <DropdownMenuItem asChild className="text-slate-700 focus:bg-amber-100 focus:text-amber-900 cursor-pointer">
                                 <a href={course.alternateLink} target="_blank" rel="noopener noreferrer">
                                     <ExternalLink className="mr-2 h-4 w-4" /> Open in Classroom
                                 </a>
                             </DropdownMenuItem>
-                            <DropdownMenuSeparator className="bg-slate-700" />
+                            <DropdownMenuSeparator className="bg-slate-100" />
                             <DropdownMenuItem
                                 onClick={() => onDeleteClass?.(course.id)}
-                                className="text-red-400 focus:text-white focus:bg-red-600 cursor-pointer"
+                                className="text-red-600 focus:text-red-700 focus:bg-red-100 cursor-pointer"
                             >
                                 <Trash2 className="mr-2 h-4 w-4" /> Delete Class
                             </DropdownMenuItem>
@@ -152,9 +152,9 @@ export function ClassroomCard({ course, studentCount = 0, onSyncAttendance, onSc
                     )}
                 </div>
             </CardContent>
-            <CardFooter className="pt-2 border-t bg-muted/20 flex gap-2">
+            <CardFooter className="pt-2 border-t border-slate-100 bg-slate-50 flex gap-2">
                 <Link href={course.alternateLink || "#"} target="_blank" className="flex-1">
-                    <Button variant="outline" className="w-full gap-2 hover:bg-primary/10 hover:text-primary border-primary/20">
+                    <Button variant="outline" className="w-full gap-2 hover:bg-amber-50 hover:text-amber-700 border-slate-200 text-slate-700">
                         <ExternalLink className="w-4 h-4" /> Open
                     </Button>
                 </Link>
@@ -168,7 +168,7 @@ export function ClassroomCard({ course, studentCount = 0, onSyncAttendance, onSc
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="text-muted-foreground hover:text-primary"
+                            className="text-slate-500 hover:text-amber-600 hover:bg-amber-50"
                             onClick={() => onAddMeetLink?.(course.id)}
                         >
                             <Calendar className="w-4 h-4" />
@@ -177,7 +177,7 @@ export function ClassroomCard({ course, studentCount = 0, onSyncAttendance, onSc
                 ) : (
                     <Button
                         variant="ghost"
-                        className="flex-1 gap-2 text-muted-foreground border-dashed border border-white/20 hover:border-primary/50 hover:text-primary"
+                        className="flex-1 gap-2 text-slate-500 border-dashed border border-slate-300 hover:border-amber-400 hover:text-amber-700 hover:bg-amber-50"
                         onClick={() => onAddMeetLink?.(course.id)}
                     >
                         <Video className="w-4 h-4" /> Add Meet Link

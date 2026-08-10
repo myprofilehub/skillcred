@@ -58,10 +58,10 @@ export function ActionRequiredWidget({ actionItems }: ActionRequiredWidgetProps)
     const totalActions = actions.reduce((acc, a) => acc + a.count, 0);
 
     return (
-        <Card className="h-full">
+        <Card className="h-full bg-white shadow-sm border-slate-200">
             <CardHeader className="pb-2 flex flex-row items-center justify-between space-y-0">
-                <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                    <AlertCircle className="w-4 h-4 text-primary" />
+                <CardTitle className="text-sm font-medium text-slate-500 flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 text-amber-500" />
                     Action Required
                 </CardTitle>
                 {totalActions > 0 && <Badge variant="destructive">{totalActions}</Badge>}
@@ -69,23 +69,23 @@ export function ActionRequiredWidget({ actionItems }: ActionRequiredWidgetProps)
             <CardContent className="space-y-1">
                 {actions.map((action) => (
                     <Link key={action.id} href={action.href} className="block group">
-                        <div className="flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 transition-colors">
+                        <div className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors">
                             <div className="flex items-center gap-3">
                                 <div className={`p-2 rounded-full ${action.bg}`}>
                                     <action.icon className={`w-4 h-4 ${action.color}`} />
                                 </div>
-                                <span className="font-medium text-sm">{action.label}</span>
+                                <span className="font-medium text-sm text-slate-900">{action.label}</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <Badge variant="secondary">{action.count}</Badge>
-                                <ChevronRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <Badge variant="secondary" className="bg-slate-100 text-slate-700 hover:bg-slate-200">{action.count}</Badge>
+                                <ChevronRight className="w-4 h-4 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                             </div>
                         </div>
                     </Link>
                 ))}
 
                 {totalActions === 0 && (
-                    <div className="py-6 text-center text-muted-foreground text-sm flex flex-col items-center gap-2">
+                    <div className="py-6 text-center text-slate-500 text-sm flex flex-col items-center gap-2">
                         <CheckCircle className="w-8 h-8 text-green-500/50" />
                         All caught up! 🎉
                     </div>

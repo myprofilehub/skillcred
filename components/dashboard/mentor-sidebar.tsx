@@ -34,9 +34,9 @@ export function MentorSidebar() {
     const pathname = usePathname();
 
     return (
-        <div className="flex flex-col h-full bg-slate-950 border-r border-white/10 w-64 fixed left-0 top-0 bottom-0 z-40">
+        <div className="flex flex-col h-full bg-white border-r border-slate-200 w-64 fixed left-0 top-0 bottom-0 z-40 shadow-sm">
             {/* Logo Area */}
-            <div className="flex flex-col h-auto px-6 py-4 border-b border-white/10">
+            <div className="flex flex-col h-auto px-6 py-4 border-b border-slate-100">
                 {/* SkillCred Brand - Links to Landing Page */}
                 <div className="mb-2">
                     <Logo />
@@ -44,8 +44,8 @@ export function MentorSidebar() {
 
                 {/* MentorHub Title */}
                 <div className="flex items-center gap-2 pl-1">
-                    <span className="text-sm font-medium text-muted-foreground">
-                        Mentor<span className="text-purple-400/80">Hub</span>
+                    <span className="text-sm font-medium text-slate-500">
+                        Mentor<span className="text-amber-600 font-bold">Hub</span>
                     </span>
                 </div>
             </div>
@@ -62,8 +62,8 @@ export function MentorSidebar() {
                             className={cn(
                                 "flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors",
                                 isActive
-                                    ? "bg-purple-500/10 text-purple-400 border border-purple-500/20"
-                                    : "text-muted-foreground hover:bg-white/5 hover:text-white"
+                                    ? "bg-amber-50 text-amber-700 border border-amber-200 shadow-sm"
+                                    : "text-slate-600 hover:bg-amber-50 hover:text-amber-700"
                             )}
                         >
                             <Icon className="w-5 h-5" />
@@ -74,10 +74,10 @@ export function MentorSidebar() {
             </nav>
 
             {/* Footer / User User */}
-            <div className="p-4 border-t border-white/10">
+            <div className="p-4 border-t border-slate-100">
                 <Button
                     variant="ghost"
-                    className="w-full justify-start text-muted-foreground hover:text-red-400 hover:bg-red-500/10"
+                    className="w-full justify-start text-slate-600 hover:text-red-600 hover:bg-red-50"
                     onClick={() => signOut({ callbackUrl: '/' })}
                 >
                     <LogOut className="w-5 h-5 mr-3" />

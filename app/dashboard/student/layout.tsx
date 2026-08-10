@@ -7,11 +7,11 @@ export default function StudentDashboardLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="min-h-screen bg-background relative overflow-x-hidden">
+        <div className="min-h-screen bg-slate-50 text-slate-900 relative overflow-x-hidden">
             {/* Ambient Background specific to Student Dashboard if needed, or keep generic one in root */}
             <div className="fixed inset-0 z-0 pointer-events-none">
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[128px] opacity-30 animate-pulse" />
-                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/20 rounded-full blur-[128px] opacity-30 animate-pulse" />
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-400/20 rounded-full blur-[128px] opacity-30 animate-pulse" />
+                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-400/20 rounded-full blur-[128px] opacity-30 animate-pulse" />
             </div>
 
             <UserStateProvider>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 import {
     LayoutDashboard,
     KeyRound,
@@ -74,8 +75,8 @@ export function AdminSidebar() {
             {/* Logo */}
             <div className="flex h-16 items-center px-6 border-b border-slate-100">
                 <Link href="/dashboard/admin" className="flex items-center gap-2 font-bold text-xl text-slate-900">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/20">
-                        <Shield className="w-4 h-4 text-white" />
+                    <div className="flex items-center justify-center">
+                        <Image src="/logo.png" alt="SkillCred Logo" width={32} height={32} className="object-contain" />
                     </div>
                     <span className="tracking-tight">
                         Skill<span className="text-amber-500">Cred</span>

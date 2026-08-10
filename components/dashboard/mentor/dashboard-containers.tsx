@@ -24,22 +24,22 @@ export async function StatsContainer() {
 
     return (
         <div className="grid grid-rows-2 gap-4">
-            <Card>
+            <Card className="bg-white shadow-sm border-slate-200">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Total Students</CardTitle>
-                    <Users className="h-4 w-4 text-muted-foreground" />
+                    <CardTitle className="text-sm font-medium text-slate-500">Total Students</CardTitle>
+                    <Users className="h-4 w-4 text-slate-400" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold">{stats.totalStudents}</div>
+                    <div className="text-2xl font-bold text-slate-900">{stats.totalStudents}</div>
                 </CardContent>
             </Card>
-            <Card>
+            <Card className="bg-white shadow-sm border-slate-200">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Active Batches</CardTitle>
-                    <BookOpen className="h-4 w-4 text-muted-foreground" />
+                    <CardTitle className="text-sm font-medium text-slate-500">Active Batches</CardTitle>
+                    <BookOpen className="h-4 w-4 text-slate-400" />
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold">{stats.activeCourses}</div>
+                    <div className="text-2xl font-bold text-slate-900">{stats.activeCourses}</div>
                 </CardContent>
             </Card>
         </div>
@@ -72,9 +72,9 @@ export async function ActiveClassroomsContainer() {
                     />
                 ))
             ) : (
-                <Card className="col-span-full py-10 border-dashed">
+                <Card className="col-span-full py-10 border-dashed border-slate-200 bg-slate-50">
                     <CardContent className="flex flex-col items-center justify-center text-center">
-                        <p className="text-muted-foreground mb-4">No active Google Classrooms found.</p>
+                        <p className="text-slate-500 mb-4">No active Google Classrooms found.</p>
                     </CardContent>
                 </Card>
             )}

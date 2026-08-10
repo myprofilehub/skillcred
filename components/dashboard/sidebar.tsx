@@ -48,7 +48,7 @@ export function Sidebar() {
             <Button
                 variant="ghost"
                 size="icon"
-                className="lg:hidden fixed top-4 left-4 z-50 bg-background/50 backdrop-blur-md border border-white/10"
+                className="lg:hidden fixed top-4 left-4 z-50 bg-white/50 backdrop-blur-md border border-slate-200"
                 onClick={() => setIsOpen(!isOpen)}
             >
                 {isOpen ? <X /> : <Menu />}
@@ -57,13 +57,13 @@ export function Sidebar() {
             {/* Sidebar Container */}
             <aside
                 className={cn(
-                    "fixed top-0 left-0 z-40 h-screen w-64 bg-background/60 backdrop-blur-xl border-r border-white/10 transition-transform duration-300 transform lg:translate-x-0",
+                    "fixed top-0 left-0 z-40 h-screen w-64 bg-white border-r border-slate-200 shadow-sm transition-transform duration-300 transform lg:translate-x-0",
                     isOpen ? "translate-x-0" : "-translate-x-full"
                 )}
             >
                 <div className="flex flex-col h-full">
                     {/* Header */}
-                    <div className="h-16 flex items-center px-6 border-b border-white/10">
+                    <div className="h-16 flex items-center px-6 border-b border-slate-100">
                         <Logo />
                     </div>
 
@@ -81,11 +81,11 @@ export function Sidebar() {
                                     className={cn(
                                         "flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 group text-sm font-medium",
                                         isActive
-                                            ? "bg-primary/20 text-primary border border-primary/20"
-                                            : "text-muted-foreground hover:bg-white/5 hover:text-white"
+                                            ? "bg-amber-50 text-amber-700 border border-amber-200 shadow-sm"
+                                            : "text-slate-600 hover:bg-amber-50 hover:text-amber-700 border border-transparent"
                                     )}
                                 >
-                                    <Icon className={cn("h-5 w-5", isActive ? "text-primary" : "text-muted-foreground group-hover:text-white")} />
+                                    <Icon className={cn("h-5 w-5", isActive ? "text-amber-600" : "text-slate-500 group-hover:text-amber-600")} />
                                     {link.name}
                                 </Link>
                             );
@@ -93,10 +93,10 @@ export function Sidebar() {
                     </nav>
 
                     {/* Footer */}
-                    <div className="p-4 border-t border-white/10">
+                    <div className="p-4 border-t border-slate-100">
                         <Button
                             variant="ghost"
-                            className="w-full justify-start gap-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                            className="w-full justify-start gap-2 text-slate-600 hover:text-red-600 hover:bg-red-50"
                             onClick={() => signOut({ callbackUrl: "/auth/signin" })}
                         >
                             <LogOut className="h-5 w-5" />

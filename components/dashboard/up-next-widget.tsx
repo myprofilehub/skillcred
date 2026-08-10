@@ -14,8 +14,8 @@ interface UpNextWidgetProps {
 export function UpNextWidget({ event }: UpNextWidgetProps) {
     if (!event) {
         return (
-            <Card className="h-full border-dashed bg-muted/20">
-                <CardContent className="flex flex-col items-center justify-center h-full py-8 text-muted-foreground">
+            <Card className="h-full border-dashed border-slate-200 bg-slate-50">
+                <CardContent className="flex flex-col items-center justify-center h-full py-8 text-slate-400">
                     <Calendar className="w-10 h-10 mb-2 opacity-20" />
                     <p>No upcoming sessions.</p>
                 </CardContent>
@@ -28,7 +28,7 @@ export function UpNextWidget({ event }: UpNextWidgetProps) {
     const endTime = new Date(event.end);
 
     return (
-        <Card className={`h-full overflow-hidden relative group ${isLive ? 'border-green-500/50 bg-green-500/5' : 'hover:border-primary/50'}`}>
+        <Card className={`h-full overflow-hidden relative group bg-white shadow-sm border-slate-200 ${isLive ? 'border-green-500/50 bg-green-50' : 'hover:border-amber-200'}`}>
             {isLive && (
                 <div className="absolute top-0 right-0 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-bl-lg animate-pulse">
                     LIVE NOW
@@ -36,20 +36,20 @@ export function UpNextWidget({ event }: UpNextWidgetProps) {
             )}
 
             <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                <CardTitle className="text-sm font-medium text-slate-500 flex items-center gap-2">
                     {isLive ? <Video className="w-4 h-4 text-green-500" /> : <Calendar className="w-4 h-4" />}
                     {isLive ? "Happening Now" : "Up Next"}
                 </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
                 <div>
-                    <h3 className="text-xl font-bold line-clamp-2 leading-tight mb-1">{event.title}</h3>
-                    <p className="text-sm text-muted-foreground line-clamp-1">{event.resource?.name || "General Session"}</p>
+                    <h3 className="text-xl font-bold line-clamp-2 leading-tight mb-1 text-slate-900">{event.title}</h3>
+                    <p className="text-sm text-slate-500 line-clamp-1">{event.resource?.name || "General Session"}</p>
                 </div>
 
                 <div className="flex items-center gap-4 text-sm">
-                    <div className="flex items-center gap-1.5 bg-background/50 px-2 py-1 rounded border">
-                        <Clock className="w-4 h-4 text-primary" />
+                    <div className="flex items-center gap-1.5 bg-slate-50 px-2 py-1 rounded border border-slate-200 text-slate-700">
+                        <Clock className="w-4 h-4 text-amber-500" />
                         <span className="font-medium">
                             {format(startTime, "h:mm a")} - {format(endTime, "h:mm a")}
                         </span>
