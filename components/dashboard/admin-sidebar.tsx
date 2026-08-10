@@ -75,12 +75,9 @@ export function AdminSidebar() {
             {/* Logo */}
             <div className="flex h-16 items-center px-6 border-b border-slate-100">
                 <Link href="/dashboard/admin" className="flex items-center gap-2 font-bold text-xl text-slate-900">
-                    <div className="flex items-center justify-center">
-                        <Image src="/logo.png" alt="SkillCred Logo" width={32} height={32} className="object-contain" />
+                    <div className="flex items-center justify-center w-full">
+                        <img src="/logo.png" alt="SkillCred Logo" className="h-8 w-auto object-contain" />
                     </div>
-                    <span className="tracking-tight">
-                        Skill<span className="text-amber-500">Cred</span>
-                    </span>
                 </Link>
             </div>
 
