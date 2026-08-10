@@ -827,6 +827,9 @@ model CounselorAssessment {
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
 
+  candidateName   String?
+  candidateEmail  String?
+
   // Section 1
   noticePeriod    String?
   currentCTC      String?

@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/db";
 import { Badge } from "@/components/ui/badge";
+import { GenerateTokenForm } from "./generate-token-form";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +14,8 @@ export default async function AdminReviewPage() {
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold mb-8">Counselor Assessment Review</h1>
         
+        <GenerateTokenForm />
+
         {assessments.length === 0 ? (
           <div className="text-slate-500">No assessments found.</div>
         ) : (
@@ -21,7 +24,12 @@ export default async function AdminReviewPage() {
               <div key={a.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-8 shadow-sm">
                 <div className="flex justify-between items-start mb-6 pb-6 border-b border-slate-100 dark:border-slate-800">
                   <div>
-                    <h2 className="text-xl font-bold mb-2">Token: {a.token}</h2>
+                    <h2 className="text-xl font-bold mb-1">
+                      {a.candidateName ? a.candidateName : `Token: ${a.token.substring(0, 8)}...`}
+                    </h2>
+                    {a.candidateEmail && (
+                      <p className="text-sm text-slate-500 mb-3">{a.candidateEmail}</p>
+                    )}
                     <div className="flex space-x-2">
                       <Badge variant={a.status === "STAGE_3_COMPLETED" ? "default" : "secondary"}>
                         {a.status}
