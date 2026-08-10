@@ -14,7 +14,7 @@ import { CheckCircle2, XCircle, Download, FileText, Clock, BookOpen } from "luci
 function LogoHeader() {
   return (
     <div className="flex items-center justify-center mb-8 pb-6 border-b border-slate-200 dark:border-slate-800">
-      <Image src="/logo-v3-transparent.png" alt="SkillCred" width={180} height={45} className="h-10 w-auto" />
+      <Image src="/logo.png" alt="SkillCred" width={200} height={50} className="h-12 w-auto" />
     </div>
   );
 }
