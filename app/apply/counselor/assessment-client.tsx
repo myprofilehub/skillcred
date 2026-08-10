@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 import { AssessmentMediaRecorder } from "@/components/assessment/media-recorder";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,6 +10,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { CheckCircle2, XCircle, Download, FileText, Clock, BookOpen } from "lucide-react";
+
+function LogoHeader() {
+  return (
+    <div className="flex items-center justify-center mb-8 pb-6 border-b border-slate-200 dark:border-slate-800">
+      <Image src="/logo-v3-transparent.png" alt="SkillCred" width={180} height={45} className="h-10 w-auto" />
+    </div>
+  );
+}
 
 const mockLeads = [
   { id: 1, name: "Arun K.", age: 21, bg: "B.Tech IT (2024)", source: "Instagram Ad", note: "fees ah?" },
@@ -40,6 +49,8 @@ export default function AssessmentClient() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
+  const [agreed, setAgreed] = useState(false);
+  const [introComplete, setIntroComplete] = useState(false);
   
   // Section 1 State
   const [noticePeriod, setNoticePeriod] = useState("");
@@ -200,22 +211,61 @@ export default function AssessmentClient() {
   };
 
   if (loading) return <div className="text-center p-12">Loading...</div>;
-  if (status === "INVALID" || status === "ERROR") return <div className="text-center p-12 text-red-500">Invalid or expired assessment link.</div>;
+  if (status === "INVALID" || status === "ERROR") return (
+    <div className="max-w-2xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-white/10 p-8 text-center">
+      <LogoHeader />
+      <p className="text-red-500 text-lg">Invalid or expired assessment link.</p>
+    </div>
+  );
 
-  // SECTION 1: Knockouts & Voice
-  if (status === "PENDING") {
+  // INTRO / AGREEMENT PAGE
+  if (status === "PENDING" && !introComplete) {
     return (
       <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-white/10 p-8">
-        <h1 className="text-3xl font-bold mb-6">Career Counselor Assessment</h1>
-        <div className="space-y-4 text-lg text-slate-700 dark:text-slate-300">
-          <p>Welcome. This asynchronous assessment consists of 3 sections.</p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li><strong>Expected Total Time:</strong> ~45 minutes.</li>
-            <li><strong>Video & Audio Required:</strong> You will need a working microphone and camera.</li>
-            <li><strong>Timed Answers:</strong> Sections 2 and 3 have strict timers and auto-submit.</li>
-          </ul>
-          <p className="mt-8">We review all submissions within 48 hours.</p>
+        <LogoHeader />
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold mb-3">Career Counselor Assessment</h1>
+          <p className="text-slate-500 dark:text-slate-400">Thank you for your interest in joining the SkillCred team.</p>
         </div>
+
+        <div className="space-y-6 text-slate-700 dark:text-slate-300">
+          <div className="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-xl">
+            <h3 className="font-semibold text-lg mb-3">Assessment Overview</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start"><span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-bold rounded-full w-7 h-7 flex items-center justify-center mr-3 mt-0.5 shrink-0">1</span><div><strong>Section 1 — Knockouts &amp; Voice</strong><br /><span className="text-sm text-slate-500">Basic eligibility questions + 2 voice recordings (Tamil &amp; English).</span></div></li>
+              <li className="flex items-start"><span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-bold rounded-full w-7 h-7 flex items-center justify-center mr-3 mt-0.5 shrink-0">2</span><div><strong>Section 2 — Written Scenarios</strong><br /><span className="text-sm text-slate-500">15 min prep + 25 min timed written answers and lead triage.</span></div></li>
+              <li className="flex items-start"><span className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-bold rounded-full w-7 h-7 flex items-center justify-center mr-3 mt-0.5 shrink-0">3</span><div><strong>Section 3 — Video Objections</strong><br /><span className="text-sm text-slate-500">6 video-recorded objection handling scenarios (90s each).</span></div></li>
+            </ul>
+          </div>
+
+          <div className="bg-amber-50 dark:bg-amber-900/20 text-amber-900 dark:text-amber-100 p-4 rounded-lg text-sm space-y-2">
+            <p><strong>⏱ Expected Total Time:</strong> ~45 minutes.</p>
+            <p><strong>🎥 Requirements:</strong> Working microphone and camera. Use Chrome or Edge for best results.</p>
+            <p><strong>⚠️ Important:</strong> Sections 2 and 3 are strictly timed and will auto-submit. You cannot pause or re-take them.</p>
+          </div>
+
+          <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg text-sm">
+            <p><strong>Terms:</strong> By proceeding, you confirm that you will complete this assessment independently, without external assistance, and that your responses are your own. All recordings and written answers become the property of SkillCred for evaluation purposes.</p>
+          </div>
+
+          <label className="flex items-start space-x-3 cursor-pointer p-4 rounded-lg border-2 border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 transition-colors">
+            <input type="checkbox" checked={agreed} onChange={e => setAgreed(e.target.checked)} className="mt-1 w-5 h-5 rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
+            <span className="text-sm">I have read and understood the assessment instructions. I agree to complete this assessment independently and consent to my responses being recorded and evaluated.</span>
+          </label>
+        </div>
+
+        <Button onClick={() => setIntroComplete(true)} disabled={!agreed} className="w-full mt-8 text-lg py-6">
+          {agreed ? "Begin Assessment →" : "Please agree to the terms above"}
+        </Button>
+      </div>
+    );
+  }
+
+  // SECTION 1: Knockouts & Voice
+  if (status === "PENDING" && introComplete) {
+    return (
+      <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-white/10 p-8">
+        <LogoHeader />
         <div className="mt-8">
           <h2 className="text-xl font-bold mb-4">Section 1: Knockouts & Voice</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -270,6 +320,7 @@ export default function AssessmentClient() {
   if (status === "STAGE_1_FAILED") {
     return (
       <div className="max-w-2xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-white/10 p-12 text-center">
+        <LogoHeader />
         <XCircle className="w-16 h-16 text-red-500 mx-auto mb-6" />
         <h2 className="text-2xl font-bold mb-4">Thank you for your time</h2>
         <p className="text-slate-600 dark:text-slate-400">
@@ -284,6 +335,7 @@ export default function AssessmentClient() {
   if (status === "STAGE_1_PASSED" && !prepDone) {
     return (
       <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-white/10 p-8">
+        <LogoHeader />
         <div className="text-center mb-8">
           <BookOpen className="w-12 h-12 text-blue-600 mx-auto mb-4" />
           <h1 className="text-3xl font-bold mb-2">Preparation Time</h1>
@@ -330,6 +382,7 @@ export default function AssessmentClient() {
   if (status === "STAGE_1_PASSED" && prepDone) {
     return (
       <div className="max-w-4xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-white/10 p-8">
+        <LogoHeader />
         <div className="flex justify-between items-center mb-6 pb-4 border-b">
           <h1 className="text-2xl font-bold">Section 2: Written Scenarios</h1>
           <div className="text-red-500 font-mono text-xl font-bold">
@@ -418,6 +471,7 @@ export default function AssessmentClient() {
   if (status === "STAGE_2_COMPLETED") {
     return (
       <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-white/10 p-8">
+        <LogoHeader />
         <h1 className="text-2xl font-bold mb-2">Section 3: Video Objections</h1>
         <p className="mb-8 text-slate-600 dark:text-slate-400">
           You will face 6 common objections in sequence. The active objection is highlighted below. Once you finish recording one, the next will unlock.
@@ -485,6 +539,7 @@ export default function AssessmentClient() {
   if (status === "STAGE_3_COMPLETED") {
     return (
       <div className="max-w-2xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-white/10 p-12 text-center">
+        <LogoHeader />
         <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-6" />
         <h2 className="text-3xl font-bold mb-4">Assessment Complete</h2>
         <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
