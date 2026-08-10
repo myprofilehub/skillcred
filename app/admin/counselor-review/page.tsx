@@ -71,7 +71,24 @@ export default async function AdminReviewPage() {
 
                   {/* Written Answers */}
                   <div className="space-y-4">
-                    <h3 className="font-semibold text-lg">Written Answers</h3>
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-semibold text-lg">Written Answers</h3>
+                      {a.empathyScore !== null && (
+                        <div className={`px-3 py-1 rounded-full text-sm font-bold ${
+                          a.empathyScore >= 8 ? 'bg-green-100 text-green-700' :
+                          a.empathyScore < 5 ? 'bg-red-100 text-red-700' :
+                          'bg-amber-100 text-amber-700'
+                        }`}>
+                          AI Empathy Score: {a.empathyScore}/10
+                        </div>
+                      )}
+                    </div>
+                    {a.empathyFeedback && (
+                      <div className="bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-200 p-3 rounded-lg text-sm border border-blue-100 dark:border-blue-800">
+                        <span className="font-semibold">AI Insight: </span>
+                        {a.empathyFeedback}
+                      </div>
+                    )}
                     <div className="text-sm space-y-2">
                       <div className="bg-slate-100 dark:bg-slate-800 p-3 rounded">
                         <p className="font-semibold mb-1">Q1: fees ah?</p>

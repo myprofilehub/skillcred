@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
@@ -74,6 +75,41 @@ export async function POST(req: NextRequest) {
       const guaranteeRegex = /guarantee|100%|assured|placement guarantee|nicchayam|kandippa/g;
       const guaranteeFlag = guaranteeRegex.test(allText);
 
+      // Empathy Scoring using Gemini
+      let empathyScore = null;
+      let empathyFeedback = null;
+      
+      try {
+        if (process.env.GEMINI_API_KEY) {
+          const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+          const model = genAI.getGenerativeModel({ 
+            model: "gemini-1.5-flash",
+            generationConfig: { responseMimeType: "application/json" }
+          });
+          const prompt = `You are an expert sales manager reviewing a career counselor's written responses to student inquiries.
+Grade their overall empathy, patience, and helpfulness on a scale of 1-10.
+Provide a short 1-2 sentence feedback explaining the score.
+Here are their responses:
+Q1 (Student asked about fees): "${payload.writtenQ1}"
+Q2 (Working professional asked if AI/ML is worth it at their age): "${payload.writtenQ2}"
+Q3 (Parent asked about placement guarantee): "${payload.writtenQ3}"
+
+Return the response in the following JSON format exactly:
+{
+  "score": <number>,
+  "feedback": "<string>"
+}`;
+          const result = await model.generateContent(prompt);
+          const jsonResponse = JSON.parse(result.response.text());
+          empathyScore = jsonResponse.score;
+          empathyFeedback = jsonResponse.feedback;
+        } else {
+          console.warn("GEMINI_API_KEY not found. Skipping empathy grading.");
+        }
+      } catch (err) {
+        console.error("Gemini empathy grading error:", err);
+      }
+
       await prisma.counselorAssessment.update({
         where: { token },
         data: {
@@ -83,6 +119,8 @@ export async function POST(req: NextRequest) {
           triageData: payload.triageData,
           triageInsight: payload.triageInsight,
           guaranteeFlag,
+          empathyScore,
+          empathyFeedback,
           status: "STAGE_2_COMPLETED",
         },
       });

@@ -857,6 +857,8 @@ model CounselorAssessment {
   // Scoring
   triageScore     Float?
   guaranteeFlag   Boolean?
+  empathyScore    Float?
+  empathyFeedback String?
   adminNotes      String?
   voiceScore      Int?
   objection1Score Int?
