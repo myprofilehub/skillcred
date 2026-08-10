@@ -58,8 +58,8 @@ export default async function MentorApplicationsPage() {
                                 <p className="text-2xl font-bold text-foreground dark:text-foreground dark:text-white">{totalApps}</p>
                             </div>
                         </div>
-                        <div className="bg-slate-900/40 backdrop-blur-md border border-indigo-500/10 rounded-xl p-4 flex-1 md:min-w-[160px] flex items-center gap-4 hover:border-indigo-500/30 transition-colors shadow-[0_0_15px_rgba(245,158,11,0.05)]">
-                            <div className="p-3 bg-indigo-500/10 text-indigo-400 rounded-xl border border-indigo-500/20">
+                        <div className="bg-slate-900/40 backdrop-blur-md border border-amber-500/10 rounded-xl p-4 flex-1 md:min-w-[160px] flex items-center gap-4 hover:border-amber-500/30 transition-colors shadow-[0_0_15px_rgba(245,158,11,0.05)]">
+                            <div className="p-3 bg-amber-500/10 text-amber-400 rounded-xl border border-amber-500/20">
                                 <Mail className="w-5 h-5" />
                             </div>
                             <div>
@@ -104,10 +104,10 @@ export default async function MentorApplicationsPage() {
                                         </div>
                                         <div className="flex flex-col items-end shrink-0">
                                             <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
-                                                String(app.status) === 'PENDING' ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20' : 
+                                                String(app.status) === 'PENDING' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' : 
                                                 String(app.status) === 'APPROVED' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
                                             }`}>
-                                                {String(app.status) === 'PENDING' && <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 shadow-[0_0_8px_rgba(251,191,36,0.8)] animate-pulse"></div>}
+                                                {String(app.status) === 'PENDING' && <div className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)] animate-pulse"></div>}
                                                 {app.status}
                                             </span>
                                         </div>
@@ -120,7 +120,7 @@ export default async function MentorApplicationsPage() {
                                         </div>
                                         {app.experience && (
                                             <div className="flex items-center gap-1.5">
-                                                <Briefcase className="w-4 h-4 text-indigo-500/50" />
+                                                <Briefcase className="w-4 h-4 text-amber-500/50" />
                                                 <span className="truncate max-w-[120px] text-muted-foreground dark:text-muted-foreground dark:text-slate-300">{app.experience}</span>
                                             </div>
                                         )}
