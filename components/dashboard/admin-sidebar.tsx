@@ -35,11 +35,7 @@ const sidebarItems = [
         href: "/dashboard/admin/enrollments",
         icon: GraduationCap,
     },
-    {
-        title: "Curriculum",
-        href: "/dashboard/admin/curriculum",
-        icon: BookOpen,
-    },
+
     {
         title: "Recordings",
         href: "/dashboard/admin/recordings",
@@ -55,11 +51,7 @@ const sidebarItems = [
         href: "/dashboard/admin/creative-gallery",
         icon: ImageIcon,
     },
-    {
-        title: "Mentor Apps",
-        href: "/dashboard/admin/mentor-applications",
-        icon: Users,
-    },
+
     {
         title: "Counselor Review",
         href: "/dashboard/admin/counselor-review",
