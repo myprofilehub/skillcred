@@ -126,7 +126,7 @@ export default async function AIMLPage() {
                             </ul>
                             
                             <div className="mt-auto">
-                                <LpCurriculumForm trackName="AI & ML Engineering Track" accentColor="orange" buttonText="Download curriculum" />
+                                <LpCurriculumForm trackName="AI & ML Engineering Track" accentColor="orange" buttonText="Download Prospectus" />
                             </div>
                         </div>
                     </div>
@@ -393,9 +393,9 @@ export default async function AIMLPage() {
                         </div>
                         {/* Curriculum Download */}
                         <div className="bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-white/10 rounded-3xl p-6 md:p-8 relative overflow-hidden flex flex-col justify-center text-slate-900 dark:text-white">
-                            <h3 className="text-2xl font-bold font-heading mb-2">Download Curriculum</h3>
+                            <h3 className="text-2xl font-bold font-heading mb-2">Download Prospectus</h3>
                             <p className="text-slate-500 dark:text-slate-400 text-sm mb-6">Get the complete syllabus, weekly milestones, and project details delivered to your inbox.</p>
-                            <LpCurriculumForm trackName="AI & ML Engineering Track" accentColor="orange" />
+                            <LpCurriculumForm trackName="AI & ML Engineering Track" accentColor="orange" buttonText="Download Prospectus" />
                         </div>
                     </div>
                 </div>
