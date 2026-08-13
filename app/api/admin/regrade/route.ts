@@ -46,6 +46,8 @@ async function uploadMediaToGemini(urlPath: string, mimeType: string) {
   }
 }
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const email = "gmsai35@gmail.com";
   // @ts-ignore
