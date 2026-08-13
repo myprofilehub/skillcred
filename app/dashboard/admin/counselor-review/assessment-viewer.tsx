@@ -177,6 +177,24 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
                 </div>
               </div>
 
+              {a.triageData && (
+                <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-200">
+                  <h3 className="font-semibold text-md mb-3 text-slate-800 dark:text-slate-200">Candidate's Lead Triage</h3>
+                  <div className="bg-slate-100 dark:bg-slate-100 p-3 rounded mb-4">
+                    <p className="font-semibold text-sm mb-2">Lead Priorities Assigned:</p>
+                    <pre className="whitespace-pre-wrap font-mono text-xs text-slate-700">
+                      {JSON.stringify(a.triageData, null, 2)}
+                    </pre>
+                  </div>
+                  <div className="bg-slate-50 dark:bg-slate-100 p-3 rounded">
+                    <p className="font-semibold text-sm mb-1">Candidate's Reasoning:</p>
+                    <p className="text-sm italic text-slate-700">
+                      "{a.triageInsight || "No reasoning provided."}"
+                    </p>
+                  </div>
+                </div>
+              )}
+
               {a.triageScore !== null && (
                 <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-200">
                   <div className="flex justify-between items-center mb-2">
