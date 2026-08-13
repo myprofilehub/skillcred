@@ -138,6 +138,7 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
               )}
             </div>
           </div>
+        </div>
 
           {/* Stage 2: Written Empathy & Triage Assessment */}
           <div className="space-y-4 border-t pt-8 mb-8">
