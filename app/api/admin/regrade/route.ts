@@ -20,7 +20,8 @@ async function uploadMediaToGemini(urlPath: string, mimeType: string) {
   if (!API_KEY) return null;
   
   try {
-    const res = await fetch(urlPath);
+    const fullUrl = urlPath.startsWith("/") ? `https://skillcred.in${urlPath}` : urlPath;
+    const res = await fetch(fullUrl);
     if (!res.ok) return null;
     const arrayBuffer = await res.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
