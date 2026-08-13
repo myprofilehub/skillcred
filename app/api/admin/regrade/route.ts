@@ -70,6 +70,7 @@ export async function GET() {
   const scores: (number | null)[] = [null, null, null, null, null, null];
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", generationConfig: { responseMimeType: "application/json" }});
 
+  const errors: string[] = [];
   for (let i = 0; i < uris.length; i++) {
     if (uris[i]) {
       const prompt = `Watch this video of a sales counselor handling Objection ${i+1}. Evaluate their body language, confidence, tone, and spoken response. Provide a score from 1 to 5. Format exactly as JSON: {"score": <number>}`;
@@ -78,8 +79,9 @@ export async function GET() {
         const j = JSON.parse(res.response.text());
         scores[i] = j.score;
         await delay(5000);
-      } catch (e) {
+      } catch (e: any) {
         console.error(`Video ${i+1} error:`, e);
+        errors.push(e?.message || String(e));
       }
     }
   }
@@ -119,6 +121,7 @@ Format exactly as JSON: {"score": <number>, "feedback": "<string>"}`;
     scores,
     urls,
     uris,
+    errors,
     cumulativeScore,
     cumulativeFeedback
   });
