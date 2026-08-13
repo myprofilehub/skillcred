@@ -70,19 +70,10 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
       {/* Selected Assessment Details */}
       {a && (
         <div className="bg-white dark:bg-white border border-slate-200 dark:border-slate-200 rounded-xl p-8 shadow-sm">
-          
-          {a.cumulativeScore !== null && (
-            <div className="mb-8 p-6 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-xl">
-              <div className="flex items-center gap-4 mb-3">
-                <div className={`text-2xl font-bold px-4 py-2 rounded-lg ${a.cumulativeScore >= 80 ? 'bg-green-100 text-green-700' : a.cumulativeScore < 50 ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700'}`}>
-                  {a.cumulativeScore}/100
-                </div>
-                <h3 className="text-xl font-bold text-indigo-900 dark:text-indigo-100">Cumulative AI Verdict</h3>
-              </div>
-              <p className="text-slate-700 dark:text-slate-300 font-medium">{a.cumulativeFeedback}</p>
-            </div>
-          )}
 
+          {/* Stage 1: Basic Info & Voice Assessment */}
+          <div className="space-y-4 border-t pt-8 mb-8">
+            <h3 className="font-semibold text-lg mb-4 text-blue-900 dark:text-blue-100 border-b pb-2">Stage 1: Basic Info & Voice Assessment</h3>
           <div className="flex justify-between items-start mb-6 pb-6 border-b border-slate-100 dark:border-slate-200">
             <div>
               <h2 className="text-xl font-bold mb-1">
@@ -127,13 +118,13 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
               <div>
                 <p className="text-sm font-medium mb-2">Tamil (Introduce yourself)</p>
                 {a.voiceTamilUrl ? (
-                  <audio controls src={a.voiceTamilUrl} className="w-full" />
+                  <audio controls src={`/api/media?url=${encodeURIComponent(a.voiceTamilUrl)}`} className="w-full" />
                 ) : <p className="text-sm text-slate-500">No recording</p>}
               </div>
               <div>
                 <p className="text-sm font-medium mb-2">English (Why join us)</p>
                 {a.voiceEnglishUrl ? (
-                  <audio controls src={a.voiceEnglishUrl} className="w-full" />
+                  <audio controls src={`/api/media?url=${encodeURIComponent(a.voiceEnglishUrl)}`} className="w-full" />
                 ) : <p className="text-sm text-slate-500">No recording</p>}
               </div>
               
@@ -146,8 +137,11 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
                 </div>
               )}
             </div>
+          </div>
 
-            {/* Written Answers & Triage */}
+          {/* Stage 2: Written Empathy & Triage Assessment */}
+          <div className="space-y-4 border-t pt-8 mb-8">
+            <h3 className="font-semibold text-lg mb-4 text-purple-900 dark:text-purple-100 border-b pb-2">Stage 2: Written Empathy & Triage Assessment</h3>
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <h3 className="font-semibold text-lg">Written Answers</h3>
@@ -170,15 +164,15 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
               <div className="text-sm space-y-2">
                 <div className="bg-slate-100 dark:bg-slate-100 p-3 rounded">
                   <p className="font-semibold mb-1">Q1: Student Inquiry about Fees</p>
-                  <p>{a.writtenQ1}</p>
+                  <p>{a.writtenQ1 || <span className="text-slate-400 italic">Not answered</span>}</p>
                 </div>
                 <div className="bg-slate-100 dark:bg-slate-100 p-3 rounded">
                   <p className="font-semibold mb-1">Q2: Working Professional Inquiry on AI/ML</p>
-                  <p>{a.writtenQ2}</p>
+                  <p>{a.writtenQ2 || <span className="text-slate-400 italic">Not answered</span>}</p>
                 </div>
                 <div className="bg-slate-100 dark:bg-slate-100 p-3 rounded">
                   <p className="font-semibold mb-1">Q3: Parent Inquiry on Placement Guarantee</p>
-                  <p className={a.guaranteeFlag ? "text-red-600 font-medium" : ""}>{a.writtenQ3}</p>
+                  <p className={a.guaranteeFlag ? "text-red-600 font-medium" : ""}>{a.writtenQ3 || <span className="text-slate-400 italic">Not answered</span>}</p>
                 </div>
               </div>
 
@@ -198,9 +192,9 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
             </div>
           </div>
 
-          {/* Videos */}
-          <div className="space-y-4 border-t pt-8">
-            <h3 className="font-semibold text-lg mb-4">Objection Handling Videos</h3>
+          {/* Stage 3: Objection Handling Video Assessment */}
+          <div className="space-y-4 border-t pt-8 mb-8">
+            <h3 className="font-semibold text-lg mb-4 text-amber-900 dark:text-amber-100 border-b pb-2">Stage 3: Objection Handling Video Assessment</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 { url: a.objection1Url, score: a.objection1Score, label: "Obj 1: Guarantee a job?" },
@@ -220,7 +214,7 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
                     )}
                   </div>
                   {obj.url ? (
-                    <video controls src={obj.url} className="w-full rounded bg-black aspect-video object-cover" />
+                    <video controls src={`/api/media?url=${encodeURIComponent(obj.url)}`} className="w-full rounded bg-black aspect-video object-cover" />
                   ) : (
                     <div className="aspect-video bg-slate-200 dark:bg-slate-700 rounded flex items-center justify-center text-sm text-slate-500">No video</div>
                   )}
@@ -234,10 +228,26 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
               ))}
             </div>
           </div>
-          
-          {/* Final Notes */}
-          <div className="mt-8 pt-8 border-t border-slate-100 dark:border-slate-200">
-            <h3 className="font-semibold text-lg mb-4">Reviewer Notes</h3>
+          {/* Cumulative Performance Report */}
+          <div className="space-y-4 border-t pt-8">
+            <h3 className="font-semibold text-xl mb-4 text-indigo-900 dark:text-indigo-100 border-b pb-2">Cumulative Performance Report</h3>
+            {a.cumulativeScore !== null ? (
+              <div className="mb-8 p-6 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-xl">
+                <div className="flex items-center gap-4 mb-3">
+                  <div className={`text-2xl font-bold px-4 py-2 rounded-lg ${a.cumulativeScore >= 80 ? 'bg-green-100 text-green-700' : a.cumulativeScore < 50 ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700'}`}>
+                    {a.cumulativeScore}/100
+                  </div>
+                  <h3 className="text-xl font-bold text-indigo-900 dark:text-indigo-100">Cumulative AI Verdict</h3>
+                </div>
+                <p className="text-slate-700 dark:text-slate-300 font-medium">{a.cumulativeFeedback}</p>
+              </div>
+            ) : (
+              <div className="mb-8 p-6 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-500">
+                <p>Cumulative report will be generated after the candidate completes all stages of the assessment.</p>
+              </div>
+            )}
+            
+            <h3 className="font-semibold text-lg mb-4 mt-8">Reviewer Notes</h3>
             <textarea 
               className="w-full p-4 rounded-lg border border-slate-200 dark:border-slate-300 bg-white dark:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow" 
               rows={4} 
