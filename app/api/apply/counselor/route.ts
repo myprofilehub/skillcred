@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
 
           if (tamilUri && englishUri) {
             const model = genAI.getGenerativeModel({ 
-              model: "gemini-1.5-flash",
+              model: "gemini-pro-latest",
               generationConfig: { responseMimeType: "application/json" }
             });
             const prompt = `You are evaluating a career counselor candidate's voice recordings.
@@ -121,7 +121,7 @@ Format exactly as JSON: {"score": <number>, "feedback": "<string>"}`;
       try {
         if (process.env.GEMINI_API_KEY) {
           const model = genAI.getGenerativeModel({ 
-            model: "gemini-1.5-flash",
+            model: "gemini-pro-latest",
             generationConfig: { responseMimeType: "application/json" }
           });
           
@@ -186,7 +186,7 @@ Return exactly: {"score": <number>, "feedback": "<string>"}`;
           ];
           
           const model = genAI.getGenerativeModel({ 
-            model: "gemini-1.5-flash",
+            model: "gemini-pro-latest",
             generationConfig: { responseMimeType: "application/json" }
           });
 

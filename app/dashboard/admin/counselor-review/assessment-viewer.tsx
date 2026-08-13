@@ -67,9 +67,34 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
         </div>
       </div>
 
-      {/* Selected Assessment Details */}
       {a && (
         <div className="bg-white dark:bg-white border border-slate-200 dark:border-slate-200 rounded-xl p-8 shadow-sm">
+
+          {/* Stage-Wise Scorecard */}
+          <div className="mb-8">
+            <h3 className="font-semibold text-xl mb-4 text-slate-900 dark:text-slate-100 border-b pb-2">Stage-Wise Scorecard</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="bg-slate-50 dark:bg-slate-100/50 p-4 rounded-lg text-center border border-slate-100">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Voice (Tamil/Eng)</p>
+                <div className="text-2xl font-bold text-slate-800">{a.voiceScore !== null ? `${a.voiceScore}/5` : 'N/A'}</div>
+              </div>
+              <div className="bg-slate-50 dark:bg-slate-100/50 p-4 rounded-lg text-center border border-slate-100">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Empathy (Written)</p>
+                <div className="text-2xl font-bold text-slate-800">{a.empathyScore !== null ? `${a.empathyScore}/10` : 'N/A'}</div>
+              </div>
+              <div className="bg-slate-50 dark:bg-slate-100/50 p-4 rounded-lg text-center border border-slate-100">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Lead Triage</p>
+                <div className="text-2xl font-bold text-slate-800">{a.triageScore !== null ? `${a.triageScore}/10` : 'N/A'}</div>
+              </div>
+              <div className="bg-slate-50 dark:bg-slate-100/50 p-4 rounded-lg text-center border border-slate-100">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Objection Handling</p>
+                <div className="text-2xl font-bold text-slate-800">
+                  {a.objection1Score !== null && a.objection2Score !== null ? 
+                    `${((a.objection1Score + a.objection2Score + (a.objection3Score||0) + (a.objection4Score||0) + (a.objection5Score||0) + (a.objection6Score||0)) / 6).toFixed(1)}/5` : 'N/A'}
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* Stage 1: Basic Info & Voice Assessment */}
           <div className="space-y-4 border-t pt-8 mb-8">
@@ -182,9 +207,16 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
                   <h3 className="font-semibold text-md mb-3 text-slate-800 dark:text-slate-200">Candidate's Lead Triage</h3>
                   <div className="bg-slate-100 dark:bg-slate-100 p-3 rounded mb-4">
                     <p className="font-semibold text-sm mb-2">Lead Priorities Assigned:</p>
-                    <pre className="whitespace-pre-wrap font-mono text-xs text-slate-700">
-                      {JSON.stringify(a.triageData, null, 2)}
-                    </pre>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {typeof a.triageData === 'object' && a.triageData !== null && Object.entries(a.triageData).map(([lead, priority]) => (
+                        <div key={lead} className="flex justify-between items-center bg-white p-2 rounded border border-slate-200 text-sm">
+                          <span className="text-slate-700 capitalize">{lead.replace(/_/g, " ")}</span>
+                          <Badge variant={String(priority).toLowerCase() === 'hot' ? 'destructive' : String(priority).toLowerCase() === 'warm' ? 'default' : 'secondary'}>
+                            {String(priority)}
+                          </Badge>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <div className="bg-slate-50 dark:bg-slate-100 p-3 rounded">
                     <p className="font-semibold text-sm mb-1">Candidate's Reasoning:</p>

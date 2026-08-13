@@ -7,6 +7,9 @@ const API_KEY = process.env.GEMINI_API_KEY || "";
 export const genAI = new GoogleGenerativeAI(API_KEY);
 export const fileManager = new GoogleAIFileManager(API_KEY);
 
+import { writeFile } from "fs/promises";
+import { tmpdir } from "os";
+
 /**
  * Uploads a local file to Gemini and waits for processing to complete.
  * @param urlPath e.g. "/uploads/counselor/token-obj1.webm"
@@ -16,20 +19,23 @@ export const fileManager = new GoogleAIFileManager(API_KEY);
 export async function uploadMediaToGemini(urlPath: string, mimeType: string) {
   if (!API_KEY) return null;
 
-  // The urlPath is served from public, so we prepend process.cwd() + "/public"
-  // Make sure to remove leading slash if present to avoid absolute path resolution issues
-  const cleanPath = urlPath.startsWith("/") ? urlPath.substring(1) : urlPath;
-  const localPath = join(process.cwd(), "public", cleanPath);
-  
-  if (!existsSync(localPath)) {
-    console.warn(`File not found: ${localPath}`);
-    return null;
-  }
-
   try {
-    const uploadResult = await fileManager.uploadFile(localPath, {
+    const fullUrl = urlPath.startsWith("/") ? `https://skillcred.in${urlPath}` : urlPath;
+    const res = await fetch(fullUrl);
+    if (!res.ok) {
+      console.warn(`Failed to fetch media from URL: ${fullUrl}`);
+      return null;
+    }
+
+    const arrayBuffer = await res.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    
+    const tempFilePath = join(tmpdir(), `upload-${Date.now()}.webm`);
+    await writeFile(tempFilePath, buffer);
+
+    const uploadResult = await fileManager.uploadFile(tempFilePath, {
       mimeType,
-      displayName: urlPath.split('/').pop(),
+      displayName: urlPath.split('/').pop()?.split('?')[0] || "media_file",
     });
 
     let file = await fileManager.getFile(uploadResult.file.name);
