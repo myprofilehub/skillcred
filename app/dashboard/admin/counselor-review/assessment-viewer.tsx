@@ -260,6 +260,11 @@ export function AssessmentViewer({ assessments }: AssessmentViewerProps) {
                 </div>
                 <p className="text-slate-700 dark:text-slate-300 font-medium">{a.cumulativeFeedback}</p>
               </div>
+            ) : a.status === "STAGE_3_COMPLETED" ? (
+              <div className="mb-8 p-6 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl text-amber-800 dark:text-amber-200">
+                <p className="font-semibold mb-1">AI Verdict Unavailable</p>
+                <p className="text-sm">The AI was unable to generate a cumulative report (likely due to skipped video submissions or API processing errors). Please use the Reviewer Notes below to record your manual verdict.</p>
+              </div>
             ) : (
               <div className="mb-8 p-6 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-500">
                 <p>Cumulative report will be generated after the candidate completes all stages of the assessment.</p>
