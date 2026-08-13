@@ -13,16 +13,24 @@ const genAI = new GoogleGenerativeAI(API_KEY);
 const fileManager = new GoogleAIFileManager(API_KEY);
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+import { writeFile } from "fs/promises";
+import { tmpdir } from "os";
+
 async function uploadMediaToGemini(urlPath: string, mimeType: string) {
   if (!API_KEY) return null;
-  const cleanPath = urlPath.startsWith("/") ? urlPath.substring(1) : urlPath;
-  const localPath = join(process.cwd(), "public", cleanPath);
-  if (!existsSync(localPath)) return null;
-
+  
   try {
-    const uploadResult = await fileManager.uploadFile(localPath, {
+    const res = await fetch(urlPath);
+    if (!res.ok) return null;
+    const arrayBuffer = await res.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    
+    const tempFilePath = join(tmpdir(), `upload-${Date.now()}.webm`);
+    await writeFile(tempFilePath, buffer);
+
+    const uploadResult = await fileManager.uploadFile(tempFilePath, {
       mimeType,
-      displayName: urlPath.split('/').pop(),
+      displayName: urlPath.split('/').pop()?.split('?')[0] || "video.webm",
     });
     let file = await fileManager.getFile(uploadResult.file.name);
     while (file.state === "PROCESSING") {
