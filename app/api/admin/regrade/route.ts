@@ -68,7 +68,7 @@ export async function GET() {
   }
 
   const scores: (number | null)[] = [null, null, null, null, null, null];
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", generationConfig: { responseMimeType: "application/json" }});
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash", generationConfig: { responseMimeType: "application/json" }});
 
   const errors: string[] = [];
   for (let i = 0; i < uris.length; i++) {
