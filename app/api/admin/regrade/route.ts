@@ -117,6 +117,8 @@ Format exactly as JSON: {"score": <number>, "feedback": "<string>"}`;
     success: true, 
     message: "Candidate regraded successfully",
     scores,
+    urls,
+    uris,
     cumulativeScore,
     cumulativeFeedback
   });
