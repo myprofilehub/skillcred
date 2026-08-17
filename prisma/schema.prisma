@@ -875,3 +875,53 @@ model CounselorAssessment {
   cumulativeScore    Int?
   cumulativeFeedback String?
 }
+
+model RAGProject {
+  projectNo      Int       @id
+  title          String
+  corpusSummary  String
+  useCase        String
+  constraintText String
+  corpusObject   String
+  isOpen         Boolean   @default(true)
+  claims         RAGClaim[]
+}
+
+model RAGClaim {
+  id               Int       @id @default(autoincrement())
+  projectNo        Int       @unique
+  studentName      String
+  email            String    @unique
+  submissionToken  String    @unique
+  claimedAt        DateTime  @default(now())
+  briefSentAt      DateTime?
+  briefSendError   String?
+  repoUrl          String?
+  submittedAt      DateTime?
+  submissionCount  Int       @default(0)
+  isLate           Boolean   @default(false)
+  claimIp          String?
+  notes            String?
+
+  project          RAGProject @relation(fields: [projectNo], references: [projectNo])
+  submissionHistory RAGSubmissionHistory[]
+  corpusDownloads  RAGCorpusDownload[]
+}
+
+model RAGSubmissionHistory {
+  id         Int      @id @default(autoincrement())
+  claimId    Int
+  repoUrl    String
+  createdAt  DateTime @default(now())
+
+  claim      RAGClaim @relation(fields: [claimId], references: [id])
+}
+
+model RAGCorpusDownload {
+  id         Int      @id @default(autoincrement())
+  claimId    Int
+  createdAt  DateTime @default(now())
+  ip         String?
+
+  claim      RAGClaim @relation(fields: [claimId], references: [id])
+}
