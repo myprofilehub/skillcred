@@ -46,7 +46,9 @@ export async function POST(req: Request) {
     // Send email via Brevo
     const BREVO_API_KEY = process.env.BREVO_API_KEY;
     if (BREVO_API_KEY) {
-      const baseUrl = 'http://localhost:8000'; // Replace with your production URL when deployed
+      const protocol = req.headers.get('x-forwarded-proto') || 'http';
+      const host = req.headers.get('host') || 'localhost:8000';
+      const baseUrl = `${protocol}://${host}`;
       
       const emailHtml = `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; line-height: 1.6; color: #333;">
