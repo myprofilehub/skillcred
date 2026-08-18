@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import * as xlsx from 'xlsx';
 import * as path from 'path';
+import * as fs from 'fs';
 
 export async function POST(req: Request) {
   try {
@@ -16,9 +17,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Read the Excel file
+    // Read the Excel file securely using Node's fs module
     const excelPath = path.join(process.cwd(), 'public', 'RAG-Workshop API Keys.xlsx');
-    const workbook = xlsx.readFile(excelPath);
+    const fileBuffer = fs.readFileSync(excelPath);
+    const workbook = xlsx.read(fileBuffer, { type: 'buffer' });
     const sheetName = workbook.SheetNames[0];
     const sheet = workbook.Sheets[sheetName];
     
